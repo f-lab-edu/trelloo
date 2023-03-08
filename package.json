@@ -1,0 +1,13 @@
+{
+  "name": "trelloo",
+  "packageManager": "yarn@3.4.1",
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "test": "react-scripts test",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.1.4"
+  }
+}
