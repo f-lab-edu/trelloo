@@ -4,7 +4,7 @@ import * as S from "./style";
 const BoardPage = (): JSX.Element => {
   return (
     <S.Container>
-      <Board />
+      <Board boardName="test board name" />
     </S.Container>
   );
 };
