@@ -27,7 +27,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
+    "@types/react-router-dom": "^5.3.3",
     "react-redux": "^8.0.5",
+    "react-router-dom": "^6.8.2",
     "styled-components": "^5.3.8"
   }
 }
