@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./index.module.css";
+import * as S from "./style";
 
 const CardDetail = () => {
-  return <div>CardDetail</div>;
+  return <S.Container>CardDetail</S.Container>;
 };
 
 export default CardDetail;
