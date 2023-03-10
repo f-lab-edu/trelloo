@@ -1,4 +1,4 @@
-import CardList from "../CardList";
+import CardList from "@components/CardList";
 import * as S from "./style";
 
 interface Board {
