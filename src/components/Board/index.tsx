@@ -1,10 +1,14 @@
 import CardList from "../CardList";
 import * as S from "./style";
 
-const Board = () => {
+interface Board {
+  boardName: string;
+}
+
+const Board = ({ boardName }: Board) => {
   return (
     <S.Container>
-      Board
+      Board: {boardName}
       <CardList />
     </S.Container>
   );
