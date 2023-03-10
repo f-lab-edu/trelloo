@@ -2,7 +2,7 @@
 
 import { BASE_URL } from "../../../src/utils/constants";
 
-describe("example to-do app", () => {
+describe("run application", () => {
   beforeEach(() => {
     cy.visit(BASE_URL.LOCAL);
   });
