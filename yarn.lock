@@ -3732,6 +3732,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^18.15.0":
+  version: 18.15.0
+  resolution: "@types/node@npm:18.15.0"
+  checksum: d81372276dd5053b1743338b61a2178ff9722dc609189d01fc7d1c2acd539414039e0e4780678730514390dad3f29c366a28c29e8dbd5b0025651181f6dd6669
+  languageName: node
+  linkType: hard
+
 "@types/normalize-package-data@npm:^2.4.0":
   version: 2.4.1
   resolution: "@types/normalize-package-data@npm:2.4.1"
@@ -8538,6 +8545,13 @@ __metadata:
     pify: ^4.0.1
     slash: ^2.0.0
   checksum: 9b4cb70aa0b43bf89b18cf0e543695185e16d8dd99c17bdc6a1df0a9f88ff9dc8d2467aebace54c3842fc451a564882948c87a3b4fbdb1cacf3e05fd54b6ac5d
+  languageName: node
+  linkType: hard
+
+"globrex@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "globrex@npm:0.1.2"
+  checksum: adca162494a176ce9ecf4dd232f7b802956bb1966b37f60c15e49d2e7d961b66c60826366dc2649093cad5a0d69970cfa8875bd1695b5a1a2f33dcd2aa88da3c
   languageName: node
   linkType: hard
 
@@ -14364,6 +14378,7 @@ __metadata:
     "@storybook/builder-vite": ^0.4.2
     "@storybook/react": ^6.5.16
     "@storybook/testing-library": ^0.0.13
+    "@types/node": ^18.15.0
     "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
     babel-loader: ^8.3.0
@@ -14371,8 +14386,8 @@ __metadata:
     react-redux: ^8.0.5
     react-router-dom: ^6.8.2
     styled-components: ^5.3.8
-    v6: ^0.0.0
     vite: ^4.1.4
+    vite-tsconfig-paths: ^4.0.5
   languageName: unknown
   linkType: soft
 
@@ -14418,6 +14433,20 @@ __metadata:
     typescript:
       optional: true
   checksum: c2a698b85d521298fe6f2435fbf2d3dc5834b423ea25abd321805ead3f399dbeedce7ca09492d7eb005b9d2c009c6b9587055bc3ab273dc6b9e40eefd7edb5b2
+  languageName: node
+  linkType: hard
+
+"tsconfck@npm:^2.0.1":
+  version: 2.0.3
+  resolution: "tsconfck@npm:2.0.3"
+  peerDependencies:
+    typescript: ^4.3.5
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  bin:
+    tsconfck: bin/tsconfck.js
+  checksum: 557060017e35cb45281134568ad64f15fe1702c318c3cfba18d49f7c66f964981f19d5c493ca1848edab31f71aeaade305ae485eb6b11c8fb40fda593f3f4998
   languageName: node
   linkType: hard
 
@@ -14942,13 +14971,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"v6@npm:^0.0.0":
-  version: 0.0.0
-  resolution: "v6@npm:0.0.0"
-  checksum: 26b676a52d0e593e4d9fac4b1d61f9254011b0637f1796d86a83e3adebf32d715970664197810352a7e96ba98ecae0685e0c4d9444f3ec18d1391e8ffd435c61
-  languageName: node
-  linkType: hard
-
 "v8-compile-cache@npm:^2.0.3":
   version: 2.3.0
   resolution: "v8-compile-cache@npm:2.3.0"
@@ -15021,6 +15043,17 @@ __metadata:
     unist-util-stringify-position: ^2.0.0
     vfile-message: ^2.0.0
   checksum: ee5726e10d170472cde778fc22e0f7499caa096eb85babea5d0ce0941455b721037ee1c9e6ae506ca2803250acd313d0f464328ead0b55cfe7cb6315f1b462d6
+  languageName: node
+  linkType: hard
+
+"vite-tsconfig-paths@npm:^4.0.5":
+  version: 4.0.5
+  resolution: "vite-tsconfig-paths@npm:4.0.5"
+  dependencies:
+    debug: ^4.1.1
+    globrex: ^0.1.2
+    tsconfck: ^2.0.1
+  checksum: 49b4064881343ef0b75e52eeb1d5cdfe1f26b32ded68e71efc84022e8e96bdb3d3f37f79f3678b43e935dca279cc24c5936942b5fdbaf1489b497e48572314d9
   languageName: node
   linkType: hard
 
