@@ -5,9 +5,9 @@ import {
 } from "@tanstack/react-query";
 import axios from "axios";
 
-interface AxiosParams<TParams = Params, TData = {}> {
+interface RequestParams<TParams = Params, TData = {}> {
   url: string;
-  method?: AxiosMethod;
+  method?: RequestMethod;
   data?: TData;
   params?: TParams;
 }
@@ -16,7 +16,7 @@ interface HandleUseQueryParams<TParams = Params, TData = object> {
   key: string;
   url: string;
   params?: TParams;
-  options?: AxiosOptions<TData>;
+  options?: RequestOptions<TData>;
 }
 
 interface HandleUseMutationParams<
@@ -26,10 +26,10 @@ interface HandleUseMutationParams<
 > {
   key?: string;
   url: string;
-  method: AxiosMethod;
+  method: RequestMethod;
   params?: TParams;
   data?: TData;
-  options?: AxiosOptions<TRes>;
+  options?: RequestOptions<TRes>;
   res?: TRes;
 }
 
@@ -38,9 +38,9 @@ export interface HandleUseMutationRes {
 }
 
 export type Params = Record<string, string>;
-type AxiosMethod = "get" | "post" | "put" | "delete";
+type RequestMethod = "get" | "post" | "put" | "delete";
 
-export interface AxiosOptions<TData> {
+export interface RequestOptions<TData> {
   onSuccess?: (data: TData) => void;
   onError?: (error: Error) => void;
 }
@@ -50,7 +50,7 @@ export const request = <TParams>({
   method,
   params,
   data,
-}: AxiosParams<TParams>) => {
+}: RequestParams<TParams>) => {
   const convertedParams = params
     ? Object.entries(params).reduce(
         (newObj: Record<string, string>, [key, value]) => {
@@ -85,7 +85,7 @@ export const handleUseQuery = <TParams, TData>({
   );
 };
 
-export const handleUseMutation = <TParams, TData, TRes>({
+export const handleUseMutation = <TParams, TData, TRes = HandleUseMutationRes>({
   key,
   url,
   params,
