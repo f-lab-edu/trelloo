@@ -19,13 +19,22 @@ interface HandleUseQueryParams<TParams = Params, TData = object> {
   options?: AxiosOptions<TData>;
 }
 
-interface HandleUseMutationParams<TParams = Params, TData = object> {
+interface HandleUseMutationParams<
+  TParams = Params,
+  TData = object,
+  TRes = object
+> {
   key?: string;
   url: string;
   method: AxiosMethod;
   params?: TParams;
   data?: TData;
-  options?: AxiosOptions<TData>;
+  options?: AxiosOptions<TRes>;
+  res?: TRes;
+}
+
+export interface HandleUseMutationRes {
+  message: string;
 }
 
 export type Params = Record<string, string>;
@@ -36,12 +45,12 @@ export interface AxiosOptions<TData> {
   onError?: (error: Error) => void;
 }
 
-export const request = <TParams, TData = object>({
+export const request = <TParams>({
   url,
   method,
   params,
   data,
-}: AxiosParams<TParams, TData>) => {
+}: AxiosParams<TParams>) => {
   const convertedParams = params
     ? Object.entries(params).reduce(
         (newObj: Record<string, string>, [key, value]) => {
@@ -76,13 +85,13 @@ export const handleUseQuery = <TParams, TData>({
   );
 };
 
-export const handleUseMutation = <TParams, TData>({
+export const handleUseMutation = <TParams, TData, TRes>({
   key,
   url,
   params,
   method,
   options,
-}: HandleUseMutationParams<TParams, TData>) => {
+}: HandleUseMutationParams<TParams, TData, TRes>) => {
   const queryClient = useQueryClient();
 
   return baseUseMutation(
@@ -91,7 +100,7 @@ export const handleUseMutation = <TParams, TData>({
       return response.data;
     },
     {
-      onSuccess: (data: TData) => {
+      onSuccess: (data: TRes) => {
         options?.onSuccess?.(data);
         key && queryClient.invalidateQueries([key]);
       },
