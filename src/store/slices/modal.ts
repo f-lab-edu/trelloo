@@ -1,20 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { MODAL_TYPE } from "./../../utils/constants";
 
-export interface ModalState {
+export interface ModalState<TOptions = object, TProps = object> {
   type: string;
+  options?: TOptions;
+  props?: TProps;
 }
 
-const initialState: ModalState = {
+const initialState: ModalState<object, object> = {
   type: MODAL_TYPE.NONE,
+  options: {},
+  props: {},
 };
 
 export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    handleModal: (state, action) => {
-      state.type = action.payload;
+    handleModal: (_, action) => {
+      return action.payload;
     },
   },
 });

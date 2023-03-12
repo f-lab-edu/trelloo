@@ -4,8 +4,9 @@ import * as S from "./style";
 
 const Card = () => {
   const { openModal } = useModal();
+
   const onClickCard = () => {
-    openModal(MODAL_TYPE.CARD_DETAIL);
+    openModal({ type: MODAL_TYPE.CARD_DETAIL, props: { title: "cardDetail" } });
   };
 
   return <S.Container onClick={onClickCard}>Card</S.Container>;

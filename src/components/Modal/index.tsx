@@ -11,10 +11,10 @@ interface ModalComponent {
 }
 
 const Modal = () => {
-  const currentModal = useSelector(
-    (state: { modal: ModalState }) => state.modal.type
+  const { type, options, props } = useSelector(
+    (state: { modal: ModalState }) => state.modal
   );
-  const isModalOpened = currentModal !== MODAL_TYPE.NONE ? true : false;
+  const isModalOpened = type !== MODAL_TYPE.NONE ? true : false;
 
   const modalComponent: ModalComponent = {
     [MODAL_TYPE.CARD_EDIT]: <CardEdit />,
@@ -25,7 +25,7 @@ const Modal = () => {
     <ModalPortal>
       {isModalOpened && (
         <S.Container>
-          {modalComponent[currentModal] && modalComponent[currentModal]}
+          {modalComponent[type] && modalComponent[type]}
         </S.Container>
       )}
     </ModalPortal>
