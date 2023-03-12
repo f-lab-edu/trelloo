@@ -1,12 +1,28 @@
 import {
   useQuery as baseUseQuery,
   useMutation as baseUseMutation,
+  useQueryClient,
 } from "@tanstack/react-query";
 import axios from "axios";
 
-interface AxiosParams<TParams = Params, TData = object> {
+interface AxiosParams<TParams = Params, TData = {}> {
   url: string;
   method?: AxiosMethod;
+  data?: TData;
+  params?: TParams;
+}
+
+interface HandleUseQueryParams<TParams = Params, TData = object> {
+  key: string;
+  url: string;
+  params?: TParams;
+  options?: AxiosOptions<TData>;
+}
+
+interface HandleUseMutationParams<TParams = Params, TData = object> {
+  key?: string;
+  url: string;
+  method: AxiosMethod;
   params?: TParams;
   data?: TData;
   options?: AxiosOptions<TData>;
@@ -25,7 +41,6 @@ export const request = <TParams, TData = object>({
   method,
   params,
   data,
-  options,
 }: AxiosParams<TParams, TData>) => {
   const convertedParams = params
     ? Object.entries(params).reduce(
@@ -44,14 +59,43 @@ export const request = <TParams, TData = object>({
   });
 };
 
-export const handleUseQuery = ({ key, url }: { key: string; url: string }) => {
-  return baseUseQuery([key], () => {
-    return request({ url });
-  });
+export const handleUseQuery = <TParams, TData>({
+  key,
+  url,
+  options,
+}: HandleUseQueryParams<TParams, TData>) => {
+  return baseUseQuery(
+    [key],
+    () => {
+      return request({ url });
+    },
+    {
+      onSuccess: (data: TData) => options?.onSuccess?.(data),
+      onError: (err: Error) => options?.onError?.(err),
+    }
+  );
 };
 
-export const handleUseMutation = ({ url, method }: AxiosParams) => {
-  return baseUseMutation((data: any) => {
-    return request({ url, method, data });
-  });
+export const handleUseMutation = <TParams, TData>({
+  key,
+  url,
+  params,
+  method,
+  options,
+}: HandleUseMutationParams<TParams, TData>) => {
+  const queryClient = useQueryClient();
+
+  return baseUseMutation(
+    async (data: TData) => {
+      const response = await request({ url, params, method, data });
+      return response.data;
+    },
+    {
+      onSuccess: (data: TData) => {
+        options?.onSuccess?.(data);
+        key && queryClient.invalidateQueries([key]);
+      },
+      onError: (err: Error) => options?.onError?.(err),
+    }
+  );
 };

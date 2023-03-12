@@ -14,10 +14,13 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        data: cardList,
+        message: "card created",
       })
     );
   }),
 ];
 
-const cardList = [{ title: "title" }];
+const cardList = [
+  { id: 0, title: "cardTitle1" },
+  { id: 1, title: "cardTitle2" },
+];
