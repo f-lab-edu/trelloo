@@ -16,12 +16,9 @@ export const modalSlice = createSlice({
     handleModal: (state, action) => {
       state.type = action.payload;
     },
-    closeModal: (state) => {
-      state.type = MODAL_TYPE.NONE;
-    },
   },
 });
 
-export const { handleModal, closeModal } = modalSlice.actions;
+export const { handleModal } = modalSlice.actions;
 
 export default modalSlice.reducer;
