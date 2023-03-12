@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../store/slices/sample";
+import modalReducer from "./slices/modal";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    modal: modalReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;
