@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BoardPage from "./pages/BoardPage";
+import Modal from "@components/Modal";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BoardPage />} />
       </Routes>
+      <Modal />
     </BrowserRouter>
   );
 }
