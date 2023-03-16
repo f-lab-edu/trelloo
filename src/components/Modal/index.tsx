@@ -14,11 +14,13 @@ interface ModalComponent {
 const Modal = () => {
   const { closeModal } = useModal();
   const clickOutsideRef = useRef<HTMLDivElement>(null);
+  useOutsideClick(clickOutsideRef, () => closeModal());
   const { type, props } = useSelector(
     (state: { modal: ModalState }) => state.modal
   );
+
   const isModalOpened = type !== MODAL_TYPE.NONE ? true : false;
-  useOutsideClick(clickOutsideRef, () => closeModal());
+
   const modalComponent: ModalComponent = {
     [MODAL_TYPE.CARD_EDIT]: React.lazy(() => import("@components/CardEdit")),
     [MODAL_TYPE.CARD_DETAIL]: React.lazy(

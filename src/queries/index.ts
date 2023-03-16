@@ -2,6 +2,7 @@ import {
   useQuery as baseUseQuery,
   useMutation as baseUseMutation,
   useQueryClient,
+  useQuery,
 } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -33,11 +34,11 @@ interface HandleUseMutationParams<
   res?: TRes;
 }
 
-export interface HandleUseMutationRes {
+interface HandleUseMutationRes {
   message: string;
 }
 
-export type Params = Record<string, string>;
+type Params = Record<string, string>;
 type RequestMethod = "get" | "post" | "put" | "delete";
 
 export interface RequestOptions<TData> {
@@ -45,7 +46,7 @@ export interface RequestOptions<TData> {
   onError?: (error: Error) => void;
 }
 
-export const request = <TParams>({
+const request = <TParams>({
   url,
   method,
   params,
@@ -102,9 +103,20 @@ export const handleUseMutation = <TParams, TData, TRes = HandleUseMutationRes>({
     {
       onSuccess: (data: TRes) => {
         options?.onSuccess?.(data);
-        key && queryClient.invalidateQueries([key]);
+        key && queryClient.invalidateQueries([key]); //무조건 되지 않음
       },
       onError: (err: Error) => options?.onError?.(err),
     }
   );
 };
+
+//query
+const getList = () => {
+  return useQuery({
+    //callback을 분리?
+    //queryclient config
+  });
+};
+
+//component
+useQuery({});
