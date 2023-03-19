@@ -5,7 +5,7 @@ const CardList = () => {
   return (
     <S.Container>
       CardList
-      <Card />
+      <Card text="" />
     </S.Container>
   );
 };
