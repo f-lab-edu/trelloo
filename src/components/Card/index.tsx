@@ -1,5 +1,5 @@
 import { MODAL_TYPE } from "@/constants";
-import useModal from "@utils/hooks/useModal";
+import useModal from "@/hooks/useModal";
 import * as S from "./style";
 
 const Card = () => {
