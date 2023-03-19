@@ -2,15 +2,15 @@ import axios from "axios";
 import { URL } from "@/constants";
 import { RequestParams } from "@/interfaces/httpRequest";
 
-const fetchRequest = <TParams>({
+const fetchRequest = <TQueryParams>({
   path,
   method,
+  queryParams,
   params,
-  data,
   isMock,
-}: RequestParams<TParams>) => {
-  const convertedParams = params
-    ? Object.entries(params).reduce(
+}: RequestParams<TQueryParams>) => {
+  const convertedParams = queryParams
+    ? Object.entries(queryParams).reduce(
         (newObj: Record<string, string>, [key, value]) => {
           newObj[key] = value.toString();
           return newObj;
@@ -22,26 +22,26 @@ const fetchRequest = <TParams>({
   const searchParams = new URLSearchParams(convertedParams).toString();
   return axios(`${isMock ? "" : URL.API}${path}?${searchParams}`, {
     method,
-    data: JSON.stringify(data),
+    data: JSON.stringify(params),
   }).then((data) => {
     return data.data;
   });
 };
 
 export const request = {
-  get(params: RequestParams) {
+  get<TResponse>(params: RequestParams): Promise<TResponse> {
     return fetchRequest({ ...params, method: "get" });
   },
 
-  post(params: RequestParams) {
+  post<TResponse>(params: RequestParams): Promise<TResponse> {
     return fetchRequest({ ...params, method: "post" });
   },
 
-  put(params: RequestParams) {
+  put<TResponse>(params: RequestParams): Promise<TResponse> {
     return fetchRequest({ ...params, method: "put" });
   },
 
-  delete(params: RequestParams) {
+  delete<TResponse>(params: RequestParams): Promise<TResponse> {
     return fetchRequest({ ...params, method: "delete" });
   },
 };
