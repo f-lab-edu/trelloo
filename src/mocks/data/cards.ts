@@ -1,9 +1,6 @@
-export interface CardList {
-  title: string;
-  cards: { text: string }[];
-}
+import { GetCardListsResponse } from "@/queries/cardList/interface";
 
-export const cardLists: CardList[] = [
+export const cardLists: GetCardListsResponse[] = [
   {
     title: "list1",
     cards: [
