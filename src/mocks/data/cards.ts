@@ -1,6 +1,4 @@
-import { GetCardListsResponse } from "@/queries/cardList/interface";
-
-export const cardLists: GetCardListsResponse[] = [
+export const cardLists = [
   {
     title: "list1",
     cards: [
