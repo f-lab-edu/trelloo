@@ -1,8 +1,9 @@
 export interface RequestParams<TParams = Params, TData = {}> {
-  url: string;
+  path: string;
   method?: RequestMethod;
   data?: TData;
   params?: TParams;
+  isMock?: boolean;
 }
 
 export type Params = Record<string, string>;
@@ -15,7 +16,7 @@ export interface RequestOptions<TData> {
 
 export interface HandleUseQueryParams<TParams = Params, TData = object> {
   key: string;
-  url: string;
+  path: string;
   params?: TParams;
   options?: RequestOptions<TData>;
 }
@@ -26,7 +27,7 @@ export interface HandleUseMutationParams<
   TRes = object
 > {
   key?: string;
-  url: string;
+  path: string;
   method: RequestMethod;
   params?: TParams;
   data?: TData;

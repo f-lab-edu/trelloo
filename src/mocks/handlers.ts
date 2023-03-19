@@ -3,12 +3,7 @@ import { cardLists } from "./data/cards";
 
 export const handlers = [
   rest.get("/card/list", (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        data: cardLists,
-      })
-    );
+    return res(ctx.status(200), ctx.json(cardLists));
   }),
 
   rest.post("/card/list", (req, res, ctx) => {
