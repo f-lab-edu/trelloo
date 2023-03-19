@@ -1,5 +1,6 @@
-export const BASE_URL = {
-  LOCAL: "http://127.0.0.1:5173/",
+export const URL = {
+  BASE: "http://127.0.0.1:5173/",
+  API: "http://api-server/", //api server example
 };
 
 export const MODAL_TYPE = {
