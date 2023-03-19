@@ -1,4 +1,4 @@
-import useModal from "@utils/hooks/useModal";
+import useModal from "@/hooks/useModal";
 import * as S from "./style";
 
 const CardDetail = ({ title }: { title: string }) => {
