@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-function Drawer({ isOpened, isOpenedFromLeft, children }: Props) {
+function DrawerContainer({ isOpened, isOpenedFromLeft, children }: Props) {
   return (
     <S.Container isOpened={isOpened} isOpenedFromLeft={isOpenedFromLeft}>
       {children}
@@ -14,4 +14,4 @@ function Drawer({ isOpened, isOpenedFromLeft, children }: Props) {
   );
 }
 
-export default Drawer;
+export default DrawerContainer;
