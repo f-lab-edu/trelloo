@@ -9,7 +9,7 @@ export default {
     text: { text: "color" },
   },
 };
-
+//
 const Template = (args: {
   isOpened: boolean;
   isOpenedFromLeft: boolean;
