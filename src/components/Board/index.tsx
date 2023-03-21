@@ -11,8 +11,9 @@ const Board = ({ boardName }: Props) => {
   // TODO: render card lists
   return (
     <S.Container>
-      Board: {boardName}
-      <CardList />
+      {cardLists?.map((cardList) => (
+        <CardList cardList={cardList} />
+      ))}
     </S.Container>
   );
 };
