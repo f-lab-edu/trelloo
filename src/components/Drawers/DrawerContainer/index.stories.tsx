@@ -22,7 +22,7 @@ const Template = (args: {
 
   return (
     <Container>
-      <Button onClick={handleDrawer}>open drawer</Button>
+      <button onClick={handleDrawer}>open drawer</button>
       <DrawerContainer {...args} isOpened={isOpened} isOpenedFromLeft={false} />
     </Container>
   );
@@ -35,9 +35,4 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-`;
-
-const Button = styled.button`
-  position: absolute;
-  left: 500px;
 `;
