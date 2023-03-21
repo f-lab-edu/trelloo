@@ -8,14 +8,20 @@ export default {
   title: "Components/CardList",
   component: CardList,
   argTypes: {
-    text: "default",
+    title: "title",
+    cards: [{ text: "text" }],
   },
 };
 
 const Template = (args: { text: string }) => {
   return (
     <Provider store={store}>
-      <CardList />
+      <CardList
+        cardList={{
+          title: "title",
+          cards: [{ text: "text" }],
+        }}
+      />
     </Provider>
   );
 };

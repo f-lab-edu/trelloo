@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import MainButton from "@components/Buttons/MainButton";
 
 export default {
