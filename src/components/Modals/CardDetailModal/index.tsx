@@ -6,7 +6,6 @@ interface Props {
 }
 
 const CardDetail = ({ title }: Props) => {
-  console.log(title);
   const { closeModal } = useModal();
 
   return (
