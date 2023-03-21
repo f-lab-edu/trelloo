@@ -18,13 +18,16 @@ const Modal = () => {
 
   const isModalOpened = type !== MODAL_TYPE.NONE ? true : false;
   const modalComponent: ModalComponent = {
-    [MODAL_TYPE.CARD_EDIT]: React.lazy(() => import("@components/CardEdit")),
+    [MODAL_TYPE.CARD_EDIT]: React.lazy(
+      () => import("@/components/Modals/CardEditModal")
+    ),
     [MODAL_TYPE.CARD_DETAIL]: React.lazy(
-      () => import("@components/CardDetail")
+      () => import("@/components/Modals/CardDetailModal")
     ),
   };
 
   const CurrentComponent = modalComponent[type];
+  ReactModal.setAppElement("#root");
 
   return (
     <ReactModal

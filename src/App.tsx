@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BoardPage from "./pages/BoardPage";
-import Modal from "@components/Modal";
+import Modal from "@components/Modals/ModalContainer";
 
 function App() {
   return (
