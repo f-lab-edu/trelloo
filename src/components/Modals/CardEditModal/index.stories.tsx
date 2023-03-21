@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Provider } from "react-redux";
 import styled from "styled-components";
 import { store } from "@/store";
-import ModalContainer from "@components/Modals/ModalContainer";
+import ModalContainer from "@components/Modals/Modal";
 import Modal from "@components/Modals/CardEditModal";
 import useModal from "@/hooks/useModal";
 import { MODAL_TYPE } from "@/constants";
@@ -33,7 +33,7 @@ const Template = () => {
     <>
       <Provider store={store}>
         <ModalButton />
-        <ModalContainer />
+        {/* <ModalContainer /> */}
       </Provider>
     </>
   );
