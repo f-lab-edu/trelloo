@@ -1,15 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BoardPage from "./pages/BoardPage";
-import Modal from "@components/Modals/ModalContainer";
+import ModalsProvider from "@components/Modals/ModalsProvider";
+import Modals from "@components/Modals/Modals";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<BoardPage />} />
-      </Routes>
-      <Modal />
-    </BrowserRouter>
+    <ModalsProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<BoardPage />} />
+        </Routes>
+        <Modals />
+      </BrowserRouter>
+    </ModalsProvider>
   );
 }
 
