@@ -6,12 +6,9 @@ import useModal from "@/hooks/useModal";
 import { ModalState } from "@/store/slices/modal";
 import * as S from "./style";
 
-interface ModalComponent {
-  [x: string]: CardEdit | CardDetail;
+interface ModalComponent<T = any> {
+  [x: string]: React.LazyExoticComponent<(props: T) => JSX.Element>;
 }
-type Props<T> = React.LazyExoticComponent<(props: T) => JSX.Element>;
-type CardEdit = Props<{ text: string }>;
-type CardDetail = Props<{ title: string }>;
 
 const Modal = () => {
   const { closeModal } = useModal();
@@ -26,11 +23,6 @@ const Modal = () => {
       () => import("@components/CardDetail")
     ),
   };
-
-  interface Modals {
-    [MODAL_TYPE.CARD_EDIT]: CardEdit;
-    [MODAL_TYPE.CARD_DETAIL]: CardDetail;
-  }
 
   const CurrentComponent = modalComponent[type];
 
