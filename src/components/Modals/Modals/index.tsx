@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { MODAL_TYPE } from "@/constants";
 import useModal from "@/hooks/useModal";
-import { ModalsStateContext, ModalState } from "../ModalsProvider";
+import { ModalsStateContext } from "../ModalsProvider";
 import Modal from "../Modal";
 
 export const modals = {
@@ -15,8 +15,8 @@ function Modals() {
 
   return (
     <>
-      {modalStates.map(({ component, props }) => (
-        <Modal component={component} onClose={closeModal} {...props} />
+      {modalStates.map(({ component, props }, idx) => (
+        <Modal key={idx} component={component} onClose={closeModal} {...props} />
       ))}
     </>
   );
