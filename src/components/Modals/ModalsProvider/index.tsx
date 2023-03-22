@@ -7,7 +7,7 @@ export interface ModalState<TProps = any> {
 
 interface ModalDispatch<T = any> {
   open: (state: ModalState<T>) => void;
-  close: (component: React.ComponentType) => void;
+  close: (state: ModalState<T>) => void;
 }
 
 interface Props {
@@ -20,16 +20,16 @@ export const ModalsDipatchContext = createContext<ModalDispatch | null>(null);
 function ModalsProvider({ children }: Props) {
   const [modals, setModals] = useState<ModalState[]>([]);
 
-  const open = (state: ModalState) => {
+  const open = useCallback((state: ModalState) => {
     setModals((modals) => {
       return [...modals, state];
     });
-  };
+  }, []);
 
-  const close = useCallback((component: React.ComponentType) => {
+  const close = useCallback((state: ModalState) => {
     setModals((modals) => {
       return modals.filter((modal) => {
-        return modal.component !== component;
+        return modal.component !== state.component || modal.props !== state.props;
       });
     });
   }, []);
