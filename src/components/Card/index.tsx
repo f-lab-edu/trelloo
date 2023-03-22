@@ -1,5 +1,5 @@
-import { MODAL_TYPE } from "@/constants";
 import useModal from "@/hooks/useModal";
+import CardDetail from "@components/Modals/CardDetailModal";
 import * as S from "./style";
 
 interface Props {
@@ -10,10 +10,10 @@ const Card = ({ text }: Props) => {
   const { openModal } = useModal();
 
   const onClickCard = () => {
-    openModal({ type: MODAL_TYPE.CARD_DETAIL, props: { title: "cardDetail" } });
+    openModal({ component: <CardDetail title={"cardDetail"} />, props: { title: "cardDetail" } });
   };
 
-  return <S.Container>{text && text}</S.Container>;
+  return <S.Container onClick={onClickCard}>{text && text}</S.Container>;
 };
 
 export default Card;
