@@ -6,14 +6,7 @@ interface Props {
 }
 
 const CardDetail = ({ title }: Props) => {
-  const { closeModal } = useModal();
-
-  return (
-    <S.Container>
-      {title}
-      <S.CloseButton onClick={closeModal}>X</S.CloseButton>
-    </S.Container>
-  );
+  return <S.Container>{title}</S.Container>;
 };
 
 export default CardDetail;
