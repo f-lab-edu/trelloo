@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "./store";
 import { ThemeProvider } from "styled-components";
 import { worker } from "./mocks/browser";
+import ModalsProvider from "@components/Modals/ModalsProvider";
 import App from "./App";
 import { theme } from "./styles/theme";
 import { GlobalStyle } from "./styles/GlobalStyle";
@@ -23,10 +24,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <App />
-        </ThemeProvider>
+        <ModalsProvider>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <App />
+          </ThemeProvider>
+        </ModalsProvider>
       </Provider>
     </QueryClientProvider>
   </React.StrictMode>,
