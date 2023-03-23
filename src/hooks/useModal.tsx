@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ModalsDipatchContext } from "@components/Modals/ModalsProvider";
 
-interface OpenModalProps<P> {
+interface ModalProps<P> {
   component: React.ComponentType<any>;
   props?: P;
 }
@@ -9,15 +9,15 @@ interface OpenModalProps<P> {
 const useModal = <P extends {}>() => {
   const modalDispatch = useContext(ModalsDipatchContext);
 
-  const openModal = ({ component, props }: OpenModalProps<P>) => {
+  const openModal = ({ component, props }: ModalProps<P>) => {
     if (!modalDispatch) return;
     modalDispatch.open({ component, props });
   };
 
-  const closeModal = (component: React.ComponentType) => {
+  const closeModal = ({ component, props }: ModalProps<P>) => {
     if (!modalDispatch) return;
 
-    modalDispatch.close(component);
+    modalDispatch.close({ component, props });
   };
   return { openModal, closeModal };
 };
