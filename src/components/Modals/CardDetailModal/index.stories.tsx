@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import Modal from "@components/Modals/CardDetailModal";
+import Modal, { CardDetailProps } from "@components/Modals/CardDetailModal";
 import useModal from "@/hooks/useModal";
 import CardDetail from "@components/Modals/CardDetailModal";
 import ModalsProvider from "@components/Modals/ModalsProvider";
@@ -16,7 +16,7 @@ export default {
 };
 
 const ModalButton = () => {
-  const { openModal } = useModal();
+  const { openModal } = useModal<CardDetailProps>();
 
   const onClickButton = () => {
     openModal({
