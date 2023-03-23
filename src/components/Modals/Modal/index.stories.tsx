@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { store } from "@/store";
 import Modal from "@components/Modals/Modal";
 import useModal from "@/hooks/useModal";
-import CardDetail from "@components/Modals/CardDetailModal";
+import CardDetail, { CardDetailProps } from "@components/Modals/CardDetailModal";
 
 export default {
   title: "Common/ModalContainer",
@@ -14,7 +14,7 @@ export default {
 };
 
 const ModalButton = () => {
-  const { openModal } = useModal();
+  const { openModal } = useModal<CardDetailProps>();
 
   const onClickButton = () => {
     openModal({
