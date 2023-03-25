@@ -2,7 +2,6 @@ import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
 export const ModalStyle = (options: any) => {
-  console.log(options);
   return {
     overlay: {
       top: 0,
