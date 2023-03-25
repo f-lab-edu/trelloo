@@ -1,5 +1,6 @@
+import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
-import CardDetail from "@components/Modals/CardDetail";
+const CardDetail = loadable(() => import("@components/Modals/CardDetail"));
 import * as S from "./style";
 
 interface Props {
