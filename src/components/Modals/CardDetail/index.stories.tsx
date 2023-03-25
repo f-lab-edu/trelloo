@@ -1,8 +1,8 @@
 import React from "react";
-import Modal, { Props as CardDetailProps } from "@components/Modals/CardDetail";
 import useModal from "@/hooks/useModal";
+import { Props as CardDetailProps } from "@components/Modals/CardDetail";
 import CardDetail from "@components/Modals/CardDetail";
-import { ModalTemplate } from "@/templateStories/ModalTemplate/index.stories";
+import { ModalProvider } from "@components/Modals/ModalsProvider/index.stories";
 
 export default {
   title: "Components/Modals",
@@ -10,10 +10,10 @@ export default {
 };
 
 const ModalButton = () => {
-  const { openModal } = useModal<CardDetailProps>();
+  const { openModal } = useModal();
 
   const onClickButton = () => {
-    openModal({
+    openModal<CardDetailProps>({
       component: CardDetail,
       props: { title: "card detail modal" },
     });
@@ -24,9 +24,9 @@ const ModalButton = () => {
 
 const Template = () => {
   return (
-    <ModalTemplate>
+    <ModalProvider>
       <ModalButton />
-    </ModalTemplate>
+    </ModalProvider>
   );
 };
 
