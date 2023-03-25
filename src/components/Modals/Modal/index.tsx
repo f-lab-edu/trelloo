@@ -11,6 +11,7 @@ const Modal = <P extends {}>({ component: Component, onClose, props, options }: 
   const handleClose = () => {
     onClose({ component: Component, props });
   };
+
   return (
     <ReactModal isOpen={true} style={S.ModalStyle(options)} onRequestClose={handleClose}>
       <button onClick={() => onClose({ component: Component, props, options })}>x</button>
