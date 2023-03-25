@@ -17,6 +17,11 @@ function ModalsProvider({ children }: Props) {
   const [modals, setModals] = useState<ModalState[]>([]);
 
   const open = useCallback((state: ModalState) => {
+    if (!state.options?.isMultiple) {
+      setModals([state]);
+      return;
+    }
+
     setModals((modals) => {
       return [...modals, state];
     });
