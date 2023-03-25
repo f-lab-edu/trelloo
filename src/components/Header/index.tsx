@@ -1,8 +1,14 @@
 import React from "react";
-import * as S from "./style";
+import { Layout } from "antd";
+
+const { Header: H } = Layout;
 
 function Header() {
-  return <S.Container>Header</S.Container>;
+  return (
+    <H style={{ position: "sticky", top: 0, zIndex: 1, width: "100%", backgroundColor: "white" }}>
+      <div>header</div>
+    </H>
+  );
 }
 
 export default Header;
