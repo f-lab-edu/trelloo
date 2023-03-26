@@ -14,6 +14,7 @@ const Card = ({ text }: Props) => {
     openModal<{ title: string }>({
       component: CardDetail,
       props: { title: "cardDetail" },
+      options: { hasOverlay: true },
     });
   };
 
