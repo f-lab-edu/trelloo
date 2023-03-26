@@ -1,3 +1,4 @@
+import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
 export const Header: React.CSSProperties = {
@@ -7,7 +8,8 @@ export const Header: React.CSSProperties = {
   zIndex: 1,
   width: "100%",
   height: 44,
-  backgroundColor: "white",
+  backgroundColor: theme.color.headerBackground,
+  borderBottom: `1px solid ${theme.color.border}`,
 };
 
 export const Container = styled.header`
