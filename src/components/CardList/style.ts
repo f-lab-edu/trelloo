@@ -16,3 +16,13 @@ export const Body = {
   width: "100%",
   backgroundColor: theme.color.cardListGray,
 };
+
+export const ButtonWrapper = styled.div`
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+`;
+
+export const TemplateButton = {
+  width: 24,
+};
