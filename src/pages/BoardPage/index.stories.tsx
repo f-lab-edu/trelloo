@@ -4,6 +4,7 @@ import styled from "styled-components";
 import BoardPage from "@/pages/BoardPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { store } from "@/store";
+import { StoryProvider } from "@/index.stories";
 
 export default {
   title: "Pages/BoardPage",
@@ -14,11 +15,9 @@ export default {
 const Template = () => {
   const client = new QueryClient();
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={client}>
-        <BoardPage />
-      </QueryClientProvider>
-    </Provider>
+    <StoryProvider>
+      <BoardPage />
+    </StoryProvider>
   );
 };
 
