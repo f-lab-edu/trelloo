@@ -15,6 +15,7 @@ import * as S from "./style";
 const { Sider: Si } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
+
 function getItem(
   label: React.ReactNode,
   key: React.Key,

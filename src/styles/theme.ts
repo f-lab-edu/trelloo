@@ -8,5 +8,11 @@ export const theme = {
     textDefaultGray: "#3C3E3F",
     siderBackground: "#E2E8ED",
     cardBoxShadow: "#091e4240",
+    buttonBackground: "rgba(0, 0, 0, 0.1);",
+    white: "white",
+  },
+  borderRadius: {
+    button: "6px",
+    card: "3px",
   },
 };
