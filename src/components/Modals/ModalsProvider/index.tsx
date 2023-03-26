@@ -1,5 +1,6 @@
 import { ModalState } from "@/interfaces/modal";
 import React, { createContext, useState, useMemo, useCallback } from "react";
+import Modals from "@components/Modals/Modals";
 
 interface ModalDispatch<T = any> {
   open: (state: ModalState<T>) => void;
@@ -39,7 +40,10 @@ function ModalsProvider({ children }: Props) {
 
   return (
     <ModalsStateContext.Provider value={modals}>
-      <ModalsDipatchContext.Provider value={dispatch}>{children}</ModalsDipatchContext.Provider>
+      <ModalsDipatchContext.Provider value={dispatch}>
+        {children}
+        <Modals />
+      </ModalsDipatchContext.Provider>
     </ModalsStateContext.Provider>
   );
 }
