@@ -1,17 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import MainButton from "@components/Buttons/MainButton";
+import Button from "@components/Buttons/Button";
+import { StoryProvider } from "@/index.stories";
 
 export default {
   title: "Common/MainButton",
-  component: MainButton,
-  argTypes: {
-    isBlue: false,
-  },
+  component: Button,
+  argTypes: {},
 };
 
 const Template = (args: { isBlue?: boolean }) => {
-  return <MainButton />;
+  return (
+    <StoryProvider>
+      <Button />
+    </StoryProvider>
+  );
 };
 
 export const Primary = Template.bind({});
