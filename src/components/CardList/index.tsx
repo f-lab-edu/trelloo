@@ -1,48 +1,38 @@
 import { useState } from "react";
-import { Card as C, Input } from "antd";
+import { Card as C } from "antd";
 import Card from "@components/Card";
-import Button from "@components/Buttons/Button";
-import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
+import { EllipsisOutlined } from "@ant-design/icons";
 import * as S from "./style";
+import AddCard from "@components/AddCard";
 
-const { TextArea } = Input;
-const CardList = () => {
-  const [isWritingNewCard, setIsWritingNewCard] = useState(false);
+interface Props {
+  data: {
+    title: string;
+    cards: { text: string }[];
+  };
+}
 
-  const handleClickAddACard = () => {
-    setIsWritingNewCard(!isWritingNewCard);
+const CardList = ({ data }: Props) => {
+  const [isWritingCard, setIsWritingCard] = useState(false);
+
+  const handleClickAddCard = () => {
+    setIsWritingCard(!isWritingCard);
   };
 
   return (
     <S.Container>
       <C
-        title="Card list"
+        title={data.title}
         bordered={false}
         style={{ width: 300 }}
         extra={<EllipsisOutlined />}
         headStyle={S.Header}
         bodyStyle={S.Body}
       >
-        <Card text="card" />
-        {isWritingNewCard ? (
-          <S.CardInputContainer>
-            <C bodyStyle={S.CardInput}>
-              <TextArea placeholder="Enter a title for this card..." autoSize bordered={false} />
-            </C>
-            <S.AddCardButtonContainer>
-              <S.AddCardButtonWrapper>
-                <Button buttonColor="blue">Add card</Button>
-                <CloseOutlined style={S.CancleAddCardButton} onClick={handleClickAddACard} />
-              </S.AddCardButtonWrapper>
-              <Button icon={<EllipsisOutlined />} />
-            </S.AddCardButtonContainer>
-          </S.CardInputContainer>
-        ) : (
-          <S.ButtonWrapper onClick={handleClickAddACard}>
-            <Button icon={<PlusOutlined />}>Add a card</Button>
-            <Button icon={<PicLeftOutlined />} />
-          </S.ButtonWrapper>
-        )}
+        {data.cards.map((card) => (
+          <Card data={card} />
+        ))}
+        <AddCard isWritingCard={isWritingCard} handleClickAddCard={handleClickAddCard} />
       </C>
     </S.Container>
   );
