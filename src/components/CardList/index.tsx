@@ -1,9 +1,18 @@
-import { Button, Card as C } from "antd";
-import { EllipsisOutlined, PlusOutlined, PicLeftOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { Card as C, Input } from "antd";
 import Card from "@components/Card";
+import Button from "@components/Buttons/Button";
+import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import * as S from "./style";
 
+const { TextArea } = Input;
 const CardList = () => {
+  const [isWritingNewCard, setIsWritingNewCard] = useState(false);
+
+  const handleClickAddACard = () => {
+    setIsWritingNewCard(!isWritingNewCard);
+  };
+
   return (
     <S.Container>
       <C
@@ -15,12 +24,25 @@ const CardList = () => {
         bodyStyle={S.Body}
       >
         <Card text="card" />
-        <S.ButtonWrapper>
-          <Button type="ghost" block icon={<PlusOutlined />} style={{ textAlign: "left", padding: 0 }}>
-            Add a card
-          </Button>
-          <Button type="ghost" block icon={<PicLeftOutlined />} style={S.TemplateButton}></Button>
-        </S.ButtonWrapper>
+        {isWritingNewCard ? (
+          <S.CardInputContainer>
+            <C bodyStyle={S.CardInput}>
+              <TextArea placeholder="Enter a title for this card..." autoSize bordered={false} />
+            </C>
+            <S.AddCardButtonContainer>
+              <S.AddCardButtonWrapper>
+                <Button buttonColor="blue">Add card</Button>
+                <CloseOutlined style={S.CancleAddCardButton} onClick={handleClickAddACard} />
+              </S.AddCardButtonWrapper>
+              <Button icon={<EllipsisOutlined />} />
+            </S.AddCardButtonContainer>
+          </S.CardInputContainer>
+        ) : (
+          <S.ButtonWrapper onClick={handleClickAddACard}>
+            <Button icon={<PlusOutlined />}>Add a card</Button>
+            <Button icon={<PicLeftOutlined />} />
+          </S.ButtonWrapper>
+        )}
       </C>
     </S.Container>
   );
