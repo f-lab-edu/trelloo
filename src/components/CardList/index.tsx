@@ -8,7 +8,10 @@ import AddCard from "@components/AddCard";
 interface Props {
   data: {
     title: string;
-    cards: { text: string }[];
+    cards: {
+      id: string;
+      text: string;
+    }[];
   };
 }
 
@@ -30,7 +33,7 @@ const CardList = ({ data }: Props) => {
         bodyStyle={S.Body}
       >
         {data.cards.map((card) => (
-          <Card data={card} />
+          <Card key={card.id} data={card} />
         ))}
         <AddCard isWritingCard={isWritingCard} handleClickAddCard={handleClickAddCard} />
       </C>
