@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const Card = {
   width: "100%",
-  boxShadow: `0 1px 0  ${theme.color.cardBoxShadow}`,
+  boxShadow: theme.boxShadow.card,
 };
 
 export const Body = {
