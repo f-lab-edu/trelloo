@@ -1,6 +1,10 @@
 export interface GetCardListsResponse {
+  id: string;
   title: string;
-  cards: { text: string }[];
+  cards: {
+    id: string;
+    text: string;
+  }[];
 }
 
 export interface ResponseMessage {
