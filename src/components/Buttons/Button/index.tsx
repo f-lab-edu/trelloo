@@ -7,7 +7,7 @@ interface Props {
   isIconBehindText?: boolean;
   buttonColor?: string;
   children?: React.ReactNode;
-  onClick?: any;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 function Button({ icon, isIconBehindText = false, buttonColor, onClick, children }: Props) {
   return (
