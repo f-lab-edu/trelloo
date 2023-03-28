@@ -1,15 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { request } from "@utils/httpRequest";
-import { GetCardListsResponse, ResponseMessage } from "./interface";
+import { AddCardRequest, GetCardListsResponse, ResponseMessage } from "./interface";
 
 const queryKeys = {
   all: ["cardLists"],
 };
-
-interface AddCardRequest {
-  text: string;
-  listId: string;
-}
 
 export const useGetCardLists = () => {
   return useQuery(queryKeys.all, () => {

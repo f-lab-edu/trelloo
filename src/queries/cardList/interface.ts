@@ -1,3 +1,8 @@
+export interface AddCardRequest {
+  text: string;
+  listId: string;
+}
+
 export interface GetCardListsResponse {
   id: string;
   title: string;

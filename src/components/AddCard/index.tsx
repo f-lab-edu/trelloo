@@ -21,7 +21,7 @@ const AddCard = ({ isWritingCard, handleClickAddCard, listId }: Props) => {
     await mutateAsync(
       {
         text: "new card text",
-        listId: "list1",
+        listId,
       },
       {
         onSuccess: () => refetch(),
