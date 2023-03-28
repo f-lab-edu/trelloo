@@ -8,7 +8,7 @@ const queryKeys = {
 
 interface AddCardRequest {
   text: string;
-  listTitle: string;
+  listId: string;
 }
 
 export const useGetCardLists = () => {

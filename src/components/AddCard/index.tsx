@@ -10,20 +10,25 @@ const { TextArea } = Input;
 interface Props {
   isWritingCard: boolean;
   handleClickAddCard: () => void;
+  listId: string;
 }
 
-const AddCard = ({ isWritingCard, handleClickAddCard }: Props) => {
+const AddCard = ({ isWritingCard, handleClickAddCard, listId }: Props) => {
   const { refetch } = useGetCardLists();
   const { mutateAsync } = useAddCardMutation();
 
   const handleAddCard = async () => {
-    await mutateAsync({
-      text: "dsf",
-      listTitle: "list1",
-    });
+    await mutateAsync(
+      {
+        text: "new card text",
+        listId: "list1",
+      },
+      {
+        onSuccess: () => refetch(),
+        //TODO: add onError
+      },
+    );
   };
-
-  refetch();
 
   return (
     <>
