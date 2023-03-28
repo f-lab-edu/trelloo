@@ -15,7 +15,7 @@ import * as S from "./style";
 import Button from "@components/Buttons/Button";
 
 interface Props {
-  showDrawer: any;
+  showDrawer: React.MouseEventHandler<HTMLDivElement>;
 }
 
 function Menu({ showDrawer }: Props) {
