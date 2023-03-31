@@ -15,7 +15,18 @@ export default {
 const Template = (args: { text: string }) => {
   return (
     <Provider store={store}>
-      <CardList />
+      <CardList
+        data={{
+          id: "string",
+          title: "string",
+          cards: [
+            {
+              id: "string",
+              text: "string",
+            },
+          ],
+        }}
+      />
     </Provider>
   );
 };
