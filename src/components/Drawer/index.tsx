@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "antd";
 import type { MenuProps } from "antd";
-import { Drawer as D } from "antd";
+import { Drawer as AntdDrawer } from "antd";
 import {
   TableOutlined,
   SettingOutlined,
@@ -53,7 +53,7 @@ const items2: MenuProps["items"] = [
 
 function Drawer({ open, onClose }: Props) {
   return (
-    <D
+    <AntdDrawer
       title="Menu"
       placement="right"
       closable={false}
@@ -63,7 +63,7 @@ function Drawer({ open, onClose }: Props) {
       bodyStyle={S.BodyStyle}
     >
       <Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} items={items2} style={S.Menu} />
-    </D>
+    </AntdDrawer>
   );
 }
 

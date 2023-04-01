@@ -1,5 +1,5 @@
 import React from "react";
-import { Button as B } from "antd";
+import { Button as AntdButton } from "antd";
 import * as S from "./style";
 
 interface Props {
@@ -12,10 +12,10 @@ interface Props {
 function Button({ icon, isIconBehindText = false, buttonColor, onClick, children }: Props) {
   return (
     <S.Container onClick={onClick} buttonColor={buttonColor}>
-      <B icon={!isIconBehindText && icon} type={buttonColor === "blue" ? "primary" : "text"}>
+      <AntdButton icon={!isIconBehindText && icon} type={buttonColor === "blue" ? "primary" : "text"}>
         {children}
         {isIconBehindText && icon}
-      </B>
+      </AntdButton>
     </S.Container>
   );
 }
