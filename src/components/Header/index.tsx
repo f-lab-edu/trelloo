@@ -4,11 +4,11 @@ import { AppstoreOutlined, BellOutlined, QuestionCircleOutlined, DownOutlined, U
 import Button from "@components/Buttons/Button";
 import * as S from "./style";
 
-const { Header: H } = Layout;
+const { Header: AntdHeader } = Layout;
 
 function Header() {
   return (
-    <H style={S.Header}>
+    <AntdHeader style={S.Header}>
       <S.Container>
         <S.Nav>
           <Button icon={<AppstoreOutlined />} />
@@ -33,7 +33,7 @@ function Header() {
           <Button icon={<UserOutlined />} />
         </S.ButtonsWrapper>
       </S.Container>
-    </H>
+    </AntdHeader>
   );
 }
 
