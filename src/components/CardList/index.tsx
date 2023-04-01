@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Card as C } from "antd";
-import Card from "@components/Card";
+import { Card as AntdCard } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
+import Card from "@components/Card";
+import CardComposer from "@components/CardComposer";
+
 import * as S from "./style";
-import AddCard from "@components/AddCard";
 
 export interface Props {
   data: {
@@ -25,7 +26,7 @@ const CardList = ({ data }: Props) => {
 
   return (
     <S.Container>
-      <C
+      <AntdCard
         title={data.title}
         bordered={false}
         style={{ width: 300 }}
@@ -36,8 +37,8 @@ const CardList = ({ data }: Props) => {
         {data.cards.map((card) => (
           <Card key={card.id} data={card} />
         ))}
-        <AddCard isWritingCard={isWritingCard} handleClickAddCard={handleClickAddCard} />
-      </C>
+        <CardComposer isWritingCard={isWritingCard} handleClickAddCard={handleClickAddCard} />
+      </AntdCard>
     </S.Container>
   );
 };
