@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Card as AntdCard } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
+import { AddCardRequest } from "@/queries/cardList/interface";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
-
 import * as S from "./style";
 
 export interface Props {
@@ -15,12 +15,15 @@ export interface Props {
       text: string;
     }[];
   };
+  handleAddCard: HandleAddCard;
 }
 
-const CardList = ({ data }: Props) => {
+export type HandleAddCard = ({ text, listId }: AddCardRequest) => void;
+
+const CardList = ({ data, handleAddCard }: Props) => {
   const [isWritingCard, setIsWritingCard] = useState(false);
 
-  const handleClickAddCard = () => {
+  const toggleCardInput = () => {
     setIsWritingCard(!isWritingCard);
   };
 
@@ -37,7 +40,7 @@ const CardList = ({ data }: Props) => {
         {data.cards.map((card) => (
           <Card key={card.id} data={card} />
         ))}
-        <CardComposer isWritingCard={isWritingCard} handleClickAddCard={handleClickAddCard} />
+        <CardComposer isWritingCard={isWritingCard} toggleCardInput={toggleCardInput} onClick={handleAddCard} />
       </AntdCard>
     </S.Container>
   );

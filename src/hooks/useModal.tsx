@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ModalsDipatchContext } from "@components/Modals/ModalsProvider";
+import { ModalsDipatchContext } from "@components/modals/ModalsProvider";
 import { ModalState } from "@/interfaces/modal";
 
 const useModal = () => {
