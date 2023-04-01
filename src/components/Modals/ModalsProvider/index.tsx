@@ -1,6 +1,6 @@
 import { ModalState } from "@/interfaces/modal";
 import React, { createContext, useState, useMemo, useCallback } from "react";
-import Modals from "@components/Modals/Modals";
+import Modals from "@components/modals/Modals";
 
 interface ModalDispatch<T = any> {
   open: (state: ModalState<T>) => void;

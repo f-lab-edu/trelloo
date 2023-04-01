@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "./store";
 import { ThemeProvider } from "styled-components";
 import { worker } from "./mocks/browser";
-import ModalsProvider from "@components/Modals/ModalsProvider";
+import ModalsProvider from "@components/modals/ModalsProvider";
 import App from "./App";
 import { theme } from "./styles/theme";
 import { GlobalStyle } from "./styles/GlobalStyle";
