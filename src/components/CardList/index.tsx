@@ -15,15 +15,15 @@ export interface Props {
       text: string;
     }[];
   };
-  handleAddCard: HandleAddCard;
+  onAddCardClick: HandleAddCard;
 }
 
 export type HandleAddCard = ({ text, listId }: AddCardRequest) => void;
 
-const CardList = ({ data, handleAddCard }: Props) => {
+const CardList = ({ data, onAddCardClick }: Props) => {
   const [isWritingCard, setIsWritingCard] = useState(false);
 
-  const toggleCardInput = () => {
+  const onCardInputToggle = () => {
     setIsWritingCard(!isWritingCard);
   };
 
@@ -40,7 +40,7 @@ const CardList = ({ data, handleAddCard }: Props) => {
         {data.cards.map((card) => (
           <Card key={card.id} data={card} />
         ))}
-        <CardComposer isWritingCard={isWritingCard} toggleCardInput={toggleCardInput} onClick={handleAddCard} />
+        <CardComposer isWritingCard={isWritingCard} onCardInputToggle={onCardInputToggle} onClick={onAddCardClick} />
       </AntdCard>
     </S.Container>
   );
