@@ -1,4 +1,4 @@
-import { Card as C } from "antd";
+import { Card as AntdCard } from "antd";
 import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
 const CardDetail = loadable(() => import("@components/Modals/CardDetail"));
@@ -23,9 +23,9 @@ const Card = ({ data }: Props) => {
 
   return (
     <S.Container>
-      <C style={S.Card} onClick={handleClick} bodyStyle={S.Body}>
+      <AntdCard style={S.Card} onClick={handleClick} bodyStyle={S.Body}>
         <p>{data.text}</p>
-      </C>
+      </AntdCard>
     </S.Container>
   );
 };
