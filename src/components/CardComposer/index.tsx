@@ -9,11 +9,11 @@ const { TextArea } = Input;
 
 interface Props {
   isWritingCard: boolean;
-  toggleCardInput: () => void;
+  onCardInputToggle: () => void;
   onClick: HandleAddCard;
 }
 
-const CardComposer = ({ isWritingCard, toggleCardInput, onClick }: Props) => {
+const CardComposer = ({ isWritingCard, onCardInputToggle, onClick }: Props) => {
   return (
     <>
       {isWritingCard ? (
@@ -26,14 +26,14 @@ const CardComposer = ({ isWritingCard, toggleCardInput, onClick }: Props) => {
               <Button buttonColor="blue" onClick={() => onClick({ text: "example text", listId: "list1" })}>
                 Add card
               </Button>
-              <CloseOutlined style={S.CancleAddCardButton} onClick={toggleCardInput} />
+              <CloseOutlined style={S.CancleAddCardButton} onClick={onCardInputToggle} />
             </S.AddCardButtonWrapper>
             <Button icon={<EllipsisOutlined />} />
           </S.AddCardButtonContainer>
         </S.CardInputContainer>
       ) : (
         <S.ButtonWrapper>
-          <Button icon={<PlusOutlined />} onClick={toggleCardInput}>
+          <Button icon={<PlusOutlined />} onClick={onCardInputToggle}>
             Add a card
           </Button>
           <Button icon={<PicLeftOutlined />} />
