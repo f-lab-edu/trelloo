@@ -1,10 +1,10 @@
-import { ModalState } from "@/interfaces/modal";
+import { CloseModalState, ModalState, OpenModalState } from "@/interfaces/modal";
 import React, { createContext, useState, useMemo, useCallback } from "react";
 import Modals from "@components/modals/Modals";
 
-interface ModalDispatch<T = any> {
-  open: (state: ModalState<T>) => void;
-  close: (state: ModalState<T>) => void;
+interface ModalDispatch {
+  open: (state: OpenModalState) => void;
+  close: (state: CloseModalState) => void;
 }
 
 interface Props {
@@ -17,12 +17,12 @@ export const ModalsDipatchContext = createContext<ModalDispatch | null>(null);
 function ModalsProvider({ children }: Props) {
   const [modals, setModals] = useState<ModalState[]>([]);
 
-  const open = useCallback((state: ModalState) => {
-    setModals((modals) => [...modals, state]);
+  const open = useCallback((state: OpenModalState) => {
+    setModals((modals) => [...modals, { ...state, index: modals.length }]);
   }, []);
 
-  const close = useCallback((state: ModalState) => {
-    setModals((modals) => modals.filter((modal) => modal.component !== state.component || modal.props !== state.props));
+  const close = useCallback((state: CloseModalState) => {
+    setModals((modals) => modals.filter((modal) => modal.index !== state.index));
   }, []);
 
   const dispatch = useMemo(() => ({ open, close }), []);

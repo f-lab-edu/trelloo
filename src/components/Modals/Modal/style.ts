@@ -9,12 +9,14 @@ interface Props {
 export const ModalStyle = (options?: Props) => {
   return {
     overlay: {
-      top: options?.top || 0,
-      left: options?.left || 0,
+      top: "50vh",
+      left: "50vw",
+      width: 0,
+      height: 0,
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: options?.hasOverlay ? theme.color.dimmedBackground : "transparent",
+      backgroundColor: theme.color.dimmedBackground,
     },
     content: {
       inset: "unset",
