@@ -2,9 +2,9 @@ import React from "react";
 import loadable from "@loadable/component";
 import styled from "styled-components";
 import useModal from "@/hooks/useModal";
-import { ModalsProvider } from "@components/Modals/ModalsProvider/index.stories";
+import { ModalsProvider } from "@components/modals/ModalsProvider/index.stories";
 import { Props as CardEditProps } from "./index";
-const CardEdit = loadable(() => import("@components/Modals/CardEdit"));
+const CardEdit = loadable(() => import("@components/modals/CardEdit"));
 
 export default {
   title: "Components/Modals",

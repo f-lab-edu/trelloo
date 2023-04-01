@@ -1,30 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card as AntdCard, Input } from "antd";
-import { useAddCardMutation, useGetCardLists } from "@/queries/cardList";
-import Button from "@components/Buttons/Button";
+import Button from "@components/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import * as S from "./style";
+import { HandleAddCard } from "@components/CardList";
 
 const { TextArea } = Input;
 
 interface Props {
   isWritingCard: boolean;
-  handleClickAddCard: () => void;
+  toggleCardInput: () => void;
+  onClick: HandleAddCard;
 }
 
-const CardComposer = ({ isWritingCard, handleClickAddCard }: Props) => {
-  const { refetch } = useGetCardLists();
-  const { mutateAsync } = useAddCardMutation();
-
-  const handleAddCard = async () => {
-    await mutateAsync({
-      text: "dsf",
-      listTitle: "list1",
-    });
-  };
-
-  refetch();
-
+const CardComposer = ({ isWritingCard, toggleCardInput, onClick }: Props) => {
   return (
     <>
       {isWritingCard ? (
@@ -34,17 +23,17 @@ const CardComposer = ({ isWritingCard, handleClickAddCard }: Props) => {
           </AntdCard>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
-              <Button buttonColor="blue" onClick={handleAddCard}>
+              <Button buttonColor="blue" onClick={() => onClick({ text: "example text", listId: "list1" })}>
                 Add card
               </Button>
-              <CloseOutlined style={S.CancleAddCardButton} onClick={handleClickAddCard} />
+              <CloseOutlined style={S.CancleAddCardButton} onClick={toggleCardInput} />
             </S.AddCardButtonWrapper>
             <Button icon={<EllipsisOutlined />} />
           </S.AddCardButtonContainer>
         </S.CardInputContainer>
       ) : (
         <S.ButtonWrapper>
-          <Button icon={<PlusOutlined />} onClick={handleClickAddCard}>
+          <Button icon={<PlusOutlined />} onClick={toggleCardInput}>
             Add a card
           </Button>
           <Button icon={<PicLeftOutlined />} />
