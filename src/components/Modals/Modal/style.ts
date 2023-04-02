@@ -9,10 +9,10 @@ interface Props {
 export const ModalStyle = (options?: Props) => {
   return {
     overlay: {
-      top: "50vh",
-      left: "50vw",
-      width: 0,
-      height: 0,
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
