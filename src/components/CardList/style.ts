@@ -8,12 +8,14 @@ export const Container = styled.div`
 export const Header = {
   minHeight: "40px",
   backgroundColor: theme.color.cardListGray,
+  borderRadius: theme.borderRadius.card,
   fontSize: "14px",
 };
 
 export const Body = {
   padding: "0 10px 5px 10px",
   width: "100%",
+  borderRadius: theme.borderRadius.card,
   backgroundColor: theme.color.cardListGray,
 };
 

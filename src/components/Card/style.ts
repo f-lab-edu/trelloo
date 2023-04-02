@@ -36,6 +36,7 @@ export const Container = styled.div`
 
 export const Card = {
   width: "100%",
+  borderRadius: theme.borderRadius.card,
   boxShadow: theme.boxShadow.card,
 };
 
