@@ -1,5 +1,5 @@
-import { useAddCardMutation, useGetCardLists } from "@/queries/cardList";
-import { AddCardRequest } from "@/queries/cardList/interface";
+import { useAddCardMutation, useAddListMutation, useGetCardLists } from "@/queries/cardList";
+import { AddCardRequest, AddListRequest } from "@/queries/cardList/interface";
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
 import * as S from "./style";
@@ -8,18 +8,21 @@ const Board = () => {
   const { data: cardLists } = useGetCardLists();
 
   const { refetch } = useGetCardLists();
-  const { mutate } = useAddCardMutation();
+  const { mutate: addCardMutate } = useAddCardMutation();
+  const { mutate: addListMutate } = useAddListMutation();
 
   const handleAddCard = ({ text, listId }: AddCardRequest) => {
-    mutate({
+    addCardMutate({
       text,
       listId,
     });
     refetch();
   };
 
-  const handleAddList = () => {
-    // TODO: add func
+  const handleAddList = ({ title }: AddListRequest) => {
+    addListMutate({
+      title,
+    });
   };
 
   return (
