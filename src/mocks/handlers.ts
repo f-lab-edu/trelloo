@@ -1,6 +1,6 @@
-import { getAllData, saveDataByKey } from "./dbfunctions";
 import { rest } from "msw";
-import { cardLists } from "./data/cards";
+import { v4 as uuidv4 } from "uuid";
+import { addCard, getAllCardListsWithCards } from "./dbfunctions";
 
 interface CardRequestBody {
   text: string;
@@ -12,14 +12,14 @@ interface CardResponseBody {
 
 export const handlers = [
   rest.get("/cards/lists", (req, res, ctx) => {
-    return getAllData().then((data) => {
+    return getAllCardListsWithCards().then((data) => {
       return res(ctx.status(200), ctx.json(data));
     });
   }),
 
   rest.post<string, CardResponseBody>("/cards", (req, res, ctx) => {
     const { text, listId } = JSON.parse(req.body) as CardRequestBody;
-    return saveDataByKey({ key: listId, value: text }).then(() => {
+    return addCard({ listId, text, id: uuidv4() }).then(() => {
       return res(
         ctx.status(200),
         ctx.json({
