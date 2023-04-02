@@ -1,6 +1,8 @@
 export const theme = {
   color: {
     dimmedBackground: "#000000a3",
+    cardEditorGray: "#0009",
+    cardEditorText: "#c7d1db",
     backgroundGray: "#F3F5F7", // modal background
     cardListGray: "#EAECF0",
     hoverPointGray: "#E1E4E9",

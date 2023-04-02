@@ -2,14 +2,30 @@ import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
 interface Color {
-  buttonColor?: string;
+  options?: {
+    buttonColor?: string;
+    textColor?: string;
+    width?: string;
+  };
 }
 
 export const Container = styled.div<Color>`
-  margin: 3px;
+  padding: 0 10px;
+  width: ${({ options }) => options?.width || "max-content"};
   height: 32px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: ${({ buttonColor }) => (buttonColor === "gray" ? theme.color.buttonBackground : "transparent")};
-  border-radius: ${({ theme }) => theme.borderRadius.button};
+  background-color: ${({ options }) => options?.buttonColor || "transparent"};
+  border-radius: ${({ theme }) => theme.borderRadius.card};
+  color: ${({ options }) => options?.textColor};
+  cursor: pointer;
+`;
+
+export const IconWrapper = styled.div`
+  margin-right: 5px;
+`;
+
+export const IconBehindWrapper = styled.div`
+  margin-left: 5px;
 `;
