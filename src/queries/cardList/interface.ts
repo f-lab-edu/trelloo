@@ -12,6 +12,10 @@ export interface AddCardRequest {
   listId: string;
 }
 
+export interface AddListRequest {
+  title: string;
+}
+
 export interface ResponseMessage {
   message: string;
 }
