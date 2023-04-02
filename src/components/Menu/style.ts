@@ -12,6 +12,11 @@ export const Container = styled.div`
 export const ButtonsWrapper = styled.span`
   display: flex;
 `;
+
+export const ButtonWrapper = styled.div`
+  margin: 5px 5px 0 0;
+`;
+
 export const OtherButtonsWrapper = styled.span`
   display: flex;
 `;

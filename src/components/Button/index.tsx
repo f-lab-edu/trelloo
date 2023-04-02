@@ -5,17 +5,21 @@ import * as S from "./style";
 interface Props {
   icon?: React.ReactNode;
   isIconBehindText?: boolean;
-  buttonColor?: string;
+  options?: {
+    buttonColor?: string;
+    textColor?: string;
+    width?: string;
+  };
+
   children?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
-function Button({ icon, isIconBehindText = false, buttonColor, onClick, children }: Props) {
+function Button({ icon, isIconBehindText = false, options, onClick, children }: Props) {
   return (
-    <S.Container onClick={onClick} buttonColor={buttonColor}>
-      <AntdButton icon={!isIconBehindText && icon} type={buttonColor === "blue" ? "primary" : "text"}>
-        {children}
-        {isIconBehindText && icon}
-      </AntdButton>
+    <S.Container onClick={onClick} options={options}>
+      <S.IconWrapper>{!isIconBehindText && icon && icon}</S.IconWrapper>
+      {children}
+      <S.IconBehindWrapper>{isIconBehindText && icon}</S.IconBehindWrapper>
     </S.Container>
   );
 }
