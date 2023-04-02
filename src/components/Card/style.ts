@@ -2,6 +2,7 @@ import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
   margin-bottom: 8px;
 
   .ant-card-body:hover {
