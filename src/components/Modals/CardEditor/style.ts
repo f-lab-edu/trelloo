@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100px;
-  height: 30px;
+  display: flex;
+  width: 500px;
+  height: 300px;
 `;
 
-export const Input = styled.div`
-  //
-`;
+export const InputWrapper = styled.div``;
+
+export const MenuButtonsWrapper = styled.div``;

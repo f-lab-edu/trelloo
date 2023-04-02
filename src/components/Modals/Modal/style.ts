@@ -20,6 +20,9 @@ export const ModalStyle = (options?: Props) => {
     },
     content: {
       inset: "unset",
+      backgroundColor: "transparent",
+      border: "none",
+      overflow: "unset",
     },
   };
 };
