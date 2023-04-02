@@ -32,4 +32,4 @@ const Template = (args: { text: string }) => {
   );
 };
 
-export const Primary = Template.bind({});
+// export const Primary = Template.bind({});
