@@ -9,7 +9,7 @@ import {
   CalendarOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-import Button from "@components/Button";
+import Button from "@components/buttons/Button";
 import * as S from "./style";
 
 const { TextArea } = Input;
@@ -27,13 +27,13 @@ const CardEditor = ({ text, onClick }: Props) => {
         <S.InputWrapper>
           <TextArea defaultValue={text} placeholder="Controlled autosize" autoSize={{ minRows: 3, maxRows: 5 }} />
           <S.SaveButtonWrapper>
-            <Button options={{ buttonColor: "#0369A7", textColor: "white", width: "80px" }}>Save</Button>
+            <Button type="blue">Save</Button>
           </S.SaveButtonWrapper>
         </S.InputWrapper>
         <S.MenuButtonsWrapper>
           {buttonList.map((button) => (
             <S.ButtonWrapper>
-              <Button icon={button.icon} options={{ buttonColor: "#0009", textColor: "#c7d1db" }}>
+              <Button type="darkGray" icon={button.icon}>
                 {button.text}
               </Button>
             </S.ButtonWrapper>
