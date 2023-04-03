@@ -3,7 +3,6 @@ import { Card as AntdCard } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
-import { DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
 const CardDetail = loadable(() => import("@components/modals/CardDetail"));
 const CardEditor = loadable(() => import("@components/modals/CardEditor"));
 import * as S from "./style";
@@ -13,11 +12,9 @@ interface Props {
     id: string;
     text: string;
   };
-  onEditCard: (data: EditCardRequest) => void;
-  onDeleteCard: (data: DeleteCardRequest) => void;
 }
 
-const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
+const Card = ({ data }: Props) => {
   const { openModal } = useModal();
   const [isCardEditorOpened, setIsCardEditorOpened] = useState(false);
 
@@ -39,9 +36,7 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
         <p>{data.text}</p>
         <EditOutlined className="edit_button" onClick={handleOpenCardEditor} />
       </AntdCard>
-      {isCardEditorOpened && (
-        <CardEditor data={data} onClick={handleOpenCardEditor} onEditCard={onEditCard} onDeleteCard={onDeleteCard} />
-      )}
+      {isCardEditorOpened && <CardEditor data={data} onClick={handleOpenCardEditor} />}
     </S.Container>
   );
 };

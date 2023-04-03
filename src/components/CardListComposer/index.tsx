@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Input } from "antd";
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
+import { CardListContext } from "@components/Board/Provider";
 import Button from "@components/Button";
 import * as S from "./style";
 
 const { TextArea } = Input;
 
-interface Props {
-  onClick: any;
-}
-
-function CardListComposer({ onClick }: Props) {
+function CardListComposer() {
   const [isInputOpened, setIsInputOpened] = useState(false);
   const [listTitleInputValue, setListTitleInputValue] = useState("");
+  const { onAddList } = useContext(CardListContext);
 
   const handleInputOpen = () => {
     setIsInputOpened(!isInputOpened);
@@ -34,7 +32,7 @@ function CardListComposer({ onClick }: Props) {
             autoSize
           />
           <S.SubmitButtonWrapper>
-            <Button type="blue" onClick={() => onClick({ title: listTitleInputValue })}>
+            <Button type="blue" onClick={() => onAddList({ title: listTitleInputValue })}>
               Add a list
             </Button>
             <CloseOutlined style={S.CancleAddListButton} onClick={handleInputOpen} />
