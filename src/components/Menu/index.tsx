@@ -11,7 +11,7 @@ import {
   UserAddOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
-import Button from "@components/buttons/Button";
+import Button from "@components/Button";
 import * as S from "./style";
 
 interface Props {
