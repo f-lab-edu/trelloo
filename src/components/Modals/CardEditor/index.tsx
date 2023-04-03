@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "antd";
 import {
   CreditCardOutlined,
@@ -11,23 +11,36 @@ import {
 } from "@ant-design/icons";
 import Button from "@components/Button";
 import * as S from "./style";
+import { EditCardRequest } from "@/queries/cardList/interface";
 
 const { TextArea } = Input;
 
 export interface Props {
-  text: string;
+  data: {
+    id: string;
+    text: string;
+  };
   onClick: (e: any) => void;
+  onEditCard: (data: EditCardRequest) => void;
 }
 
-const CardEditor = ({ text, onClick }: Props) => {
+const CardEditor = ({ data, onClick, onEditCard }: Props) => {
+  const [inputValue, setInputValue] = useState(data.text);
+
   return (
     <>
       <S.Overlay onClick={onClick} />
       <S.Container>
         <S.InputWrapper>
-          <TextArea defaultValue={text} placeholder="Controlled autosize" autoSize={{ minRows: 3, maxRows: 5 }} />
+          <TextArea
+            defaultValue={data.text}
+            onChange={(e) => setInputValue(e.target.value)}
+            autoSize={{ minRows: 3, maxRows: 5 }}
+          />
           <S.SaveButtonWrapper>
-            <Button type="blue">Save</Button>
+            <Button type="blue" onClick={() => onEditCard({ id: data.id, text: inputValue })}>
+              Save
+            </Button>
           </S.SaveButtonWrapper>
         </S.InputWrapper>
         <S.MenuButtonsWrapper>
