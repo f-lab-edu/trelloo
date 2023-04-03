@@ -1,22 +1,18 @@
 import React from "react";
-import { Button as AntdButton } from "antd";
 import * as S from "./style";
+import { theme } from "@/styles/theme";
 
 interface Props {
   icon?: React.ReactNode;
   isIconBehindText?: boolean;
-  options?: {
-    buttonColor?: string;
-    textColor?: string;
-    width?: string;
-  };
-
+  type: "blue" | "gray" | "darkGray" | "transparent";
   children?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
-function Button({ icon, isIconBehindText = false, options, onClick, children }: Props) {
+
+function Button({ icon, isIconBehindText = false, type, onClick, children }: Props) {
   return (
-    <S.Container onClick={onClick} options={options}>
+    <S.Container onClick={onClick} options={buttonOptions[type]}>
       <S.IconWrapper>{!isIconBehindText && icon && icon}</S.IconWrapper>
       {children}
       <S.IconBehindWrapper>{isIconBehindText && icon}</S.IconBehindWrapper>
@@ -25,3 +21,22 @@ function Button({ icon, isIconBehindText = false, options, onClick, children }: 
 }
 
 export default Button;
+
+const buttonOptions = {
+  blue: {
+    buttonColor: theme.color.buttonBlue,
+    textColor: theme.color.white,
+  },
+  gray: {
+    buttonColor: theme.color.buttonBackground,
+    textColor: theme.color.black,
+  },
+  darkGray: {
+    buttonColor: theme.color.cardEditorGray,
+    textColor: theme.color.white,
+  },
+  transparent: {
+    buttonColor: "transparent",
+    textColor: theme.color.black,
+  },
+};
