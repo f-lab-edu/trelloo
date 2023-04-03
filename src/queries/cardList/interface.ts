@@ -17,6 +17,10 @@ export interface EditCardRequest {
   text: string;
 }
 
+export interface DeleteCardRequest {
+  id: string;
+}
+
 export interface AddListRequest {
   title: string;
 }
