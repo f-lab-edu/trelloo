@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Card as AntdCard } from "antd";
+import { Card as AntdCard, Dropdown } from "antd";
+import type { MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
 import { AddCardRequest } from "@/queries/cardList/interface";
 import Card from "@components/Card";
@@ -33,13 +34,18 @@ const CardList = ({ data, onAddCardClick }: Props) => {
         title={data.title}
         bordered={false}
         style={{ width: 300 }}
-        extra={<EllipsisOutlined />}
+        extra={
+          <Dropdown menu={{ items }} placement="bottomLeft">
+            <EllipsisOutlined />
+          </Dropdown>
+        }
         headStyle={S.Header}
         bodyStyle={S.Body}
       >
         {data.cards.map((card) => (
           <Card key={card.id} data={card} />
         ))}
+        <S.ListOption></S.ListOption>
         <CardComposer isWritingCard={isWritingCard} onCardInputToggle={onCardInputToggle} onClick={onAddCardClick} />
       </AntdCard>
     </S.Container>
@@ -47,3 +53,34 @@ const CardList = ({ data, onAddCardClick }: Props) => {
 };
 
 export default CardList;
+
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: <S.ListOptionTitle>List actions</S.ListOptionTitle>,
+  },
+  {
+    key: "2",
+    label: <>Add card...</>,
+  },
+  {
+    key: "3",
+    label: <>Copy list...</>,
+  },
+  {
+    key: "4",
+    label: <>Move list...</>,
+  },
+  {
+    key: "5",
+    label: <>Watch</>,
+  },
+  {
+    key: "6",
+    label: <>Sort by...</>,
+  },
+  {
+    key: "7",
+    label: <>Arcive this list...</>,
+  },
+];
