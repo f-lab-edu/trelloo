@@ -1,6 +1,6 @@
 import React from "react";
-import * as S from "./style";
 import { theme } from "@/styles/theme";
+import * as S from "./style";
 
 interface Props {
   icon?: React.ReactNode;
