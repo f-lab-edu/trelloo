@@ -31,7 +31,7 @@ const CardComposer = ({ isWritingCard, onCardInputToggle, onClick, listId }: Pro
           </AntdCard>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
-              <Button type="blue" onClick={() => onClick({ text: "example text", listId: "list1" })}>
+              <Button type="blue" onClick={() => onClick({ text: cardInputValue, listId })}>
                 Add card
               </Button>
               <CloseOutlined style={S.CancelAddCardButton} onClick={onCardInputToggle} />
