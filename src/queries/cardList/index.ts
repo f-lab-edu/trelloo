@@ -6,6 +6,7 @@ import {
   DeleteCardRequest,
   DeleteListRequest,
   EditCardRequest,
+  EditListRequest,
   GetCardListsResponse,
   ResponseMessage,
 } from "./interface";
@@ -44,6 +45,12 @@ export const useDeleteCardMutation = () => {
 export const useAddListMutation = () => {
   return useMutation(cardListsKeys.all, (params: AddListRequest) => {
     return request.post<ResponseMessage>({ path: "/list", isMock: true, params });
+  });
+};
+
+export const useEditListMutation = () => {
+  return useMutation(cardListsKeys.all, (params: EditListRequest) => {
+    return request.put<ResponseMessage>({ path: "/list", isMock: true, params });
   });
 };
 
