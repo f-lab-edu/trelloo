@@ -4,6 +4,7 @@ import {
   useDeleteCardMutation,
   useDeleteListMutation,
   useEditCardMutation,
+  useEditListMutation,
   useGetCardLists,
 } from "@/queries/cardList";
 import {
@@ -12,6 +13,7 @@ import {
   DeleteCardRequest,
   DeleteListRequest,
   EditCardRequest,
+  EditListRequest,
 } from "@/queries/cardList/interface";
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
@@ -26,6 +28,7 @@ const Board = () => {
   const { mutate: editCardMutate } = useEditCardMutation();
   const { mutate: deleteCardMutate } = useDeleteCardMutation();
   const { mutate: deleteListMutate } = useDeleteListMutation();
+  const { mutate: editListMutate } = useEditListMutation();
 
   const handleAddCard = ({ text, listId }: AddCardRequest) => {
     addCardMutate({
@@ -57,6 +60,14 @@ const Board = () => {
     refetch();
   };
 
+  const handleEditList = ({ id, title }: EditListRequest) => {
+    editListMutate({
+      id,
+      title,
+    });
+    refetch();
+  };
+
   const handleDeleteList = ({ id }: DeleteListRequest) => {
     deleteListMutate({
       id,
@@ -73,6 +84,7 @@ const Board = () => {
           onAddCardClick={handleAddCard}
           onEditCard={handleEditCard}
           onDeleteCard={handleDeleteCard}
+          onEditList={handleEditList}
           onDeleteList={handleDeleteList}
         />
       ))}

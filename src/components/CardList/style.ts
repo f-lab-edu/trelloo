@@ -19,6 +19,15 @@ export const Body = {
   backgroundColor: theme.color.cardListGray,
 };
 
+export const ListTitle = styled.div`
+  position: absolute;
+  top: 0;
+  margin-top: 8px;
+`;
+export const Title = styled.h2`
+  padding: 5px 12px;
+`;
+
 export const ListOption = styled.div`
   position: absolute;
   top: 40px;
