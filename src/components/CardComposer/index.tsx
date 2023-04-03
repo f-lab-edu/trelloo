@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card as AntdCard, Input } from "antd";
 import Button from "@components/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import * as S from "./style";
-import { HandleAddCard } from "@components/CardList";
+import { CardContext } from "@components/Board/Provider";
 
 const { TextArea } = Input;
 
 interface Props {
   isWritingCard: boolean;
   onCardInputToggle: () => void;
-  onClick: HandleAddCard;
   listId: string;
 }
 
-const CardComposer = ({ isWritingCard, onCardInputToggle, onClick, listId }: Props) => {
+const CardComposer = ({ isWritingCard, onCardInputToggle, listId }: Props) => {
   const [cardInputValue, setCardInputValue] = useState("");
+  const { onAddCard } = useContext(CardContext);
 
   return (
     <>
@@ -31,7 +31,7 @@ const CardComposer = ({ isWritingCard, onCardInputToggle, onClick, listId }: Pro
           </AntdCard>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
-              <Button type="blue" onClick={() => onClick({ text: cardInputValue, listId })}>
+              <Button type="blue" onClick={() => onAddCard({ text: cardInputValue, listId })}>
                 Add card
               </Button>
               <CloseOutlined style={S.CancelAddCardButton} onClick={onCardInputToggle} />
