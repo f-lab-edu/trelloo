@@ -21,19 +21,17 @@ const BoardPage: React.FC = () => {
   };
 
   return (
-    <S.Container>
-      <Layout style={S.Layout}>
-        <Header />
-        <Layout style={S.ContentLayout}>
-          <Sider />
-          <Content style={S.Content}>
-            <Menu showDrawer={showDrawer} boardName={"boardName"} />
-            <Board />
-            <Drawer open={open} onClose={onClose} />
-          </Content>
-        </Layout>
+    <Layout style={S.Layout}>
+      <Header />
+      <Layout style={S.ContentLayout}>
+        <Sider />
+        <Content style={S.Content}>
+          <Menu showDrawer={showDrawer} boardName={"boardName"} />
+          <Board />
+          <Drawer open={open} onClose={onClose} />
+        </Content>
       </Layout>
-    </S.Container>
+    </Layout>
   );
 };
 

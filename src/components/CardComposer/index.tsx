@@ -1,6 +1,6 @@
 import React from "react";
 import { Card as AntdCard, Input } from "antd";
-import Button from "@components/buttons/Button";
+import Button from "@components/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import * as S from "./style";
 import { HandleAddCard } from "@components/CardList";
