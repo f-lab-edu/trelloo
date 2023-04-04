@@ -13,7 +13,7 @@ export const Header = {
 };
 
 export const Body = {
-  padding: "0 10px 5px 10px",
+  padding: "5px 10px 5px 10px",
   width: "100%",
   borderRadius: theme.borderRadius.card,
   backgroundColor: theme.color.cardListGray,
