@@ -14,7 +14,7 @@ const ModalButton = () => {
   const { openModal } = useModal();
 
   const onClickButton = () => {
-    openModal<CardDetailProps>({
+    openModal({
       component: CardDetail,
       props: { title: "card detail modal" },
     });
