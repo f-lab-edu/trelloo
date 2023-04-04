@@ -17,12 +17,18 @@ const CardComposer = ({ isWritingCard, onCardInputToggle, listId }: Props) => {
   const [cardInputValue, setCardInputValue] = useState("");
   const { onAddCard } = useContext(CardContext);
 
+  const handleAddCard = (params: { text: string; listId: string }) => {
+    onAddCard(params);
+    setCardInputValue("");
+  };
+
   return (
     <>
       {isWritingCard ? (
         <S.CardInputContainer>
           <AntdCard bodyStyle={S.CardInput}>
             <TextArea
+              value={cardInputValue}
               onChange={(e) => setCardInputValue(e.target.value)}
               placeholder="Enter a title for this card..."
               autoSize
@@ -31,7 +37,7 @@ const CardComposer = ({ isWritingCard, onCardInputToggle, listId }: Props) => {
           </AntdCard>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
-              <Button type="blue" onClick={() => onAddCard({ text: cardInputValue, listId })}>
+              <Button type="blue" onClick={() => handleAddCard({ text: cardInputValue, listId })}>
                 Add card
               </Button>
               <CloseOutlined style={S.CancelAddCardButton} onClick={onCardInputToggle} />
