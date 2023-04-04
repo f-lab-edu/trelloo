@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Provider } from "react-redux";
-import styled from "styled-components";
 import { store } from "@/store";
+import { Props as CardProps } from "./index";
 import Card from "@components/Card";
 
 export default {
@@ -12,10 +12,10 @@ export default {
   },
 };
 
-const Template = (args: { text: string }) => {
+const Template = (args: CardProps) => {
   return (
     <Provider store={store}>
-      <Card data={{ text: "default" }} />
+      <Card data={{ id: "cardId", text: "default" }} />
     </Provider>
   );
 };
