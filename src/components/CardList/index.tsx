@@ -2,17 +2,11 @@ import { useState, useContext } from "react";
 import { Card as AntdCard, Dropdown, Input } from "antd";
 import type { MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
-import {
-  AddCardRequest,
-  DeleteCardRequest,
-  DeleteListRequest,
-  EditCardRequest,
-  EditListRequest,
-} from "@/queries/cardList/interface";
+import { AddCardRequest } from "@/queries/cardList/interface";
+import { CardHandlerProvider, CardListContext } from "@components/Board/Provider";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
 import * as S from "./style";
-import { CardContext, CardListContext } from "@components/Board/Provider";
 
 const { TextArea } = Input;
 
@@ -104,10 +98,12 @@ const CardList = ({ data }: Props) => {
             />
           )}
         </S.ListTitle>
-        {data.cards.map((card) => (
-          <Card key={card.id} data={card} />
-        ))}
-        <CardComposer isWritingCard={isWritingCard} onCardInputToggle={onCardInputToggle} listId={data.id} />
+        <CardHandlerProvider>
+          {data.cards.map((card) => (
+            <Card key={card.id} data={card} />
+          ))}
+          <CardComposer isWritingCard={isWritingCard} onCardInputToggle={onCardInputToggle} listId={data.id} />
+        </CardHandlerProvider>
       </AntdCard>
     </S.Container>
   );
