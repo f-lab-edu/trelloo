@@ -1,22 +1,25 @@
 import React, { useState, useContext } from "react";
 import { Input } from "antd";
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
-import { CardListContext } from "@components/Board/Provider";
+import { AddListRequest } from "@/queries/cardList/interface";
 import Button from "@components/Button";
 import * as S from "./style";
 
 const { TextArea } = Input;
 
-function CardListComposer() {
+interface Props {
+  onAddList: (params: AddListRequest) => void;
+}
+
+function CardListComposer({ onAddList }: Props) {
   const [isInputOpened, setIsInputOpened] = useState(false);
   const [listTitleInputValue, setListTitleInputValue] = useState("");
-  const { onAddList } = useContext(CardListContext);
 
   const handleInputOpen = () => {
     setIsInputOpened(!isInputOpened);
   };
 
-  const handleAddList = (params: { title: string }) => {
+  const handleAddList = (params: AddListRequest) => {
     onAddList(params);
     setListTitleInputValue("");
   };

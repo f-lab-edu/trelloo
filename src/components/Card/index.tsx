@@ -6,15 +6,18 @@ import useModal from "@/hooks/useModal";
 import CardEditor from "@components/modals/CardEditor";
 const CardDetail = loadable(() => import("@components/modals/CardDetail"));
 import * as S from "./style";
+import { DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
 
 export interface Props {
   data: {
     id: string;
     text: string;
   };
+  onEditCard: (params: EditCardRequest) => void;
+  onDeleteCard: (params: DeleteCardRequest) => void;
 }
 
-const Card = ({ data }: Props) => {
+const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
   const { openModal } = useModal();
   const [isCardEditorOpened, setIsCardEditorOpened] = useState(false);
 
@@ -37,7 +40,13 @@ const Card = ({ data }: Props) => {
         <EditOutlined className="edit_button" onClick={handleOpenCardEditor} />
       </AntdCard>
       {isCardEditorOpened && (
-        <CardEditor data={data} onClick={handleOpenCardEditor} setIsCardEditorOpened={setIsCardEditorOpened} />
+        <CardEditor
+          data={data}
+          onClick={handleOpenCardEditor}
+          setIsCardEditorOpened={setIsCardEditorOpened}
+          onEditCard={onEditCard}
+          onDeleteCard={onDeleteCard}
+        />
       )}
     </S.Container>
   );
