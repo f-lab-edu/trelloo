@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Input } from "antd";
 import {
   CreditCardOutlined,
@@ -9,9 +9,9 @@ import {
   CalendarOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
+import { DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
 import Button from "@components/Button";
 import * as S from "./style";
-import { CardContext } from "@components/Board/Provider";
 
 const { TextArea } = Input;
 
@@ -22,11 +22,12 @@ export interface Props {
   };
   onClick: (e: any) => void;
   setIsCardEditorOpened: (state: boolean) => void;
+  onEditCard: (params: EditCardRequest) => void;
+  onDeleteCard: (params: DeleteCardRequest) => void;
 }
 
-const CardEditor = ({ data, onClick, setIsCardEditorOpened }: Props) => {
+const CardEditor = ({ data, onClick, setIsCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
   const [inputValue, setInputValue] = useState(data.text);
-  const { onEditCard, onDeleteCard } = useContext(CardContext);
 
   const buttonList = [
     {
