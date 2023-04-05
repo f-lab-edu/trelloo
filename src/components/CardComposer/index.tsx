@@ -17,7 +17,7 @@ interface Props {
 const CardComposer = ({ isWritingCard, onCardInputToggle, listId, onAddCard }: Props) => {
   const [cardInputValue, setCardInputValue] = useState("");
 
-  const handleAddCard = (params: { text: string; listId: string }) => {
+  const handleAddCard = (params: AddCardRequest) => {
     onAddCard(params);
     setCardInputValue("");
   };
