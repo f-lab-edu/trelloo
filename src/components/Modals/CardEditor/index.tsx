@@ -9,15 +9,15 @@ import {
   CalendarOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-import { Card } from "@/interfaces/cards";
-import { DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
+import { ICard } from "@/interfaces/cards";
+import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
 import Button from "@components/Button";
 import * as S from "./style";
 
 const { TextArea } = Input;
 
 export interface Props {
-  data: Card;
+  data: ICard;
   onCardEditorClose: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
   setIsCardEditorOpened: (state: boolean) => void;
   onEditCard: (params: EditCardRequest) => void;

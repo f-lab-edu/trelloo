@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Input } from "antd";
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
-import { AddListRequest } from "@/queries/cardList/interface";
+import { AddListRequest } from "@/queries/cards/interface";
 import Button from "@components/Button";
 import * as S from "./style";
 
