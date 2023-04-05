@@ -1,10 +1,10 @@
-export interface Card {
+export interface ICard {
   id: string;
   text: string;
 }
 
-export interface CardList {
+export interface ICardList {
   id: string;
   title: string;
-  cards: Card[];
+  cards: ICard[];
 }
