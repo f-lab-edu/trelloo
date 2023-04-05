@@ -9,6 +9,7 @@ import {
   CalendarOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
+import { Card } from "@/interfaces/cards";
 import { DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
 import Button from "@components/Button";
 import * as S from "./style";
@@ -16,17 +17,14 @@ import * as S from "./style";
 const { TextArea } = Input;
 
 export interface Props {
-  data: {
-    id: string;
-    text: string;
-  };
-  onClick: (e: any) => void;
+  data: Card;
+  onCardEditorClose: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
   setIsCardEditorOpened: (state: boolean) => void;
   onEditCard: (params: EditCardRequest) => void;
   onDeleteCard: (params: DeleteCardRequest) => void;
 }
 
-const CardEditor = ({ data, onClick, setIsCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
+const CardEditor = ({ data, onCardEditorClose, setIsCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
   const [inputValue, setInputValue] = useState(data.text);
 
   const buttonList = [
@@ -74,7 +72,7 @@ const CardEditor = ({ data, onClick, setIsCardEditorOpened, onEditCard, onDelete
 
   return (
     <>
-      <S.Overlay onClick={onClick} />
+      <S.Overlay onClick={onCardEditorClose} />
       <S.Container>
         <S.InputWrapper>
           <TextArea
