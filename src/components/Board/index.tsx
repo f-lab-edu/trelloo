@@ -1,5 +1,5 @@
-import { useCardsQuery } from "@/queries/cardList";
-import { useAddListMutation, useDeleteListMutation, useEditListMutation } from "@/queries/cardList";
+import { useCardsQuery } from "@/queries/cards";
+import { useAddListMutation, useDeleteListMutation, useEditListMutation } from "@/queries/cards";
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
 import * as S from "./style";

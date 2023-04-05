@@ -6,7 +6,7 @@ import {
   EditCardRequest,
   EditListRequest,
   ResponseMessage,
-} from "@/queries/cardList/interface";
+} from "@/queries/cards/interface";
 import { rest } from "msw";
 import { v4 as uuidv4 } from "uuid";
 import {

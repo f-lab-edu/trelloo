@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Card as AntdCard, Dropdown, Input } from "antd";
 import type { MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
-import { AddCardRequest, DeleteListRequest, EditListRequest } from "@/queries/cardList/interface";
-import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from "@/queries/cardList";
-import { CardList } from "@/interfaces/cards";
+import { AddCardRequest, DeleteListRequest, EditListRequest } from "@/queries/cards/interface";
+import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from "@/queries/cards";
+import { ICardList } from "@/interfaces/cards";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
 import * as S from "./style";
@@ -12,7 +12,7 @@ import * as S from "./style";
 const { TextArea } = Input;
 
 export interface Props {
-  data: CardList;
+  data: ICardList;
   onEditList: (params: EditListRequest) => void;
   onDeleteList: (params: DeleteListRequest) => void;
 }
@@ -20,7 +20,7 @@ export interface Props {
 export type HandleAddCard = ({ text, listId }: AddCardRequest) => void;
 
 const CardList = ({ data, onEditList, onDeleteList }: Props) => {
-  const [isWritingCard, setIsWritingCard] = useState(false);
+  const [isCardInputOpened, setIsCardInputOpened] = useState(false);
   const [isTitleInputOpened, setIsTitleInputOpened] = useState(false);
   const [titleInput, setTitleInput] = useState(data.title);
 
@@ -29,7 +29,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   const { mutate: deleteCardMutate } = useDeleteCardMutation();
 
   const onCardInputToggle = () => {
-    setIsWritingCard(!isWritingCard);
+    setIsCardInputOpened(!isCardInputOpened);
   };
 
   const handleTitleInput = () => {
@@ -101,7 +101,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
           <Card key={card.id} data={card} onEditCard={editCardMutate} onDeleteCard={deleteCardMutate} />
         ))}
         <CardComposer
-          isWritingCard={isWritingCard}
+          isCardInputOpened={isCardInputOpened}
           onCardInputToggle={onCardInputToggle}
           listId={data.id}
           onAddCard={addCardMutate}
