@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { Card as AntdCard, Dropdown, Input } from "antd";
-import type { MenuProps } from "antd";
-import { EllipsisOutlined } from "@ant-design/icons";
-import { AddCardRequest, DeleteListRequest, EditListRequest } from "@/queries/cards/interface";
+import { Card as AntdCard, Input } from "antd";
+import {
+  AddCardRequest,
+  DeleteCardRequest,
+  DeleteListRequest,
+  EditCardRequest,
+  EditListRequest,
+} from "@/queries/cards/interface";
 import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from "@/queries/cards";
 import { ICardList } from "@/interfaces/cards";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
+import ListOptions from "@components/ListOptions";
 import * as S from "./style";
 
 const { TextArea } = Input;
@@ -41,47 +46,28 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     handleTitleInput();
   };
 
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: <S.ListOptionTitle>List actions</S.ListOptionTitle>,
-    },
-    {
-      key: "2",
-      label: <>Add card...</>,
-    },
-    {
-      key: "3",
-      label: <>Copy list...</>,
-    },
-    {
-      key: "4",
-      label: <>Move list...</>,
-    },
-    {
-      key: "5",
-      label: <>Watch</>,
-    },
-    {
-      key: "6",
-      label: <>Sort by...</>,
-    },
-    {
-      key: "7",
-      label: <div onClick={() => onDeleteList({ id: data.id })}>Arcive this list...</div>,
-    },
-  ];
+  const onAddCard = (params: AddCardRequest) => {
+    addCardMutate(params);
+  };
+
+  const onEditCard = (params: EditCardRequest) => {
+    editCardMutate(params);
+  };
+
+  const onDeleteCard = (params: DeleteCardRequest) => {
+    deleteCardMutate(params);
+  };
+
+  const onDeleteListById = () => {
+    onDeleteList({ id: data.id });
+  };
 
   return (
     <S.Container>
       <AntdCard
         bordered={false}
         style={{ width: 300 }}
-        extra={
-          <Dropdown menu={{ items }} placement="bottomLeft">
-            <EllipsisOutlined />
-          </Dropdown>
-        }
+        extra={<ListOptions onDeleteListById={onDeleteListById} />}
         headStyle={S.Header}
         bodyStyle={S.Body}
       >
@@ -98,13 +84,13 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
           )}
         </S.ListTitle>
         {data.cards.map((card) => (
-          <Card key={card.id} data={card} onEditCard={editCardMutate} onDeleteCard={deleteCardMutate} />
+          <Card key={card.id} data={card} onEditCard={onEditCard} onDeleteCard={onDeleteCard} />
         ))}
         <CardComposer
           isCardInputOpened={isCardInputOpened}
           onCardInputToggle={onCardInputToggle}
           listId={data.id}
-          onAddCard={addCardMutate}
+          onAddCard={onAddCard}
         />
       </AntdCard>
     </S.Container>
