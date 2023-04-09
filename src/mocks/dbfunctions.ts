@@ -17,6 +17,7 @@ export interface CardData {
   id: string;
   text: string;
   createdAt: number;
+  index: number;
 }
 
 export interface EditCardData {
@@ -41,6 +42,7 @@ const initDb = async () => {
         keyPath: listKeyPath,
       });
       const cardStore = db.createObjectStore(cardStoreName, {
+        autoIncrement: true,
         keyPath: cardKeyPath,
       });
 
@@ -48,6 +50,7 @@ const initDb = async () => {
       cardStore.createIndex("listId", "listId", { unique: false });
       cardStore.createIndex("id", "id", { unique: true });
       cardStore.createIndex("createdAt", "createdAt", { unique: true });
+      cardStore.createIndex("index", "index", { unique: false });
     },
   });
   return db;
@@ -138,11 +141,12 @@ export const getCardIdsByListId = async (listId: string): Promise<CardData[]> =>
   return cards;
 };
 
-export const addCard = async (card: CardData) => {
+export const addCard = async (card: Omit<CardData, "index">) => {
   const db = await initDb();
   const tx = db.transaction(cardStoreName, "readwrite");
   const store = tx.objectStore(cardStoreName);
-  await store.add({ ...card });
+  const index = await store.count();
+  await store.add({ ...card, index });
   await tx.done;
   return card;
 };
@@ -172,7 +176,7 @@ export const editCardPosition = async ({
   const tx2 = db.transaction([cardStoreName], "readwrite");
   const destinationListStore = tx2.objectStore(cardStoreName);
   const destinationList = await destinationListStore.index("listId").getAll(destination.listId);
-  const updatedDestinationList = [...destinationList];
+  const updatedDestinationList = destinationList.filter((card) => card.id !== cardId);
 
   const sourceListStore2 = tx2.objectStore(cardStoreName);
   const card = await sourceListStore2.get(cardId);
@@ -181,11 +185,13 @@ export const editCardPosition = async ({
 
   for (let i = 0; i < updatedSourceList.length; i++) {
     const updatedCard = updatedSourceList[i];
+    updatedCard.index = i;
     await destinationListStore.put(updatedCard);
   }
 
   for (let i = 0; i < updatedDestinationList.length; i++) {
     const updatedCard = updatedDestinationList[i];
+    updatedCard.index = i;
     await destinationListStore.put(updatedCard);
   }
 
@@ -231,7 +237,7 @@ export const getAllCardListsWithCards = async (): Promise<CardListData[]> => {
   return lists.map((list) => {
     return {
       ...list,
-      cards: cards.filter((card) => card.listId === list.id),
+      cards: cards.filter((card) => card.listId === list.id).sort((a, b) => a.index - b.index),
     };
   });
 };
