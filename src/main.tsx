@@ -20,17 +20,17 @@ const queryClient = new QueryClient();
 ReactModal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <ModalsProvider>
-            <GlobalStyle />
-            <App />
-          </ModalsProvider>
-        </ThemeProvider>
-      </Provider>
-    </QueryClientProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={false} />
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <ModalsProvider>
+          <GlobalStyle />
+          <App />
+        </ModalsProvider>
+      </ThemeProvider>
+    </Provider>
+  </QueryClientProvider>,
+  // </React.StrictMode>,
 );
