@@ -17,6 +17,21 @@ export interface EditCardRequest {
   text: string;
 }
 
+export interface EditCardPositionRequest {
+  destination: {
+    listId: string;
+    index: number;
+  };
+  source: {
+    listId: string;
+    index: number;
+  };
+}
+
+export interface EditCardPositionParam {
+  cardId: string;
+}
+
 export interface DeleteCardRequest {
   id: string;
 }

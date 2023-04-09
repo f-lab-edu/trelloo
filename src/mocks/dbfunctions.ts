@@ -1,3 +1,4 @@
+import { EditCardPositionParam, EditCardPositionRequest } from "./../queries/cards/interface";
 import { openDB } from "idb";
 
 export interface CardListData {
@@ -89,6 +90,31 @@ const deleteOnlyList = async ({ id }: DeleteCardData) => {
   return deleteRequest;
 };
 
+const getCardByIndex = async (listId: string, cardIndex: number) => {
+  const db = await openDB(dbName, 1);
+  const tx = db.transaction([listStoreName, cardStoreName], "readonly");
+  const listStore = tx.objectStore(listStoreName);
+  const cardStore = tx.objectStore(cardStoreName);
+
+  const list = await listStore.get(listId);
+  if (!list) return null;
+
+  const index = cardStore.index("listId");
+  const cursor = await index.openCursor(IDBKeyRange.only(listId));
+
+  let i = 0;
+  while (cursor && i <= cardIndex) {
+    if (i === cardIndex) {
+      const card = cursor.value;
+      return card;
+    }
+    cursor.continue();
+    i++;
+  }
+
+  return null;
+};
+
 const deleteCardsInList = async ({ id }: DeleteCardData) => {
   const db = await initDb();
   const tx = db.transaction([listStoreName, cardStoreName], "readwrite");
@@ -111,7 +137,7 @@ export const getCardIdsByListId = async (listId: string): Promise<CardData[]> =>
   return cards;
 };
 
-export const addCard = async (card: CardData) => {
+export const addCard = async (card: CardData, index?: number) => {
   const db = await initDb();
   const tx = db.transaction(cardStoreName, "readwrite");
   const store = tx.objectStore(cardStoreName);
@@ -130,6 +156,32 @@ export const editCard = async ({ id, text }: EditCardData) => {
   await tx.done;
   return card;
 };
+
+export const editCardPosition = async ({
+  cardId,
+  source,
+  destination,
+}: EditCardPositionParam & EditCardPositionRequest) => {
+  const db = await initDb();
+  const tx1 = db.transaction([cardStoreName], "readonly");
+  const store = tx1.objectStore(cardStoreName);
+  const card = await store.get(cardId);
+  const tx2 = db.transaction([cardStoreName], "readwrite");
+  const updatedCardStore = tx2.objectStore(cardStoreName);
+  const updatedCard = { ...card, listId: destination.listId };
+  await updatedCardStore.put(updatedCard);
+  await tx2.done;
+  await tx1.done;
+};
+
+async function insertCard(card: object, destinationListId: string, index: number) {
+  const db = await initDb();
+  const tx = db.transaction([cardStoreName], "readwrite");
+  const store = tx.objectStore(cardStoreName);
+
+  const cards = await getCardByIndex(destinationListId, index);
+  await tx.done;
+}
 
 export const deleteCard = async ({ id }: DeleteCardData) => {
   const db = await initDb();
