@@ -37,6 +37,7 @@
     "@tanstack/react-query-devtools": "^4.26.1",
     "@types/axios": "^0.14.0",
     "@types/loadable__component": "^5.13.4",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "@types/react-modal": "^3.13.1",
     "@types/react-query": "^1.2.9",
     "@types/react-router-dom": "^5.3.3",
