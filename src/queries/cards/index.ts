@@ -5,6 +5,8 @@ import {
   AddListRequest,
   DeleteCardRequest,
   DeleteListRequest,
+  EditCardPositionParam,
+  EditCardPositionRequest,
   EditCardRequest,
   EditListRequest,
   GetCardListsResponse,
@@ -77,6 +79,22 @@ export const useEditListMutation = () => {
   return useMutation(
     (params: EditListRequest) => {
       return request.put<ResponseMessage>({ path: "/lists", isMock: true, params });
+    },
+    {
+      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+    },
+  );
+};
+
+export const useEditCardPositionMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ({ cardId, destination, source }: EditCardPositionParam & EditCardPositionRequest) => {
+      return request.put<ResponseMessage>({
+        path: `/cards/${cardId}/move`,
+        isMock: true,
+        params: { destination, source },
+      });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
