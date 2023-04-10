@@ -33,7 +33,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   const { mutate: editCardMutate } = useEditCardMutation();
   const { mutate: deleteCardMutate } = useDeleteCardMutation();
 
-  const onCardInputToggle = () => {
+  const handleCardInputToggle = () => {
     setIsCardInputOpened(!isCardInputOpened);
   };
 
@@ -46,19 +46,19 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     handleTitleInput();
   };
 
-  const onAddCard = (params: AddCardRequest) => {
+  const handleAddCard = (params: AddCardRequest) => {
     addCardMutate(params);
   };
 
-  const onEditCard = (params: EditCardRequest) => {
+  const handleEditCard = (params: EditCardRequest) => {
     editCardMutate(params);
   };
 
-  const onDeleteCard = (params: DeleteCardRequest) => {
+  const handleDeleteCard = (params: DeleteCardRequest) => {
     deleteCardMutate(params);
   };
 
-  const onDeleteListById = () => {
+  const handleDeleteListById = () => {
     onDeleteList({ id: data.id });
   };
 
@@ -67,7 +67,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
       <AntdCard
         bordered={false}
         style={{ width: 300 }}
-        extra={<ListOptions onDeleteListById={onDeleteListById} />}
+        extra={<ListOptions onDeleteListById={handleDeleteListById} />}
         headStyle={S.Header}
         bodyStyle={S.Body}
       >
@@ -84,13 +84,13 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
           )}
         </S.ListTitle>
         {data.cards.map((card) => (
-          <Card key={card.id} data={card} onEditCard={onEditCard} onDeleteCard={onDeleteCard} />
+          <Card key={card.id} data={card} onEditCard={handleEditCard} onDeleteCard={handleDeleteCard} />
         ))}
         <CardComposer
           isCardInputOpened={isCardInputOpened}
-          onCardInputToggle={onCardInputToggle}
+          onCardInputToggle={handleCardInputToggle}
           listId={data.id}
-          onAddCard={onAddCard}
+          onAddCard={handleAddCard}
         />
       </AntdCard>
     </S.Container>
