@@ -11,24 +11,24 @@ const Board = () => {
   const { mutate: deleteListMutate } = useDeleteListMutation();
   const { mutate: editListMutate } = useEditListMutation();
 
-  const onEditList = (params: EditListRequest) => {
+  const handleEditList = (params: EditListRequest) => {
     editListMutate(params);
   };
 
-  const onDeleteList = (params: DeleteListRequest) => {
+  const handleDeleteList = (params: DeleteListRequest) => {
     deleteListMutate(params);
   };
 
-  const onAddList = (params: AddListRequest) => {
+  const handleAddList = (params: AddListRequest) => {
     addListMutate(params);
   };
 
   return (
     <S.Container>
       {cardLists?.map((cardList) => (
-        <CardList key={cardList.id} data={cardList} onEditList={onEditList} onDeleteList={onDeleteList} />
+        <CardList key={cardList.id} data={cardList} onEditList={handleEditList} onDeleteList={handleDeleteList} />
       ))}
-      <CardListComposer onAddList={onAddList} />
+      <CardListComposer onAddList={handleAddList} />
     </S.Container>
   );
 };
