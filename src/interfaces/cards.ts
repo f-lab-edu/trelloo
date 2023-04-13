@@ -1,6 +1,6 @@
 export interface ICard {
   id: string;
-  text: string;
+  description: string;
 }
 
 export interface ICardList {

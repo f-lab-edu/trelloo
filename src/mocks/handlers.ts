@@ -29,24 +29,24 @@ export const handlers = [
   }),
 
   rest.post<string, ResponseMessage>("/cards", (req, res, ctx) => {
-    const { text, listId } = JSON.parse(req.body) as AddCardRequest;
+    const { description, listId } = JSON.parse(req.body) as AddCardRequest;
     const id = uuidv4();
 
-    return addCard({ listId, text, id, createdAt: Date.now() }).then(() => {
+    return addCard({ listId, description, id, createdAt: Date.now() }).then(() => {
       return res(
         ctx.status(201),
         ctx.json({
           message: "Card created",
           id,
-          text,
+          description,
         }),
       );
     });
   }),
 
   rest.put<string, ResponseMessage>("/cards", (req, res, ctx) => {
-    const { id, text } = JSON.parse(req.body) as EditCardRequest;
-    return editCard({ id, text }).then(() => {
+    const { id, description } = JSON.parse(req.body) as EditCardRequest;
+    return editCard({ id, description }).then(() => {
       return res(
         ctx.status(200),
         ctx.json({
