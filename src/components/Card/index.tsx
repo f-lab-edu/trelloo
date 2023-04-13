@@ -5,7 +5,7 @@ import loadable from "@loadable/component";
 import { ICard } from "@/interfaces/cards";
 import useModal from "@/hooks/useModal";
 import CardEditor from "@components/modals/CardEditor";
-const CardDetail = loadable(() => import("@components/modals/CardDetail"));
+const CardDetail = loadable(() => import("@components/modals/CardDetailModal"));
 import * as S from "./style";
 import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
 
