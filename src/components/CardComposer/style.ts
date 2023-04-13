@@ -1,21 +1,15 @@
+import { Card as AntdCard } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
-export const Container = styled.div`
-  //
-`;
-
-export const Header = {
-  minHeight: "40px",
-  backgroundColor: theme.color.cardListGray,
-  fontSize: "14px",
-};
-
-export const Body = {
-  padding: "0 10px 5px 10px",
-  width: "100%",
-  backgroundColor: theme.color.cardListGray,
-};
+export const Card = styled(AntdCard).attrs(() => ({
+  bodyStyle: {
+    padding: 0,
+    height: 65,
+    boxShadow: theme.boxShadow.card,
+  },
+}))``;
 
 export const ButtonWrapper = styled.div`
   margin-top: 5px;
@@ -24,19 +18,9 @@ export const ButtonWrapper = styled.div`
   align-items: center;
 `;
 
-export const TemplateButton = {
-  width: 24,
-};
-
 export const CardInputContainer = styled.div`
   margin-top: 10px;
 `;
-
-export const CardInput = {
-  padding: 0,
-  height: 65,
-  boxShadow: theme.boxShadow.card,
-};
 
 export const AddCardButtonContainer = styled.div`
   padding: 5px 0;
@@ -49,9 +33,9 @@ export const AddCardButtonWrapper = styled.span`
   align-items: center;
 `;
 
-export const CancelAddCardButton = {
-  marginLeft: 5,
-  padding: 0,
-  fontSize: 20,
-  color: theme.color.textPointGray,
-};
+export const CloseButton = styled(CloseOutlined)<{ theme: typeof theme }>`
+  margin-left: 5px;
+  padding: 0;
+  font-size: 20px;
+  color: ${({ theme }) => theme.color.textPointGray};
+`;
