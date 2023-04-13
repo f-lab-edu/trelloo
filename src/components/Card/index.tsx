@@ -17,7 +17,7 @@ export interface Props {
 
 const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
   const { openModal } = useModal();
-  const [isCardEditorOpened, setIsCardEditorOpened] = useState(false);
+  const [cardEditorOpened, setCardEditorOpened] = useState(false);
 
   const handleClick = () => {
     openModal({
@@ -28,7 +28,7 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
 
   const handleOpenCardEditor = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     e.stopPropagation();
-    setIsCardEditorOpened(!isCardEditorOpened);
+    setCardEditorOpened(!cardEditorOpened);
   };
 
   return (
@@ -37,11 +37,11 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
         <p>{data.text}</p>
         <EditOutlined className="edit_button" onClick={handleOpenCardEditor} />
       </AntdCard>
-      {isCardEditorOpened && (
+      {cardEditorOpened && (
         <CardEditor
           data={data}
           onCardEditorClose={handleOpenCardEditor}
-          setIsCardEditorOpened={setIsCardEditorOpened}
+          setCardEditorOpened={setCardEditorOpened}
           onEditCard={onEditCard}
           onDeleteCard={onDeleteCard}
         />
