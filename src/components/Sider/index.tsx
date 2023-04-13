@@ -81,7 +81,7 @@ function Sider() {
               <LeftOutlined onClick={onClickCollapse} />
             </S.ProfileContainer>
           </S.SiderButton>
-          <Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} style={S.Menu} items={items2} />
+          <S.Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} items={items2} />
         </>
       )}
     </AntdSider>

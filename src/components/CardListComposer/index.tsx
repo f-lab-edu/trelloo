@@ -44,7 +44,7 @@ function CardListComposer({ onAddList }: Props) {
             <Button type="blue" onClick={() => handleAddList({ title: listTitleInputValue })}>
               Add a list
             </Button>
-            <CloseOutlined style={S.CancleAddListButton} onClick={handleInputOpen} />
+            <S.CloseButton onClick={handleInputOpen} />
           </S.SubmitButtonWrapper>
         </S.InputWrapper>
       )}
