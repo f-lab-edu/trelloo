@@ -8,9 +8,8 @@ export const Container = styled.div`
   margin-bottom: 8px;
 `;
 
-export const Card = styled(AntdCard).attrs(({ bodyStyle }) => ({
+export const Card = styled(AntdCard).attrs(() => ({
   bodyStyle: {
-    ...bodyStyle,
     padding: 0,
   },
 }))`
