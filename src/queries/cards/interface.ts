@@ -3,18 +3,18 @@ export interface GetCardListsResponse {
   title: string;
   cards: {
     id: string;
-    text: string;
+    description: string;
   }[];
 }
 
 export interface AddCardRequest {
-  text: string;
+  description: string;
   listId: string;
 }
 
 export interface EditCardRequest {
   id: string;
-  text: string;
+  description: string;
 }
 
 export interface EditCardPositionRequest {

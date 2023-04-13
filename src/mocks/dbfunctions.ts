@@ -15,14 +15,14 @@ export interface EditCardListData {
 export interface CardData {
   listId: string;
   id: string;
-  text: string;
+  description: string;
   createdAt: number;
   index: number;
 }
 
 export interface EditCardData {
   id: string;
-  text: string;
+  description: string;
 }
 
 export interface DeleteCardData {
@@ -151,12 +151,12 @@ export const addCard = async (card: Omit<CardData, "index">) => {
   return card;
 };
 
-export const editCard = async ({ id, text }: EditCardData) => {
+export const editCard = async ({ id, description }: EditCardData) => {
   const db = await initDb();
   const tx = db.transaction(cardStoreName, "readwrite");
   const store = tx.objectStore(cardStoreName);
   const card = await store.get(id);
-  card.text = text;
+  card.description = description;
   await store.put(card);
   await tx.done;
   return card;
