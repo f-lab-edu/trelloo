@@ -35,7 +35,10 @@ const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, 
             autoSize={{ minRows: 3, maxRows: 5 }}
           />
           <S.SaveButtonWrapper>
-            <Button type="blue" onClick={() => handleClickSave({ id: data.id, description: inputValue })}>
+            <Button
+              appearance={{ type: "blue" }}
+              onClick={() => handleClickSave({ id: data.id, description: inputValue })}
+            >
               Save
             </Button>
           </S.SaveButtonWrapper>

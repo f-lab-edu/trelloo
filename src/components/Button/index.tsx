@@ -3,19 +3,22 @@ import { theme } from "@/styles/theme";
 import * as S from "./style";
 
 interface Props {
-  icon?: React.ReactNode;
+  Icon?: React.ReactNode;
   isIconBehindText?: boolean;
-  type: "blue" | "gray" | "darkGray" | "transparent";
+  type?: "button" | "submit" | "reset";
+  appearance?: {
+    type: S.ButtonStyleType;
+  };
   children?: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function Button({ icon, isIconBehindText = false, type, onClick, children }: Props) {
+function Button({ Icon, isIconBehindText = false, type = "button", appearance, onClick, children }: Props) {
   return (
-    <S.Container onClick={onClick} options={buttonOptions[type]}>
-      <S.IconWrapper>{!isIconBehindText && icon && icon}</S.IconWrapper>
+    <S.Container type={type} onClick={onClick} appearance={appearance}>
+      <S.IconWrapper>{!isIconBehindText && !!Icon && Icon}</S.IconWrapper>
       {children}
-      <S.IconBehindWrapper>{isIconBehindText && icon}</S.IconBehindWrapper>
+      <S.IconBehindWrapper>{isIconBehindText && Icon}</S.IconBehindWrapper>
     </S.Container>
   );
 }
