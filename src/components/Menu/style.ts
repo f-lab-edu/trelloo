@@ -15,8 +15,11 @@ export const ButtonsWrapper = styled.span`
 
 export const ButtonWrapper = styled.div`
   margin: 5px 5px 0 0;
+  display: flex;
+  align-items: center;
 `;
 
 export const OtherButtonsWrapper = styled.span`
   display: flex;
+  align-items: center;
 `;
