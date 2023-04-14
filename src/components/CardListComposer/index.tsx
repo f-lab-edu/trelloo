@@ -28,7 +28,7 @@ function CardListComposer({ onAddList }: Props) {
     <S.Container>
       {!isInputOpened ? (
         <S.ButtonWrapper onClick={handleInputOpen}>
-          <Button type="transparent" icon={<PlusOutlined />}>
+          <Button appearance={{ type: "transparent" }} Icon={<PlusOutlined />}>
             Add another list
           </Button>
         </S.ButtonWrapper>
@@ -41,7 +41,7 @@ function CardListComposer({ onAddList }: Props) {
             autoSize
           />
           <S.SubmitButtonWrapper>
-            <Button type="blue" onClick={() => handleAddList({ title: listTitleInputValue })}>
+            <Button appearance={{ type: "blue" }} onClick={() => handleAddList({ title: listTitleInputValue })}>
               Add a list
             </Button>
             <S.CloseButton onClick={handleInputOpen} />

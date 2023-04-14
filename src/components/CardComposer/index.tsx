@@ -37,20 +37,23 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard 
           </S.Card>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
-              <Button type="blue" onClick={() => handleAddCard({ description: cardInputValue, listId })}>
+              <Button
+                appearance={{ type: "blue" }}
+                onClick={() => handleAddCard({ description: cardInputValue, listId })}
+              >
                 Add card
               </Button>
               <S.CloseButton onClick={onCardInputToggle} />
             </S.AddCardButtonWrapper>
-            <Button type="transparent" icon={<EllipsisOutlined />} />
+            <Button appearance={{ type: "transparent" }} Icon={<EllipsisOutlined />} />
           </S.AddCardButtonContainer>
         </S.CardInputContainer>
       ) : (
         <S.ButtonWrapper>
-          <Button type="transparent" icon={<PlusOutlined />} onClick={onCardInputToggle}>
+          <Button appearance={{ type: "transparent" }} Icon={<PlusOutlined />} onClick={onCardInputToggle}>
             Add a card
           </Button>
-          <Button type="transparent" icon={<PicLeftOutlined />} />
+          <Button appearance={{ type: "transparent" }} Icon={<PicLeftOutlined />} />
         </S.ButtonWrapper>
       )}
     </>
