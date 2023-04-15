@@ -8,6 +8,7 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSubmitClick = () => {
+    // suppose get token with api request
     const token = "OJs_login_token_3sDEjxdjZE";
     localStorage.setItem(STORAGE_KEY.TOKEN, token);
     navigate("/");
@@ -37,6 +38,7 @@ const LoginPage: React.FC = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          {/* TODO: replace to the Button component instead of antd */}
           <Button type="primary" htmlType="submit" onClick={handleSubmitClick}>
             Submit
           </Button>
