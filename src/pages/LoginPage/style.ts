@@ -1,4 +1,3 @@
-import { Form as AntdForm } from "antd";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -9,13 +8,25 @@ export const Container = styled.div`
   height: 100vh;
 `;
 
-export const Form = styled(AntdForm)`
-  margin-top: 70px;
-  width: 500px;
-`;
-
 export const Title = styled.h1`
+  margin-bottom: 30px;
   font-size: 30px;
   font-weight: 800;
   text-align: center;
+`;
+
+export const Input = styled.input`
+  padding: 5px;
+  width: 200px;
+  border: 1px solid ${({ theme }) => theme.color.buttonBackground};
+  border-radius: 5px;
+`;
+
+export const InputPassword = styled.input.attrs({
+  type: "password",
+})`
+  padding: 5px;
+  width: 200px;
+  border: 1px solid ${({ theme }) => theme.color.buttonBackground};
+  border-radius: 5px;
 `;
