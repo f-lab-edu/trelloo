@@ -8,3 +8,7 @@ export const MODAL_TYPE = {
   CARD_EDIT: "cardEdit",
   CARD_DETAIL: "cardDetail",
 };
+
+export const STORAGE_KEY = {
+  TOKEN: "token",
+};
