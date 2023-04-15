@@ -45,6 +45,8 @@ export const cardsHandlers = [
     if (!isRequestSucceed) {
       return res(ctx.delay(), ctx.status(500));
     }
+    const error = handleAuthError(req, res, ctx);
+    if (error) return error;
 
     return getAllCardListsWithCards().then((data) => {
       return res(ctx.delay(), ctx.status(201), ctx.json(data));
@@ -73,6 +75,10 @@ export const cardsHandlers = [
 
   rest.put<string, ResponseMessage>("/cards", (req, res, ctx) => {
     const { id, description } = JSON.parse(req.body) as EditCardRequest;
+
+    const error = handleAuthError(req, res, ctx);
+    if (error) return error;
+
     return editCard({ id, description }).then(() => {
       return res(
         ctx.status(200),
@@ -85,6 +91,10 @@ export const cardsHandlers = [
 
   rest.delete<string, ResponseMessage>("/cards", (req, res, ctx) => {
     const { id } = JSON.parse(req.body) as DeleteCardRequest;
+
+    const error = handleAuthError(req, res, ctx);
+    if (error) return error;
+
     return deleteCard({ id }).then(() => {
       return res(
         ctx.status(200),
@@ -98,6 +108,9 @@ export const cardsHandlers = [
   rest.post<string, ResponseMessage>("/lists", (req, res, ctx) => {
     const { title } = JSON.parse(req.body) as AddListRequest;
     const id = uuidv4();
+
+    const error = handleAuthError(req, res, ctx);
+    if (error) return error;
 
     return addCardList({ title, id, createdAt: Date.now() }).then(() => {
       return res(
@@ -113,6 +126,10 @@ export const cardsHandlers = [
 
   rest.put<string, ResponseMessage>("/lists", (req, res, ctx) => {
     const { id, title } = JSON.parse(req.body) as EditListRequest;
+
+    const error = handleAuthError(req, res, ctx);
+    if (error) return error;
+
     return editCardList({ id, title }).then(() => {
       return res(
         ctx.status(200),
@@ -127,6 +144,9 @@ export const cardsHandlers = [
     const { cardId } = req.params;
     const { destination, source } = JSON.parse(req.body) as EditCardPositionRequest;
 
+    const error = handleAuthError(req, res, ctx);
+    if (error) return error;
+
     return editCardPosition({ cardId, destination, source }).then(() => {
       return res(
         ctx.status(200),
@@ -139,6 +159,10 @@ export const cardsHandlers = [
 
   rest.delete<string, ResponseMessage>("/lists", (req, res, ctx) => {
     const { id } = JSON.parse(req.body) as DeleteListRequest;
+
+    const error = handleAuthError(req, res, ctx);
+    if (error) return error;
+
     return deleteCardList({ id }).then(() => {
       return res(
         ctx.status(200),
