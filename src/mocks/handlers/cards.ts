@@ -8,7 +8,7 @@ import {
   EditListRequest,
   ResponseMessage,
 } from "@/queries/cards/interface";
-import { rest } from "msw";
+import { DefaultBodyType, ResponseComposition, rest, RestContext, RestRequest } from "msw";
 import { v4 as uuidv4 } from "uuid";
 import {
   addCard,
@@ -21,7 +21,24 @@ import {
   getAllCardListsWithCards,
 } from "../dbfunctions";
 
-const cardsHandlers = [
+const handleAuthError = (
+  req: RestRequest<string, { [key: string]: any }>,
+  res: ResponseComposition<DefaultBodyType>,
+  ctx: RestContext,
+) => {
+  const authToken = req.headers.get("Authorization");
+
+  if (!authToken) {
+    return res(
+      ctx.status(401),
+      ctx.json({
+        message: "access token is required",
+      }),
+    );
+  }
+};
+
+export const cardsHandlers = [
   rest.get("/cards", (req, res, ctx) => {
     const isRequestSucceed = Math.random() < 0.5;
 
@@ -37,6 +54,9 @@ const cardsHandlers = [
   rest.post<string, ResponseMessage>("/cards", (req, res, ctx) => {
     const { description, listId } = JSON.parse(req.body) as AddCardRequest;
     const id = uuidv4();
+
+    const error = handleAuthError(req, res, ctx);
+    if (error) return error;
 
     return addCard({ listId, description, id, createdAt: Date.now() }).then(() => {
       return res(

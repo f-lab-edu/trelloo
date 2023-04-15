@@ -2,6 +2,10 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 import { STORAGE_KEY, URL } from "@/constants";
 import { RequestParams } from "@/interfaces/httpRequest";
 
+interface HandleError {
+  [status: number]: () => void;
+}
+
 const instance = axios.create({
   baseURL: "",
   headers: {
