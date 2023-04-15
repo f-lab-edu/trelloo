@@ -1,40 +1,49 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Checkbox, Form, Input } from "antd";
+import { useForm } from "react-hook-form";
+import { Button, Form } from "antd";
 import { STORAGE_KEY } from "@/constants";
+import { useLoginMutation } from "@/queries/auth";
 import * as S from "./style";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const { mutateAsync: loginMutate } = useLoginMutation();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const handleSubmitClick = () => {
-    // suppose get token with api request
-    const token = "OJs_login_token_3sDEjxdjZE";
-    localStorage.setItem(STORAGE_KEY.TOKEN, token);
-    navigate("/");
+    loginMutate({
+      id: watch("id"),
+      password: watch("password"),
+    }).then((res) => {
+      localStorage.setItem(STORAGE_KEY.TOKEN, res.accessToken);
+      navigate("/");
+      // TODO: add toast
+    });
   };
 
   return (
     <S.Container>
       <S.Title>Login</S.Title>
-      <S.Form
+      <Form
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
-        onFinish={handleSubmitClick}
+        onFinish={handleSubmit(handleSubmitClick)}
         autoComplete="off"
       >
-        <Form.Item label="Username" name="username">
-          <Input />
+        <Form.Item label="id" name="id">
+          <S.Input {...register("id")} name="id" />
         </Form.Item>
 
         <Form.Item label="Password" name="password">
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-          <Checkbox>Remember me</Checkbox>
+          <S.InputPassword {...register("password")} />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
@@ -43,7 +52,7 @@ const LoginPage: React.FC = () => {
             Submit
           </Button>
         </Form.Item>
-      </S.Form>
+      </Form>
     </S.Container>
   );
 };
