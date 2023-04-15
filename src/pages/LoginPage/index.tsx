@@ -16,15 +16,13 @@ const LoginPage: React.FC = () => {
   return (
     <S.Container>
       <S.Title>Login</S.Title>
-      <Form
+      <S.Form
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
         initialValues={{ remember: true }}
         onFinish={handleSubmitClick}
         autoComplete="off"
-        className="login_form"
       >
         <Form.Item label="Username" name="username">
           <Input />
@@ -43,7 +41,7 @@ const LoginPage: React.FC = () => {
             Submit
           </Button>
         </Form.Item>
-      </Form>
+      </S.Form>
     </S.Container>
   );
 };
