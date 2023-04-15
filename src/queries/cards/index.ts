@@ -34,9 +34,6 @@ export const useAddCardMutation = () => {
         path: "/cards",
         isMock: true,
         params,
-        config: {
-          includeAuthorization: true,
-        },
       });
     },
     {
@@ -77,9 +74,6 @@ export const useAddListMutation = () => {
         path: "/lists",
         isMock: true,
         params,
-        config: {
-          includeAuthorization: true,
-        },
       });
     },
     {

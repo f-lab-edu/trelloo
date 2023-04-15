@@ -1,36 +1,28 @@
+import axios from "axios";
 import { STORAGE_KEY, URL } from "@/constants";
 import { RequestParams } from "@/interfaces/httpRequest";
 
-import axios, { InternalAxiosRequestConfig } from "axios";
-
-export interface MyAxiosRequestConfig extends InternalAxiosRequestConfig {
-  includeAuthorization?: boolean;
-}
-
-const axiosInstance = axios.create({
+const instance = axios.create({
   baseURL: "",
+  headers: {
+    common: {
+      "Content-Type": "application/json",
+    },
+  },
 });
 
-axiosInstance.interceptors.request.use((config: MyAxiosRequestConfig) => {
-  const accessToken = localStorage.getItem(STORAGE_KEY.TOKEN);
+instance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem(STORAGE_KEY.TOKEN);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 
-  if (config?.headers.includeAuthorization && !!accessToken && config.headers) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
-  }
-
-  return config;
-});
-
-export default axiosInstance;
-
-const fetchRequest = <TQueryParams>({
-  path,
-  method,
-  queryParams,
-  params,
-  isMock,
-  config,
-}: RequestParams<TQueryParams>) => {
+const fetchRequest = <TQueryParams>({ path, method, queryParams, params, isMock }: RequestParams<TQueryParams>) => {
   const convertedParams = queryParams
     ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {
         newObj[key] = value.toString();
@@ -39,8 +31,7 @@ const fetchRequest = <TQueryParams>({
     : "";
 
   const searchParams = new URLSearchParams(convertedParams).toString();
-  return axiosInstance(`${isMock ? "" : URL.API}${path}?${searchParams}`, {
-    headers: config,
+  return instance(`${isMock ? "" : URL.API}${path}?${searchParams}`, {
     method,
     data: JSON.stringify(params),
   }).then((data) => {
