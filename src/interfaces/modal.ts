@@ -1,7 +1,7 @@
 import {type ComponentType} from "react";
 
 export interface ModalState<TProps = any> {
-  component: ComponentType<TProps>;
+  component: string;
   props: TProps;
   index: number;
   options?: {
