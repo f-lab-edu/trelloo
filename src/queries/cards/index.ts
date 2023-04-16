@@ -1,18 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { mockedAuthorizedRequest, mockedRequest } from "@/utils/httpRequest";
-import {} from "@utils/httpRequest";
-import {
-  AddCardRequest,
-  AddListRequest,
-  DeleteCardRequest,
-  DeleteListRequest,
-  EditCardPositionParam,
-  EditCardPositionRequest,
-  EditCardRequest,
-  EditListRequest,
-  GetCardListsResponse,
-  ResponseMessage,
-} from "./interface";
+import { mockedRequest, mockedAuthorizedRequest } from "@/utils/httpRequest";
+import * as I from "./interface";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
@@ -22,7 +10,7 @@ export const useCardsQuery = () => {
   return useQuery(
     cardListsKeys.all,
     () => {
-      return mockedRequest.get<GetCardListsResponse[]>({
+      return mockedRequest.get<I.GetCardListsResponse[]>({
         path: "/cards",
       });
     },
@@ -35,8 +23,8 @@ export const useCardsQuery = () => {
 export const useAddCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (data: AddCardRequest) => {
-      return mockedAuthorizedRequest.post<ResponseMessage>({
+    (data: I.AddCardRequest) => {
+      return mockedAuthorizedRequest.post<I.ResponseMessage>({
         path: "/cards",
         data,
       });
@@ -50,8 +38,8 @@ export const useAddCardMutation = () => {
 export const useEditCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (data: EditCardRequest) => {
-      return mockedRequest.put<ResponseMessage>({ path: "/cards", data });
+    (data: I.EditCardRequest) => {
+      return mockedAuthorizedRequest.put<I.ResponseMessage>({ path: "/cards", data });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
@@ -62,8 +50,8 @@ export const useEditCardMutation = () => {
 export const useDeleteCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (data: DeleteCardRequest) => {
-      return mockedRequest.delete<ResponseMessage>({ path: "/cards", data });
+    (data: I.DeleteCardRequest) => {
+      return mockedAuthorizedRequest.delete<I.ResponseMessage>({ path: "/cards", data });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
@@ -74,8 +62,8 @@ export const useDeleteCardMutation = () => {
 export const useAddListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (data: AddListRequest) => {
-      return mockedRequest.post<ResponseMessage>({
+    (data: I.AddListRequest) => {
+      return mockedAuthorizedRequest.post<I.ResponseMessage>({
         path: "/lists",
         data,
       });
@@ -89,8 +77,8 @@ export const useAddListMutation = () => {
 export const useEditListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (data: EditListRequest) => {
-      return mockedRequest.put<ResponseMessage>({ path: "/lists", data });
+    (data: I.EditListRequest) => {
+      return mockedAuthorizedRequest.put<I.ResponseMessage>({ path: "/lists", data });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
@@ -101,8 +89,8 @@ export const useEditListMutation = () => {
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    ({ cardId, destination, source }: EditCardPositionParam & EditCardPositionRequest) => {
-      return mockedRequest.put<ResponseMessage>({
+    ({ cardId, destination, source }: I.EditCardPositionParam & I.EditCardPositionRequest) => {
+      return mockedAuthorizedRequest.put<I.ResponseMessage>({
         path: `/cards/${cardId}/move`,
         data: { destination, source },
       });
@@ -116,8 +104,8 @@ export const useEditCardPositionMutation = () => {
 export const useDeleteListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (data: DeleteListRequest) => {
-      return mockedRequest.delete<ResponseMessage>({ path: "/lists", data });
+    (data: I.DeleteListRequest) => {
+      return mockedAuthorizedRequest.delete<I.ResponseMessage>({ path: "/lists", data });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
