@@ -1,15 +1,13 @@
-import axiosInstance from "./instance";
-
+import { AxiosResponse } from "axios";
 interface HandleError {
   [status: number]: () => void;
 }
 
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => handleInterceptError(error),
-);
+export const handleInterceptResponse = (response: AxiosResponse) => {
+  return response;
+};
 
-const handleInterceptError = (error: any) => {
+export const handleResponseInterceptError = (error: any) => {
   const { status } = error.response;
   handleError[status]();
   return Promise.reject(error);
