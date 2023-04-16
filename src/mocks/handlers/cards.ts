@@ -34,7 +34,7 @@ const cardsHandlers = [
 
     return addCard({ listId, description, id, createdAt: Date.now() }).then(() => {
       return res(
-        ctx.delay(3000),
+        ctx.delay(),
         ctx.status(201),
         ctx.json({
           message: "Card created",
