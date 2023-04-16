@@ -1,4 +1,4 @@
-import { Card as AntdCard } from "antd";
+import { Card as AntdCard, Input } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
@@ -10,6 +10,8 @@ export const Card = styled(AntdCard).attrs(() => ({
     boxShadow: theme.boxShadow.card,
   },
 }))``;
+
+// export const Card
 
 export const ButtonWrapper = styled.div`
   margin-top: 5px;
