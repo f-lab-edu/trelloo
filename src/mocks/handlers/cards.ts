@@ -24,7 +24,7 @@ import {
 const cardsHandlers = [
   rest.get("/cards", (req, res, ctx) => {
     return getAllCardListsWithCards().then((data) => {
-      return res(ctx.delay(5000), ctx.status(200), ctx.json(data));
+      return res(ctx.delay(), ctx.status(500), ctx.json(data));
     });
   }),
 
