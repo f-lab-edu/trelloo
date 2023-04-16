@@ -27,7 +27,7 @@ const LoginPage: React.FC = () => {
 
   const handleLoginComplete = (token: string) => {
     localStorage.setItem(STORAGE_KEY.TOKEN, token);
-    navigate("/");
+    navigate("/board");
     toast.success("Welcome!");
   };
 
