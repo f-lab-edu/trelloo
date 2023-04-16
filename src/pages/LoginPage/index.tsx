@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Button, Form } from "antd";
 import { STORAGE_KEY } from "@/constants";
 import { useLoginMutation } from "@/queries/auth";
@@ -9,12 +10,7 @@ import * as S from "./style";
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { mutateAsync: loginMutate } = useLoginMutation();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, watch } = useForm();
 
   const handleSubmitClick = () => {
     loginMutate({
@@ -23,7 +19,7 @@ const LoginPage: React.FC = () => {
     }).then((res) => {
       localStorage.setItem(STORAGE_KEY.TOKEN, res.accessToken);
       navigate("/");
-      // TODO: add toast
+      toast.success("Welcome!");
     });
   };
 
