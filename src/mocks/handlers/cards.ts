@@ -25,8 +25,12 @@ const cardsHandlers = [
   rest.get("/cards", (req, res, ctx) => {
     const isRequestSucceed = Math.random() < 0.5;
 
+    if (!isRequestSucceed) {
+      return res(ctx.delay(), ctx.status(500));
+    }
+
     return getAllCardListsWithCards().then((data) => {
-      return res(ctx.delay(), ctx.status(isRequestSucceed ? 201 : 500), ctx.json(data));
+      return res(ctx.delay(), ctx.status(201), ctx.json(data));
     });
   }),
 
