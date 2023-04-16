@@ -5,16 +5,15 @@ interface HandleError {
 }
 
 axiosInstance.interceptors.response.use(
-  function (response) {
-    return response;
-  },
-  function (error) {
-    const { status } = error.response;
-    handleError[status]();
-
-    return Promise.reject(error);
-  },
+  (response) => response,
+  (error) => handleInterceptError(error),
 );
+
+const handleInterceptError = (error: any) => {
+  const { status } = error.response;
+  handleError[status]();
+  return Promise.reject(error);
+};
 
 const handleError: HandleError = {
   401() {
