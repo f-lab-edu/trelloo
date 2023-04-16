@@ -1,5 +1,6 @@
 import React, { useState, Suspense } from "react";
 import { Layout } from "antd";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import Sider from "@components/Sider";
 import Drawer from "@components/Drawer";
@@ -30,11 +31,18 @@ const BoardPage: React.FC = () => {
         <Sider />
         <Content style={S.Content}>
           <Menu showDrawer={showDrawer} boardName={"boardName"} />
-          <ErrorBoundary FallbackComponent={EmptyBoard}>
-            <Suspense fallback={<BoardSkeleton />}>
-              <Board />
-            </Suspense>
-          </ErrorBoundary>
+          <QueryErrorResetBoundary>
+            {({ reset }) => (
+              <ErrorBoundary
+                onReset={reset}
+                fallbackRender={({ resetErrorBoundary }) => <EmptyBoard onQueryErrorReset={resetErrorBoundary} />}
+              >
+                <Suspense fallback={<BoardSkeleton />}>
+                  <Board />
+                </Suspense>
+              </ErrorBoundary>
+            )}
+          </QueryErrorResetBoundary>
           <Drawer open={open} onClose={onClose} />
         </Content>
       </Layout>
