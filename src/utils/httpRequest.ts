@@ -1,6 +1,6 @@
 import axiosInstance from "@/axios";
 import { URL } from "@/constants";
-import { RequestParams } from "@/interfaces/httpRequest";
+import { HandleRequestParams, RequestParams } from "@/interfaces/httpRequest";
 
 const fetchRequest = <TQueryParams>({ path, method, params, data, isMock, config }: RequestParams<TQueryParams>) => {
   return axiosInstance(`${isMock ? "" : URL.API}${path}`, {
@@ -13,62 +13,41 @@ const fetchRequest = <TQueryParams>({ path, method, params, data, isMock, config
   });
 };
 
-export const request = {
-  get<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({ ...data, method: "get" });
-  },
+const handleRequest = (params?: HandleRequestParams) => {
+  return {
+    get<TResponse>(data: RequestParams): Promise<TResponse> {
+      return fetchRequest({ ...data, ...params, method: "get" });
+    },
 
-  post<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({ ...data, method: "post" });
-  },
+    post<TResponse>(data: RequestParams): Promise<TResponse> {
+      return fetchRequest({ ...data, ...params, method: "post" });
+    },
 
-  put<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({ ...data, method: "put" });
-  },
+    put<TResponse>(data: RequestParams): Promise<TResponse> {
+      return fetchRequest({ ...data, ...params, method: "put" });
+    },
 
-  delete<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({ ...data, method: "delete" });
-  },
+    delete<TResponse>(data: RequestParams): Promise<TResponse> {
+      return fetchRequest({ ...data, ...params, method: "delete" });
+    },
+  };
 };
 
-export const authorizedRequest = {
-  get<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({
-      ...data,
-      method: "get",
-      config: {
-        includeAuthorization: true,
-      },
-    });
-  },
+export const request = handleRequest();
 
-  post<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({
-      ...data,
-      method: "post",
-      config: {
-        includeAuthorization: true,
-      },
-    });
+export const authorizedRequest = handleRequest({
+  config: {
+    includeAuthorization: true,
   },
+});
 
-  put<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({
-      ...data,
-      method: "put",
-      config: {
-        includeAuthorization: true,
-      },
-    });
-  },
+export const mockedRequest = handleRequest({
+  isMock: true,
+});
 
-  delete<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({
-      ...data,
-      method: "delete",
-      config: {
-        includeAuthorization: true,
-      },
-    });
+export const mockedAuthorizedRequest = handleRequest({
+  isMock: true,
+  config: {
+    includeAuthorization: true,
   },
-};
+});
