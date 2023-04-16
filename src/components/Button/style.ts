@@ -6,7 +6,6 @@ export type ButtonStyleType = "transparent" | "gray" | "blue" | "black";
 interface Color {
   appearance?: {
     type: ButtonStyleType;
-    width?: string;
   };
 }
 
@@ -31,7 +30,7 @@ const buttonColor = {
 
 export const Container = styled.button<Color>`
   padding: 0 10px;
-  width: ${({ appearance }) => appearance?.width || "max-content"};
+  width: "max-content";
   height: 32px;
   display: flex;
   justify-content: center;
@@ -40,6 +39,11 @@ export const Container = styled.button<Color>`
   border-radius: ${({ theme }) => theme.borderRadius.card};
   color: ${({ appearance }) => (appearance ? buttonColor[appearance.type].color : "black")};
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `;
 
 export const IconWrapper = styled.div`
