@@ -1,3 +1,4 @@
+import { authorizedRequest } from "./../../utils/httpRequest";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "@utils/httpRequest";
 import {
@@ -30,7 +31,7 @@ export const useAddCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (data: AddCardRequest) => {
-      return request.post<ResponseMessage>({
+      return authorizedRequest.post<ResponseMessage>({
         path: "/cards",
         isMock: true,
         data,
