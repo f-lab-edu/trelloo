@@ -1,5 +1,6 @@
 import React, { Suspense, useCallback } from "react";
 import { type CloseModalState, type ModalState } from "@/interfaces/modal";
+import { modalContents } from "../modalContents";
 import * as S from "./style";
 
 interface Props<P> extends ModalState<P> {
@@ -8,14 +9,15 @@ interface Props<P> extends ModalState<P> {
 
 const Modal = <P extends Record<string,unknown>>({ component: Component, index, onClose, props, options }: Props<P>) => {
   const handleClose = useCallback(() => {
-    onClose({ component: Component, index });
-  }, [Component, index, props]);
+    onClose({ component, index });
+  }, [component, index, props]);
+
+  const Component = modalContents[component];
 
   return (
     <S.ModalContainer isOpen={true} onRequestClose={handleClose}>
-      <button onClick={handleClose}>x</button>
       <Suspense fallback={<div>is loading...</div>}>
-        <Component {...props} />
+        <Component {...props} onClose={handleClose} />
       </Suspense>
     </S.ModalContainer>
   );
