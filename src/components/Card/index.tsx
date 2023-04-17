@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ICard } from "@/interfaces/cards";
 import useModal from "@/hooks/useModal";
 import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
-import CardEditor from "@components/modals/CardEditor";
+import CardEditor from "@components/CardEditor";
 import * as S from "./style";
 
 export interface Props {
