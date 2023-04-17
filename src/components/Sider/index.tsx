@@ -1,50 +1,11 @@
 import React, { useState } from "react";
 import { Layout } from "antd";
 import type { MenuProps } from "antd";
-import {
-  LeftOutlined,
-  RightCircleOutlined,
-  TableOutlined,
-  SettingOutlined,
-  UserOutlined,
-  CalendarOutlined,
-  AppstoreOutlined,
-  UngroupOutlined,
-} from "@ant-design/icons";
+import { LeftOutlined, RightCircleOutlined } from "@ant-design/icons";
+import SiderMenu from "@components/menus/SiderMenu";
 import * as S from "./style";
+
 const { Sider: AntdSider } = Layout;
-
-type MenuItem = Required<MenuProps>["items"][number];
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: "group",
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  } as MenuItem;
-}
-
-const items2: MenuProps["items"] = [
-  getItem("Boards", "12", <AppstoreOutlined />),
-  getItem("Members", "13", <UserOutlined />),
-  getItem("Workspace settings", "14", <SettingOutlined />),
-  getItem(
-    "Workspace views",
-    "grp",
-    null,
-    [getItem("Table", "15", <TableOutlined />), getItem("Calendar", "16", <CalendarOutlined />)],
-    "group",
-  ),
-  getItem("Your boards", "grp2", null, [getItem("my board", "17", <UngroupOutlined />)], "group"),
-];
 
 function Sider() {
   const [collapsed, setCollapsed] = useState(true);
@@ -81,7 +42,7 @@ function Sider() {
               <LeftOutlined onClick={onClickCollapse} />
             </S.ProfileContainer>
           </S.SiderButton>
-          <S.Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} items={items2} />
+          <SiderMenu />
         </>
       )}
     </AntdSider>
