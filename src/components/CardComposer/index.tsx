@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Input, Spin } from "antd";
-import { AddCardRequest } from "@/queries/cards/interface";
+import { useController, useForm } from "react-hook-form";
 import Button from "@components/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined } from "@ant-design/icons";
 import * as S from "./style";
@@ -12,15 +11,22 @@ interface Props {
   isCardInputOpened: boolean;
   onCardInputToggle: () => void;
   listId: string;
-  onAddCard: (params: AddCardRequest) => void;
+  onAddCard: (params: any) => void;
 }
 
 const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard, isLoading }: Props) => {
-  const [cardInputValue, setCardInputValue] = useState("");
+  const { control, reset, handleSubmit } = useForm({
+    defaultValues: {
+      description: "",
+    },
+  });
 
-  const handleAddCard = ({ description, listId }: AddCardRequest) => {
-    onAddCard({ description, listId });
-    setCardInputValue("");
+  const {
+    field: { onChange, value },
+  } = useController({ name: "description", control });
+
+  const handleAddCard = async () => {
+    await onAddCard({ description: value, listId, onSuccess: () => reset() });
   };
 
   return (
@@ -29,23 +35,13 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
         <S.CardInputContainer>
           <Spin spinning={isLoading}>
             <S.Card>
-              <TextArea
-                value={cardInputValue}
-                onChange={(e) => setCardInputValue(e.target.value)}
-                placeholder="Enter a title for this card..."
-                autoSize
-                bordered={false}
-              />
+              <input onChange={onChange} value={value} placeholder="Enter a title for this card..." />
             </S.Card>
           </Spin>
 
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
-              <Button
-                appearance={{ type: "blue" }}
-                onClick={() => handleAddCard({ description: cardInputValue, listId })}
-                isLoading={isLoading}
-              >
+              <Button appearance={{ type: "blue" }} onClick={handleAddCard} isLoading={isLoading}>
                 Add card
               </Button>
               <S.CloseButton onClick={onCardInputToggle} />
