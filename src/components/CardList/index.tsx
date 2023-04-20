@@ -33,7 +33,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   const [isTitleInputOpened, setIsTitleInputOpened] = useState(false);
   const [titleInput, setTitleInput] = useState(data.title);
 
-  const { mutate: addCardMutate, isLoading: addCardLoading } = useAddCardMutation();
+  const { mutateAsync: addCardMutateAsync, isSuccess, isLoading: addCardLoading } = useAddCardMutation();
   const { mutate: editCardMutate } = useEditCardMutation();
   const { mutate: deleteCardMutate } = useDeleteCardMutation();
 
@@ -54,8 +54,13 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     handleTitleInput();
   };
 
-  const handleAddCard = ({ description, listId }: AddCardRequest) => {
-    addCardMutate({ description, listId });
+  const handleAddCard = ({ description, listId, onSuccess }: any) => {
+    addCardMutateAsync(
+      { description, listId },
+      {
+        onSuccess: () => onSuccess(),
+      },
+    );
   };
 
   const handleEditCard = ({ id, description }: EditCardRequest) => {
