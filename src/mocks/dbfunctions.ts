@@ -127,52 +127,36 @@ export const addCard = async (card: Omit<CardData, 'index'>) => {
 }
 
 export const editCard = async ({ id, description }: EditCardData) => {
-  const db = await initDb()
-  const tx = db.transaction(cardStoreName, 'readwrite')
-  const store = tx.objectStore(cardStoreName)
-  const card = await store.get(id)
-  card.description = description
-  await store.put(card)
-  await tx.done
-  return card
-}
-export const editCardPosition = async ({
-  cardId,
-  source,
-  destination
-}: EditCardPositionParam & EditCardPositionRequest) => {
-  const db = await initDb()
+  const db = await initDb();
+  const tx = db.transaction(cardStoreName, "readwrite");
+  const store = tx.objectStore(cardStoreName);
+  const card = await store.get(id);
+  card.description = description;
+  await store.put(card);
+  await tx.done;
+  return card;
+};
 
-  const tx1 = db.transaction([cardStoreName], 'readonly')
-  const sourceListStore = tx1.objectStore(cardStoreName)
-  const sourceList = await sourceListStore.index('listId').getAll(source.listId)
-  const updatedSourceList = sourceList.filter((card) => card.id !== cardId)
+export const editCardPosition = async ({ cardId, listId, index }: EditCardPositionParam & EditCardPositionRequest) => {
+  const db = await initDb();
 
-  const tx2 = db.transaction([cardStoreName], 'readwrite')
-  const destinationListStore = tx2.objectStore(cardStoreName)
-  const destinationList = await destinationListStore.index('listId').getAll(destination.listId)
-  const updatedDestinationList = destinationList.filter((card) => card.id !== cardId)
+  const tx = db.transaction([cardStoreName, listStoreName], "readwrite");
+  const cardStore = tx.objectStore(cardStoreName);
+  const listStore = tx.objectStore(listStoreName);
+  const card = await cardStore.get(cardId);
+  const list = await listStore.get(listId);
 
-  const sourceListStore2 = tx2.objectStore(cardStoreName)
-  const card = await sourceListStore2.get(cardId)
-  const insertedCard = { ...card, listId: destination.listId, index: destination.index }
-  updatedDestinationList.splice(destination.index, 0, insertedCard)
+  card.listId = listId;
 
-  for (let i = 0; i < updatedSourceList.length; i++) {
-    const updatedCard = updatedSourceList[i]
-    updatedCard.index = i
-    await destinationListStore.put(updatedCard)
-  }
+  // Update the card in the cardStore
+  await cardStore.put(card);
 
-  for (let i = 0; i < updatedDestinationList.length; i++) {
-    const updatedCard = updatedDestinationList[i]
-    updatedCard.index = i
-    await destinationListStore.put(updatedCard)
-  }
-
-  await tx1.done
-  await tx2.done
-}
+  const oldIndex = card.index;
+  const newIndex = index;
+  const cards = await (await cardStore.getAll()).filter((card) => card.listId === listId);
+  // Fix: change index
+  console.log(cards);
+};
 
 export const deleteCard = async ({ id }: DeleteCardData) => {
   const db = await initDb()
