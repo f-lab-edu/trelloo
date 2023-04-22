@@ -22,14 +22,9 @@ export interface EditCardRequest {
 }
 
 export interface EditCardPositionRequest {
-  destination: {
-    listId: string;
-    index: number;
-  };
-  source: {
-    listId: string;
-    index: number;
-  };
+  cardId: string;
+  listId: string;
+  index: number;
 }
 
 export interface EditCardPositionParam {

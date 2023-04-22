@@ -1,4 +1,4 @@
-import { type EditCardPositionRequest } from "../../queries/cards/interface";
+import { EditCardPositionParam, type EditCardPositionRequest } from "../../queries/cards/interface";
 import {
   type AddCardRequest,
   type AddListRequest,
@@ -126,19 +126,18 @@ export const cardsHandlers = [
       );
   }),
 
-  rest.put<EditCardPositionRequest>("/cards/:cardId/move", async(req, res, ctx) => {
-    const { cardId } = req.params as { cardId: string };
-    const { destination, source } = req.body ;
-    const error = handleAuthError(req, res, ctx);
-    if (error != null) return await error;
+  rest.put<string, EditCardPositionParam>("/cards/:cardId/move", (req, res, ctx) => {
+    const { cardId } = req.params;
+    const { listId, index } = JSON.parse(req.body) as EditCardPositionRequest;
 
-     await editCardPosition({ cardId, destination, source })
-      return await res(
+    return editCardPosition({ cardId, listId, index }).then(() => {
+      return res(
         ctx.status(200),
         ctx.json({
           message: "Card position updated",
         }),
       );
+    })
   }),
 
   rest.delete<DeleteListRequest>("/lists", async(req, res, ctx) => {

@@ -47,17 +47,10 @@ const Board = ({searchKeyword}:Props) => {
     }
     editCardPositionMutate({
       cardId: draggableId,
-      destination: {
-        listId: destination.droppableId,
-        index: destination.index
-      },
-      source: {
-        listId: source.droppableId,
-        index: source.index
-      }
-    })
-  }
-
+      listId: destination.droppableId,
+      index: destination.index,
+    });
+  };
   return (
     <S.Container>
       <DragDropContext onDragEnd={handleDragEnd}>
@@ -80,7 +73,7 @@ const Board = ({searchKeyword}:Props) => {
         <CardListComposer onAddList={handleAddList} />
       </DragDropContext>
     </S.Container>
-  )
-}
+  );
+};
 
-export default Board
+export default Board;
