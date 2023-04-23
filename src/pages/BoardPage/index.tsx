@@ -8,8 +8,7 @@ import Header from "@components/Header";
 import Menu from "@components/Menu";
 import Board from "@components/Board";
 import BoardSkeleton from "@components/skeletons/BoardSkeleton";
-import EmptyBoard from "@components/EmptyBoard";
-
+import BoardErrorFallback from "@components/BoardErrorFallback";
 import * as S from "./style";
 
 const { Content } = Layout;
@@ -48,7 +47,7 @@ function BoardWrapper() {
       {({ reset }) => (
         <ErrorBoundary
           onReset={reset}
-          fallbackRender={({ resetErrorBoundary }) => <EmptyBoard onQueryErrorReset={resetErrorBoundary} />}
+          fallbackRender={({ resetErrorBoundary }) => <BoardErrorFallback onQueryErrorReset={resetErrorBoundary} />}
         >
           <Suspense fallback={<BoardSkeleton />}>
             <Board />

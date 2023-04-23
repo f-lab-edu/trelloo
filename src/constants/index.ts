@@ -1,6 +1,6 @@
 export const URL = {
   BASE: "http://127.0.0.1:5173/",
-  API: "http://api-server/", //api server example
+  API: "http://api-server/",
 };
 
 export const MODAL_TYPE = {

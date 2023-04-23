@@ -1,5 +1,4 @@
 import React from "react";
-import { Menu } from "antd";
 import type { MenuProps } from "antd";
 import {
   TableOutlined,
@@ -25,15 +24,15 @@ function getItem(
   children?: MenuItem[],
   type?: "group",
 ): MenuItem {
-  return {
+  const menuItem: MenuItem = {
     key,
     icon,
     children,
     label,
     type,
-  } as MenuItem;
+  };
+  return menuItem;
 }
-
 const items2: MenuProps["items"] = [
   getItem("About this board", "About this board", <AppstoreOutlined />),
   getItem("Change background", "Change background", <UserOutlined />),
