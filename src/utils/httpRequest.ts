@@ -1,53 +1,62 @@
-import axiosInstance from "@/axios";
-import { URL } from "@/constants";
-import { type HandleRequestParams, type RequestParams } from "@/interfaces/httpRequest";
+import { STORAGE_KEY, URL } from "@/constants";
+import { type RequestParams } from "@/interfaces/httpRequest";
 
-const fetchRequest = async <TQueryParams>({ path, method, params, data, isMock, config }: RequestParams<TQueryParams>) => {
-  return await axiosInstance(`${isMock ?? true ? "" : URL.API}${path}`, {
-    headers: config,
-    method,
-    data: JSON.stringify(data),
-    params,
-  }).then((res) => {
-    return res.data;
-  });
+const headers: HeadersInit = {
+  "Content-Type": "application/json; charset=utf-8",
 };
 
-const handleRequest = (params?: HandleRequestParams) => {
+const fetchRequest = async <TQueryParams>({
+  path,
+  method,
+  queryParams,
+  params,
+  isMock,
+  shouldAuthorize,
+}: RequestParams<TQueryParams>) => {
+  const convertedParams = queryParams
+    ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {
+        newObj[key] = value.toString();
+        return newObj;
+      }, {})
+    : "";
+
+  const searchParams = new URLSearchParams(convertedParams).toString();
+
+  if ((shouldAuthorize)) {
+    const token = localStorage.getItem(STORAGE_KEY.TOKEN);
+    headers.Authorization = `Bearer ${token ?? ""}`;
+  }
+
+  return await fetch(`${isMock ? "" : URL.API}${path}${searchParams ? `?${searchParams}` : ""}`, {
+    headers,
+    method,
+    body: JSON.stringify(params),
+  })
+    .then(async (res) => await res.json())
+    .then((data) => {
+      return data;
+    });
+};
+
+const handleRequest = (option?: { isMock: true }) => {
   return {
-    async get<TResponse>(data: RequestParams): Promise<TResponse> {
-      return await fetchRequest({ ...data, ...params, method: "get" });
+    async get<TResponse>(params: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...params, method: "get", ...option });
     },
 
-    async post<TResponse>(data: RequestParams): Promise<TResponse> {
-      return await fetchRequest({ ...data, ...params, method: "post" });
+    async post<TResponse>(params: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...params, method: "post", ...option });
     },
 
-    async put<TResponse>(data: RequestParams): Promise<TResponse> {
-      return await fetchRequest({ ...data, ...params, method: "put" });
+    async put<TResponse>(params: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...params, method: "put", ...option });
     },
 
-    async delete<TResponse>(data: RequestParams): Promise<TResponse> {
-      return await fetchRequest({ ...data, ...params, method: "delete" });
+    async delete<TResponse>(params: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...params, method: "delete", ...option });
     },
   };
 };
 
 export const request = handleRequest();
-
-export const authorizedRequest = handleRequest({
-  config: {
-    includeAuthorization: true,
-  },
-});
-
-export const mockedRequest = handleRequest({
-  isMock: true,
-});
-
-export const mockedAuthorizedRequest = handleRequest({
-  isMock: true,
-  config: {
-    includeAuthorization: true,
-  },
-});
+export const mockedRequest = handleRequest({ isMock: true });
