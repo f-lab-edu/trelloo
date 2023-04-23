@@ -3,20 +3,32 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "standard-with-typescript"],
+  "extends": [
+    "plugin:react/recommended",
+    "standard-with-typescript",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:cypress/recommended"
+  ],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": ["./tsconfig.json", "./cypress.config.ts"]
   },
-  "plugins": ["react"],
+  "plugins": ["react", "prettier", "cypress"],
   "rules": {
-    "quotes": ["error", "single"],
+    "prettier/prettier": "off",
     "no-duplicate-imports": "error",
     "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
     "no-unused-vars": "error",
     "no-multiple-empty-lines": "error",
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn",
+    "cypress/no-force": "warn",
+    "cypress/no-async-tests": "error",
+    "cypress/no-pause": "error"
   }
 }
