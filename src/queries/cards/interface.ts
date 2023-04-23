@@ -8,6 +8,7 @@ export interface GetCardListsResponse {
   cards: Array<{
     id: string;
     description: string;
+    index: number;
   }>;
 }
 
