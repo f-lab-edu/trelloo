@@ -8,7 +8,7 @@ interface Props {
   type?: "button" | "submit" | "reset";
   appearance?: {
     type: S.ButtonStyleType;
-    style?: {};
+    style?: Record<string, unknown>;
   };
   children?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -17,7 +17,7 @@ interface Props {
 function Button({ Icon, isIconBehindText = false, type = "button", appearance, onClick, children, isLoading }: Props) {
   return (
     <S.Container type={type} style={appearance?.style} onClick={onClick} appearance={appearance} disabled={isLoading}>
-      <S.IconWrapper>{!isIconBehindText && !!Icon && Icon}</S.IconWrapper>
+      <S.IconWrapper>{!isIconBehindText && Boolean(Icon) && Icon}</S.IconWrapper>
       {children}
       <S.IconBehindWrapper>{isIconBehindText && Icon}</S.IconBehindWrapper>
     </S.Container>

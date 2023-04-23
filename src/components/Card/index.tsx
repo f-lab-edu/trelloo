@@ -1,34 +1,33 @@
-import React, { useState } from "react";
-import { Card as AntdCard } from "antd";
-import loadable from "@loadable/component";
-import { ICard } from "@/interfaces/cards";
-import useModal from "@/hooks/useModal";
-import CardEditor from "@components/modals/CardEditor";
-const CardDetail = loadable(() => import("@components/modals/CardDetailModal"));
-import * as S from "./style";
-import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
+import React, { useState } from 'react'
+import loadable from '@loadable/component'
+import { type ICard } from '@/interfaces/cards'
+import useModal from '@/hooks/useModal'
+import CardEditor from '@components/modals/CardEditor'
+import * as S from './style'
+import { type DeleteCardRequest, type EditCardRequest } from '@/queries/cards/interface'
+const CardDetail = loadable(async () => await import('@components/modals/CardDetailModal'))
 
 export interface Props {
-  data: ICard;
-  onEditCard: (params: EditCardRequest) => void;
-  onDeleteCard: (params: DeleteCardRequest) => void;
+  data: ICard
+  onEditCard: (params: EditCardRequest) => void
+  onDeleteCard: (params: DeleteCardRequest) => void
 }
 
 const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
-  const { openModal } = useModal();
-  const [cardEditorOpened, setCardEditorOpened] = useState(false);
+  const { openModal } = useModal()
+  const [cardEditorOpened, setCardEditorOpened] = useState(false)
 
   const handleClick = () => {
     openModal({
       component: CardDetail,
-      props: { title: data.description },
-    });
-  };
+      props: { title: data.description }
+    })
+  }
 
   const handleOpenCardEditor = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    e.stopPropagation();
-    setCardEditorOpened(!cardEditorOpened);
-  };
+    e.stopPropagation()
+    setCardEditorOpened(!cardEditorOpened)
+  }
 
   return (
     <S.Container>
@@ -46,7 +45,7 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
         />
       )}
     </S.Container>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card
