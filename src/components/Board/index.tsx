@@ -1,57 +1,58 @@
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import React from 'react'
+import { DragDropContext, Droppable, type DropResult } from 'react-beautiful-dnd'
 import {
   useCardsQuery,
   useEditCardPositionMutation,
   useAddListMutation,
   useDeleteListMutation,
-  useEditListMutation,
-} from "@/queries/cards";
-import { AddListRequest, DeleteListRequest, EditListRequest } from "@/queries/cards/interface";
-import CardList from "@components/CardList";
-import CardListComposer from "@components/CardListComposer";
+  useEditListMutation
+} from '@/queries/cards'
+import { type AddListRequest, type DeleteListRequest, type EditListRequest } from '@/queries/cards/interface'
+import CardList from '@components/CardList'
+import CardListComposer from '@components/CardListComposer'
 
-import * as S from "./style";
+import * as S from './style'
 
 const Board = () => {
-  const { data: cardLists } = useCardsQuery();
-  const { mutate: addListMutate } = useAddListMutation();
-  const { mutate: deleteListMutate } = useDeleteListMutation();
-  const { mutate: editListMutate } = useEditListMutation();
-  const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
+  const { data: cardLists } = useCardsQuery()
+  const { mutate: addListMutate } = useAddListMutation()
+  const { mutate: deleteListMutate } = useDeleteListMutation()
+  const { mutate: editListMutate } = useEditListMutation()
+  const { mutate: editCardPositionMutate } = useEditCardPositionMutation()
 
   const handleEditList = ({ id, title }: EditListRequest) => {
-    editListMutate({ id, title });
-  };
+    editListMutate({ id, title })
+  }
 
   const handleDeleteList = ({ id }: DeleteListRequest) => {
-    deleteListMutate({ id });
-  };
+    deleteListMutate({ id })
+  }
 
   const handleAddList = ({ title }: AddListRequest) => {
-    addListMutate({ title });
-  };
+    addListMutate({ title })
+  }
 
-  const handleDragEnd = (result: any) => {
-    const { destination, source, draggableId } = result;
-    if (!destination) {
-      return;
+  const handleDragEnd = (result: DropResult) => {
+    const { destination, source, draggableId } = result
+    if (destination == null) {
+      return
     }
 
     if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return;
+      return
     }
     editCardPositionMutate({
       cardId: draggableId,
       destination: {
         listId: destination.droppableId,
-        index: destination.index,
+        index: destination.index
       },
       source: {
         listId: source.droppableId,
-        index: source.index,
-      },
-    });
-  };
+        index: source.index
+      }
+    })
+  }
 
   return (
     <S.Container>
@@ -75,7 +76,7 @@ const Board = () => {
         <CardListComposer onAddList={handleAddList} />
       </DragDropContext>
     </S.Container>
-  );
-};
+  )
+}
 
-export default Board;
+export default Board

@@ -1,9 +1,9 @@
 import axiosInstance from "@/axios";
 import { URL } from "@/constants";
-import { HandleRequestParams, RequestParams } from "@/interfaces/httpRequest";
+import { type HandleRequestParams, type RequestParams } from "@/interfaces/httpRequest";
 
-const fetchRequest = <TQueryParams>({ path, method, params, data, isMock, config }: RequestParams<TQueryParams>) => {
-  return axiosInstance(`${isMock ? "" : URL.API}${path}`, {
+const fetchRequest = async <TQueryParams>({ path, method, params, data, isMock, config }: RequestParams<TQueryParams>) => {
+  return await axiosInstance(`${isMock ?? true ? "" : URL.API}${path}`, {
     headers: config,
     method,
     data: JSON.stringify(data),
@@ -15,20 +15,20 @@ const fetchRequest = <TQueryParams>({ path, method, params, data, isMock, config
 
 const handleRequest = (params?: HandleRequestParams) => {
   return {
-    get<TResponse>(data: RequestParams): Promise<TResponse> {
-      return fetchRequest({ ...data, ...params, method: "get" });
+    async get<TResponse>(data: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...data, ...params, method: "get" });
     },
 
-    post<TResponse>(data: RequestParams): Promise<TResponse> {
-      return fetchRequest({ ...data, ...params, method: "post" });
+    async post<TResponse>(data: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...data, ...params, method: "post" });
     },
 
-    put<TResponse>(data: RequestParams): Promise<TResponse> {
-      return fetchRequest({ ...data, ...params, method: "put" });
+    async put<TResponse>(data: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...data, ...params, method: "put" });
     },
 
-    delete<TResponse>(data: RequestParams): Promise<TResponse> {
-      return fetchRequest({ ...data, ...params, method: "delete" });
+    async delete<TResponse>(data: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...data, ...params, method: "delete" });
     },
   };
 };

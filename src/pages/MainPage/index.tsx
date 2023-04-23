@@ -1,14 +1,8 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 function MainPage() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate("/board");
-  }, []);
-
-  return <></>;
+  return <Navigate to="/board" />;
 }
 
 export default MainPage;
