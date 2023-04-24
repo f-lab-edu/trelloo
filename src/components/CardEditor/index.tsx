@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "antd";
 import { type ICard } from "@/interfaces/cards";
 import { type DeleteCardRequest, type EditCardRequest } from "@/queries/cards/interface";
-import Button from "@components/Button";
+import Button from "@components/buttons/Button";
 import CardEditorButtons from "@components/CardEditorButtons";
 import * as S from "./style";
 

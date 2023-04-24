@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { type AddListRequest } from "@/queries/cards/interface";
-import Button from "@components/Button";
+import Button from "@components/buttons/Button";
 import * as S from "./style";
 
 const { TextArea } = Input;
