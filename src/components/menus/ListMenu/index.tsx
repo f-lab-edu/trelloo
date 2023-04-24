@@ -1,5 +1,4 @@
-import { Dropdown } from "antd";
-import type { MenuProps } from "antd";
+import React, { Dropdown,type MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
 import * as S from "./style";
 
@@ -7,7 +6,7 @@ interface Props {
   onDeleteList: () => void;
 }
 
-function ListOptions({ onDeleteList }: Props) {
+function ListMenu({ onDeleteList }: Props) {
   const items: MenuProps["items"] = [
     {
       key: "1",
@@ -45,4 +44,4 @@ function ListOptions({ onDeleteList }: Props) {
   );
 }
 
-export default ListOptions;
+export default ListMenu;
