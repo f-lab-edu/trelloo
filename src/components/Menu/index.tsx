@@ -12,6 +12,8 @@ import {
   EllipsisOutlined,
 } from "@ant-design/icons";
 import Button from "@components/buttons/Button";
+import DropdownButton from "@components/buttons/DropdownButton";
+import FilterMenu from "@components/menus/FilterMenu";
 import * as S from "./style";
 
 interface Props {
@@ -31,10 +33,8 @@ function Menu({ showDrawer, boardName }: Props) {
         ))}
       </S.ButtonsWrapper>
       <S.OtherButtonsWrapper>
-        {buttonList2.map((button, idx) => (
-          <Button key={idx} Icon={button.icon} appearance={{ type: "gray", style: { margin: "5px 5px 0 0" } }}>
-            {button.text}
-          </Button>
+        {buttonList2.map(({ text, icon, Dropdown }, idx) => (
+          <DropdownButton key={idx} text={text} icon={icon} Dropdown={Dropdown} />
         ))}
         <Button Icon={<EllipsisOutlined />} onClick={showDrawer} appearance={{ type: "transparent" }} />
       </S.OtherButtonsWrapper>
@@ -76,10 +76,7 @@ const buttonList2 = [
     text: "Automation",
     icon: <ThunderboltOutlined />,
   },
-  {
-    text: "Filter",
-    icon: <FilterOutlined />,
-  },
+  { text: "Filter", icon: <FilterOutlined />, Dropdown: FilterMenu },
   {
     text: "Share",
     icon: <UserAddOutlined />,
