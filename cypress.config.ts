@@ -1,7 +1,9 @@
-import { URL } from "./src/constants";
-module.exports = {
+import { defineConfig } from "cypress";
+
+export default defineConfig({
   projectId: "5ouo1q",
+
   e2e: {
-    baseUrl: URL.BASE,
+    baseUrl: "http://127.0.0.1:5173/",
   },
-};
+});
