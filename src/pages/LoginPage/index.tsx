@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { Form } from "antd";
 import { STORAGE_KEY } from "@/constants";
 import { useLoginMutation } from "@/queries/auth";
-import Button from "@components/Button";
+import Button from "@components/buttons/Button";
 import * as S from "./style";
 
 const LoginPage: React.FC = () => {

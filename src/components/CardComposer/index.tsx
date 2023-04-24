@@ -1,6 +1,6 @@
 import React, { Spin } from "antd";
 import { useController, useForm } from "react-hook-form";
-import Button from "@components/Button";
+import Button from "@components/buttons/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined } from "@ant-design/icons";
 import * as S from "./style";
 
