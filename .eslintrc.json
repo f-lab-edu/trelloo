@@ -24,6 +24,7 @@
     "no-unused-vars": "error",
     "no-multiple-empty-lines": "error",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "cypress/no-assigning-return-values": "error",
