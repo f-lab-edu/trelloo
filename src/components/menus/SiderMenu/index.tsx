@@ -24,23 +24,21 @@ function SiderMenu() {
     });
   };
 
-  function getItem(
+  const getItem = (
     label: React.ReactNode,
     key: React.Key,
     icon?: React.ReactNode,
     children?: MenuItem[],
     type?: "group",
     onClick?: () => void,
-  ): MenuItem {
-    return {
-      key,
-      icon,
-      children,
-      label,
-      type,
-      onClick,
-    } as MenuItem;
-  }
+  ): MenuItem => ({
+    key,
+    icon,
+    children,
+    label,
+    type,
+    onClick,
+  });
 
   const items2: MenuProps["items"] = [
     getItem("Boards", "12", <AppstoreOutlined />),

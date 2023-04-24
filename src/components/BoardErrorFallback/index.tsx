@@ -1,6 +1,7 @@
+import React from "react";
 import { Empty } from "antd";
 import { theme } from "@/styles/theme";
-import Button from "@components/Button";
+import Button from "@components/buttons/Button";
 import * as S from "./style";
 
 interface Props {
