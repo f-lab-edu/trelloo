@@ -1,6 +1,6 @@
 import { Space, Input } from "antd";
-import Button from "@components/Button";
 import CardDetailModalButtons from "@components/CardDetailModalButtons";
+import Button from "@components/buttons/Button";
 import * as S from "./style";
 
 export interface Props {
