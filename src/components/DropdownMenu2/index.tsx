@@ -17,28 +17,28 @@ function DropdownMenu2({ searchCards }: Props) {
   const buttonList2 = [
     {
       text: "Repeats",
-      icon: <HistoryOutlined />,
+      Icon: <HistoryOutlined />,
     },
     {
       text: "Power-ups",
-      icon: <RocketOutlined />,
+      Icon: <RocketOutlined />,
     },
     {
       text: "Automation",
-      icon: <ThunderboltOutlined />,
+      Icon: <ThunderboltOutlined />,
     },
-    { text: "Filter", icon: <FilterOutlined />, Dropdown: <FilterMenu onClick={searchCards} />, onClick: searchCards },
+    { text: "Filter", Icon: <FilterOutlined />, Dropdown: <FilterMenu onClick={searchCards} />, onClick: searchCards },
     {
       text: "Share",
-      icon: <UserAddOutlined />,
+      Icon: <UserAddOutlined />,
       buttonColor: "blue",
     },
   ];
 
   return (
     <>
-      {buttonList2.map(({ text, icon, Dropdown }, idx) => (
-        <DropdownButton key={idx} text={text} icon={icon} Dropdown={Dropdown} />
+      {buttonList2.map(({ text, Icon, Dropdown }, idx) => (
+        <DropdownButton key={idx} text={text} Icon={Icon} Dropdown={Dropdown} />
       ))}
     </>
   );
