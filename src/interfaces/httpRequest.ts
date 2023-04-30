@@ -1,4 +1,4 @@
-export interface RequestParams<TQueryParams = Params, TParams = {}> {
+export interface RequestParams<TQueryParams = Params, TParams = any> {
   path: string;
   method?: RequestMethod;
   params?: TParams;

@@ -1,22 +1,29 @@
 import React from "react";
-import { useController } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 import * as S from "./style";
 
 interface Props {
-  control: any;
+  onSubmit: (data: any) => void;
   name: string;
   placeHolder: string;
 }
 
-function Input({ placeHolder, control, name }: Props) {
+function Input({ placeHolder, name, onSubmit }: Props) {
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      [name]: "",
+    },
+    mode: "onChange",
+  });
+
   const { field } = useController({
     control,
     name,
   });
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <S.Input {...field} placeholder={placeHolder} />
-    </div>
+    </form>
   );
 }
 
