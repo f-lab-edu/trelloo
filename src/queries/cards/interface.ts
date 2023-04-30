@@ -1,3 +1,7 @@
+export interface GetCardRequest {
+  search: string;
+}
+
 export interface GetCardListsResponse {
   id: string;
   title: string;
