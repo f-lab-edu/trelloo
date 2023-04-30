@@ -16,7 +16,7 @@ export default {
 const Template = (args: CardProps) => {
   return (
     <Provider store={store}>
-      <Card data={{ id: "cardId", description: "default" }} onEditCard={() => {}} onDeleteCard={() => {}} />
+      <Card data={{ id: "cardId", description: "default", index: 0 }} onEditCard={() => {}} onDeleteCard={() => {}} />
     </Provider>
   );
 };
