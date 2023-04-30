@@ -1,9 +1,8 @@
 import React, { Spin } from "antd";
 import { useController, useForm } from "react-hook-form";
-import { AddCardRequest } from "@/queries/cards/interface";
-import Button from "@components/buttons/Button";
-import { EllipsisOutlined, PlusOutlined, PicLeftOutlined } from "@ant-design/icons";
+import { type AddCardRequest } from "@/queries/cards/interface";
 import * as S from "./style";
+import Composer from "@components/forms/Composer";
 
 interface Props {
   isLoading: boolean;
@@ -32,35 +31,16 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     reset();
   };
 
-  return (
-    <>
-      {isCardInputOpened ? (
-        <S.CardInputContainer onSubmit={handleSubmit(handleAddCard)}>
-          <Spin spinning={isLoading}>
-            <S.Card>
-              <input onChange={onChange} value={value} placeholder="Enter a title for this card..." />
-            </S.Card>
-          </Spin>
+  const wrappedOnSubmit = handleSubmit(handleAddCard)
 
-          <S.AddCardButtonContainer>
-            <S.AddCardButtonWrapper>
-              <Button type="submit" appearance={{ type: "blue" }} isLoading={isLoading}>
-                Add card
-              </Button>
-              <S.CloseButton onClick={onCardInputToggle} />
-            </S.AddCardButtonWrapper>
-            <Button appearance={{ type: "transparent" }} Icon={<EllipsisOutlined />} />
-          </S.AddCardButtonContainer>
-        </S.CardInputContainer>
-      ) : (
-        <S.ButtonWrapper>
-          <Button appearance={{ type: "transparent" }} Icon={<PlusOutlined />} onClick={onCardInputToggle}>
-            Add a card
-          </Button>
-          <Button appearance={{ type: "transparent" }} Icon={<PicLeftOutlined />} />
-        </S.ButtonWrapper>
-      )}
-    </>
+  return (
+    <Composer isOpen={isCardInputOpened} toggleInputOpen={onCardInputToggle} btnText="Add a card" submitBtnText="Add card"  onSubmit={wrappedOnSubmit}>
+      <Spin spinning={isLoading}>
+        <S.Card>
+          <input onChange={onChange} value={value} placeholder="Enter a title for this card..." />
+        </S.Card>
+      </Spin>
+    </Composer>
   );
 };
 
