@@ -13,8 +13,12 @@ import CardListComposer from '@components/CardListComposer'
 
 import * as S from './style'
 
-const Board = () => {
-  const { data: cardLists } = useCardsQuery()
+interface Props {
+  searchKeyword:string;
+}
+
+const Board = ({searchKeyword}:Props) => {
+  const { data: cardLists } = useCardsQuery({search:searchKeyword})
   const { mutate: addListMutate } = useAddListMutation()
   const { mutate: deleteListMutate } = useDeleteListMutation()
   const { mutate: editListMutate } = useEditListMutation()
