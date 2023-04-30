@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, type ReactNode } from "react";
 import Button from "@components/buttons/Button";
 import * as S from "./style";
 
 interface Props {
   text: string;
-  icon: any;
-  Dropdown?: any;
-  onClick: any;
+  icon: ReactNode;
+  Dropdown?: ReactNode;
 }
 
-function DropdownButton({ text, icon, Dropdown, onClick }: Props) {
+function DropdownButton({ text, icon, Dropdown }: Props) {
   const [isOpened, setIsOpened] = useState(false);
 
   const handleDropdownOpen = () => {
@@ -23,7 +22,7 @@ function DropdownButton({ text, icon, Dropdown, onClick }: Props) {
       </Button>
       {isOpened && (
         <S.Dropdown>
-          <Dropdown onClick={onClick} />
+          {Dropdown}
         </S.Dropdown>
       )}
     </S.Container>
