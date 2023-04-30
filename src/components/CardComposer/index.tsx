@@ -1,5 +1,6 @@
 import React, { Spin } from "antd";
 import { useController, useForm } from "react-hook-form";
+import { AddCardRequest } from "@/queries/cards/interface";
 import Button from "@components/buttons/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined } from "@ant-design/icons";
 import * as S from "./style";
@@ -9,7 +10,7 @@ interface Props {
   isCardInputOpened: boolean;
   onCardInputToggle: () => void;
   listId: string;
-  onAddCard: (params: any) => void;
+  onAddCard: (params: AddCardRequest) => void;
 }
 
 const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard, isLoading }: Props) => {
@@ -27,10 +28,8 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     onAddCard({
       description: value,
       listId,
-      onSuccess: () => {
-        reset();
-      },
     });
+    reset();
   };
 
   return (
