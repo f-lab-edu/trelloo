@@ -1,26 +1,19 @@
 import React from "react";
 import Input from "@components/inputs/Input";
-import { useForm } from "react-hook-form";
 import * as S from "./style";
 
-function FilterMenu() {
-  const { handleSubmit, control } = useForm({
-    defaultValues: {
-      filterMenu: "",
-    },
-    mode: "onChange",
-  });
+interface Props {
+  onClick: (keyword: string) => void;
+}
 
-  const onSubmit = (data: any) => {
-    // TODO: add onSubmit
+function FilterMenu({ onClick }: Props) {
+  const onSubmit = ({ filterMenu }: { filterMenu: string }) => {
+    onClick(filterMenu);
   };
-
   return (
     <div>
       <S.Title>Keyword</S.Title>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input control={control} placeHolder="Enter a keyword..." name="filterMenu" />
-      </form>
+      <Input placeHolder="Enter a keyword..." name="filterMenu" onSubmit={onSubmit} />
       <S.Description>Search cards, members, labels, and more.</S.Description>
     </div>
   );
