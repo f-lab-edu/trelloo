@@ -1,13 +1,13 @@
-import React, { Suspense, useCallback } from "react";
-import { type CloseModalState, type ModalState } from "@/interfaces/modal";
+import { Suspense, useCallback } from "react";
+import { CloseModalState, ModalState } from "@/interfaces/modal";
 import { modalContents } from "../modalContents";
 import * as S from "./style";
 
-interface Props<P> extends ModalState<P> {
+interface Props extends ModalState {
   onClose: (state: CloseModalState) => void;
 }
 
-const Modal = <P extends Record<string,unknown>>({ component: Component, index, onClose, props, options }: Props<P>) => {
+const Modal = ({ component, index, onClose, props }: Props) => {
   const handleClose = useCallback(() => {
     onClose({ component, index });
   }, [component, index, props]);
@@ -22,5 +22,4 @@ const Modal = <P extends Record<string,unknown>>({ component: Component, index, 
     </S.ModalContainer>
   );
 };
-
 export default Modal;
