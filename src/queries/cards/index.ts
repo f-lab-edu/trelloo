@@ -11,7 +11,7 @@ const cardListsKeys = {
 
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {
   return useQuery(
-    cardListsKeys.search(search),
+    cardListsKeys.all,
     async () => {
       return await request.get<I.GetCardListsResponse[]>({
         path: "/cards",
