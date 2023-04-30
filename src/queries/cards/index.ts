@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "@/utils/httpRequest";
 import type * as I from "./interface";
@@ -105,7 +106,7 @@ export const useEditListMutation = () => {
 };
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
-  return useMutation(
+  return useMutation<I.ResponseMessage, AxiosError, I.EditCardPositionRequest, I.EditCardMutationData>(
     ({ cardId, listId, index }: I.EditCardPositionParam & I.EditCardPositionRequest) => {
       return request.put<I.ResponseMessage>({
         path: `/cards/${cardId}/move`,
@@ -115,38 +116,45 @@ export const useEditCardPositionMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
-      onMutate: ({ cardId, listId, index }) => {
+      onMutate: async ({ cardId, listId, index }) => {
+        await queryClient.cancelQueries(cardListsKeys.all);
+
         const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.all);
         if (!currentCards) return;
 
-        const currentCardsList = currentCards.filter((list) => list.cards.some((card) => card.id === cardId));
-        const currentListId = currentCardsList[0].id;
-        const card = currentCardsList[0].cards.filter((card) => card.id === cardId)[0];
-
-        const updatedData = currentCards.map((list) => {
-          const hasMatchedListId = list.id === listId;
-          const hasCardInList = list.id === currentListId;
-
-          if (hasMatchedListId) {
-            return addMovedCardToList(list, card, index);
-          }
-
-          if (hasCardInList) {
-            return removeMovedCardFromList(list, cardId);
-          }
-
-          return list;
-        });
-
+        const updatedData = createNewCardList(currentCards, cardId, listId, index);
         queryClient.setQueryData(cardListsKeys.all, updatedData);
 
-        return () => queryClient.setQueryData(cardListsKeys.all, currentCards);
+        return { currentCards };
       },
-      onError: (error, variables, rollback) => {
-        rollback?.();
+      onError: (err, currentCards, context) => {
+        queryClient.setQueryData(cardListsKeys.all, context?.currentCards);
       },
     },
   );
+};
+
+const createNewCardList = (currentCards: ICardList[], cardId: string, listId: string, index: number) => {
+  const currentCardsList = currentCards.filter((list) => list.cards.some((card) => card.id === cardId));
+  const currentListId = currentCardsList[0].id;
+  const card = currentCardsList[0].cards.filter((card) => card.id === cardId)[0];
+
+  const updatedData = currentCards.map((list) => {
+    const hasMatchedListId = list.id === listId;
+    const hasCardInList = list.id === currentListId;
+
+    if (hasMatchedListId) {
+      return addMovedCardToList(list, card, index);
+    }
+
+    if (hasCardInList) {
+      return removeMovedCardFromList(list, cardId);
+    }
+
+    return list;
+  });
+
+  return updatedData;
 };
 
 const addMovedCardToList = (list: ICardList, card: ICard, index: number) => {
