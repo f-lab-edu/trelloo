@@ -7,13 +7,18 @@ interface Props {
 }
 
 function FilterMenu({ onClick }: Props) {
-  const onSubmit = ({ filterMenu }: { filterMenu: string }) => {
+  const onSubmit = ({ filterMenu }: Record<"filterMenu", string>) => {
     onClick(filterMenu);
   };
+
+  const onChange = (data: string) => {
+    onClick(data);
+  };
+
   return (
     <div>
       <S.Title>Keyword</S.Title>
-      <Input placeHolder="Enter a keyword..." name="filterMenu" onSubmit={onSubmit} />
+      <Input placeHolder="Enter a keyword..." name="filterMenu" onSubmit={onSubmit} onChange={onChange} />
       <S.Description>Search cards, members, labels, and more.</S.Description>
     </div>
   );
