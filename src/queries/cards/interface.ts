@@ -1,3 +1,5 @@
+import { ICardList } from "@/interfaces/cards";
+
 export interface GetCardRequest {
   search: string;
 }
@@ -26,6 +28,10 @@ export interface EditCardPositionRequest {
   cardId: string;
   listId: string;
   index: number;
+}
+
+export interface EditCardMutationData {
+  currentCards: ICardList[];
 }
 
 export interface EditCardPositionParam {
