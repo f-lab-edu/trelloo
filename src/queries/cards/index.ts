@@ -4,7 +4,7 @@ import type * as I from "./interface";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
-  search: (keyword: string) => [...cardListsKeys.all, ...keyword],
+  search: (keyword: string) => [...cardListsKeys.all, keyword],
 };
 
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {

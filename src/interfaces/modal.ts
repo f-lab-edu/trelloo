@@ -1,5 +1,7 @@
+import {type ComponentType} from "react";
+
 export interface ModalState<TProps = any> {
-  component: React.ComponentType<TProps>;
+  component: ComponentType<TProps>;
   props: TProps;
   index: number;
   options?: {
