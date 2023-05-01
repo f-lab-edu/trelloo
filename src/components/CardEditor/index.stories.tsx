@@ -2,7 +2,7 @@ import React from "react";
 import CardEditor from "@components/CardEditor";
 
 export default {
-  title: "Components/Cards",
+  title: "components/CardEditor",
   component: CardEditor,
 };
 
@@ -23,4 +23,4 @@ const Template = () => {
     />
   );
 };
-export const InviteToWorkspaceModal = Template.bind({});
+export const Default = Template.bind({});

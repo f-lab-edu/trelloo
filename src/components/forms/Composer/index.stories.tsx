@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useController, useForm } from "react-hook-form";
-import Composer from "./index";
+import styled from "styled-components";
+import Component from "./index";
 
 export default {
-  title: "Components/forms",
-  component: Composer,
+  title: "Common/forms/Composer",
+  component: Component,
 };
 
 const Template = () => {
@@ -30,16 +31,22 @@ const Template = () => {
   const wrappedOnSubmit = handleSubmit(handleAddCard);
 
   return (
-    <Composer
-      isOpen={isOpen}
-      onSubmit={wrappedOnSubmit}
-      toggleInputOpen={toggleInputOpen}
-      btnText="Add a card"
-      submitBtnText="Add card"
-    >
-      <input onChange={onChange} value={value} placeholder="Enter description..." />
-    </Composer>
+    <Container>
+      <Component
+        isOpen={isOpen}
+        onSubmit={wrappedOnSubmit}
+        toggleInputOpen={toggleInputOpen}
+        btnText="Add a card"
+        submitBtnText="Add card"
+      >
+        <input onChange={onChange} value={value} placeholder="Enter description..." />
+      </Component>
+    </Container>
   );
 };
 
-export const ComposerComponent = Template.bind({});
+export const Composer = Template.bind({});
+
+const Container = styled.div`
+  width: 300px;
+`;

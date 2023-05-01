@@ -1,8 +1,9 @@
 import React from "react";
+import styled from "styled-components";
 import SiderMenu from "./index";
 
 export default {
-  title: "Components/menus",
+  title: "components/menus/SiderMenu",
   component: SiderMenu,
   argTypes: {
     onSubmit: "function",
@@ -10,7 +11,15 @@ export default {
 };
 
 const Template = () => {
-  return <SiderMenu />;
+  return (
+    <Container>
+      <SiderMenu />
+    </Container>
+  );
 };
 
-export const Sider = Template.bind({});
+export const Default = Template.bind({});
+
+const Container = styled.div`
+  width: 300px;
+`;

@@ -1,16 +1,25 @@
 import React from "react";
 import CardListComposer from "@components/CardListComposer";
 import { AddListRequest } from "@/queries/cards/interface";
+import styled from "styled-components";
 
 export default {
-  title: "Components/forms",
+  title: "Components/forms/CardListComposer",
   component: CardListComposer,
 };
 
 const Template = () => {
   const handleAddList = async ({ title }: AddListRequest) => {};
 
-  return <CardListComposer onAddList={handleAddList} />;
+  return (
+    <Container>
+      <CardListComposer onAddList={handleAddList} />
+    </Container>
+  );
 };
 
-export const CardListComposerComponent = Template.bind({});
+export const Default = Template.bind({});
+
+const Container = styled.div`
+  width: 300px;
+`;

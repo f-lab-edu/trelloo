@@ -2,7 +2,7 @@ import React from "react";
 import ListMenu from "./index";
 
 export default {
-  title: "Components/menus",
+  title: "components/menus/ListMenu",
   component: ListMenu,
   argTypes: {
     onSubmit: "function",
@@ -15,4 +15,4 @@ const Template = () => {
   return <ListMenu onDeleteList={handleDeleteList} />;
 };
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});

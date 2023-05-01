@@ -15,4 +15,4 @@ const Template = () => {
   return <Drawer isOpen onClose={onClose} />;
 };
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});

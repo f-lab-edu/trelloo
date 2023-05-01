@@ -3,7 +3,7 @@ import loadable from "@loadable/component";
 const InviteToWorkspaceModal = loadable(async () => await import("@components/modals/InviteToWorkspaceModal"));
 
 export default {
-  title: "Components/modals",
+  title: "Components/modals/InviteToWorkspaceModal",
   component: InviteToWorkspaceModal,
 };
 
@@ -12,4 +12,4 @@ const Template = () => {
   return <InviteToWorkspaceModal onClose={onClose} />;
 };
 
-export const InviteToWorkspace = Template.bind({});
+export const Default = Template.bind({});

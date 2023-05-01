@@ -1,9 +1,9 @@
 import React from "react";
-import Input from "./index";
+import Component from "./index";
 
 export default {
-  title: "Components/inputs",
-  component: Input,
+  title: "common/inputs/Input",
+  component: Component,
   argTypes: {
     onSubmit: "function",
   },
@@ -12,7 +12,7 @@ export default {
 const Template = () => {
   const handleSubmit = () => {};
 
-  return <Input onSubmit={handleSubmit} placeHolder="Enter new keyword..." name="input" />;
+  return <Component onSubmit={handleSubmit} placeHolder="Enter new keyword..." name="input" />;
 };
 
-export const Primary = Template.bind({});
+export const Input = Template.bind({});

@@ -7,7 +7,10 @@ import { store } from "../src/store";
 import { theme } from "../src/styles/theme";
 import { GlobalStyle } from "../src/styles/GlobalStyle";
 import ModalsProvider from "@components/modals/ModalsProvider";
+import { worker } from "../src/mocks/browser";
+import { Router } from "react-router-dom";
 
+worker.start();
 const queryClient = new QueryClient();
 ReactModal.setAppElement("#root");
 
@@ -26,12 +29,16 @@ export const decorators = [
   ),
 ];
 
-export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+const preview = {
+  parameters: {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
     },
   },
 };
+
+export default preview;

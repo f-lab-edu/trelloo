@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "@components/Card";
+import styled from "styled-components";
 
 export default {
   title: "Components/Card",
@@ -11,12 +12,18 @@ const Template = () => {
   const handleDeleteCard = () => {};
 
   return (
-    <Card
-      data={{ id: "cardId", description: "default", index: 0 }}
-      onEditCard={handleEditCard}
-      onDeleteCard={handleDeleteCard}
-    />
+    <Container>
+      <Card
+        data={{ id: "cardId", description: "default", index: 0 }}
+        onEditCard={handleEditCard}
+        onDeleteCard={handleDeleteCard}
+      />
+    </Container>
   );
 };
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});
+
+const Container = styled.div`
+  width: 300px;
+`;
