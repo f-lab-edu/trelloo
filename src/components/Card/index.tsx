@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { ICard } from "@/interfaces/cards";
+import { type ICard } from "@/interfaces/cards";
 import useModal from "@/hooks/useModal";
-import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
+import { type DeleteCardRequest, type EditCardRequest } from "@/queries/cards/interface";
 import CardEditor from "@components/CardEditor";
 import * as S from "./style";
 
 export interface Props {
   data: ICard;
-  onEditCard: (params: EditCardRequest) => void;
+  onEditCard: (params: EditCardRequest) => void
   onDeleteCard: (params: DeleteCardRequest) => void;
 }
 

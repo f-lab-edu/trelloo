@@ -72,6 +72,7 @@ export const cardsHandlers = [
 
     if(!isAuthorized) {
       return await res(
+        ctx.delay(),
         ctx.status(401),
         ctx.json({
           message: "access token is required",
