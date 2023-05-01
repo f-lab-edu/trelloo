@@ -1,9 +1,8 @@
 import React from "react";
 import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
-import { Props as CardDetailProps } from "@components/modals/CardDetailModal";
 import { ModalsProvider } from "@components/modals/ModalsProvider/index.stories";
-const CardDetailModal = loadable(() => import("@components/modals/CardDetailModal"));
+const CardDetailModal = loadable(async () => await import("@components/modals/CardDetailModal"));
 
 export default {
   title: "Components/Modals",
