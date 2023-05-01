@@ -10,7 +10,6 @@ import {
 import { AddListRequest, DeleteListRequest, EditListRequest } from "@/queries/cards/interface";
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
-
 import * as S from "./style";
 
 interface Props {
@@ -45,12 +44,14 @@ const Board = ({ searchKeyword }: Props) => {
     if (destination.droppableId === source.droppableId && destination.index === source.index) {
       return;
     }
+
     editCardPositionMutate({
       cardId: draggableId,
       listId: destination.droppableId,
       index: destination.index,
     });
   };
+
   return (
     <S.Container>
       <DragDropContext onDragEnd={handleDragEnd}>
