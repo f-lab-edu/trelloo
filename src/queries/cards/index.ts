@@ -1,11 +1,11 @@
-import { type AxiosError } from "axios";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { request } from "@/utils/httpRequest";
-import type * as I from "./interface";
-import { type ICard, type ICardList } from "@/interfaces/cards";
+import { AxiosError } from 'axios';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { request } from '@/utils/httpRequest';
+import * as I from './interface';
+import { ICard, ICardList } from '@/interfaces/cards';
 
 const cardListsKeys = {
-  all: ["cardLists"] as const,
+  all: ['cardLists'] as const,
   search: (keyword: string) => [...cardListsKeys.all, keyword],
 };
 
@@ -14,7 +14,7 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
     cardListsKeys.all,
     async () => {
       return await request.get<I.GetCardListsResponse[]>({
-        path: "/cards",
+        path: '/cards',
         queryParams: { search },
         isMock: true,
       });
@@ -30,7 +30,7 @@ export const useAddCardMutation = () => {
   return useMutation(
     async (params: I.AddCardRequest) => {
       return await request.post<I.ResponseMessage>({
-        path: "/cards",
+        path: '/cards',
         params,
         isMock: true,
         shouldAuthorize: true,
@@ -48,7 +48,7 @@ export const useEditCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (params: I.EditCardRequest) => {
-      return await request.put<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
+      return await request.put<I.ResponseMessage>({ path: '/cards', params, isMock: true, shouldAuthorize: true });
     },
     {
       onSuccess: async () => {
@@ -62,7 +62,7 @@ export const useDeleteCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (params: I.DeleteCardRequest) => {
-      return await request.delete<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
+      return await request.delete<I.ResponseMessage>({ path: '/cards', params, isMock: true, shouldAuthorize: true });
     },
     {
       onSuccess: async () => {
@@ -77,7 +77,7 @@ export const useAddListMutation = () => {
   return useMutation(
     async (params: I.AddListRequest) => {
       return await request.post<I.ResponseMessage>({
-        path: "/lists",
+        path: '/lists',
         params,
         isMock: true,
         shouldAuthorize: true,
@@ -95,7 +95,7 @@ export const useEditListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (params: I.EditListRequest) => {
-      return await request.put<I.ResponseMessage>({ path: "/lists", params, isMock: true, shouldAuthorize: true });
+      return await request.put<I.ResponseMessage>({ path: '/lists', params, isMock: true, shouldAuthorize: true });
     },
     {
       onSuccess: async () => {
@@ -116,7 +116,9 @@ export const useEditCardPositionMutation = () => {
       });
     },
     {
-      onSuccess: async () => { await queryClient.invalidateQueries(cardListsKeys.all); },
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(cardListsKeys.all);
+      },
       onMutate: async ({ cardId, listId, index }) => {
         await queryClient.cancelQueries(cardListsKeys.all);
 
@@ -174,7 +176,7 @@ export const useDeleteListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (params: I.DeleteListRequest) => {
-      return await request.delete<I.ResponseMessage>({ path: "/lists", params, isMock: true, shouldAuthorize: true });
+      return await request.delete<I.ResponseMessage>({ path: '/lists', params, isMock: true, shouldAuthorize: true });
     },
     {
       onSuccess: async () => {

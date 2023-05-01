@@ -1,49 +1,49 @@
-import React from 'react'
-import { DragDropContext, Droppable, type DropResult } from 'react-beautiful-dnd'
+import React from "react";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import {
   useCardsQuery,
   useEditCardPositionMutation,
   useAddListMutation,
   useDeleteListMutation,
-  useEditListMutation
-} from '@/queries/cards'
-import { type AddListRequest, type DeleteListRequest, type EditListRequest } from '@/queries/cards/interface'
-import CardList from '@components/CardList'
-import CardListComposer from '@components/CardListComposer'
+  useEditListMutation,
+} from "@/queries/cards";
+import { AddListRequest, DeleteListRequest, EditListRequest } from "@/queries/cards/interface";
+import CardList from "@components/CardList";
+import CardListComposer from "@components/CardListComposer";
 
-import * as S from './style'
+import * as S from "./style";
 
 interface Props {
-  searchKeyword:string;
+  searchKeyword: string;
 }
 
-const Board = ({searchKeyword}:Props) => {
-  const { data: cardLists } = useCardsQuery({search:searchKeyword})
-  const { mutateAsync: addListMutateAsync } = useAddListMutation()
-  const { mutate: deleteListMutate } = useDeleteListMutation()
-  const { mutateAsync: editListMutateAsync } = useEditListMutation()
-  const { mutate: editCardPositionMutate } = useEditCardPositionMutation()
+const Board = ({ searchKeyword }: Props) => {
+  const { data: cardLists } = useCardsQuery({ search: searchKeyword });
+  const { mutateAsync: addListMutateAsync } = useAddListMutation();
+  const { mutate: deleteListMutate } = useDeleteListMutation();
+  const { mutateAsync: editListMutateAsync } = useEditListMutation();
+  const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
 
-  const handleEditList = async({ id, title }: EditListRequest) => {
-    await editListMutateAsync({ id, title })
-  }
+  const handleEditList = async ({ id, title }: EditListRequest) => {
+    await editListMutateAsync({ id, title });
+  };
 
   const handleDeleteList = ({ id }: DeleteListRequest) => {
-    deleteListMutate({ id })
-  }
+    deleteListMutate({ id });
+  };
 
   const handleAddList = async ({ title }: AddListRequest) => {
-    await addListMutateAsync({ title })
-  }
+    await addListMutateAsync({ title });
+  };
 
   const handleDragEnd = (result: DropResult) => {
-    const { destination, source, draggableId } = result
+    const { destination, source, draggableId } = result;
     if (destination == null) {
-      return
+      return;
     }
 
     if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return
+      return;
     }
 
     editCardPositionMutate({

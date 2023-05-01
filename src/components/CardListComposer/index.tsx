@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input } from "antd";
-import { type AddListRequest } from "@/queries/cards/interface";
+import { AddListRequest } from "@/queries/cards/interface";
 import Composer from "@components/forms/Composer";
 import { useController, useForm } from "react-hook-form";
 import * as S from "./style";
@@ -17,36 +17,39 @@ function CardListComposer({ onAddList }: Props) {
   };
 
   const { control, reset, handleSubmit } = useForm({
-    defaultValues: {
-      title: "",
-    },
-    mode: "onSubmit"
+    defaultValues: { title: "" },
+    mode: "onSubmit",
   });
 
   const {
-    field: {onChange, value},
-  } = useController({ name: "title", control, rules:{required:true} });
+    field: { onChange, value },
+  } = useController({
+    name: "title",
+    control,
+    rules: { required: true },
+  });
 
-  const handleAddList = async() => {
+  const handleAddList = async () => {
     await onAddList({
-      title:value
+      title: value,
     });
-    reset()
+    reset();
   };
 
-  const wrappedOnSubmit = handleSubmit(handleAddList)
+  const wrappedOnSubmit = handleSubmit(handleAddList);
 
   return (
     <S.Container>
-    <Composer isOpen={isInputOpened} toggleInputOpen={handleInputOpen} btnText="Add a list" submitBtnText="Add list" onSubmit={wrappedOnSubmit}>
-      <Input
-        onChange={onChange}
-        value={value}
-        placeholder="Enter list title..."
-      />
-    </Composer>
+      <Composer
+        isOpen={isInputOpened}
+        toggleInputOpen={handleInputOpen}
+        btnText="Add a list"
+        submitBtnText="Add list"
+        onSubmit={wrappedOnSubmit}
+      >
+        <Input onChange={onChange} value={value} placeholder="Enter list title..." />
+      </Composer>
     </S.Container>
-
   );
 }
 

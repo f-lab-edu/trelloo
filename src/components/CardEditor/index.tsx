@@ -1,8 +1,8 @@
 import React from "react";
 import { useController, useForm } from "react-hook-form";
 import { Input } from "antd";
-import { type ICard } from "@/interfaces/cards";
-import { type DeleteCardRequest, type EditCardRequest } from "@/queries/cards/interface";
+import { ICard } from "@/interfaces/cards";
+import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
 import Button from "@components/buttons/Button";
 import CardEditorButtons from "@components/CardEditorButtons";
 import * as S from "./style";
@@ -18,26 +18,22 @@ export interface Props {
 }
 
 const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
-
   const { handleSubmit, control } = useForm({
-    defaultValues: {
-      description: data.description,
-    },
+    defaultValues: { description: data.description },
     mode: "onSubmit",
   });
 
   const { field } = useController({
     control,
-    name:"description",
+    name: "description",
   });
 
-  const handleClickSave = async() => {
+  const handleClickSave = async () => {
     await onEditCard({
-      id:data.id,
-      description:field.value
+      id: data.id,
+      description: field.value,
     });
     setCardEditorOpened(false);
-
   };
 
   return (
@@ -45,22 +41,19 @@ const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, 
       <S.Overlay onClick={onCardEditorClose} />
       <S.Container>
         <S.EditorForm onSubmit={handleSubmit(handleClickSave)}>
-          <TextArea
-            {...field}
-            autoSize={{ minRows: 3, maxRows: 5 }}
-            onPressEnter={handleClickSave}
-          />
+          <TextArea {...field} autoSize={{ minRows: 3, maxRows: 5 }} onPressEnter={handleClickSave} />
           <S.SaveButtonWrapper>
-            <Button
-              type="submit"
-              appearance={{ type: "blue" }}
-            >
+            <Button type="submit" appearance={{ type: "blue" }}>
               Save
             </Button>
           </S.SaveButtonWrapper>
         </S.EditorForm>
         <S.MenuButtonsWrapper>
-          <CardEditorButtons onDeleteCard={() => { onDeleteCard({ id: data.id }); }} />
+          <CardEditorButtons
+            onDeleteCard={() => {
+              onDeleteCard({ id: data.id });
+            }}
+          />
         </S.MenuButtonsWrapper>
       </S.Container>
     </>
