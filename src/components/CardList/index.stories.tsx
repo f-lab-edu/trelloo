@@ -10,6 +10,9 @@ export default {
   },
 };
 const Template = (args: { text: string }) => {
+  const handleDeleteList = () => {};
+  const handleEditList = async () => {};
+
   return (
     <Provider store={store}>
       <CardList
@@ -24,8 +27,8 @@ const Template = (args: { text: string }) => {
             },
           ],
         }}
-        onDeleteList={() => {}}
-        onEditList={() => {}}
+        onDeleteList={handleDeleteList}
+        onEditList={handleEditList}
       />
     </Provider>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import { type Props as CardProps } from "./index";
+import { Props as CardProps } from "./index";
 
 import Card from "@components/Card";
 
@@ -14,9 +14,16 @@ export default {
 };
 
 const Template = (args: CardProps) => {
+  const handleEditCard = async () => {};
+  const handleDeleteCard = () => {};
+
   return (
     <Provider store={store}>
-      <Card data={{ id: "cardId", description: "default", index: 0 }} onEditCard={() => {}} onDeleteCard={() => {}} />
+      <Card
+        data={{ id: "cardId", description: "default", index: 0 }}
+        onEditCard={handleEditCard}
+        onDeleteCard={handleDeleteCard}
+      />
     </Provider>
   );
 };
