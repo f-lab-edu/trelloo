@@ -27,8 +27,8 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   const [isTitleInputOpened, setIsTitleInputOpened] = useState(false)
   const [titleInput, setTitleInput] = useState(data.title)
 
-  const { mutate: addCardMutate, isLoading: addCardLoading } = useAddCardMutation()
-  const { mutate: editCardMutate } = useEditCardMutation()
+  const { mutateAsync: addCardMutateAsync, isLoading: addCardLoading } = useAddCardMutation()
+  const { mutateAsync: editCardMutateAsync } = useEditCardMutation()
   const { mutate: deleteCardMutate } = useDeleteCardMutation()
 
   const handleCardInputToggle = () => {
@@ -48,12 +48,12 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     handleTitleInput()
   }
 
-  const handleAddCard = ({ description, listId }: I.AddCardRequest) => {
-    addCardMutate({ description, listId })
+  const handleAddCard = async({ description, listId }: I.AddCardRequest) => {
+    await addCardMutateAsync({ description, listId })
   }
 
-  const handleEditCard = ({ id, description }: I.EditCardRequest) => {
-    editCardMutate({ id, description })
+  const handleEditCard = async({ id, description }: I.EditCardRequest) => {
+    await editCardMutateAsync({ id, description })
   }
 
   const handleDeleteCard = ({ id }: I.DeleteCardRequest) => {

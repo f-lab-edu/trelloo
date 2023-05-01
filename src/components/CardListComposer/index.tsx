@@ -14,6 +14,10 @@ interface Props {
 function CardListComposer({ onAddList }: Props) {
   const [isInputOpened, setIsInputOpened] = useState(false);
 
+  const handleInputOpen = () => {
+    setIsInputOpened(!isInputOpened);
+  };
+
   const { control, reset,handleSubmit } = useForm({
     defaultValues: {
       title: "",
@@ -23,10 +27,6 @@ function CardListComposer({ onAddList }: Props) {
   const {
       field: {onChange, value}
   } = useController({ name: "title", control });
-
-  const handleInputOpen = () => {
-    setIsInputOpened(!isInputOpened);
-  };
 
   const handleAddList = () => {
     onAddList({

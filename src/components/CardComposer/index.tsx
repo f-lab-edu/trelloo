@@ -9,7 +9,7 @@ interface Props {
   isCardInputOpened: boolean;
   onCardInputToggle: () => void;
   listId: string;
-  onAddCard: (params: AddCardRequest) => void;
+  onAddCard: (params: AddCardRequest) => Promise<void>;
 }
 
 const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard, isLoading }: Props) => {
@@ -24,8 +24,8 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     field: { onChange, value },
   } = useController({ name: "description", control });
 
-  const handleAddCard = () => {
-    onAddCard({
+  const handleAddCard = async() => {
+    await onAddCard({
       description: value,
       listId,
     });
