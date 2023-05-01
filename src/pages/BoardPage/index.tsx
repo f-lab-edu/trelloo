@@ -19,7 +19,7 @@ interface BoardProps {
 }
 
 const BoardPage: React.FC = () => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   const [searchKeyword, setSearchKeywords] = useState<string>("");
 
   const searchCards = (keyword: string) => {
@@ -42,7 +42,7 @@ const BoardPage: React.FC = () => {
         <Content style={S.Content}>
           <Menu showDrawer={showDrawer} boardName={"boardName"} searchCards={searchCards} />
           <BoardWrapper searchKeyword={searchKeyword} />
-          <Drawer open={open} onClose={onClose} />
+          <Drawer isOpen={isOpen} onClose={onClose} />
         </Content>
       </Layout>
     </Layout>
