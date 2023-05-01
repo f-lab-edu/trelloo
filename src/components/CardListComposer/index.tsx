@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Input } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import { AddListRequest } from "@/queries/cards/interface";
-import Button from "@components/buttons/Button";
+import { type AddListRequest } from "@/queries/cards/interface";
+import Composer from "@components/forms/Composer";
+import { useController, useForm } from "react-hook-form";
 import * as S from "./style";
 
 const { TextArea } = Input;
@@ -13,49 +13,42 @@ interface Props {
 
 function CardListComposer({ onAddList }: Props) {
   const [isInputOpened, setIsInputOpened] = useState(false);
-  const [listTitleInputValue, setListTitleInputValue] = useState("");
+
+  const { control, reset,handleSubmit } = useForm({
+    defaultValues: {
+      title: "",
+    },
+  });
+
+  const {
+      field: {onChange, value}
+  } = useController({ name: "title", control });
 
   const handleInputOpen = () => {
     setIsInputOpened(!isInputOpened);
   };
 
-  const handleAddList = (params: AddListRequest) => {
-    onAddList(params);
-    setListTitleInputValue("");
+  const handleAddList = () => {
+    onAddList({
+      title:value
+    });
+    reset()
   };
+
+  const wrappedOnSubmit = handleSubmit(handleAddList)
 
   return (
     <S.Container>
-      {!isInputOpened ? (
-        <S.ButtonWrapper onClick={handleInputOpen}>
-          <Button appearance={{ type: "transparent" }} Icon={<PlusOutlined />}>
-            Add another list
-          </Button>
-        </S.ButtonWrapper>
-      ) : (
-        <S.InputWrapper>
-          <TextArea
-            value={listTitleInputValue}
-            onChange={(e) => {
-              setListTitleInputValue(e.target.value);
-            }}
-            placeholder="Enter list title..."
-            autoSize
-          />
-          <S.SubmitButtonWrapper>
-            <Button
-              appearance={{ type: "blue" }}
-              onClick={() => {
-                handleAddList({ title: listTitleInputValue });
-              }}
-            >
-              Add a list
-            </Button>
-            <S.CloseButton onClick={handleInputOpen} />
-          </S.SubmitButtonWrapper>
-        </S.InputWrapper>
-      )}
+    <Composer isOpen={isInputOpened} toggleInputOpen={handleInputOpen} btnText="Add a list" submitBtnText="Add list" onSubmit={wrappedOnSubmit}>
+      <TextArea
+        onChange={onChange}
+        value={value}
+        placeholder="Enter list title..."
+        autoSize
+      />
+    </Composer>
     </S.Container>
+
   );
 }
 
