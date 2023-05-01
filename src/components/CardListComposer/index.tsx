@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Input } from "antd";
-import { type AddListRequest } from "@/queries/cards/interface";
+import { AddListRequest } from "@/queries/cards/interface";
 import Composer from "@components/forms/Composer";
 import { useController, useForm } from "react-hook-form";
 import * as S from "./style";
-
-const { TextArea } = Input;
 
 interface Props {
   onAddList: (params: AddListRequest) => void;
@@ -14,41 +12,42 @@ interface Props {
 function CardListComposer({ onAddList }: Props) {
   const [isInputOpened, setIsInputOpened] = useState(false);
 
-  const { control, reset,handleSubmit } = useForm({
-    defaultValues: {
-      title: "",
-    },
-  });
-
-  const {
-      field: {onChange, value}
-  } = useController({ name: "title", control });
-
   const handleInputOpen = () => {
     setIsInputOpened(!isInputOpened);
   };
 
+  const { control, reset, handleSubmit } = useForm({
+    defaultValues: {
+      title: "",
+    },
+    mode: "onSubmit",
+  });
+
+  const {
+    field: { onChange, value },
+  } = useController({ name: "title", control, rules: { required: true } });
+
   const handleAddList = () => {
     onAddList({
-      title:value
+      title: value,
     });
-    reset()
+    reset();
   };
 
-  const wrappedOnSubmit = handleSubmit(handleAddList)
+  const wrappedOnSubmit = handleSubmit(handleAddList);
 
   return (
     <S.Container>
-    <Composer isOpen={isInputOpened} toggleInputOpen={handleInputOpen} btnText="Add a list" submitBtnText="Add list" onSubmit={wrappedOnSubmit}>
-      <TextArea
-        onChange={onChange}
-        value={value}
-        placeholder="Enter list title..."
-        autoSize
-      />
-    </Composer>
+      <Composer
+        isOpen={isInputOpened}
+        toggleInputOpen={handleInputOpen}
+        btnText="Add a list"
+        submitBtnText="Add list"
+        onSubmit={wrappedOnSubmit}
+      >
+        <Input onChange={onChange} value={value} placeholder="Enter list title..." />
+      </Composer>
     </S.Container>
-
   );
 }
 
