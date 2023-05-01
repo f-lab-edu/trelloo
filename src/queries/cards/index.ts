@@ -1,8 +1,8 @@
-import { AxiosError } from "axios";
+import { type AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "@/utils/httpRequest";
 import type * as I from "./interface";
-import { ICard, ICardList } from "@/interfaces/cards";
+import { type ICard, type ICardList } from "@/interfaces/cards";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
@@ -107,8 +107,8 @@ export const useEditListMutation = () => {
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation<I.ResponseMessage, AxiosError, I.EditCardPositionRequest, I.EditCardMutationData>(
-    ({ cardId, listId, index }: I.EditCardPositionRequest) => {
-      return request.put<I.ResponseMessage>({
+    async ({ cardId, listId, index }: I.EditCardPositionRequest) => {
+      return await request.put<I.ResponseMessage>({
         path: `/cards/${cardId}/move`,
         isMock: true,
         params: { listId, index },
@@ -116,7 +116,7 @@ export const useEditCardPositionMutation = () => {
       });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: async () => { await queryClient.invalidateQueries(cardListsKeys.all); },
       onMutate: async ({ cardId, listId, index }) => {
         await queryClient.cancelQueries(cardListsKeys.all);
 
@@ -128,6 +128,7 @@ export const useEditCardPositionMutation = () => {
 
         return { currentCards };
       },
+      // eslint-disable-next-line n/handle-callback-err
       onError: (err, currentCards, context) => {
         queryClient.setQueryData(cardListsKeys.all, context?.currentCards);
       },
