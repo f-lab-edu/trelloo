@@ -20,7 +20,7 @@ export const theme = {
   },
   borderRadius: {
     button: "6px",
-    card: "3px",
+    card: "12px",
   },
   boxShadow: {
     card: "0 1px 0 #091e4240",
