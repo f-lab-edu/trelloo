@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { Input } from 'antd'
-import { useForm } from 'react-hook-form'
+import { useController, useForm } from 'react-hook-form'
 import type * as I from '@/queries/cards/interface'
 import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from '@/queries/cards'
 import { type ICardList } from '@/interfaces/cards'
@@ -10,42 +10,50 @@ import CardComposer from '@components/CardComposer'
 import ListMenu from '@components/menus/ListMenu'
 import * as S from './style'
 
-const { TextArea } = Input
-
 export interface Props {
   data: ICardList
-  onEditList: (params: I.EditListRequest) => void
+  onEditList: (params: I.EditListRequest) => Promise<void>
   onDeleteList: (params: I.DeleteListRequest) => void
 }
 
 export type HandleAddCard = ({ description, listId }: I.AddCardRequest) => void
 
 const CardList = ({ data, onEditList, onDeleteList }: Props) => {
-  const { register, handleSubmit } = useForm()
 
   const [isCardInputOpened, setIsCardInputOpened] = useState(false)
   const [isTitleInputOpened, setIsTitleInputOpened] = useState(false)
-  const [titleInput, setTitleInput] = useState(data.title)
 
   const { mutateAsync: addCardMutateAsync, isLoading: addCardLoading } = useAddCardMutation()
   const { mutateAsync: editCardMutateAsync } = useEditCardMutation()
   const { mutate: deleteCardMutate } = useDeleteCardMutation()
 
+  const { control, reset, handleSubmit } = useForm({
+    defaultValues: {
+      title: data.title,
+    },
+    mode:"all"
+  });
+
+  const {
+    field: {onChange, value},
+    fieldState:{invalid}
+  } = useController({ name: "title", control,
+  rules: { required: true } });
+
   const handleCardInputToggle = () => {
     setIsCardInputOpened(!isCardInputOpened)
   }
 
-  const handleTitleInput = () => {
+  const toggleTitleInputOpen = () => {
     setIsTitleInputOpened(!isTitleInputOpened)
   }
 
-  const handleTitleChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTitleInput(e.target.value)
-  }
-
-  const handleTitleUpdate = () => {
-    onEditList({ id: data.id, title: titleInput })
-    handleTitleInput()
+  const handleTitleUpdate = async () => {
+    if(!invalid) {
+      await onEditList({ id: data.id, title: value })
+    }
+    toggleTitleInputOpen()
+    reset()
   }
 
   const handleAddCard = async({ description, listId }: I.AddCardRequest) => {
@@ -67,20 +75,19 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
         style={{ width: 300 }}
         extra={<ListMenu onDeleteList={() => { onDeleteList({ id: data.id }) }} />}
       >
-        <S.ListTitle onSubmit={() => handleSubmit(handleTitleUpdate)}>
+        <S.ListTitle onSubmit={handleSubmit(handleTitleUpdate)}>
           {!isTitleInputOpened
             ? (
-            <S.Title onClick={handleTitleInput}>{data.title}</S.Title>
+            <S.Title onClick={toggleTitleInputOpen}>{data.title}</S.Title>
               )
             : (
-            <TextArea
-              autoSize
-              {...register('title')}
-              defaultValue={titleInput}
-              onChange={handleTitleChange}
+            <Input
+              onChange={onChange}
+              value={value}
               onBlur={handleTitleUpdate}
+              onPressEnter={handleTitleUpdate}
             />
-              )}
+          )}
         </S.ListTitle>
 
         {data.cards.map((card, index) => (

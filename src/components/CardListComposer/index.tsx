@@ -5,10 +5,8 @@ import Composer from "@components/forms/Composer";
 import { useController, useForm } from "react-hook-form";
 import * as S from "./style";
 
-const { TextArea } = Input;
-
 interface Props {
-  onAddList: (params: AddListRequest) => void;
+  onAddList: (params: AddListRequest) => Promise<void>;
 }
 
 function CardListComposer({ onAddList }: Props) {
@@ -18,18 +16,19 @@ function CardListComposer({ onAddList }: Props) {
     setIsInputOpened(!isInputOpened);
   };
 
-  const { control, reset,handleSubmit } = useForm({
+  const { control, reset, handleSubmit } = useForm({
     defaultValues: {
       title: "",
     },
+    mode: "onSubmit"
   });
 
   const {
-      field: {onChange, value}
-  } = useController({ name: "title", control });
+    field: {onChange, value},
+  } = useController({ name: "title", control, rules:{required:true} });
 
-  const handleAddList = () => {
-    onAddList({
+  const handleAddList = async() => {
+    await onAddList({
       title:value
     });
     reset()
@@ -40,11 +39,10 @@ function CardListComposer({ onAddList }: Props) {
   return (
     <S.Container>
     <Composer isOpen={isInputOpened} toggleInputOpen={handleInputOpen} btnText="Add a list" submitBtnText="Add list" onSubmit={wrappedOnSubmit}>
-      <TextArea
+      <Input
         onChange={onChange}
         value={value}
         placeholder="Enter list title..."
-        autoSize
       />
     </Composer>
     </S.Container>

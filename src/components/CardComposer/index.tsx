@@ -22,7 +22,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
 
   const {
     field: { onChange, value },
-  } = useController({ name: "description", control });
+  } = useController({ name: "description", control, rules:{required:true} });
 
   const handleAddCard = async() => {
     await onAddCard({

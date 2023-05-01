@@ -19,21 +19,21 @@ interface Props {
 
 const Board = ({searchKeyword}:Props) => {
   const { data: cardLists } = useCardsQuery({search:searchKeyword})
-  const { mutate: addListMutate } = useAddListMutation()
+  const { mutateAsync: addListMutateAsync } = useAddListMutation()
   const { mutate: deleteListMutate } = useDeleteListMutation()
-  const { mutate: editListMutate } = useEditListMutation()
+  const { mutateAsync: editListMutateAsync } = useEditListMutation()
   const { mutate: editCardPositionMutate } = useEditCardPositionMutation()
 
-  const handleEditList = ({ id, title }: EditListRequest) => {
-    editListMutate({ id, title })
+  const handleEditList = async({ id, title }: EditListRequest) => {
+    await editListMutateAsync({ id, title })
   }
 
   const handleDeleteList = ({ id }: DeleteListRequest) => {
     deleteListMutate({ id })
   }
 
-  const handleAddList = ({ title }: AddListRequest) => {
-    addListMutate({ title })
+  const handleAddList = async ({ title }: AddListRequest) => {
+    await addListMutateAsync({ title })
   }
 
   const handleDragEnd = (result: DropResult) => {
@@ -45,12 +45,14 @@ const Board = ({searchKeyword}:Props) => {
     if (destination.droppableId === source.droppableId && destination.index === source.index) {
       return
     }
+
     editCardPositionMutate({
       cardId: draggableId,
       listId: destination.droppableId,
       index: destination.index,
     });
   };
+
   return (
     <S.Container>
       <DragDropContext onDragEnd={handleDragEnd}>
