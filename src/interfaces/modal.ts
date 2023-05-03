@@ -1,7 +1,4 @@
-import { LoadableComponent } from "@loadable/component";
-
 type ModalContentsKey = "cardDetailModal" | "inviteToWorkspaceModal";
-export type ModalContents<TProps> = Record<ModalContentsKey, LoadableComponent<TProps>>;
 
 export interface ModalState<TProps = any> {
   component: ModalContentsKey;
