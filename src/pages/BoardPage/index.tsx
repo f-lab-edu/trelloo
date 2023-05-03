@@ -1,15 +1,16 @@
-import React, { useState, Suspense } from "react";
-import { QueryErrorResetBoundary } from "@tanstack/react-query";
-import { ErrorBoundary } from "react-error-boundary";
+import React, { useState } from "react";
 import { Layout } from "antd";
+import loadable from "@loadable/component";
 import Sider from "@components/Sider";
 import Drawer from "@components/Drawer";
 import Header from "@components/Header";
 import Menu from "@components/Menu";
-import Board from "@components/Board";
 import BoardSkeleton from "@components/skeletons/BoardSkeleton";
 import BoardErrorFallback from "@components/BoardErrorFallback";
+import SuspenseBoundary from "@components/SuspenseBoundary";
 import * as S from "./style";
+
+const Board = loadable(async () => await import("@components/Board"));
 
 const { Content } = Layout;
 
@@ -52,17 +53,8 @@ export default BoardPage;
 
 function BoardWrapper({ searchKeyword }: BoardProps) {
   return (
-    <QueryErrorResetBoundary>
-      {({ reset }) => (
-        <ErrorBoundary
-          onReset={reset}
-          fallbackRender={({ resetErrorBoundary }) => <BoardErrorFallback onQueryErrorReset={resetErrorBoundary} />}
-        >
-          <Suspense fallback={<BoardSkeleton />}>
-            <Board searchKeyword={searchKeyword} />
-          </Suspense>
-        </ErrorBoundary>
-      )}
-    </QueryErrorResetBoundary>
+    <SuspenseBoundary Fallback={BoardSkeleton} ErrorFallback={BoardErrorFallback}>
+      <Board searchKeyword={searchKeyword} />
+    </SuspenseBoundary>
   );
 }
