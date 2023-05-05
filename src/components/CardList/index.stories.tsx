@@ -3,7 +3,7 @@ import CardList from "@components/CardList";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 export default {
-  title: "Components/CardList",
+  title: "components/CardList",
   component: CardList,
 };
 

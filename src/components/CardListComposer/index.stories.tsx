@@ -4,7 +4,7 @@ import { AddListRequest } from "@/queries/cards/interface";
 import styled from "styled-components";
 
 export default {
-  title: "Components/forms/CardListComposer",
+  title: "components/forms/CardListComposer",
   component: CardListComposer,
 };
 

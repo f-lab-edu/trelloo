@@ -3,7 +3,7 @@ import loadable from "@loadable/component";
 const InviteToWorkspaceModal = loadable(async () => await import("@components/modals/InviteToWorkspaceModal"));
 
 export default {
-  title: "Components/modals/InviteToWorkspaceModal",
+  title: "components/modals/InviteToWorkspaceModal",
   component: InviteToWorkspaceModal,
 };
 

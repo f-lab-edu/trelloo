@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Drawer from "@components/Drawer";
 
 export default {
-  title: "Components/Drawer",
+  title: "components/Drawer",
   component: Drawer,
 };
 

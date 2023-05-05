@@ -3,7 +3,7 @@ import Card from "@components/Card";
 import styled from "styled-components";
 
 export default {
-  title: "Components/Card",
+  title: "components/Card",
   component: Card,
 };
 

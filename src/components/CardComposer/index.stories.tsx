@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CardComposer from "./index";
 
 export default {
-  title: "Components/forms/CardComposer",
+  title: "components/forms/CardComposer",
   component: CardComposer,
 };
 

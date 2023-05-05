@@ -2,7 +2,7 @@ import React from "react";
 import Board from "@components/Board";
 
 export default {
-  title: "Components/Board",
+  title: "components/Board",
   component: Board,
 };
 

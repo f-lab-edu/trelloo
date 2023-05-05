@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Component from "./index";
 
 export default {
-  title: "Common/forms/Composer",
+  title: "common/forms/Composer",
   component: Component,
 };
 

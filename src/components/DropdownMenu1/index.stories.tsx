@@ -2,7 +2,7 @@ import React from "react";
 import DropdownMenu1 from "@components/DropdownMenu1";
 
 export default {
-  title: "Components/menus",
+  title: "components/menus",
   component: DropdownMenu1,
 };
 

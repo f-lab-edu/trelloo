@@ -2,7 +2,7 @@ import React from "react";
 import Sider from "@components/Sider";
 
 export default {
-  title: "Components/Sider",
+  title: "components/Sider",
   component: Sider,
 };
 
