@@ -5,6 +5,7 @@ import { useController, useForm } from "react-hook-form";
 import * as I from "@/queries/cards/interface";
 import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from "@/queries/cards";
 import { ICardList } from "@/interfaces/cards";
+import { MutationOptions } from "@/interfaces/httpRequest";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
 import ListMenu from "@components/menus/ListMenu";
@@ -12,8 +13,8 @@ import * as S from "./style";
 
 export interface Props {
   data: ICardList;
-  onEditList: (params: I.EditListRequest) => void;
-  onDeleteList: (params: I.DeleteListRequest) => void;
+  onEditList: (params: I.EditListRequest, options?: MutationOptions) => void;
+  onDeleteList: (params: I.DeleteListRequest, options?: MutationOptions) => void;
 }
 
 export type HandleAddCard = ({ description, listId }: I.AddCardRequest) => void;
@@ -54,16 +55,16 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     reset();
   };
 
-  const handleAddCard = ({ description, listId }: I.AddCardRequest) => {
-    addCardMutate({ description, listId });
+  const handleAddCard = ({ description, listId }: I.AddCardRequest, options?: MutationOptions) => {
+    addCardMutate({ description, listId }, { onSuccess: options?.onSuccess, onError: options?.onError });
   };
 
-  const handleEditCard = ({ id, description }: I.EditCardRequest) => {
-    editCardMutate({ id, description });
+  const handleEditCard = ({ id, description }: I.EditCardRequest, options?: MutationOptions) => {
+    editCardMutate({ id, description }, { onSuccess: options?.onSuccess, onError: options?.onError });
   };
 
-  const handleDeleteCard = ({ id }: I.DeleteCardRequest) => {
-    deleteCardMutate({ id });
+  const handleDeleteCard = ({ id }: I.DeleteCardRequest, options?: MutationOptions) => {
+    deleteCardMutate({ id }, { onSuccess: options?.onSuccess, onError: options?.onError });
   };
 
   return (
