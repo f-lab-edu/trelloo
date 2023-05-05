@@ -1,4 +1,4 @@
-import { type AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 type HandleError = Record<number, () => void>;
 
 export const handleInterceptResponse = (response: AxiosResponse) => {

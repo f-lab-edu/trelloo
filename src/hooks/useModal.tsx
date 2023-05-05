@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ModalsDipatchContext } from "@components/modals/ModalsProvider";
-import { type CloseModalState, type OpenModalState } from "@/interfaces/modal";
+import { CloseModalState, OpenModalState } from "@/interfaces/modal";
 
 const useModal = () => {
   const modalDispatch = useContext(ModalsDipatchContext);
