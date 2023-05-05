@@ -6,6 +6,7 @@ import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
 import Button from "@components/buttons/Button";
 import CardEditorButtons from "@components/CardEditorButtons";
 import * as S from "./style";
+import { MutationOptions } from "@/interfaces/httpRequest";
 
 const { TextArea } = Input;
 
@@ -13,8 +14,8 @@ export interface Props {
   data: ICard;
   onCardEditorClose: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
   setCardEditorOpened: (state: boolean) => void;
-  onEditCard: (params: EditCardRequest) => void;
-  onDeleteCard: (params: DeleteCardRequest) => void;
+  onEditCard: (params: EditCardRequest, options?: MutationOptions) => void;
+  onDeleteCard: (params: DeleteCardRequest, options?: MutationOptions) => void;
 }
 
 const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
