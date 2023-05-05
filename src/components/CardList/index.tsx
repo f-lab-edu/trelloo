@@ -14,7 +14,7 @@ import * as S from "./style";
 export interface Props {
   data: ICardList;
   onEditList: (params: I.EditListRequest, options?: MutationOptions) => void;
-  onDeleteList: (params: I.DeleteListRequest, options?: MutationOptions) => void;
+  onDeleteList: (params: I.DeleteListRequest) => void;
 }
 
 export type HandleAddCard = ({ description, listId }: I.AddCardRequest) => void;
@@ -49,22 +49,28 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
 
   const handleTitleUpdate = () => {
     if (!invalid) {
-      onEditList({ id: data.id, title: value });
+      onEditList(
+        { id: data.id, title: value },
+        {
+          onSuccess: () => {
+            toggleTitleInputOpen();
+            reset();
+          },
+        },
+      );
     }
-    toggleTitleInputOpen();
-    reset();
   };
 
   const handleAddCard = ({ description, listId }: I.AddCardRequest, options?: MutationOptions) => {
-    addCardMutate({ description, listId }, { onSuccess: options?.onSuccess, onError: options?.onError });
+    addCardMutate({ description, listId }, { onSuccess: options?.onSuccess });
   };
 
   const handleEditCard = ({ id, description }: I.EditCardRequest, options?: MutationOptions) => {
-    editCardMutate({ id, description }, { onSuccess: options?.onSuccess, onError: options?.onError });
+    editCardMutate({ id, description }, { onSuccess: options?.onSuccess });
   };
 
-  const handleDeleteCard = ({ id }: I.DeleteCardRequest, options?: MutationOptions) => {
-    deleteCardMutate({ id }, { onSuccess: options?.onSuccess, onError: options?.onError });
+  const handleDeleteCard = ({ id }: I.DeleteCardRequest) => {
+    deleteCardMutate({ id });
   };
 
   return (
