@@ -42,6 +42,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "latest",
     "msw": "^1.2.1",
+    "storybook-addon-react-router-v6": "^0.3.6",
     "typescript": "*",
     "vite": "^4.1.4",
     "vite-tsconfig-paths": "^4.0.5"

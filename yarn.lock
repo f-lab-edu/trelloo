@@ -16195,7 +16195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-inspector@npm:^5.1.0":
+"react-inspector@npm:^5.1.0, react-inspector@npm:^5.1.1":
   version: 5.1.1
   resolution: "react-inspector@npm:5.1.1"
   dependencies:
@@ -17767,6 +17767,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"storybook-addon-react-router-v6@npm:^0.3.6":
+  version: 0.3.6
+  resolution: "storybook-addon-react-router-v6@npm:0.3.6"
+  dependencies:
+    react-inspector: ^5.1.1
+  peerDependencies:
+    "@storybook/addons": ^6.4.0
+    "@storybook/api": ^6.4.0
+    "@storybook/components": ^6.4.0
+    "@storybook/core-events": ^6.4.0
+    "@storybook/theming": ^6.4.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-router: ^6.3.0
+    react-router-dom: ^6.3.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 2fd33250cc47ae62e25be72a3da9fafa1181a482d672f2abf52ec07f1e91209cb4bf94d1731c703ff8a0cdb08add398143aa920b715ba99f0911cb7a9418a441
+  languageName: node
+  linkType: hard
+
 "stream-browserify@npm:^2.0.1":
   version: 2.0.2
   resolution: "stream-browserify@npm:2.0.2"
@@ -18579,6 +18603,7 @@ __metadata:
     react-redux: ^8.0.5
     react-router-dom: ^6.8.2
     react-toastify: ^9.1.2
+    storybook-addon-react-router-v6: ^0.3.6
     styled-components: ^5.3.8
     typescript: "*"
     uuidv4: ^6.2.13
