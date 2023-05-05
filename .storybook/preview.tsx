@@ -6,9 +6,7 @@ import { ThemeProvider } from "styled-components";
 import { store } from "../src/store";
 import { theme } from "../src/styles/theme";
 import { GlobalStyle } from "../src/styles/GlobalStyle";
-import ModalsProvider from "@components/modals/ModalsProvider";
 import { worker } from "../src/mocks/browser";
-import { Router } from "react-router-dom";
 
 worker.start();
 const queryClient = new QueryClient();
@@ -19,10 +17,8 @@ export const decorators = [
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <ModalsProvider>
-            <GlobalStyle />
-            <Story />
-          </ModalsProvider>
+          <GlobalStyle />
+          <Story />
         </ThemeProvider>
       </Provider>
     </QueryClientProvider>

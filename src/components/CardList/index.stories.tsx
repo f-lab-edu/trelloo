@@ -9,7 +9,7 @@ export default {
 
 const Template = () => {
   const handleDeleteList = () => {};
-  const handleEditList = async () => {};
+  const handleEditList = () => {};
   const handleDragEnd = () => {};
 
   return (

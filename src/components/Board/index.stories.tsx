@@ -7,7 +7,7 @@ export default {
 };
 
 const Template = () => {
-  return <Board searchKeyword="s" />;
+  return <Board searchKeyword="" />;
 };
 
 export const Default = Template.bind({});

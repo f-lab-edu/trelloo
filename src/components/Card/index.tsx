@@ -7,7 +7,7 @@ import * as S from "./style";
 
 export interface Props {
   data: ICard;
-  onEditCard: (params: EditCardRequest) => Promise<void>;
+  onEditCard: (params: EditCardRequest) => void;
   onDeleteCard: (params: DeleteCardRequest) => void;
 }
 

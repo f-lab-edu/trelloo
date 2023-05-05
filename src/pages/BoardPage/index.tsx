@@ -5,7 +5,7 @@ import Drawer from "@components/Drawer";
 import Header from "@components/Header";
 import Menu from "@components/Menu";
 import BoardSkeleton from "@components/skeletons/BoardSkeleton";
-import BoardErrorFallback from "@components/BoardErrorFallback";
+import NoDataFallback from "@components/fallbacks/NoDataFallback";
 import SuspenseBoundary from "@components/SuspenseBoundary";
 import * as S from "./style";
 
@@ -50,7 +50,7 @@ export default BoardPage;
 
 function BoardWrapper({ searchKeyword }: BoardProps) {
   return (
-    <SuspenseBoundary Fallback={BoardSkeleton} ErrorFallback={BoardErrorFallback}>
+    <SuspenseBoundary Fallback={BoardSkeleton} ErrorFallback={NoDataFallback}>
       <Board searchKeyword={searchKeyword} />
     </SuspenseBoundary>
   );
