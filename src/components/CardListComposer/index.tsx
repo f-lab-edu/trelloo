@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Input } from "antd";
+import { MutationOptions } from "@/interfaces/httpRequest";
 import { AddListRequest } from "@/queries/cards/interface";
 import Composer from "@components/forms/Composer";
 import { useController, useForm } from "react-hook-form";
 import * as S from "./style";
 
 interface Props {
-  onAddList: (params: AddListRequest) => void;
+  onAddList: (params: AddListRequest, options?: MutationOptions) => void;
 }
 
 function CardListComposer({ onAddList }: Props) {
@@ -28,10 +29,16 @@ function CardListComposer({ onAddList }: Props) {
   } = useController({ name: "title", control, rules: { required: true } });
 
   const handleAddList = () => {
-    onAddList({
-      title: value,
-    });
-    reset();
+    onAddList(
+      {
+        title: value,
+      },
+      {
+        onSuccess: () => {
+          reset();
+        },
+      },
+    );
   };
 
   const wrappedOnSubmit = handleSubmit(handleAddList);
