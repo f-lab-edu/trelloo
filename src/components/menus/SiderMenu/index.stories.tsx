@@ -5,9 +5,6 @@ import SiderMenu from "./index";
 export default {
   title: "components/menus/SiderMenu",
   component: SiderMenu,
-  argTypes: {
-    onSubmit: "function",
-  },
 };
 
 const Template = () => {

@@ -4,9 +4,6 @@ import FilterMenu from "./index";
 export default {
   title: "Components/menus",
   component: FilterMenu,
-  argTypes: {
-    onSubmit: "function",
-  },
 };
 
 const Template = () => {

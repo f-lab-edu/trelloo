@@ -4,9 +4,6 @@ import Component from "./index";
 export default {
   title: "common/inputs/Input",
   component: Component,
-  argTypes: {
-    onSubmit: "function",
-  },
 };
 
 const Template = () => {

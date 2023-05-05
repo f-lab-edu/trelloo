@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Layout } from "antd";
 import loadable from "@loadable/component";
 import Sider from "@components/Sider";
 import Drawer from "@components/Drawer";
@@ -11,8 +10,6 @@ import SuspenseBoundary from "@components/SuspenseBoundary";
 import * as S from "./style";
 
 const Board = loadable(async () => await import("@components/Board"));
-
-const { Content } = Layout;
 
 interface BoardProps {
   searchKeyword: string;
@@ -35,17 +32,17 @@ const BoardPage: React.FC = () => {
   };
 
   return (
-    <Layout style={S.Layout}>
+    <S.Container>
       <Header />
-      <Layout style={S.ContentLayout}>
+      <S.ContentLayout>
         <Sider />
-        <Content style={S.Content}>
+        <S.Main>
           <Menu showDrawer={showDrawer} boardName={"boardName"} searchCards={searchCards} />
           <BoardWrapper searchKeyword={searchKeyword} />
           <Drawer isOpen={isOpen} onClose={onClose} />
-        </Content>
-      </Layout>
-    </Layout>
+        </S.Main>
+      </S.ContentLayout>
+    </S.Container>
   );
 };
 

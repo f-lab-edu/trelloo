@@ -1,14 +1,13 @@
 import React from "react";
 import CardList from "@components/CardList";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
 export default {
   title: "Components/CardList",
   component: CardList,
-  argTypes: {
-    text: "default",
-  },
 };
-const Template = (args: { text: string }) => {
+
+const Template = () => {
   const handleDeleteList = () => {};
   const handleEditList = async () => {};
   const handleDragEnd = () => {};

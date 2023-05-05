@@ -4,9 +4,6 @@ import Menu from "./index";
 export default {
   title: "Components/menus",
   component: Menu,
-  argTypes: {
-    onSubmit: "function",
-  },
 };
 
 const Template = () => {

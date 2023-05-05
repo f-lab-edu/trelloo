@@ -4,9 +4,6 @@ import ListMenu from "./index";
 export default {
   title: "components/menus/ListMenu",
   component: ListMenu,
-  argTypes: {
-    onSubmit: "function",
-  },
 };
 
 const Template = () => {
