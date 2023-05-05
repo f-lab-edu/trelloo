@@ -32,11 +32,17 @@ const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, 
   });
 
   const handleClickSave = () => {
-    onEditCard({
-      id: data.id,
-      description: field.value,
-    });
-    setCardEditorOpened(false);
+    onEditCard(
+      {
+        id: data.id,
+        description: field.value,
+      },
+      {
+        onSuccess: () => {
+          setCardEditorOpened(false);
+        },
+      },
+    );
   };
 
   return (
