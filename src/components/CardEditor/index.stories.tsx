@@ -8,18 +8,18 @@ export default {
 
 const Template = () => {
   const data = { id: "id", description: "description", index: 0 };
-  const onCardEditorClose = () => {};
+  const handleCardEditorClose = () => {};
   const setCardEditorOpened = () => {};
-  const onEditCard = () => {};
-  const onDeleteCard = () => {};
+  const handleEditCard = async () => {};
+  const handleDeleteCard = () => {};
 
   return (
     <CardEditor
       data={data}
-      onCardEditorClose={onCardEditorClose}
+      onCardEditorClose={handleCardEditorClose}
       setCardEditorOpened={setCardEditorOpened}
-      onEditCard={onEditCard}
-      onDeleteCard={onDeleteCard}
+      onEditCard={handleEditCard}
+      onDeleteCard={handleDeleteCard}
     />
   );
 };

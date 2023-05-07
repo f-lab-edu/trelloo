@@ -14,9 +14,16 @@ export default {
 };
 
 const Template = (args: CardProps) => {
+  const handleEditCard = async () => {};
+  const handleDeleteCard = () => {};
+
   return (
     <Provider store={store}>
-      <Card data={{ id: "cardId", description: "default", index: 0 }} onEditCard={() => {}} onDeleteCard={() => {}} />
+      <Card
+        data={{ id: "cardId", description: "default", index: 0 }}
+        onEditCard={handleEditCard}
+        onDeleteCard={handleDeleteCard}
+      />
     </Provider>
   );
 };
