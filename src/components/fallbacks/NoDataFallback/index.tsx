@@ -8,7 +8,7 @@ interface Props {
   resetErrorBoundary: () => void;
 }
 
-function BoardErrorFallback({ resetErrorBoundary }: Props) {
+function NoDataFallback({ resetErrorBoundary }: Props) {
   return (
     <S.Container>
       <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
@@ -30,4 +30,4 @@ function BoardErrorFallback({ resetErrorBoundary }: Props) {
   );
 }
 
-export default BoardErrorFallback;
+export default NoDataFallback;

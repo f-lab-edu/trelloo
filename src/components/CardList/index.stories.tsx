@@ -1,33 +1,42 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { store } from "@/store";
 import CardList from "@components/CardList";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
 export default {
-  title: "Components/CardList",
+  title: "components/CardList",
   component: CardList,
-  argTypes: {
-    text: "default",
-  },
 };
-const Template = (args: { text: string }) => {
+
+const Template = () => {
+  const handleDeleteList = () => {};
+  const handleEditList = () => {};
+  const handleDragEnd = () => {};
+
   return (
-    <Provider store={store}>
-      <CardList
-        data={{
-          id: "string",
-          title: "string",
-          cards: [
-            {
-              id: "string",
-              description: "string",
-              index: 0,
-            },
-          ],
-        }}
-        onDeleteList={() => {}}
-        onEditList={() => {}}
-      />
-    </Provider>
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <Droppable droppableId="cardList">
+        {(provided) => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            <CardList
+              data={{
+                id: "string",
+                title: "string",
+                cards: [
+                  {
+                    id: "string",
+                    description: "string",
+                    index: 0,
+                  },
+                ],
+              }}
+              onDeleteList={handleDeleteList}
+              onEditList={handleEditList}
+            />
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
-export const Primary = Template.bind({});
+export const Default = Template.bind({});

@@ -1,14 +1,20 @@
 import React from "react";
+import { withRouter } from "storybook-addon-react-router-v6";
 import LoginPage from ".";
 
 export default {
   title: "Pages/LoginPage",
   component: LoginPage,
-  argTypes: {},
+  decorators: [withRouter],
+  parameters: {
+    reactRouter: {
+      routePath: "/board",
+    },
+  },
 };
 
 const Template = () => {
   return <LoginPage />;
 };
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});

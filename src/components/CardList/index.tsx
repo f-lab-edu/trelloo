@@ -77,7 +77,6 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     <S.Container>
       <S.Card
         bordered={false}
-        style={{ width: 300 }}
         extra={
           <ListMenu
             onDeleteList={() => {
