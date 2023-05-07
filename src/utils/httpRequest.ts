@@ -1,3 +1,4 @@
+import { convertValuesToString } from "./index";
 import { STORAGE_KEY, URL } from "@/constants";
 import { RequestParams } from "@/interfaces/httpRequest";
 
@@ -13,13 +14,7 @@ const fetchRequest = async <TQueryParams>({
   isMock,
   shouldAuthorize,
 }: RequestParams<TQueryParams>) => {
-  const convertedParams = queryParams
-    ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {
-        newObj[key] = value.toString();
-        return newObj;
-      }, {})
-    : "";
-
+  const convertedParams = queryParams ? convertValuesToString<TQueryParams>(queryParams) : "";
   const searchParams = new URLSearchParams(convertedParams).toString();
 
   if (shouldAuthorize) {
