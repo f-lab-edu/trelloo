@@ -1,25 +1,22 @@
 import React, { useState } from "react";
-import { Layout } from "antd";
 import loadable from "@loadable/component";
 import Sider from "@components/Sider";
 import Drawer from "@components/Drawer";
 import Header from "@components/Header";
 import Menu from "@components/Menu";
 import BoardSkeleton from "@components/skeletons/BoardSkeleton";
-import BoardErrorFallback from "@components/BoardErrorFallback";
+import NoDataFallback from "@components/fallbacks/NoDataFallback";
 import SuspenseBoundary from "@components/SuspenseBoundary";
 import * as S from "./style";
 
 const Board = loadable(async () => await import("@components/Board"));
-
-const { Content } = Layout;
 
 interface BoardProps {
   searchKeyword: string;
 }
 
 const BoardPage: React.FC = () => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   const [searchKeyword, setSearchKeywords] = useState<string>("");
 
   const searchCards = (keyword: string) => {
@@ -35,17 +32,17 @@ const BoardPage: React.FC = () => {
   };
 
   return (
-    <Layout style={S.Layout}>
+    <S.Container>
       <Header />
-      <Layout style={S.ContentLayout}>
+      <S.ContentLayout>
         <Sider />
-        <Content style={S.Content}>
+        <S.Main>
           <Menu showDrawer={showDrawer} boardName={"boardName"} searchCards={searchCards} />
           <BoardWrapper searchKeyword={searchKeyword} />
-          <Drawer open={open} onClose={onClose} />
-        </Content>
-      </Layout>
-    </Layout>
+          <Drawer isOpen={isOpen} onClose={onClose} />
+        </S.Main>
+      </S.ContentLayout>
+    </S.Container>
   );
 };
 
@@ -53,7 +50,7 @@ export default BoardPage;
 
 function BoardWrapper({ searchKeyword }: BoardProps) {
   return (
-    <SuspenseBoundary Fallback={BoardSkeleton} ErrorFallback={BoardErrorFallback}>
+    <SuspenseBoundary Fallback={BoardSkeleton} ErrorFallback={NoDataFallback}>
       <Board searchKeyword={searchKeyword} />
     </SuspenseBoundary>
   );

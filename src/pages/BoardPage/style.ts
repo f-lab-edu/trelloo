@@ -1,12 +1,21 @@
-export const Layout = {
-  minHeight: "100vh",
-  backgroundColor: "transparent",
-};
+import { Layout as AntdLayout } from "antd";
+import styled from "styled-components";
 
-export const ContentLayout = {
-  backgroundColor: "transparent",
-};
+export const Container = styled(AntdLayout).attrs(() => ({
+  style: {
+    minHeight: "100vh",
+    backgroundColor: "transparent",
+  },
+}))``;
 
-export const Content: React.CSSProperties = {
-  position: "relative",
-};
+export const ContentLayout = styled(AntdLayout).attrs(() => ({
+  style: {
+    backgroundColor: "transparent",
+  },
+}))``;
+
+export const Main = styled(AntdLayout.Content).attrs(() => ({
+  style: {
+    position: "relative",
+  },
+}))``;

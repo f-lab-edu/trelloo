@@ -1,13 +1,13 @@
 import React from "react";
-import BoardPage from "@/pages/BoardPage";
+import Sider from "@components/Sider";
 
 export default {
-  title: "Pages/BoardPage",
-  component: BoardPage,
+  title: "components/Sider",
+  component: Sider,
 };
 
 const Template = () => {
-  return <BoardPage />;
+  return <Sider />;
 };
 
 export const Default = Template.bind({});
