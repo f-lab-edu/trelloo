@@ -1,24 +1,29 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { store } from "@/store";
-import { Props as CardProps } from "./index";
-
 import Card from "@components/Card";
+import styled from "styled-components";
 
 export default {
-  title: "Components/Card",
+  title: "components/Card",
   component: Card,
-  argTypes: {
-    text: "default",
-  },
 };
 
-const Template = (args: CardProps) => {
+const Template = () => {
+  const handleEditCard = async () => {};
+  const handleDeleteCard = () => {};
+
   return (
-    <Provider store={store}>
-      <Card data={{ id: "cardId", description: "default", index: 0 }} onEditCard={() => {}} onDeleteCard={() => {}} />
-    </Provider>
+    <Container>
+      <Card
+        data={{ id: "cardId", description: "default", index: 0 }}
+        onEditCard={handleEditCard}
+        onDeleteCard={handleDeleteCard}
+      />
+    </Container>
   );
 };
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});
+
+const Container = styled.div`
+  width: 300px;
+`;

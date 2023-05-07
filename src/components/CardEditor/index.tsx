@@ -20,9 +20,7 @@ export interface Props {
 
 const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
   const { handleSubmit, control } = useForm({
-    defaultValues: {
-      description: data.description,
-    },
+    defaultValues: { description: data.description },
     mode: "onSubmit",
   });
 
