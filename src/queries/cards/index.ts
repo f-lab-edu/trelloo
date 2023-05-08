@@ -1,8 +1,10 @@
 import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "@/utils/httpRequest";
-import * as I from "./interface";
+import useApiError from "@/hooks/useApiError";
 import { ICard, ICardList } from "@/interfaces/cards";
+import * as I from "./interface";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
@@ -10,6 +12,14 @@ const cardListsKeys = {
 };
 
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {
+  const handlers = {
+    400: {
+      12: () => toast.error("error in useCardsQuery"),
+    },
+  };
+
+  const { handleError } = useApiError(handlers);
+
   return useQuery(
     cardListsKeys.search(search),
     () => {
@@ -21,6 +31,9 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
     },
     {
       suspense: true,
+      onError: (err) => {
+        handleError(err as Error);
+      },
     },
   );
 };

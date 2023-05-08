@@ -1,23 +1,31 @@
-import { toast } from "react-toastify";
-
-type HttpStatus = Record<number, () => void>;
+import useErrorHandler from "./useErrorHandler";
+type ErrorFunctions = Record<number, Record<number | "default", () => void>>;
 
 function useApiError(handlers?: any) {
-  const httpStatus: HttpStatus = {
-    400() {
-      toast.error("입력값을 다시 확인해주세요.");
+  const errorHandlers = useErrorHandler();
+
+  const defaultHandlers: ErrorFunctions = {
+    500: {
+      default: () => {
+        errorHandlers.handleServerErrorType1();
+      },
+      13: () => {
+        errorHandlers.handleServerErrorType1();
+      },
+      14: () => {
+        errorHandlers.handleServerErrorType2();
+      },
     },
-    401() {
-      toast.error("로그인이 필요합니다.");
-    },
-    403() {
-      toast.error("접근 권한이 없습니다.");
-    },
-    500() {
-      toast.error("서버 에러가 발생했습니다.");
-    },
-    504() {
-      toast.error("타임아웃 에러가 발생했습니다. 잠시 뒤 다시 시도해주세요.");
+    400: {
+      default: () => {
+        errorHandlers.handleBadRequestType1();
+      },
+      13: () => {
+        errorHandlers.handleBadRequestType1();
+      },
+      21: () => {
+        errorHandlers.handleBadRequestType2();
+      },
     },
   };
 
@@ -30,8 +38,25 @@ function useApiError(handlers?: any) {
   };
 
   const handleError = (error: Error) => {
-    const { statusCode } = getErrorCode(error.message);
-    httpStatus[statusCode]();
+    const { statusCode, detailCode } = getErrorCode(error.message);
+
+    switch (true) {
+      case !!handlers?.[statusCode][detailCode]:
+        handlers[statusCode][detailCode]();
+        break;
+
+      case !!handlers?.[statusCode]:
+        handlers[statusCode].default();
+        break;
+
+      case !!defaultHandlers[statusCode][detailCode]:
+        defaultHandlers[statusCode][detailCode]();
+        break;
+
+      case !!defaultHandlers[statusCode]:
+        defaultHandlers[statusCode].default();
+        break;
+    }
   };
   return { handleError };
 }
