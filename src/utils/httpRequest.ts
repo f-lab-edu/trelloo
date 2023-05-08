@@ -31,17 +31,14 @@ const fetchRequest = async <TQueryParams>({
     headers,
     method,
     body: JSON.stringify(params),
-  })
-    .then(async (res) => {
-      if (!res.ok) {
-        return await Promise.reject(res.status);
-      }
+  }).then(async (res) => {
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(`status:${res.status} detail:${errorData.code}`);
+    }
 
-      return await res.json();
-    })
-    .catch((err) => {
-      handleError(err);
-    });
+    return await res.json();
+  });
 };
 
 const handleRequest = (option?: { isMock: true }) => {
@@ -62,18 +59,6 @@ const handleRequest = (option?: { isMock: true }) => {
       return await fetchRequest({ ...params, method: "delete", ...option });
     },
   };
-};
-
-const handleError = (status: number) => {
-  switch (status) {
-    case 401:
-      redirectToLogin();
-      break;
-  }
-};
-
-const redirectToLogin = () => {
-  window.location.href = "/login";
 };
 
 export const request = handleRequest();
