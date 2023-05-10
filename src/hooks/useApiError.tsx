@@ -5,26 +5,38 @@ function useApiError(handlers?: any) {
   const errorHandlers = useErrorHandler();
 
   const defaultHandlers: ErrorFunctions = {
-    500: {
+    202: {
       default: () => {
-        errorHandlers.handleServerErrorType1();
+        errorHandlers.handle202Error();
       },
-      13: () => {
-        errorHandlers.handleServerErrorType1();
-      },
-      14: () => {
-        errorHandlers.handleServerErrorType2();
+      709: () => {
+        errorHandlers.handle202Error709();
       },
     },
     400: {
       default: () => {
-        errorHandlers.handleBadRequestType1();
+        errorHandlers.handle400Error();
       },
-      13: () => {
-        errorHandlers.handleBadRequestType1();
+      1: () => {
+        errorHandlers.handle400Error1();
       },
-      21: () => {
-        errorHandlers.handleBadRequestType2();
+    },
+    401: {
+      default: () => {
+        errorHandlers.handle401Error();
+      },
+    },
+    500: {
+      default: () => {
+        errorHandlers.handle500Error();
+      },
+      1: () => {
+        errorHandlers.handle500Error1();
+      },
+    },
+    504: {
+      default: () => {
+        errorHandlers.handle504Error();
       },
     },
   };
@@ -41,7 +53,7 @@ function useApiError(handlers?: any) {
     const { statusCode, detailCode } = getErrorCode(error.message);
 
     switch (true) {
-      case !!handlers?.[statusCode][detailCode]:
+      case !!handlers?.[statusCode]?.[detailCode]:
         handlers[statusCode][detailCode]();
         break;
 
@@ -49,11 +61,11 @@ function useApiError(handlers?: any) {
         handlers[statusCode].default();
         break;
 
-      case !!defaultHandlers[statusCode][detailCode]:
+      case !!defaultHandlers?.[statusCode]?.[detailCode]:
         defaultHandlers[statusCode][detailCode]();
         break;
 
-      case !!defaultHandlers[statusCode]:
+      case !!defaultHandlers?.[statusCode]:
         defaultHandlers[statusCode].default();
         break;
     }
