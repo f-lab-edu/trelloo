@@ -11,7 +11,6 @@ const fetchRequest = async <TQueryParams>({
   queryParams,
   params,
   isMock,
-  shouldAuthorize,
 }: RequestParams<TQueryParams>) => {
   const convertedParams = queryParams
     ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {

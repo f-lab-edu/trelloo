@@ -1,6 +1,5 @@
 import { CloseModalState, ModalState } from "@/interfaces/modal";
 import React, { Suspense, useCallback } from "react";
-import { modalContents } from "../modalContents";
 import * as S from "./style";
 
 interface Props extends ModalState {
@@ -12,7 +11,7 @@ const Modal = ({ component, index, onClose, props }: Props) => {
     onClose({ component, index });
   }, [component, index, props]);
 
-  const Component = modalContents[component];
+  const Component = component;
 
   return (
     <S.ModalContainer isOpen={true} onRequestClose={handleClose}>
