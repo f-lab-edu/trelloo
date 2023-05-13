@@ -11,5 +11,7 @@ export interface ModalState<TProps = any> {
   };
 }
 
-export type OpenModalState<TProps> = Omit<ModalState<TProps>, "index">;
+export type OpenModal<TProps> = Omit<ModalState<TProps>, "index">;
+
+export type OpenModalState = Omit<ModalState, "index">;
 export type CloseModalState = Pick<ModalState, "component" | "index">;
