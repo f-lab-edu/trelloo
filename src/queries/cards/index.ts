@@ -1,10 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { request } from "@/utils/httpRequest";
-import * as I from "./interface";
-import { ICard, ICardList } from "@/interfaces/cards";
 import { SEARCH_PARAMS_KEY } from "@/constants";
+import { request } from "@/utils/httpRequest";
+import { RequestParams } from "@/interfaces/httpRequest";
+import { ICard, ICardList } from "@/interfaces/cards";
+import * as I from "./interface";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
@@ -12,14 +13,17 @@ const cardListsKeys = {
 };
 
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {
+  const parameter: RequestParams = {
+    path: "/cards",
+    isMock: true,
+  };
+
+  if (search) parameter.queryParams = { search };
+
   return useQuery(
     cardListsKeys.search(search),
     () => {
-      return request.get<I.GetCardListsResponse[]>({
-        path: "/cards",
-        queryParams: { search },
-        isMock: true,
-      });
+      return request.get<I.GetCardListsResponse[]>(parameter);
     },
     {
       suspense: true,
@@ -114,9 +118,7 @@ export const useEditCardPositionMutation = () => {
         const searchKeyword = searchParams.get(SEARCH_PARAMS_KEY.SEARCH) ?? "";
         queryClient.cancelQueries(cardListsKeys.search(searchKeyword));
 
-        const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.search(searchKeyword), {
-          exact: false,
-        });
+        const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.search(searchKeyword));
         if (!currentCards) return;
 
         const updatedData = createNewCardList(currentCards, cardId, listId, index);
