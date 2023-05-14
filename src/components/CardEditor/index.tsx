@@ -24,7 +24,7 @@ const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, 
     mode: "onSubmit",
   });
 
-  const { field } = useController({
+  const { field: cardEditorField } = useController({
     control,
     name: "description",
   });
@@ -33,7 +33,7 @@ const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, 
     onEditCard(
       {
         id: data.id,
-        description: field.value,
+        description: cardEditorField.value,
       },
       {
         onSuccess: () => {
@@ -48,7 +48,7 @@ const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, 
       <S.Overlay onClick={onCardEditorClose} />
       <S.Container>
         <S.EditorForm onSubmit={handleSubmit(handleClickSave)}>
-          <TextArea {...field} autoSize={{ minRows: 3, maxRows: 5 }} onPressEnter={handleClickSave} />
+          <TextArea {...cardEditorField} autoSize={{ minRows: 3, maxRows: 5 }} onPressEnter={handleClickSave} />
           <S.SaveButtonWrapper>
             <Button type="submit" appearance={{ type: "blue" }}>
               Save
