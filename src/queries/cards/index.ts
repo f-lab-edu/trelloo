@@ -1,12 +1,14 @@
+import { useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "@/utils/httpRequest";
 import * as I from "./interface";
 import { ICard, ICardList } from "@/interfaces/cards";
+import { SEARCH_PARAMS_KEY } from "@/constants";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
-  search: (keyword: string) => [...cardListsKeys.all, keyword],
+  search: (keyword: string) => [...cardListsKeys.all, keyword] as const,
 };
 
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {
@@ -96,6 +98,7 @@ export const useEditListMutation = () => {
 };
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
+  const [searchParams] = useSearchParams(window.location.search);
   return useMutation<I.ResponseMessage, AxiosError, I.EditCardPositionRequest, I.EditCardMutationData>(
     ({ cardId, listId, index }: I.EditCardPositionRequest) => {
       return request.put<I.ResponseMessage>({
@@ -108,13 +111,16 @@ export const useEditCardPositionMutation = () => {
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
       onMutate: ({ cardId, listId, index }) => {
-        queryClient.cancelQueries(cardListsKeys.all);
+        const searchKeyword = searchParams.get(SEARCH_PARAMS_KEY.SEARCH) ?? "";
+        queryClient.cancelQueries(cardListsKeys.search(searchKeyword));
 
-        const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.all);
+        const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.search(searchKeyword), {
+          exact: false,
+        });
         if (!currentCards) return;
 
         const updatedData = createNewCardList(currentCards, cardId, listId, index);
-        queryClient.setQueryData(cardListsKeys.all, updatedData);
+        queryClient.setQueryData(cardListsKeys.search(searchKeyword), updatedData);
 
         return { currentCards };
       },
