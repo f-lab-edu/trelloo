@@ -1,4 +1,3 @@
-import useApiError from "@/hooks/useApiError";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React from "react";
@@ -8,12 +7,11 @@ interface Props {
 }
 
 function QueryErrorHandler({ children }: Props) {
-  const { handleError } = useApiError();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
         onError: (err: unknown) => {
-          handleError(err as Error);
+          console.log(err, " default on error");
         },
       },
     },
