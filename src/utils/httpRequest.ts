@@ -5,14 +5,14 @@ const headers: HeadersInit = {
   "Content-Type": "application/json; charset=utf-8",
 };
 
-const fetchRequest = async <TQueryParams>({
+const fetchRequest = async <TQueryParams, TParams>({
   path,
   method,
   queryParams,
   params,
   isMock,
   shouldAuthorize,
-}: RequestParams<TQueryParams>) => {
+}: RequestParams<TQueryParams, TParams>) => {
   const convertedParams = queryParams
     ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {
         newObj[key] = value.toString();
@@ -46,19 +46,19 @@ const fetchRequest = async <TQueryParams>({
 
 const handleRequest = (option?: { isMock: true }) => {
   return {
-    async get<TResponse>(params: RequestParams): Promise<TResponse> {
-      return await fetchRequest({ ...params, method: "get", ...option });
+    async get<TQueryParams, TParams, TResponse>(params: RequestParams<TQueryParams, TParams>): Promise<TResponse> {
+      return await fetchRequest<TQueryParams, TParams>({ ...params, method: "get", ...option });
     },
 
-    async post<TResponse>(params: RequestParams): Promise<TResponse> {
+    async post<TQueryParams, TParams, TResponse>(params: RequestParams<TQueryParams, TParams>): Promise<TResponse> {
       return await fetchRequest({ ...params, method: "post", ...option });
     },
 
-    async put<TResponse>(params: RequestParams): Promise<TResponse> {
+    async put<TQueryParams, TParams, TResponse>(params: RequestParams<TQueryParams, TParams>): Promise<TResponse> {
       return await fetchRequest({ ...params, method: "put", ...option });
     },
 
-    async delete<TResponse>(params: RequestParams): Promise<TResponse> {
+    async delete<TQueryParams, TParams, TResponse>(params: RequestParams<TQueryParams, TParams>): Promise<TResponse> {
       return await fetchRequest({ ...params, method: "delete", ...option });
     },
   };
