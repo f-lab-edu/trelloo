@@ -18,6 +18,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     defaultValues: {
       description: "",
     },
+
     mode: "onSubmit",
   });
 
@@ -47,7 +48,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     >
       <Spin spinning={isLoading}>
         <S.Card>
-          <input {...(register("description"), { required: true })} placeholder="Enter a title for this card..." />
+          <input {...register("description", { required: true })} placeholder="Enter a title for this card..." />
         </S.Card>
       </Spin>
     </Composer>
