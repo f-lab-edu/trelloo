@@ -32,11 +32,11 @@ const fetchRequest = <TQueryParams>({
     method,
     body: JSON.stringify(params),
   }).then((res) => {
-    if (!res.ok) {
-      throw new Error(res.status.toString());
+    if (res.status >= 200 && res.status < 300) {
+      return res.json();
     }
 
-    return res.json();
+    throw new Error(res.status.toString());
   });
 };
 
@@ -62,3 +62,7 @@ const handleRequest = (option?: { isMock: true }) => {
 
 export const request = handleRequest();
 export const mockedRequest = handleRequest({ isMock: true });
+
+export const handleThrowError = (code: number) => {
+  if (!!code && code !== 1) throw new Error(code?.toString());
+};

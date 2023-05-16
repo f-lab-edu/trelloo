@@ -20,3 +20,7 @@ export const STATUS_CODE = {
   500: "500",
   504: "504",
 };
+
+export const DETAIL_CODE = {
+  700: "700",
+};

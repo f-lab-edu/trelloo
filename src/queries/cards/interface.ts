@@ -52,5 +52,6 @@ export interface DeleteListRequest {
 }
 
 export interface ResponseMessage {
+  code?:number;
   message: string;
 }

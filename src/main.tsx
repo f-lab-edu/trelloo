@@ -7,29 +7,31 @@ import { store } from "./store";
 import { ThemeProvider } from "styled-components";
 import { worker } from "./mocks/browser";
 import ModalsProvider from "@components/modals/ModalsProvider";
-import QueryErrorHandler from "@components/QueryErrorHandler";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App";
 import { theme } from "./styles/theme";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import "react-toastify/dist/ReactToastify.css";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 if (process.env.NODE_ENV === "development") {
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
   worker.start();
 }
-
+const queryClient = new QueryClient();
 ReactModal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <QueryErrorHandler>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <ModalsProvider>
           <GlobalStyle />
           <App />
           <ToastContainer position="bottom-left" theme="dark" autoClose={1500} hideProgressBar={true} limit={1} />
         </ModalsProvider>
-      </QueryErrorHandler>
+      </QueryClientProvider>
     </ThemeProvider>
   </Provider>,
 );

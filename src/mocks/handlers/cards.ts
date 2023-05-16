@@ -27,7 +27,7 @@ export const cardsHandlers = [
   rest.get("/cards", async (req, res, ctx) => {
     const search = req.url.searchParams.get("search");
     const data = await getAllCardListsWithCards(search ?? "");
-    return await res(ctx.delay(), ctx.status(400), ctx.json(data));
+    return await res(ctx.delay(), ctx.status(200), ctx.json(data));
   }),
 
   rest.post<I.AddCardRequest>("/cards", async (req, res, ctx) => {
@@ -51,6 +51,7 @@ export const cardsHandlers = [
       ctx.delay(),
       ctx.status(201),
       ctx.json({
+        code: 1,
         message: "Card created",
         id,
         description,
@@ -77,6 +78,7 @@ export const cardsHandlers = [
     return await res(
       ctx.status(200),
       ctx.json({
+        code: 1,
         message: "Card updated",
       }),
     );
@@ -99,6 +101,7 @@ export const cardsHandlers = [
     return await res(
       ctx.status(200),
       ctx.json({
+        code: 1,
         message: "Card deleted",
       }),
     );
@@ -123,6 +126,7 @@ export const cardsHandlers = [
     return await res(
       ctx.status(201),
       ctx.json({
+        code: 1,
         message: "List created",
         title,
         id,
@@ -148,6 +152,7 @@ export const cardsHandlers = [
     return await res(
       ctx.status(200),
       ctx.json({
+        code: 1,
         message: "List updated",
       }),
     );
@@ -171,6 +176,7 @@ export const cardsHandlers = [
     return await res(
       ctx.status(200),
       ctx.json({
+        code: 1,
         message: "Card position updated",
       }),
     );
@@ -194,6 +200,7 @@ export const cardsHandlers = [
     return await res(
       ctx.status(200),
       ctx.json({
+        code: 1,
         message: "List deleted",
       }),
     );

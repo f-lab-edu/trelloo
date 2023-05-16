@@ -5,6 +5,7 @@ const authHandlers = [
     return await res(
       ctx.status(200),
       ctx.json({
+        code: 1,
         message: "login succeed",
         accessToken: "OJs_login_token_3sDEjxdjZE",
       }),

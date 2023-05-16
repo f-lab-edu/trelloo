@@ -1,10 +1,11 @@
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { request } from "@/utils/httpRequest";
-import { STATUS_CODE } from "@/constants";
+import { handleThrowError, request } from "@/utils/httpRequest";
+import { DETAIL_CODE, STATUS_CODE } from "@/constants";
 import { ICard, ICardList } from "@/interfaces/cards";
 import * as I from "./interface";
+import { handleError } from "@utils/handleError";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
@@ -12,12 +13,6 @@ const cardListsKeys = {
 };
 
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {
-  const errorHandlers: Record<string, () => void> = {
-    [STATUS_CODE[400]]() {
-      toast.error("oh no!");
-    },
-  };
-
   return useQuery(
     cardListsKeys.search(search),
     () => {
@@ -29,9 +24,9 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
     },
     {
       suspense: true,
-      onError: (err: unknown) => {
+      onError: (err) => {
         const error = err as Error;
-        errorHandlers[error.message]();
+        handleError(error.message);
       },
     },
   );
@@ -39,6 +34,13 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
 
 export const useAddCardMutation = () => {
   const queryClient = useQueryClient();
+
+  const errorHandlers: Record<string, () => void> = {
+    [DETAIL_CODE[700]]() {
+      toast.error("카드 생성에 실패했습니다.\n잠시 후 다시 시도해주세요.");
+    },
+  };
+
   return useMutation(
     (params: I.AddCardRequest) => {
       return request.post<I.ResponseMessage>({
@@ -49,19 +51,37 @@ export const useAddCardMutation = () => {
       });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: ({ code }: { code: number }) => {
+        handleThrowError(code);
+        queryClient.invalidateQueries(cardListsKeys.all);
+      },
+      onError: (err) => {
+        const error = err as Error;
+        handleError(error.message, errorHandlers);
+      },
     },
   );
 };
 
 export const useEditCardMutation = () => {
   const queryClient = useQueryClient();
+
+  const errorHandlers: Record<string, () => void> = {
+    [STATUS_CODE[500]]() {
+      toast.error("카드 텍스트 수정에 실패했습니다.\n잠시 후 다시 시도해주세요.");
+    },
+  };
+
   return useMutation(
     (params: I.EditCardRequest) => {
       return request.put<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onError: (err) => {
+        const error = err as Error;
+        handleError(error.message, errorHandlers);
+      },
     },
   );
 };
@@ -74,6 +94,10 @@ export const useDeleteCardMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onError: (err) => {
+        const error = err as Error;
+        handleError(error.message);
+      },
     },
   );
 };
@@ -91,6 +115,10 @@ export const useAddListMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onError: (err) => {
+        const error = err as Error;
+        handleError(error.message);
+      },
     },
   );
 };
@@ -103,6 +131,10 @@ export const useEditListMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onError: (err) => {
+        const error = err as Error;
+        handleError(error.message);
+      },
     },
   );
 };
@@ -132,6 +164,8 @@ export const useEditCardPositionMutation = () => {
       },
       onError: (err, currentCards, context) => {
         queryClient.setQueryData(cardListsKeys.all, context?.currentCards);
+        const error = err as Error;
+        handleError(error.message);
       },
     },
   );
@@ -190,6 +224,10 @@ export const useDeleteListMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onError: (err) => {
+        const error = err as Error;
+        handleError(error.message);
+      },
     },
   );
 };
