@@ -1,16 +1,16 @@
 import { useContext } from "react";
 import { ModalsDipatchContext } from "@components/modals/ModalsProvider";
-import { CloseModalState, OpenModalState } from "@/interfaces/modal";
+import { CloseModalState, OpenModal } from "@/interfaces/modal";
 
 const useModal = () => {
   const modalDispatch = useContext(ModalsDipatchContext);
 
-  const openModal = ({ component, props, options }: OpenModalState) => {
-    modalDispatch?.open({ component, props, options });
+  const openModal = <TProps,>(props: OpenModal<TProps>) => {
+    modalDispatch?.open(props);
   };
 
-  const closeModal = ({ component, index }: CloseModalState) => {
-    modalDispatch?.close({ component, index });
+  const closeModal = ({ index }: CloseModalState) => {
+    modalDispatch?.close({ index });
   };
   return { openModal, closeModal };
 };

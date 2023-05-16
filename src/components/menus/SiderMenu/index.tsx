@@ -9,6 +9,7 @@ import {
   UngroupOutlined,
 } from "@ant-design/icons";
 import useModal from "@/hooks/useModal";
+import { modals } from "@components/modals/components";
 import * as S from "./style";
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -18,7 +19,7 @@ function SiderMenu() {
 
   const handleMemberClick = () => {
     openModal({
-      component: "inviteToWorkspaceModal",
+      component: modals.inviteToWorkspaceModal,
     });
   };
 
