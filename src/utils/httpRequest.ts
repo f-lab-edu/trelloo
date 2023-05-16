@@ -62,7 +62,3 @@ const handleRequest = (option?: { isMock: true }) => {
 
 export const request = handleRequest();
 export const mockedRequest = handleRequest({ isMock: true });
-
-export const handleThrowError = (code: number) => {
-  if (!!code && code !== 1) throw new Error(code?.toString());
-};

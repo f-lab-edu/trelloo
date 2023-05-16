@@ -22,16 +22,16 @@ const queryClient = new QueryClient();
 ReactModal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={false} />
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
         <ModalsProvider>
           <GlobalStyle />
           <App />
           <ToastContainer position="bottom-left" theme="dark" autoClose={1500} hideProgressBar={true} limit={1} />
         </ModalsProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
-  </Provider>,
+      </ThemeProvider>
+    </Provider>
+  </QueryClientProvider>,
 );

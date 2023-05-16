@@ -1,11 +1,11 @@
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { handleThrowError, request } from "@/utils/httpRequest";
+import { request } from "@/utils/httpRequest";
+import { handleError, handleThrowError } from "@utils/handleError";
 import { DETAIL_CODE, STATUS_CODE } from "@/constants";
 import { ICard, ICardList } from "@/interfaces/cards";
 import * as I from "./interface";
-import { handleError } from "@utils/handleError";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,

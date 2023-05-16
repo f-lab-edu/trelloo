@@ -26,3 +26,7 @@ export const handleError = (errorCode: string, handlers?: Record<string, () => v
   }
   errorHandlers[errorCode]();
 };
+
+export const handleThrowError = (code: number) => {
+  if (!!code && code !== 1) throw new Error(code?.toString());
+};

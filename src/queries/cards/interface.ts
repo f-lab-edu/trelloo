@@ -1,4 +1,4 @@
-import { type ICardList } from "@/interfaces/cards";
+import { ICardList } from "@/interfaces/cards";
 
 export interface GetCardRequest {
   search: string;
@@ -52,6 +52,6 @@ export interface DeleteListRequest {
 }
 
 export interface ResponseMessage {
-  code?:number;
+  code: number;
   message: string;
 }
