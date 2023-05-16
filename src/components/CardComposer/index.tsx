@@ -1,5 +1,5 @@
 import React, { Spin } from "antd";
-import { useController, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { MutationOptions } from "@/interfaces/httpRequest";
 import { AddCardRequest } from "@/queries/cards/interface";
 import Composer from "@components/forms/Composer";
@@ -14,21 +14,18 @@ interface Props {
 }
 
 const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard, isLoading }: Props) => {
-  const { control, reset, handleSubmit } = useForm({
+  const { reset, register, handleSubmit } = useForm({
     defaultValues: {
       description: "",
     },
+
     mode: "onSubmit",
   });
 
-  const {
-    field: { onChange, value },
-  } = useController({ name: "description", control, rules: { required: true } });
-
-  const handleAddCard = () => {
+  const handleAddCard = ({ description }: { description: string }) => {
     onAddCard(
       {
-        description: value,
+        description,
         listId,
       },
       {
@@ -51,7 +48,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     >
       <Spin spinning={isLoading}>
         <S.Card>
-          <input onChange={onChange} value={value} placeholder="Enter a title for this card..." />
+          <input {...register("description", { required: true })} placeholder="Enter a title for this card..." />
         </S.Card>
       </Spin>
     </Composer>
