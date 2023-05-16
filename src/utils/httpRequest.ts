@@ -34,7 +34,7 @@ const fetchRequest = <TQueryParams>({
     body: JSON.stringify(params),
   }).then((res) => {
     if (!res.ok) {
-      Promise.reject(new Error(res.status.toString()));
+      throw new Error(res.status.toString());
     }
 
     return res.json();
