@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import loadable from "@loadable/component";
+import { SEARCH_PARAMS_KEY } from "@/constants";
 import Sider from "@components/Sider";
 import Drawer from "@components/Drawer";
 import Header from "@components/Header";
@@ -17,10 +19,12 @@ interface BoardProps {
 
 const BoardPage: React.FC = () => {
   const [isOpen, setOpen] = useState(false);
-  const [searchKeyword, setSearchKeywords] = useState<string>("");
+  const [searchParams, setSearchParams] = useSearchParams(window.location.search);
+  const searchKeyword = searchParams.get(SEARCH_PARAMS_KEY.SEARCH) ?? "";
 
   const searchCards = (keyword: string) => {
-    setSearchKeywords(keyword);
+    searchParams.set(SEARCH_PARAMS_KEY.SEARCH, keyword);
+    setSearchParams(searchParams);
   };
 
   const showDrawer = () => {
