@@ -21,8 +21,8 @@ function ModalsProvider({ children }: Props) {
     setModals((modals) => [...modals, { ...state, index: modals.length }]);
   }, []);
 
-  const close = useCallback((state: CloseModalState) => {
-    setModals((modals) => modals.filter((modal) => modal.index !== state.index));
+  const close = useCallback(({ index }: CloseModalState) => {
+    setModals((modals) => modals.filter((modal) => modal.index !== index));
   }, []);
 
   const dispatch = useMemo(() => ({ open, close }), []);

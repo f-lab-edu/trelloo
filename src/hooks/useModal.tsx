@@ -9,8 +9,8 @@ const useModal = () => {
     modalDispatch?.open({ component, props, options });
   };
 
-  const closeModal = ({ component, index }: CloseModalState) => {
-    modalDispatch?.close({ component, index });
+  const closeModal = ({ index }: CloseModalState) => {
+    modalDispatch?.close({ index });
   };
   return { openModal, closeModal };
 };

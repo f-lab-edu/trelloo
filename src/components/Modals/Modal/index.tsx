@@ -6,12 +6,10 @@ interface Props extends ModalState {
   onClose: (state: CloseModalState) => void;
 }
 
-const Modal = ({ component, index, onClose, props }: Props) => {
+const Modal = ({ component: Component, index, onClose, props }: Props) => {
   const handleClose = useCallback(() => {
-    onClose({ component, index });
-  }, [component, index, props]);
-
-  const Component = component;
+    onClose({ index });
+  }, [Component, index, props]);
 
   return (
     <S.ModalContainer isOpen={true} onRequestClose={handleClose}>
