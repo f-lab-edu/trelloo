@@ -5,14 +5,15 @@ import * as S from "./style";
 export interface Props {
   onSubmit: (params: Record<string, string>) => void;
   name: string;
+  defaultValue: string;
   placeHolder: string;
   onChange?: (data: string) => void;
 }
 
-function Input({ placeHolder, name, onSubmit, onChange }: Props) {
+function Input({ placeHolder, name, defaultValue = "", onSubmit, onChange }: Props) {
   const { handleSubmit, control } = useForm({
     defaultValues: {
-      [name]: "",
+      [name]: defaultValue,
     },
     mode: "onChange",
   });
