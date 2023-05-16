@@ -1,6 +1,6 @@
 import { ICard, ICardList } from "@/interfaces/cards";
 
-export const createNewCardList = (currentCardList: ICardList[], cardId: string, listId: string, index: number) => {
+export const rearrangeCards = (currentCardList: ICardList[], cardId: string, listId: string, index: number) => {
   const currentCardsList = currentCardList.find((cardList) => cardList.cards.some((card) => card.id === cardId));
   const currentListId = currentCardsList?.id;
   const card = currentCardsList?.cards.find((card) => card.id === cardId);

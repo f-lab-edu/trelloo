@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { SEARCH_PARAMS_KEY } from "@/constants";
 import { request } from "@/utils/httpRequest";
-import { createNewCardList } from "@components/Board/createNewCardList";
+import { rearrangeCards } from "@components/Board/utils/rearrangeCards";
 import { RequestParams } from "@/interfaces/httpRequest";
 import { ICardList } from "@/interfaces/cards";
 import * as I from "./interface";
@@ -122,7 +122,7 @@ export const useEditCardPositionMutation = () => {
         const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.search(searchKeyword));
         if (!currentCards) return;
 
-        const updatedData = createNewCardList(currentCards, cardId, listId, index);
+        const updatedData = rearrangeCards(currentCards, cardId, listId, index);
         queryClient.setQueryData(cardListsKeys.search(searchKeyword), updatedData);
 
         return { currentCards };
