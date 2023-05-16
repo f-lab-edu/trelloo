@@ -5,8 +5,8 @@ import { CloseModalState, OpenModal } from "@/interfaces/modal";
 const useModal = () => {
   const modalDispatch = useContext(ModalsDipatchContext);
 
-  const openModal = <TProps,>({ component, props, options }: OpenModal<TProps>) => {
-    modalDispatch?.open({ component, props, options });
+  const openModal = <TProps,>(props: OpenModal<TProps>) => {
+    modalDispatch?.open(props);
   };
 
   const closeModal = ({ index }: CloseModalState) => {
