@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/return-await */
 import { STORAGE_KEY, URL } from "@/constants";
 import { RequestParams } from "@/interfaces/httpRequest";
 
