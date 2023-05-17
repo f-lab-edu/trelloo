@@ -24,7 +24,7 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
   return useQuery(
     cardListsKeys.search(search),
     () => {
-      return request.get<I.GetCardRequest, null, I.GetCardListsResponse[]>({
+      return request.get<I.GetCardRequest, I.GetCardListsResponse[]>({
         path: "/cards",
         queryParams: { search },
         isMock: true,
@@ -40,7 +40,7 @@ export const useAddCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (params: I.AddCardRequest) => {
-      return request.post<null, I.AddCardRequest, I.ResponseMessage>({
+      return request.post<I.AddCardRequest, I.ResponseMessage>({
         path: "/cards",
         params,
         isMock: true,
@@ -57,7 +57,7 @@ export const useEditCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (params: I.EditCardRequest) => {
-      return request.put<null, I.EditCardRequest, I.ResponseMessage>({
+      return request.put<I.EditCardRequest, I.ResponseMessage>({
         path: "/cards",
         params,
         isMock: true,
@@ -74,7 +74,7 @@ export const useDeleteCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (params: I.DeleteCardRequest) => {
-      return request.delete<null, I.DeleteCardRequest, I.ResponseMessage>({
+      return request.delete<I.DeleteCardRequest, I.ResponseMessage>({
         path: "/cards",
         params,
         isMock: true,
@@ -91,7 +91,7 @@ export const useAddListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (params: I.AddListRequest) => {
-      return request.post<null, I.AddListRequest, I.ResponseMessage>({
+      return request.post<I.AddListRequest, I.ResponseMessage>({
         path: "/lists",
         params,
         isMock: true,
@@ -108,7 +108,7 @@ export const useEditListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (params: I.EditListRequest) => {
-      return request.put<null, I.EditListRequest, I.ResponseMessage>({
+      return request.put<I.EditListRequest, I.ResponseMessage>({
         path: "/lists",
         params,
         isMock: true,
@@ -125,7 +125,7 @@ export const useEditCardPositionMutation = () => {
   const [searchParams] = useSearchParams(window.location.search);
   return useMutation<I.ResponseMessage, AxiosError, I.EditCardPositionRequest, I.EditCardMutationData>(
     ({ cardId, listId, index }: I.EditCardPositionRequest) => {
-      return request.put<null, Omit<I.EditCardPositionRequest, "cardId">, I.ResponseMessage>({
+      return request.put<Omit<I.EditCardPositionRequest, "cardId">, I.ResponseMessage>({
         path: `/cards/${cardId}/move`,
         isMock: true,
         params: { listId, index },
@@ -157,7 +157,7 @@ export const useDeleteListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (params: I.DeleteListRequest) => {
-      return request.delete<null, I.DeleteListRequest, I.ResponseMessage>({
+      return request.delete<I.DeleteListRequest, I.ResponseMessage>({
         path: "/lists",
         params,
         isMock: true,

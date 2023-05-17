@@ -5,14 +5,14 @@ const headers: HeadersInit = {
   "Content-Type": "application/json; charset=utf-8",
 };
 
-const fetchRequest = <TQueryParams, TParams>({
+const fetchRequest = <TParams>({
   path,
   method,
   queryParams,
   params,
   isMock,
   shouldAuthorize,
-}: RequestParams<TQueryParams, TParams>) => {
+}: RequestParams<TParams>) => {
   const convertedParams = queryParams
     ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {
         newObj[key] = value.toString();
@@ -46,19 +46,19 @@ const fetchRequest = <TQueryParams, TParams>({
 
 const handleRequest = (option?: { isMock: true }) => {
   return {
-    get<TQueryParams, TParams, TResponse>(params: RequestParams<TQueryParams, TParams>): Promise<TResponse> {
-      return fetchRequest<TQueryParams, TParams>({ ...params, method: "get", ...option });
+    get<TParams, TResponse>(params: RequestParams<TParams>): Promise<TResponse> {
+      return fetchRequest<TParams>({ ...params, method: "get", ...option });
     },
 
-    post<TQueryParams, TParams, TResponse>(params: RequestParams<TQueryParams, TParams>): Promise<TResponse> {
+    post<TParams, TResponse>(params: RequestParams<TParams>): Promise<TResponse> {
       return fetchRequest({ ...params, method: "post", ...option });
     },
 
-    put<TQueryParams, TParams, TResponse>(params: RequestParams<TQueryParams, TParams>): Promise<TResponse> {
+    put<TParams, TResponse>(params: RequestParams<TParams>): Promise<TResponse> {
       return fetchRequest({ ...params, method: "put", ...option });
     },
 
-    delete<TQueryParams, TParams, TResponse>(params: RequestParams<TQueryParams, TParams>): Promise<TResponse> {
+    delete<TParams, TResponse>(params: RequestParams<TParams>): Promise<TResponse> {
       return fetchRequest({ ...params, method: "delete", ...option });
     },
   };
