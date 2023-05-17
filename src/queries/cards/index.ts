@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "@/utils/httpRequest";
-import { handleError, handleThrowError } from "@utils/handleError";
+import { handleError } from "@utils/handleError";
 import { DETAIL_CODE, STATUS_CODE } from "@/constants";
 import { ICard, ICardList } from "@/interfaces/cards";
 import * as I from "./interface";
@@ -24,10 +24,6 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
     },
     {
       suspense: true,
-      onError: (err) => {
-        const error = err as Error;
-        handleError(error.message);
-      },
     },
   );
 };
@@ -52,7 +48,6 @@ export const useAddCardMutation = () => {
     },
     {
       onSuccess: ({ code }: { code: number }) => {
-        handleThrowError(code);
         queryClient.invalidateQueries(cardListsKeys.all);
       },
       onError: (err) => {
@@ -94,10 +89,6 @@ export const useDeleteCardMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
-      onError: (err) => {
-        const error = err as Error;
-        handleError(error.message);
-      },
     },
   );
 };
@@ -115,10 +106,6 @@ export const useAddListMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
-      onError: (err) => {
-        const error = err as Error;
-        handleError(error.message);
-      },
     },
   );
 };
@@ -131,10 +118,6 @@ export const useEditListMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
-      onError: (err) => {
-        const error = err as Error;
-        handleError(error.message);
-      },
     },
   );
 };
@@ -164,8 +147,6 @@ export const useEditCardPositionMutation = () => {
       },
       onError: (err, currentCards, context) => {
         queryClient.setQueryData(cardListsKeys.all, context?.currentCards);
-        const error = err as Error;
-        handleError(error.message);
       },
     },
   );
@@ -224,10 +205,6 @@ export const useDeleteListMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
-      onError: (err) => {
-        const error = err as Error;
-        handleError(error.message);
-      },
     },
   );
 };
