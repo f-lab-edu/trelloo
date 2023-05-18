@@ -24,3 +24,7 @@ export const STATUS_CODE = {
 export const DETAIL_CODE = {
   700: "700",
 };
+
+export const SEARCH_PARAMS_KEY = {
+  SEARCH: "search",
+};

@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
 
   const handleSubmitClick = async () => {
     const res = await handleLogin();
-    handleLoginComplete(res.accessToken);
+    handleLoginComplete(res?.accessToken);
   };
 
   const handleLogin = async () => {

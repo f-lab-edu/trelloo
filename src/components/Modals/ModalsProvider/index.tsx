@@ -1,4 +1,4 @@
-import { type CloseModalState, type ModalState, type OpenModalState } from "@/interfaces/modal";
+import { CloseModalState, ModalState, OpenModalState } from "@/interfaces/modal";
 import React, { createContext, useState, useMemo, useCallback } from "react";
 import Modals from "@components/modals/Modals";
 
@@ -21,8 +21,8 @@ function ModalsProvider({ children }: Props) {
     setModals((modals) => [...modals, { ...state, index: modals.length }]);
   }, []);
 
-  const close = useCallback((state: CloseModalState) => {
-    setModals((modals) => modals.filter((modal) => modal.index !== state.index));
+  const close = useCallback(({ index }: CloseModalState) => {
+    setModals((modals) => modals.filter((modal) => modal.index !== index));
   }, []);
 
   const dispatch = useMemo(() => ({ open, close }), []);
