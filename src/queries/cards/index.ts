@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { SEARCH_PARAMS_KEY, DETAIL_CODE, STATUS_CODE } from "@/constants";
 import { request } from "@/utils/httpRequest";
 import { handleError } from "@utils/handleError";
-import { ICardList, ICardList } from "@/interfaces/cards";
+import { ICardList } from "@/interfaces/cards";
 import { rearrangeCards } from "@components/Board/utils/rearrangeCards";
 import { RequestParams } from "@/interfaces/httpRequest";
 import * as I from "./interface";
