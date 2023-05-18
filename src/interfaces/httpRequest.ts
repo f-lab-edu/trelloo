@@ -1,8 +1,8 @@
-export interface RequestParams<TQueryParams = Params, TParams = any> {
+export interface RequestParams<TParams = Params> {
   path: string;
   method?: RequestMethod;
   params?: TParams;
-  queryParams?: TQueryParams;
+  queryParams?: TParams;
   isMock?: boolean;
   shouldAuthorize?: boolean;
 }
