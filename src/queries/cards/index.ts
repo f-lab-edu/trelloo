@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
-import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { SEARCH_PARAMS_KEY, DETAIL_CODE, STATUS_CODE } from "@/constants";
 import { request } from "@/utils/httpRequest";
@@ -26,7 +25,7 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
   return useQuery(
     cardListsKeys.search(search),
     () => {
-      return request.get<I.GetCardRequest, I.GetCardListsResponse[]>({
+      return request.get<I.GetCardRequest, I.ResponseData<I.GetCardListsResponse[]>>({
         path: "/cards",
         queryParams: { search },
         isMock: true,
@@ -148,8 +147,9 @@ export const useEditListMutation = () => {
 };
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
-  const [searchParams] = useSearchParams(window.location.search);
-  return useMutation<I.ResponseMessage, AxiosError, I.EditCardPositionRequest, I.EditCardMutationData>(
+  const [searchParams] = useSearchParams();
+
+  return useMutation(
     ({ cardId, listId, index }: I.EditCardPositionRequest) => {
       return request.put<Omit<I.EditCardPositionRequest, "cardId">, I.ResponseMessage>({
         path: `/cards/${cardId}/move`,

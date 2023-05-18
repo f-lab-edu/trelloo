@@ -28,7 +28,14 @@ export const cardsHandlers = [
   rest.get("/cards", async (req, res, ctx) => {
     const search = req.url.searchParams.get(SEARCH_PARAMS_KEY.SEARCH);
     const data = await getAllCardListsWithCards(search ?? "");
-    return await res(ctx.delay(), ctx.status(200), ctx.json(data));
+    return await res(
+      ctx.delay(),
+      ctx.status(200),
+      ctx.json({
+        code: 1,
+        data,
+      }),
+    );
   }),
 
   rest.post<I.AddCardRequest>("/cards", async (req, res, ctx) => {

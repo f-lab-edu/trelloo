@@ -1,5 +1,15 @@
 import { ICardList } from "@/interfaces/cards";
 
+export interface ResponseMessage {
+  code: number;
+  message: string;
+}
+
+export interface ResponseData<TData> {
+  code: number;
+  data: TData;
+}
+
 export interface GetCardRequest {
   search: string;
 }
@@ -49,9 +59,4 @@ export interface EditListRequest {
 
 export interface DeleteListRequest {
   id: string;
-}
-
-export interface ResponseMessage {
-  code: number;
-  message: string;
 }
