@@ -16,7 +16,14 @@ interface Props {
 
 function Button({ Icon, isIconBehindText = false, type = "button", appearance, onClick, children, isLoading }: Props) {
   return (
-    <S.Container type={type} style={appearance?.style} onClick={onClick} appearance={appearance} disabled={isLoading}>
+    <S.Container
+      id="test"
+      type={type}
+      style={appearance?.style}
+      onClick={onClick}
+      appearance={appearance}
+      disabled={isLoading}
+    >
       <S.IconWrapper>{!isIconBehindText && Boolean(Icon) && Icon}</S.IconWrapper>
       {children}
       <S.IconBehindWrapper>{isIconBehindText && Icon}</S.IconBehindWrapper>
