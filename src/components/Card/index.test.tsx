@@ -1,15 +1,26 @@
 import React from "react";
-import { customRender } from "@utils/testUtils";
+import { customRender, screen } from "@utils/testUtils";
+import userEvent from "@testing-library/user-event";
 import { describe } from "vitest";
 import Card from ".";
 
-/**
- * 1. render
- * 2. 카드 인풋이 비어있을 때, add card 버튼 클릭하면
- */
-
 describe("test card render test", () => {
-  it("카드 인풋값이 없을 경우 Add card 버튼을 클릭해도 카드 생성되지 않음", async () => {
-    customRender(<Card data={{ description: "", index: 0, id: "" }} onEditCard={() => {}} onDeleteCard={() => {}} />);
+  beforeEach(() => {
+    customRender(
+      <Card
+        data={{ description: "card description", index: 0, id: "" }}
+        onEditCard={() => {}}
+        onDeleteCard={() => {}}
+      />,
+    );
+  });
+  it("description을 포함한 Card 컴포넌트 렌더링", async () => {
+    expect(screen.getByText("card description")).toBeInTheDocument();
+  });
+
+  it("hover하면 edit 버튼 표시", () => {
+    userEvent.hover(screen.getByText("card description"));
+    userEvent.click(screen.getByLabelText("edit"));
+    screen.debug();
   });
 });

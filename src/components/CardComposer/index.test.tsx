@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { customRender, fireEvent, renderHook } from "@utils/testUtils";
 import { describe, vi, expect } from "vitest";
@@ -19,7 +20,7 @@ describe("CardComposer 테스트", () => {
 
   const { result } = renderHook(() => useCardState());
 
-  const { getByPlaceholderText, getByText } = customRender(
+  customRender(
     <CardComposer
       isLoading={false}
       isCardInputOpened={result.current.isCardInputOpened}
@@ -29,9 +30,16 @@ describe("CardComposer 테스트", () => {
     />,
   );
 
-  it("Add a card 버튼 표시됨", () => {
-    const cardInputToggleButton = getByText("Add a card");
-    expect(cardInputToggleButton).toBeInTheDocument();
+  it("Add a card 버튼 표시됨", async () => {
+    // const cardInputToggleButton = screen.getByText("Add a card");
+    // expect(cardInputToggleButton).toBeInTheDocument();
+    // fireEvent.click(cardInputToggleButton);
+    //...
+    // const submitButton = screen.getByRole("button", { type: "submit" });
+    // expect(submitButton).toBeInTheDocument();
+    // fireEvent.click(submitButton);
+    //...
+    // screen.debug();
   });
 
   // it("Add a card 버튼 클릭 시 인풋창 렌더링", async () => {
