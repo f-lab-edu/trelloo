@@ -1,12 +1,12 @@
-/* eslint-disable */
 import React, { useState } from "react";
 import { customRender, fireEvent, renderHook } from "@utils/testUtils";
 import { describe, vi, expect } from "vitest";
 import CardComposer from ".";
 import "@testing-library/jest-dom";
-import { act, screen, waitFor } from "@testing-library/react";
+import { act, cleanup } from "@testing-library/react";
 
 describe("CardComposer 테스트", () => {
+  afterEach(cleanup);
   const handleAddCard = vi.fn();
 
   function useCardState() {
@@ -18,83 +18,68 @@ describe("CardComposer 테스트", () => {
     return { isCardInputOpened, handleCardInputToggle };
   }
 
-  const { result } = renderHook(() => useCardState());
+  const { result } = renderHook(useCardState);
 
-  customRender(
-    <CardComposer
-      isLoading={false}
-      isCardInputOpened={result.current.isCardInputOpened}
-      onCardInputToggle={result.current.handleCardInputToggle}
-      listId="listIs"
-      onAddCard={handleAddCard}
-    />,
-  );
+  const setup = (isCardInputOpened: boolean, handleCardInputToggle: () => void) => {
+    const { getByText, getByPlaceholderText, getByLabelText } = customRender(
+      <CardComposer
+        isLoading={false}
+        isCardInputOpened={isCardInputOpened}
+        onCardInputToggle={handleCardInputToggle}
+        listId="listIs"
+        onAddCard={handleAddCard}
+      />,
+    );
 
-  it("Add a card 버튼 표시됨", async () => {
-    // const cardInputToggleButton = screen.getByText("Add a card");
-    // expect(cardInputToggleButton).toBeInTheDocument();
-    // fireEvent.click(cardInputToggleButton);
-    //...
-    // const submitButton = screen.getByRole("button", { type: "submit" });
-    // expect(submitButton).toBeInTheDocument();
-    // fireEvent.click(submitButton);
-    //...
-    // screen.debug();
+    return { getByText, getByPlaceholderText, getByLabelText };
+  };
+
+  it("텍스트 입력 후 버튼 클릭 시 handleAddCard 호출", async () => {
+    const { getByText: getByTextPrev } = setup(result.current.isCardInputOpened, result.current.handleCardInputToggle);
+    const cardInputToggleButton = getByTextPrev("Add a card");
+    expect(result.current.isCardInputOpened).toBeFalsy();
+
+    act(() => {
+      fireEvent.click(cardInputToggleButton);
+    });
+
+    expect(result.current.isCardInputOpened).toBeTruthy();
+    const { getByText, getByPlaceholderText } = setup(
+      result.current.isCardInputOpened,
+      result.current.handleCardInputToggle,
+    );
+    const addCardButton = getByText("Add card");
+    const input = getByPlaceholderText("Enter a title for this card...") as HTMLInputElement;
+    expect(input).toBeInTheDocument();
+    expect(addCardButton).toBeInTheDocument();
+
+    fireEvent.change(input, { target: { value: "description" } });
+    expect(input.value).toEqual("description");
+
+    act(() => {
+      fireEvent.click(addCardButton);
+    });
+
+    expect(handleAddCard).toHaveBeenCalled();
   });
 
-  // it("Add a card 버튼 클릭 시 인풋창 렌더링", async () => {
-  //   const cardInputToggleButton = getByText("Add a card");
+  it("아무 텍스트도 입력하지 않으면 카드 생성하지 않음", async () => {
+    const { getByPlaceholderText, getByText } = setup(
+      result.current.isCardInputOpened,
+      result.current.handleCardInputToggle,
+    );
+    const addCardButton = getByText("Add card");
+    const input = getByPlaceholderText("Enter a title for this card...") as HTMLInputElement;
 
-  //   expect(result.current.isCardInputOpened).toBeFalsy();
+    act(() => {
+      fireEvent.change(input, { target: { value: "" } });
+    });
+    expect(input.value).toEqual("");
 
-  //   fireEvent.click(cardInputToggleButton);
+    act(() => {
+      fireEvent.click(addCardButton);
+    });
 
-  //   expect(result.current.isCardInputOpened).toEqual(true);
-  //   const { getByPlaceholderText, getByText } = customRender(
-  //     <CardComposer
-  //       isLoading={false}
-  //       isCardInputOpened={result.current.isCardInputOpened}
-  //       onCardInputToggle={result.current.handleCardInputToggle}
-  //       listId="listIs"
-  //       onAddCard={handleAddCard}
-  //     />,
-  //   );
-  //   const addCardSubmitButton = getByText("Add card");
-  //   expect(addCardSubmitButton).toBeInTheDocument();
-  // });
-
-  // it("Add a card 버튼 클릭 시 인풋창 렌더링", () => {
-  //   //
-  // });
-
-  // it("닫기 버튼 클릭 시 인풋창 닫음", () => {
-  //   //
-  // });
-
-  // it("텍스트 입력 후 버튼 클릭 시 새 카드 생성", async () => {
-  // const addCardSubmitButton = getByText("Add card");
-
-  // const descriptionInput = getByPlaceholderText("Enter a title for this card...") as HTMLInputElement;
-
-  //   expect(addCardSubmitButton).toBeInTheDocument();
-
-  //   const textToType = "New card description";
-
-  //   fireEvent.change(descriptionInput, { target: { value: textToType } });
-  //   expect(descriptionInput.value).toEqual(textToType);
-
-  //   fireEvent.click(addCardSubmitButton);
-
-  //   // handleAddCard 호출되지 않는 에러 수정 필요
-  //   // expect(handleAddCard).toHaveBeenCalledTimes(1);
-  //   expect(descriptionInput.value).toEqual("");
-  // });
-
-  // it("아무 텍스트도 입력하지 않으면 카드 생성하지 않음", () => {
-  //   fireEvent.change(descriptionInput, { target: { value: "" } });
-
-  //   expect(descriptionInput.value).toEqual("");
-  //   fireEvent.click(addCardSubmitButton);
-  //   expect(handleAddCard).toHaveBeenCalledTimes(0);
-  // });
+    expect(handleAddCard).toHaveBeenCalledTimes(0);
+  });
 });

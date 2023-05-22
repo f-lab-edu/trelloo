@@ -21,6 +21,5 @@ describe("test card render test", () => {
   it("hover하면 edit 버튼 표시", () => {
     userEvent.hover(screen.getByText("card description"));
     userEvent.click(screen.getByLabelText("edit"));
-    screen.debug();
   });
 });
