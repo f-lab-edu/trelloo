@@ -1,80 +1,73 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import React from "react";
-import { customRender, fireEvent, renderHook, screen, waitFor } from "@utils/testUtils";
-import { describe } from "vitest";
+import { customRender, waitFor } from "@utils/testUtils";
+import { describe, vi } from "vitest";
 import Board from ".";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
-import { rest, setupWorker } from "msw";
-import { setupServer } from "msw/node";
+import { mockedCardLists } from "./mockData";
+import * as queries from "@/queries/cards";
+import {
+  AddCardRequest,
+  AddListRequest,
+  DeleteCardRequest,
+  DeleteListRequest,
+  EditCardMutationData,
+  EditCardPositionRequest,
+  EditCardRequest,
+  EditListRequest,
+  ResponseMessage,
+} from "@/queries/cards/interface";
+import { UseMutationResult } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
-const handlers = [
-  rest.get("/cards", (req, res, ctx) => {
-    return res(
-      ctx.json({
-        code: 1,
-        data: [
-          {
-            id: "list1",
-            title: "list1",
-            cards: [
-              {
-                id: "card1",
-                text: "card1",
-              },
-              {
-                id: "card2",
-                text: "card2",
-              },
-            ],
-          },
-          {
-            id: "list2",
-            title: "list2",
-            cards: [
-              {
-                id: "card2-1",
-                text: "card2-1",
-              },
-            ],
-          },
-        ],
-      }),
-    );
-  }),
-];
-
-// export const worker = setupWorker(...handlers);
+vi.mock("@/queries/cards");
 
 describe("Board 테스트", () => {
-  function useCardsQuery() {
-    return useQuery({
-      queryKey: ["fetchData"],
-      queryFn: () => {
-        return { code: 1 };
-      },
-    });
-  }
+  const useCardsQueryMock = vi
+    .spyOn(queries, "useCardsQuery")
+    .mockImplementation(vi.fn().mockReturnValue({ data: mockedCardLists, isLoading: false, isSuccess: true }));
 
-  beforeEach(() => {
-    // worker.start();
-  });
+  const useAddListMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
+  const useEditListMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
+  const useDeleteListMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
+  const useEditCardPositionMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
 
-  const queryClient = new QueryClient();
-  const wrapper = ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  const useAddCardMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
+  const useDeleteCardMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
+  const useEditCardMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
+
+  vi.spyOn(queries, "useAddListMutation").mockReturnValue(
+    useAddListMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, AddListRequest, unknown>,
+  );
+  vi.spyOn(queries, "useEditListMutation").mockReturnValue(
+    useEditListMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, EditListRequest, unknown>,
+  );
+  vi.spyOn(queries, "useDeleteListMutation").mockReturnValue(
+    useDeleteListMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, DeleteListRequest, unknown>,
+  );
+  vi.spyOn(queries, "useEditCardPositionMutation").mockReturnValue(
+    useEditCardPositionMutationMock as unknown as UseMutationResult<
+      ResponseMessage,
+      AxiosError<unknown, any>,
+      EditCardPositionRequest,
+      EditCardMutationData
+    >,
+  );
+
+  vi.spyOn(queries, "useAddCardMutation").mockReturnValue(
+    useAddCardMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, AddCardRequest, unknown>,
+  );
+  vi.spyOn(queries, "useEditCardMutation").mockReturnValue(
+    useEditCardMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, EditCardRequest, unknown>,
+  );
+  vi.spyOn(queries, "useDeleteCardMutation").mockReturnValue(
+    useDeleteCardMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, DeleteCardRequest, unknown>,
   );
 
   it("텍스트 입력 후 새 카드 생성", async () => {
-    const { result } = renderHook(() => useCardsQuery(), { wrapper });
+    customRender(<Board searchKeyword="" />);
 
-    // await waitFor(() => {
-    // return result.current.isSuccess;
-    // });
-
-    // expect(result.current.data).toEqual({ code: 1 });
-    const { getByPlaceholderText, getByText } = customRender(<Board searchKeyword="" />);
-    screen.debug();
+    await waitFor(() => {
+      expect(useCardsQueryMock).toHaveBeenCalled();
+    });
   });
-  // data fetch하는 부분 query mocking 하기
-  // 각각의 cardList, card mocking하기
 });

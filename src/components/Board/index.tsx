@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import {
@@ -56,7 +57,7 @@ const Board = ({ searchKeyword }: Props) => {
   return (
     <S.Container>
       <DragDropContext onDragEnd={handleDragEnd}>
-        {cardLists?.map((cardList) => (
+        {cardLists?.data?.map((cardList) => (
           <Droppable key={cardList.id} droppableId={cardList.id}>
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
