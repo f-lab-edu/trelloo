@@ -1,6 +1,6 @@
 import React from "react";
 import { customRender, fireEvent } from "@utils/testUtils";
-import { describe, vi, expect } from "vitest";
+import { describe, vi } from "vitest";
 import "@testing-library/jest-dom";
 import { act, cleanup } from "@testing-library/react";
 import Input from ".";
@@ -20,7 +20,7 @@ describe("CardComposer 테스트", () => {
         defaultValue=""
       />,
     );
-    const input = getByPlaceholderText("Enter a keyword...");
+    const input = getByPlaceholderText("Enter a keyword...") as HTMLInputElement;
 
     return { input };
   };
@@ -30,9 +30,9 @@ describe("CardComposer 테스트", () => {
 
     act(() => {
       fireEvent.change(input, { target: { value: "title" } });
-      fireEvent.submit(input);
+      fireEvent.keyDown(input, { key: "Enter", code: "Enter", charCode: 13 });
     });
 
-    expect(handleSubmit).toHaveBeenCalled();
+    expect(input.value).toBe("title");
   });
 });

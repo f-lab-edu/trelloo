@@ -7,11 +7,13 @@ export const mockedCardLists = {
       cards: [
         {
           id: "card1",
-          text: "card1",
+          description: "card1",
+          index: 0,
         },
         {
           id: "card2",
-          text: "card2",
+          description: "card2",
+          index: 1,
         },
       ],
     },
@@ -21,9 +23,27 @@ export const mockedCardLists = {
       cards: [
         {
           id: "card2-1",
-          text: "card2-1",
+          description: "card2-1",
+          index: 2,
         },
       ],
+    },
+  ],
+};
+
+export const mockedCardList = {
+  id: "list1",
+  title: "list1",
+  cards: [
+    {
+      id: "card1",
+      description: "card1",
+      index: 0,
+    },
+    {
+      id: "card2",
+      description: "card2",
+      index: 1,
     },
   ],
 };
