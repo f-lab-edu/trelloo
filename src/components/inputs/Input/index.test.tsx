@@ -37,4 +37,9 @@ describe("CardComposer 테스트", () => {
     // Need to fix
     // expect(handleSubmit).toBeCalled();
   });
+
+  it("스냅샷 테스트", () => {
+    const component = setup();
+    expect(component).toMatchSnapshot();
+  });
 });

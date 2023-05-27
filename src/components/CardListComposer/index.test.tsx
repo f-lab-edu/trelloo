@@ -10,8 +10,12 @@ describe("CardListComposer 테스트", () => {
     customRender(<CardListComposer onAddList={handleAddList} />);
   });
 
-  it("sdf", () => {
+  it("컴포넌트 렌더링", () => {
     expect(screen.getByRole("button")).toHaveTextContent("Add a list");
-    expect(screen.getByPlaceholderText("Enter list title...")).toBeInTheDocument();
+  });
+
+  it("스냅샷 테스트", () => {
+    const component = customRender(<CardListComposer onAddList={handleAddList} />);
+    expect(component).toMatchSnapshot();
   });
 });

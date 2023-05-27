@@ -63,11 +63,16 @@ describe("Board 테스트", () => {
     useDeleteCardMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, DeleteCardRequest, unknown>,
   );
 
-  it("텍스트 입력 후 새 카드 생성", async () => {
+  it("Board 컴포넌트 렌더링 후 useCardsQuery 호출", async () => {
     customRender(<Board searchKeyword="" />);
 
     await waitFor(() => {
       expect(useCardsQueryMock).toHaveBeenCalled();
     });
+  });
+
+  it("스냅샷 테스트", () => {
+    const component = customRender(<Board searchKeyword="" />);
+    expect(component).toMatchSnapshot();
   });
 });

@@ -24,6 +24,6 @@ describe("카드 컴포넌트 렌더링", () => {
 
   it("hover하면 edit 버튼 표시", () => {
     userEvent.hover(screen.getByText("card description"));
-    userEvent.click(screen.getByLabelText("edit"));
+    expect(screen.getByLabelText("edit")).toBeDefined();
   });
 });
