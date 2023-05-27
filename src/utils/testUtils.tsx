@@ -2,7 +2,7 @@ import { store } from "@/store";
 import { GlobalStyle } from "@/styles/GlobalStyle";
 import { theme } from "@/styles/theme";
 import ModalsProvider from "@components/modals/ModalsProvider";
-import { QueryClient, QueryClientProvider, UseMutationResult, UseQueryResult } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, UseQueryResult } from "@tanstack/react-query";
 import { render, renderHook, RenderOptions } from "@testing-library/react";
 import React, { ReactElement } from "react";
 import { Provider } from "react-redux";
@@ -32,7 +32,7 @@ const createQueryClientWrapper = ({ children }: { children: React.ReactNode }) =
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };
 
-export const createMockedQuery = (hook: () => UseQueryResult<string, unknown> | UseMutationResult<string, unknown>) => {
+export const createMockedQuery = (hook: () => UseQueryResult<any, unknown>) => {
   return renderHook(() => hook(), { wrapper: createQueryClientWrapper });
 };
 

@@ -1,10 +1,10 @@
 import React from "react";
-import CardList from "@components/CardList";
-import { customRender, fireEvent, renderHook, waitFor } from "@utils/testUtils";
+import { useQuery } from "@tanstack/react-query";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { describe, vi, expect } from "vitest";
+import { createMockedQuery, customRender, fireEvent, waitFor } from "@utils/testUtils";
 import { ICardList } from "@/interfaces/cards";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import CardList from "@components/CardList";
 import { mockedCardList, mockedCardLists } from "@components/Board/mockData";
 
 describe("CardListComposer 테스트", () => {
@@ -61,12 +61,7 @@ describe("CardListComposer 테스트", () => {
   });
 
   it("인풋창에 텍스트 입력 후 제출 버튼 클릭 시 새 카드 생성", async () => {
-    const queryClient = new QueryClient();
-    const wrapper = ({ children }: { children: React.ReactNode }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
-
-    const { result } = renderHook(() => useCardsQuery(), { wrapper });
+    const { result } = createMockedQuery(() => useCardsQuery<ICardList>());
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     const cardLists = result.current.data;
