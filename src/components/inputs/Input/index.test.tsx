@@ -25,7 +25,7 @@ describe("CardComposer 테스트", () => {
     return { input };
   };
 
-  it("input 값 입력 후 제출하면 onSubmit 호출됨", async () => {
+  it("input 값 입력 후 제출하면 onSubmit 호출됨", () => {
     const { input } = setup();
 
     act(() => {

@@ -24,7 +24,7 @@ describe("CardComposer 테스트", () => {
     return { getByText, getByPlaceholderText, getByLabelText };
   };
 
-  it("텍스트 입력 후 카드 생성", async () => {
+  it("텍스트 입력 후 카드 생성", () => {
     const { getByPlaceholderText, getByText } = setup(true);
     const addCardButton = getByText("Add card");
     const input = getByPlaceholderText("Enter a title for this card...") as HTMLInputElement;

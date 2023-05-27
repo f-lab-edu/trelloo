@@ -60,10 +60,10 @@ describe("CardListComposer 테스트", () => {
     expect(cardInput).toBeInTheDocument();
   });
 
-  it("인풋창에 텍스트 입력 후 제출 버튼 클릭 시 새 카드 생성", async () => {
+  it("인풋창에 텍스트 입력 후 제출 버튼 클릭 시 새 카드 생성", () => {
     const { result } = createMockedQuery(() => useCardsQuery());
 
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    waitFor(() => expect(result.current.isSuccess).toBe(true));
     const cardLists = result.current.data;
     expect(cardLists).toEqual(mockedCardLists);
     const { getByText } = setup(cardLists?.data[0]);

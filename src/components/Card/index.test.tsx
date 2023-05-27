@@ -18,7 +18,7 @@ describe("카드 컴포넌트 렌더링", () => {
     );
   });
 
-  it("description을 포함한 Card 컴포넌트 렌더링", async () => {
+  it("description을 포함한 Card 컴포넌트 렌더링", () => {
     expect(screen.getByText("card description")).toBeInTheDocument();
   });
 
