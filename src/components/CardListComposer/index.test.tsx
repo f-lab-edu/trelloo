@@ -11,8 +11,7 @@ describe("CardListComposer 테스트", () => {
   });
 
   it("sdf", () => {
-    screen.debug();
     expect(screen.getByRole("button")).toHaveTextContent("Add a list");
-    // expect(screen.getByPlaceholderText("Enter list title...")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Enter list title...")).toBeInTheDocument();
   });
 });

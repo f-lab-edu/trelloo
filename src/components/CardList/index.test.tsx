@@ -72,7 +72,7 @@ describe("CardListComposer 테스트", () => {
     const cardLists = result.current.data;
     expect(cardLists).toEqual(mockedCardLists);
     const { getByText } = setup(cardLists?.data[0]);
-    const listTitle = getByText("listTitle1");
+    const listTitle = getByText("list1");
     expect(listTitle).toBeInTheDocument();
   });
 });

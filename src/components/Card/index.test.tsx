@@ -1,19 +1,23 @@
 import React from "react";
 import { customRender, screen } from "@utils/testUtils";
 import userEvent from "@testing-library/user-event";
-import { describe } from "vitest";
+import { describe, vi } from "vitest";
 import Card from ".";
 
-describe("test card render test", () => {
+describe("카드 컴포넌트 렌더링", () => {
+  const handleEditCard = vi.fn();
+  const handleDeleteCard = vi.fn();
+
   beforeEach(() => {
     customRender(
       <Card
         data={{ description: "card description", index: 0, id: "" }}
-        onEditCard={() => {}}
-        onDeleteCard={() => {}}
+        onEditCard={handleEditCard}
+        onDeleteCard={handleDeleteCard}
       />,
     );
   });
+
   it("description을 포함한 Card 컴포넌트 렌더링", async () => {
     expect(screen.getByText("card description")).toBeInTheDocument();
   });

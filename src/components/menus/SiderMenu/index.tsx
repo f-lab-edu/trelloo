@@ -9,8 +9,8 @@ import {
   UngroupOutlined,
 } from "@ant-design/icons";
 import useModal from "@/hooks/useModal";
-import * as S from "./style";
 import { modals } from "@components/modals/components";
+import * as S from "./style";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
