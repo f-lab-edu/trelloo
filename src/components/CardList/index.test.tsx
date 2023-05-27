@@ -1,6 +1,6 @@
 import React from "react";
 import CardList from "@components/CardList";
-import { customRender, fireEvent, renderHook, screen, waitFor } from "@utils/testUtils";
+import { customRender, fireEvent, renderHook, waitFor } from "@utils/testUtils";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { describe, vi, expect } from "vitest";
 import { ICardList } from "@/interfaces/cards";
@@ -40,7 +40,6 @@ describe("CardListComposer 테스트", () => {
 
   it("카드와 카드 목록, Add a card 버튼 렌더링", () => {
     const { getByText } = setup(mockedCardList);
-    screen.debug();
     const cardInputToggleButton = getByText("Add a card");
     const card = getByText("card1");
     const list = getByText("list1");
@@ -52,7 +51,6 @@ describe("CardListComposer 테스트", () => {
 
   it("Add a card 버튼 클릭 시 카드 인풋창과 Add card 버튼 렌더링", () => {
     const { getByText, getByPlaceholderText } = setup(mockedCardList);
-    screen.debug();
     const cardInputToggleButton = getByText("Add a card");
 
     fireEvent.click(cardInputToggleButton);
