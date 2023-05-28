@@ -2,10 +2,10 @@
 
 ### 목차
 
+- Overview
+- Tech stack
+- Getting started
 - Description
-- 기술스택
-- 시작하기
-- 기능 소개
 - Point
 - Convention
 
@@ -49,6 +49,8 @@ start project
 yarn start
 ```
 
+<br>
+
 run test
 
 ```js
@@ -56,13 +58,17 @@ yarn test
 yarn run cypress open
 ```
 
+<br>
+
 start storybook
 
 ```js
 yarn storybook
 ```
 
-Links
+<br>
+
+Published Links
 
 - [Storybook](https://64187d30417c706e850654d5-pbqcfkgiqy.chromatic.com/?path=/story/components-board--default)
 
