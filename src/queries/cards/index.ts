@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { SEARCH_PARAMS_KEY, DETAIL_CODE, STATUS_CODE } from "@/constants";
 import { request } from "@/utils/httpRequest";
-import { handleError } from "@utils/handleError";
+import { handleError, handleThrowError } from "@utils/handleError";
 import { ICardList } from "@/interfaces/cards";
 import { rearrangeCards } from "@components/Board/utils/rearrangeCards";
 import { RequestParams } from "@/interfaces/httpRequest";
@@ -57,6 +57,7 @@ export const useAddCardMutation = () => {
     },
     {
       onSuccess: ({ code }: { code: number }) => {
+        handleThrowError(code);
         queryClient.invalidateQueries(cardListsKeys.all);
       },
       onError: (err) => {
