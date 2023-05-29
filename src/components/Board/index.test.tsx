@@ -4,19 +4,6 @@ import { customRender, waitFor } from "@utils/testUtils";
 import { describe, vi, expect } from "vitest";
 import { mockedCardLists } from "./mockData";
 import * as queries from "@/queries/cards";
-import {
-  AddCardRequest,
-  AddListRequest,
-  DeleteCardRequest,
-  DeleteListRequest,
-  EditCardMutationData,
-  EditCardPositionRequest,
-  EditCardRequest,
-  EditListRequest,
-  ResponseMessage,
-} from "@/queries/cards/interface";
-import { UseMutationResult } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import Board from ".";
 
 vi.mock("@/queries/cards");
@@ -26,42 +13,21 @@ describe("Board 테스트", () => {
     .spyOn(queries, "useCardsQuery")
     .mockImplementation(vi.fn().mockReturnValue({ data: mockedCardLists, isLoading: false, isSuccess: true }));
 
-  const useAddListMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
-  const useEditListMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
-  const useDeleteListMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
-  const useEditCardPositionMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
+  const useAddListMutationMock = vi.fn();
+  const useEditListMutationMock = vi.fn();
+  const useDeleteListMutationMock = vi.fn();
+  const useEditCardPositionMutationMock = vi.fn();
+  const useAddCardMutationMock = vi.fn();
+  const useDeleteCardMutationMock = vi.fn();
+  const useEditCardMutationMock = vi.fn();
 
-  const useAddCardMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
-  const useDeleteCardMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
-  const useEditCardMutationMock = vi.fn().mockResolvedValue({ mutate: vi.fn(), message: "succeed" });
-
-  vi.spyOn(queries, "useAddListMutation").mockReturnValue(
-    useAddListMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, AddListRequest, unknown>,
-  );
-  vi.spyOn(queries, "useEditListMutation").mockReturnValue(
-    useEditListMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, EditListRequest, unknown>,
-  );
-  vi.spyOn(queries, "useDeleteListMutation").mockReturnValue(
-    useDeleteListMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, DeleteListRequest, unknown>,
-  );
-  vi.spyOn(queries, "useEditCardPositionMutation").mockReturnValue(
-    useEditCardPositionMutationMock as unknown as UseMutationResult<
-      ResponseMessage,
-      AxiosError<unknown, any>,
-      EditCardPositionRequest,
-      EditCardMutationData
-    >,
-  );
-
-  vi.spyOn(queries, "useAddCardMutation").mockReturnValue(
-    useAddCardMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, AddCardRequest, unknown>,
-  );
-  vi.spyOn(queries, "useEditCardMutation").mockReturnValue(
-    useEditCardMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, EditCardRequest, unknown>,
-  );
-  vi.spyOn(queries, "useDeleteCardMutation").mockReturnValue(
-    useDeleteCardMutationMock as unknown as UseMutationResult<ResponseMessage, unknown, DeleteCardRequest, unknown>,
-  );
+  vi.spyOn(queries, "useAddListMutation").mockImplementation(useAddListMutationMock);
+  vi.spyOn(queries, "useEditListMutation").mockImplementation(useEditListMutationMock);
+  vi.spyOn(queries, "useDeleteListMutation").mockImplementation(useDeleteListMutationMock);
+  vi.spyOn(queries, "useEditCardPositionMutation").mockImplementation(useEditCardPositionMutationMock);
+  vi.spyOn(queries, "useAddCardMutation").mockImplementation(useAddCardMutationMock);
+  vi.spyOn(queries, "useEditCardMutation").mockImplementation(useEditCardMutationMock);
+  vi.spyOn(queries, "useDeleteCardMutation").mockImplementation(useDeleteCardMutationMock);
 
   it("Board 컴포넌트 렌더링 후 useCardsQuery 호출", () => {
     customRender(<Board searchKeyword="" />);
