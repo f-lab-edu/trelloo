@@ -1,5 +1,4 @@
-/* eslint-disable */
-import React from "react";
+import React, { useState } from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import {
   useCardsQuery,
@@ -24,6 +23,12 @@ const Board = ({ searchKeyword }: Props) => {
   const { mutate: deleteListMutate } = useDeleteListMutation();
   const { mutate: editListMutate } = useEditListMutation();
   const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
+
+  const [isListInputOpen, setIsListInputOpen] = useState(false);
+
+  const toggleListInputOpen = () => {
+    setIsListInputOpen(!isListInputOpen);
+  };
 
   const handleEditList = ({ id, title }: EditListRequest, options?: MutationOptions) => {
     editListMutate({ id, title }, { onSuccess: options?.onSuccess });
@@ -73,7 +78,11 @@ const Board = ({ searchKeyword }: Props) => {
           </Droppable>
         ))}
 
-        <CardListComposer onAddList={handleAddList} />
+        <CardListComposer
+          isInputOpen={isListInputOpen}
+          toggleInputOpen={toggleListInputOpen}
+          onAddList={handleAddList}
+        />
       </DragDropContext>
     </S.Container>
   );

@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import React from "react";
 import { customRender, waitFor } from "@utils/testUtils";
-import { describe, vi } from "vitest";
-import Board from ".";
+import { describe, vi, expect } from "vitest";
 import { mockedCardLists } from "./mockData";
 import * as queries from "@/queries/cards";
 import {
@@ -18,6 +17,7 @@ import {
 } from "@/queries/cards/interface";
 import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import Board from ".";
 
 vi.mock("@/queries/cards");
 

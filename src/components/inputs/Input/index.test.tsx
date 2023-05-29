@@ -1,8 +1,6 @@
 import React from "react";
-import { customRender, fireEvent } from "@utils/testUtils";
-import { describe, vi } from "vitest";
-import "@testing-library/jest-dom";
-import { act, cleanup } from "@testing-library/react";
+import { customRender, fireEvent, act, cleanup, waitFor } from "@utils/testUtils";
+import { describe, vi, expect } from "vitest";
 import Input from ".";
 
 describe("CardComposer 테스트", () => {
@@ -34,8 +32,10 @@ describe("CardComposer 테스트", () => {
     });
 
     expect(input.value).toBe("title");
-    // Need to fix
-    // expect(handleSubmit).toBeCalled();
+
+    waitFor(() => {
+      expect(handleSubmit).toBeCalled();
+    });
   });
 
   it("스냅샷 테스트", () => {

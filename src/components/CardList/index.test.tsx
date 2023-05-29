@@ -63,12 +63,14 @@ describe("CardListComposer 테스트", () => {
   it("인풋창에 텍스트 입력 후 제출 버튼 클릭 시 새 카드 생성", () => {
     const { result } = createMockedQuery(() => useCardsQuery());
 
-    waitFor(() => expect(result.current.isSuccess).toBe(true));
-    const cardLists = result.current.data;
-    expect(cardLists).toEqual(mockedCardLists);
-    const { getByText } = setup(cardLists?.data[0]);
-    const listTitle = getByText("list1");
-    expect(listTitle).toBeInTheDocument();
+    waitFor(() => {
+      expect(result.current.isSuccess).toBe(true);
+      const cardLists = result.current.data;
+      expect(cardLists).toEqual(mockedCardLists);
+      const { getByText } = setup(cardLists?.data[0]);
+      const listTitle = getByText("list1");
+      expect(listTitle).toBeInTheDocument();
+    });
   });
 
   it("스냅샷 테스트", () => {

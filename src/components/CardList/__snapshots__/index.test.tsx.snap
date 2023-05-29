@@ -3,7 +3,6 @@
 exports[`CardListComposer 테스트 > 스냅샷 테스트 1`] = `
 {
   "getByPlaceholderText": [Function],
-  "getByTestId": [Function],
   "getByText": [Function],
 }
 `;
