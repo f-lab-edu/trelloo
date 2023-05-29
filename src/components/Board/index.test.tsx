@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import React from "react";
-import { customRender, waitFor } from "@utils/testUtils";
 import { describe, vi, expect } from "vitest";
+import { customRender, waitFor } from "@utils/testUtils";
 import { mockedCardLists } from "./mockData";
 import * as queries from "@/queries/cards";
 import Board from ".";

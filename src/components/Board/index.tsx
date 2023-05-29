@@ -19,10 +19,10 @@ interface Props {
 
 const Board = ({ searchKeyword }: Props) => {
   const { data: cardLists } = useCardsQuery({ search: searchKeyword });
-  const { mutate: addListMutate } = useAddListMutation();
-  const { mutate: deleteListMutate } = useDeleteListMutation();
-  const { mutate: editListMutate } = useEditListMutation();
-  const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
+  const addListMutation = useAddListMutation();
+  const deleteListMutation = useDeleteListMutation();
+  const editListMutation = useEditListMutation();
+  const editCardPositionMutation = useEditCardPositionMutation();
 
   const [isListInputOpen, setIsListInputOpen] = useState(false);
 
@@ -31,15 +31,15 @@ const Board = ({ searchKeyword }: Props) => {
   };
 
   const handleEditList = ({ id, title }: EditListRequest, options?: MutationOptions) => {
-    editListMutate({ id, title }, { onSuccess: options?.onSuccess });
+    editListMutation.mutate({ id, title }, { onSuccess: options?.onSuccess });
   };
 
   const handleDeleteList = ({ id }: DeleteListRequest) => {
-    deleteListMutate({ id });
+    deleteListMutation.mutate({ id });
   };
 
   const handleAddList = ({ title }: AddListRequest, options?: MutationOptions) => {
-    addListMutate({ title }, { onSuccess: options?.onSuccess });
+    addListMutation.mutate({ title }, { onSuccess: options?.onSuccess });
   };
 
   const handleDragEnd = (result: DropResult) => {
@@ -52,7 +52,7 @@ const Board = ({ searchKeyword }: Props) => {
       return;
     }
 
-    editCardPositionMutate({
+    editCardPositionMutation.mutate({
       cardId: draggableId,
       listId: destination.droppableId,
       index: destination.index,
