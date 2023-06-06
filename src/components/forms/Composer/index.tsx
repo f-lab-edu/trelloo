@@ -28,7 +28,7 @@ function Composer({ isOpen, toggleInputOpen, btnText, submitBtnText, children, o
             <Button type="submit" appearance={{ type: "blue" }}>
               {submitBtnText}
             </Button>
-            <S.CloseButton onClick={toggleInputOpen} />
+            <S.CloseButton onClick={toggleInputOpen} data-testId="cardInputCloseButton" />
           </S.SubmitButtonWrapper>
         </div>
       )}

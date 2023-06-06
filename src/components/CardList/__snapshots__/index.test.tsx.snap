@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CardListComposer 테스트 > 스냅샷 테스트 1`] = `
+{
+  "getByPlaceholderText": [Function],
+  "getByText": [Function],
+}
+`;
