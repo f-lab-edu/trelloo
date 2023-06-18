@@ -9,7 +9,7 @@
     "serve": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=9bfb91eb89ef",
+    "chromatic": "chromatic --project-token=9bfb91eb89ef",
     "lint": "eslint ."
   },
   "devDependencies": {
