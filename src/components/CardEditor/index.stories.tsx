@@ -24,3 +24,4 @@ const Template = () => {
   );
 };
 export const Default = Template.bind({});
+export const Default2 = Template.bind({});
