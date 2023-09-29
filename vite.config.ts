@@ -29,4 +29,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./src/setupTest.ts"],
   },
+  optimizeDeps: {
+    exclude: ["js-big-decimal"],
+  },
 } as VitestConfigExport);
