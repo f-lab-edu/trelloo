@@ -34,6 +34,7 @@ footer, header, hgroup, main, menu, nav, section {
 
 button {
   cursor: pointer;
+  background-color: transparent;
 }
 body {
   line-height: 1;
