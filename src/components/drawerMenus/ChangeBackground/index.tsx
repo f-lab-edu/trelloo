@@ -1,13 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import useFunnel from "@/hooks/useFunnel";
+import { changeBackground } from "@/store/slices/background";
 import ImageCard from "@components/cards/listCard";
 import Menu from "@components/menuList";
 import BackgroundPhotos from "../BackgroundPhotos";
 import BackgroundColors from "@components/BackgroundColors";
-import useFunnel from "@/hooks/useFunnel";
 
 function ChangeBackground() {
-  const { Funnel, handleStep } = useFunnel<"changeBackground" | "photos" | "colors">("changeBackground");
+  const dispatch = useDispatch();
+  const { Funnel, handleStep } = useFunnel<"changeBackground" | "photos" | "colors">("photos");
 
+  const handleBackgroundChange = (image: string) => {
+    dispatch(changeBackground(image));
+  };
   return (
     <div>
       <Funnel>
@@ -36,7 +42,7 @@ function ChangeBackground() {
         </Funnel.Step>
 
         <Funnel.Step name="photos">
-          <BackgroundPhotos />
+          <BackgroundPhotos onClick={handleBackgroundChange} />
         </Funnel.Step>
 
         <Funnel.Step name="colors">

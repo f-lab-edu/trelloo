@@ -13,7 +13,7 @@ export const DrawerStateContext = createContext(false);
 export const DrawerDispatchContext = createContext<DrawerDispatch | null>(null);
 
 function DrawerProvider({ children }: Props) {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(true);
 
   const open = useCallback(() => {
     setOpen(true);
