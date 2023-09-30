@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
-interface ContainerProps {
-  background: string;
-}
-
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div`
   padding: 10px 15px;
   display: flex;
-  background-image: url(${({ background }) => background});
+  height: 100%;
 `;

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import {
   useCardsQuery,
@@ -19,7 +18,6 @@ interface Props {
 }
 
 const Board = ({ searchKeyword }: Props) => {
-  const background = useSelector((state: any) => state.background);
   const { data: cardLists } = useCardsQuery({ search: searchKeyword });
   const addListMutation = useAddListMutation();
   const deleteListMutation = useDeleteListMutation();
@@ -62,7 +60,7 @@ const Board = ({ searchKeyword }: Props) => {
   };
 
   return (
-    <S.Container background={background}>
+    <S.Container>
       <DragDropContext onDragEnd={handleDragEnd}>
         {cardLists?.data?.map((cardList) => (
           <Droppable key={cardList.id} droppableId={cardList.id}>
