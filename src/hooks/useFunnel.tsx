@@ -1,14 +1,18 @@
-import React, { ReactElement, ReactNode, useState } from "react";
-
-interface Props {
-  children: ReactNode;
-}
+import React, { ReactElement, ReactNode, useEffect } from "react";
+import { SEARCH_PARAMS_KEY } from "@/constants";
+import { useSearchParams } from "react-router-dom";
 
 function useFunnel<T>(initialStep: T) {
-  const [step, setStep] = useState<T>(initialStep);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const step = searchParams.get(SEARCH_PARAMS_KEY.FUNNEL_STEPS);
+
+  useEffect(() => {
+    handleStep(initialStep);
+  }, []);
 
   const handleStep = (step: T) => {
-    setStep(step);
+    searchParams.set(SEARCH_PARAMS_KEY.FUNNEL_STEPS, step as string);
+    setSearchParams(searchParams);
   };
 
   const Funnel = ({ children }: { children: ReactElement[] }) => {
@@ -16,11 +20,13 @@ function useFunnel<T>(initialStep: T) {
     return <>{targetStep}</>;
   };
 
-  const Step = ({ children, nextStep }: Props & { name: string; nextStep?: T }) => {
-    return <div onClick={() => nextStep && setStep(nextStep)}>{children}</div>;
+  const Step = ({ children, nextStep }: { children: ReactNode; name: T; nextStep?: T }) => {
+    return <div onClick={() => nextStep && handleStep(nextStep)}>{children}</div>;
   };
 
-  return { Funnel, Step, handleStep };
+  Funnel.Step = Step;
+
+  return { Funnel, handleStep };
 }
 
 export default useFunnel;
