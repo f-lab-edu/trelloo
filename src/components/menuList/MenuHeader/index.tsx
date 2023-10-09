@@ -1,9 +1,7 @@
 import React from "react";
-import { SEARCH_PARAMS_KEY } from "@/constants";
 import useDrawer from "@/hooks/useDrawer";
 import CloseButton from "@components/buttons/CloseButton";
 import GoBackButton from "@components/buttons/GoBackButton";
-import useFunnel from "@/hooks/useFunnel";
 import * as S from "./style";
 
 interface Props {
@@ -11,17 +9,14 @@ interface Props {
   children: string;
 }
 
-function MenuTitle({ hasGoBackButton = false, children }: Props) {
-  const { closeDrawer } = useDrawer();
-  const { goBack, initializeStep } = useFunnel();
+function MenuHeader({ hasGoBackButton = false, children }: Props) {
+  const { closeDrawer, goBack } = useDrawer();
 
   const handleGoBack = () => {
     goBack();
   };
 
   const handleClose = () => {
-    initializeStep(SEARCH_PARAMS_KEY.MENU);
-
     closeDrawer();
   };
 
@@ -34,4 +29,4 @@ function MenuTitle({ hasGoBackButton = false, children }: Props) {
   );
 }
 
-export default MenuTitle;
+export default MenuHeader;
