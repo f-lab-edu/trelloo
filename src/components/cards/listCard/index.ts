@@ -1,13 +1,17 @@
 import AddButton from "./AddButton";
-import Image from "./Image";
+import ColorThumbnail from "./ColorThumbnail";
+import ImageCard from "./ImageCard";
 import ImageList from "./ImageList";
+import ImageThumbnail from "./ImageThumbnail";
 import Title from "./Title";
 
-function ImageCard() {}
+function ListCard() {}
 
-ImageCard.Image = Image;
-ImageCard.Title = Title;
-ImageCard.AddButton = AddButton;
-ImageCard.ImageList = ImageList;
+ListCard.ImageCard = ImageCard;
+ListCard.ImageThumbnail = ImageThumbnail;
+ListCard.ColorThumbnail = ColorThumbnail;
+ListCard.Title = Title;
+ListCard.AddButton = AddButton;
+ListCard.ImageList = ImageList;
 
-export default ImageCard;
+export default ListCard;

@@ -19,13 +19,8 @@ export const SEARCH_PARAMS_KEY = {
   FUNNEL_STEPS: "funnel-steps",
 };
 
-export const DRAWER_MENU_SEARCH_PARAMS = {
+export const DRAWER_MENU = {
   ALL: "all",
-  CHANGE_BACKGROUND: "change_background",
-  PHOTOS: "photos",
-};
-
-export const DRAWER_CONTENT = {
-  CHANGE_BACKGROUND: "changeBackground",
+  CHANGE_BACKGROUND: "change-background",
   PHOTOS: "photos",
 };

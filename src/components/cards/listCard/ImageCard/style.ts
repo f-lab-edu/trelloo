@@ -14,7 +14,7 @@ export const Button = styled.button`
   }
 `;
 
-export const Image = styled.img`
+export const ImageCard = styled.img`
   width: 100%;
   border-radius: 5px;
 `;
