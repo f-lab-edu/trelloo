@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "@components/menuList";
 import { TableOutlined, SettingOutlined, UserOutlined, AppstoreOutlined, UngroupOutlined } from "@ant-design/icons";
-import { DRAWER_CONTENT, SEARCH_PARAMS_KEY } from "@/constants";
+import { DRAWER_MENU, SEARCH_PARAMS_KEY } from "@/constants";
 import { useSearchParams } from "react-router-dom";
 
 function AllLists() {
@@ -10,6 +10,7 @@ function AllLists() {
     searchParams.set(SEARCH_PARAMS_KEY.MENU, content);
     setSearchParams(searchParams);
   };
+
   return (
     <>
       <Menu.Title>Menu</Menu.Title>
@@ -17,7 +18,7 @@ function AllLists() {
         <Menu.ListTitle>menu title</Menu.ListTitle>
         <Menu.List>
           <Menu.Button Icon={<AppstoreOutlined />}>About this board</Menu.Button>
-          <Menu.Button Icon={<UserOutlined />} onClick={() => handleContent(DRAWER_CONTENT.CHANGE_BACKGROUND)}>
+          <Menu.Button Icon={<UserOutlined />} onClick={() => handleContent(DRAWER_MENU.CHANGE_BACKGROUND)}>
             Change Background
           </Menu.Button>
           <Menu.Button Icon={<SettingOutlined />}>Custom fields</Menu.Button>
