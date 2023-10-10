@@ -15,7 +15,11 @@ const fetchRequest = <TParams>({
 }: RequestParams<TParams>) => {
   const convertedParams = queryParams
     ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {
-        newObj[key] = value.toString();
+        if (typeof value === "string") {
+          newObj[key] = value;
+        } else if (typeof value === "number") {
+          newObj[key] = value.toString();
+        }
         return newObj;
       }, {})
     : "";

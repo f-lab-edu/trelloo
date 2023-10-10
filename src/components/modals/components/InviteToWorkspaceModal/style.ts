@@ -29,7 +29,7 @@ export const Title = styled.h1`
 `;
 
 export const Input = styled(AntdInput).attrs(() => ({
-  styles: {
+  style: {
     height: 40,
   },
 }))`
