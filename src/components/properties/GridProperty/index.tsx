@@ -3,16 +3,16 @@ import * as S from "./style";
 
 interface Props {
   name: string;
-  id?: string;
   children: ReactNode;
 }
-function Property({ name, id, children }: Props) {
+
+function GridProperty({ name, children }: Props) {
   return (
     <S.Container>
-      <S.Label htmlFor={id ?? name}>{name}</S.Label>
       {children}
+      {name}
     </S.Container>
   );
 }
 
-export default Property;
+export default GridProperty;

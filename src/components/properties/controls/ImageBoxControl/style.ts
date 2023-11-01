@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
   color: black;
   border: 1px solid hsl(var(--input));
   border-radius: 5px;
-  background-color: aliceblue;
 `;
