@@ -2,6 +2,9 @@ import React from "react";
 import * as S from "./style";
 import Menu from "@components/menuList";
 import Properties from "@components/properties";
+import ImageBoxControl from "@components/properties/controls/ImageBoxControl";
+import { IoColorPaletteSharp } from "react-icons/io5";
+import { MdTexture } from "react-icons/md";
 
 function BackgroundProperties() {
   return (
@@ -40,7 +43,7 @@ function BackgroundProperties() {
           </Properties.Property>
 
           <Properties.Property name="Equirect">
-            <Properties.ImageControl />
+            <Properties.ImageButtonControl />
           </Properties.Property>
         </Properties.Group>
 
@@ -60,6 +63,10 @@ function BackgroundProperties() {
             <Properties.ColorControl color="lightgray" />
           </Properties.Property>
 
+          <Properties.Property name="Emissive">
+            <Properties.ColorSliderControl color="lightgray" />
+          </Properties.Property>
+
           <Properties.Property name="Shininess">
             <Properties.SliderControl />
           </Properties.Property>
@@ -70,17 +77,29 @@ function BackgroundProperties() {
         </Properties.Group>
 
         <Properties.Group name="Transform">
-          <Properties.PropertyVertical name="Position">
+          <Properties.Property name="Position" appearance={{ isVertical: true }}>
             <Properties.CoordControl />
-          </Properties.PropertyVertical>
+          </Properties.Property>
 
-          <Properties.PropertyVertical name="Rotation">
+          <Properties.Property name="Rotation" appearance={{ isVertical: true }}>
             <Properties.CoordControl />
-          </Properties.PropertyVertical>
+          </Properties.Property>
 
-          <Properties.PropertyVertical name="Scale">
+          <Properties.Property name="Scale" appearance={{ isVertical: true }}>
             <Properties.CoordControl />
-          </Properties.PropertyVertical>
+          </Properties.Property>
+        </Properties.Group>
+
+        <Properties.Group name="Background" appearance={{ horizontal: true }}>
+          <Properties.GridProperty name="Default">
+            <ImageBoxControl Icon={IoColorPaletteSharp} />
+          </Properties.GridProperty>
+          <Properties.GridProperty name="Texture">
+            <ImageBoxControl Icon={MdTexture} />
+          </Properties.GridProperty>
+          <Properties.GridProperty name="Color">
+            <ImageBoxControl Icon={IoColorPaletteSharp} />
+          </Properties.GridProperty>
         </Properties.Group>
       </div>
     </S.Container>

@@ -5,10 +5,13 @@ interface Props {
   name: string;
   id?: string;
   children: ReactNode;
+  appearance?: {
+    isVertical?: boolean;
+  };
 }
-function Property({ name, id, children }: Props) {
+function Property({ name, id, children, appearance }: Props) {
   return (
-    <S.Container>
+    <S.Container isVertical={appearance?.isVertical}>
       <S.Label htmlFor={id ?? name}>{name}</S.Label>
       {children}
     </S.Container>
