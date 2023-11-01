@@ -22,5 +22,4 @@ export const SEARCH_PARAMS_KEY = {
 export const DRAWER_MENU = {
   ALL: "all",
   CHANGE_BACKGROUND: "change-background",
-  PHOTOS: "photos",
 };

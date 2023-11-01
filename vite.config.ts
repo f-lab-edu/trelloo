@@ -13,6 +13,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: "@src", replacement: resolve(__dirname, "src") },
+      { find: "@", replacement: resolve(__dirname, "src") },
       {
         find: "@components",
         replacement: resolve(__dirname, "src/components"),
