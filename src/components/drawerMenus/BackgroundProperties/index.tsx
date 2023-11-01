@@ -23,6 +23,48 @@ function BackgroundProperties() {
             <Properties.ToggleControl id="FogActive" />
           </Properties.Property>
         </Properties.Group>
+
+        <Properties.Group name="Appearance">
+          <Properties.Property name="Transparency">
+            <Properties.SliderControl />
+          </Properties.Property>
+        </Properties.Group>
+
+        <Properties.Group name="Environment">
+          <Properties.Property name="Equirect">
+            <Properties.ToggleControl id="Equirect" />
+          </Properties.Property>
+
+          <Properties.Property name="Equirect">
+            <Properties.SliderControl />
+          </Properties.Property>
+
+          <Properties.Property name="Equirect">
+            <Properties.ImageControl />
+          </Properties.Property>
+        </Properties.Group>
+
+        <Properties.Group name="Tone Mapping">
+          <Properties.Property name="Mode">{/* <Properties.DropdownControl /> */}</Properties.Property>
+
+          <Properties.Property name="Exposure">
+            <Properties.SliderControl />
+          </Properties.Property>
+        </Properties.Group>
+
+        <Properties.Group name="Material Property">
+          <Properties.Property name="MeshColor">
+            <Properties.ColorControl color="lightgray" />
+          </Properties.Property>
+
+          <Properties.Property name="Shininess">
+            <Properties.SliderControl />
+          </Properties.Property>
+
+          <Properties.Property name="Opacity">
+            <Properties.SliderControl />
+          </Properties.Property>
+        </Properties.Group>
       </div>
     </S.Container>
   );
