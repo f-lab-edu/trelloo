@@ -2,9 +2,8 @@ import { mockedCardLists } from "./data/cards";
 import * as I from "../../src/queries/cards/interface";
 import { DefaultBodyType, PathParams, ResponseComposition, rest, RestContext, RestRequest } from "msw";
 import { v4 as uuidv4 } from "uuid";
-import { SEARCH_PARAMS_KEY } from "../../src/constants";
 
-const checkAuthorization = async (
+const checkAuthorization = (
   req: RestRequest<any, PathParams<string>>,
   res: ResponseComposition<DefaultBodyType>,
   ctx: RestContext,
@@ -15,18 +14,18 @@ const checkAuthorization = async (
 };
 
 export const cardsHandlers = [
-  rest.get("/cards", async (req, res, ctx) => {
-    return await res(ctx.delay(), ctx.status(201), ctx.json(mockedCardLists)); //return mock data
+  rest.get("/cards", (req, res, ctx) => {
+    return res(ctx.delay(), ctx.status(201), ctx.json(mockedCardLists));
   }),
 
-  rest.post<I.AddCardRequest>("/cards", async (req, res, ctx) => {
+  rest.post<I.AddCardRequest>("/cards", (req, res, ctx) => {
     const { description } = req.body;
     const id = uuidv4();
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+    const isAuthorized = checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return await res(
+      return res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -34,7 +33,7 @@ export const cardsHandlers = [
       );
     }
 
-    return await res(
+    return res(
       ctx.delay(),
       ctx.status(201),
       ctx.json({
@@ -45,11 +44,11 @@ export const cardsHandlers = [
     );
   }),
 
-  rest.put<I.EditCardRequest>("/cards", async (req, res, ctx) => {
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+  rest.put<I.EditCardRequest>("/cards", (req, res, ctx) => {
+    const isAuthorized = checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return await res(
+      return res(
         ctx.delay(),
         ctx.status(401),
         ctx.json({
@@ -58,7 +57,7 @@ export const cardsHandlers = [
       );
     }
 
-    return await res(
+    return res(
       ctx.status(200),
       ctx.json({
         message: "Card updated",
@@ -66,18 +65,18 @@ export const cardsHandlers = [
     );
   }),
 
-  rest.delete<I.DeleteCardRequest>("/cards", async (req, res, ctx) => {
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+  rest.delete<I.DeleteCardRequest>("/cards", (req, res, ctx) => {
+    const isAuthorized = checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return await res(
+      return res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
         }),
       );
     }
-    return await res(
+    return res(
       ctx.status(200),
       ctx.json({
         message: "Card deleted",
@@ -85,14 +84,14 @@ export const cardsHandlers = [
     );
   }),
 
-  rest.post<I.AddListRequest>("/lists", async (req, res, ctx) => {
+  rest.post<I.AddListRequest>("/lists", (req, res, ctx) => {
     const { title } = req.body as { title: string };
     const id = uuidv4();
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+    const isAuthorized = checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return await res(
+      return res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -100,7 +99,7 @@ export const cardsHandlers = [
       );
     }
 
-    return await res(
+    return res(
       ctx.status(201),
       ctx.json({
         message: "List created",
@@ -110,11 +109,11 @@ export const cardsHandlers = [
     );
   }),
 
-  rest.put<I.EditListRequest>("/lists", async (req, res, ctx) => {
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+  rest.put<I.EditListRequest>("/lists", (req, res, ctx) => {
+    const isAuthorized = checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return await res(
+      return res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -122,7 +121,7 @@ export const cardsHandlers = [
       );
     }
 
-    return await res(
+    return res(
       ctx.status(200),
       ctx.json({
         message: "List updated",
@@ -130,10 +129,10 @@ export const cardsHandlers = [
     );
   }),
 
-  rest.put<I.EditCardPositionRequest>("/cards/:cardId/move", async (req, res, ctx) => {
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+  rest.put<I.EditCardPositionRequest>("/cards/:cardId/move", (req, res, ctx) => {
+    const isAuthorized = checkAuthorization(req, res, ctx);
     if (!isAuthorized) {
-      return await res(
+      return res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -141,7 +140,7 @@ export const cardsHandlers = [
       );
     }
 
-    return await res(
+    return res(
       ctx.status(200),
       ctx.json({
         message: "Card position updated",
@@ -149,11 +148,11 @@ export const cardsHandlers = [
     );
   }),
 
-  rest.delete<I.DeleteListRequest>("/lists", async (req, res, ctx) => {
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+  rest.delete<I.DeleteListRequest>("/lists", (req, res, ctx) => {
+    const isAuthorized = checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return await res(
+      return res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -161,7 +160,7 @@ export const cardsHandlers = [
       );
     }
 
-    return await res(
+    return res(
       ctx.status(200),
       ctx.json({
         message: "List deleted",
