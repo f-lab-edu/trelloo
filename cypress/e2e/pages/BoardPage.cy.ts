@@ -8,6 +8,6 @@ describe("run application", () => {
   });
 
   it("displays Board", () => {
-    cy.contains("Menu").should("be.visible");
+    cy.contains("Trelloo").should("be.visible");
   });
 });

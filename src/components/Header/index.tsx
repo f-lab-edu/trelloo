@@ -9,7 +9,7 @@ function Header() {
       <S.Container>
         <S.Nav>
           <Button Icon={<AppstoreOutlined />} />
-          <Button Icon={<AppstoreOutlined />}>Trello</Button>
+          <Button Icon={<AppstoreOutlined />}>Trelloo</Button>
           <Button Icon={<DownOutlined />} isIconBehindText={true}>
             Workspaces
           </Button>
