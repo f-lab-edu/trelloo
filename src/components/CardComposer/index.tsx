@@ -36,7 +36,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
   return (
     <>
       {isCardInputOpened ? (
-        <S.CardInputContainer onSubmit={handleSubmit(handleAddCard)}>
+        <S.CardInputContainer onSubmit={() => handleSubmit(handleAddCard)}>
           <Spin spinning={isLoading}>
             <S.Card>
               <input onChange={onChange} value={value} placeholder="Enter a title for this card..." />

@@ -1,7 +1,7 @@
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
-export type ButtonStyleType = "transparent" | "darkGray" | "gray" | "blue" | "black";
+export type ButtonStyleType = "transparent" | "gray" | "blue" | "black";
 
 interface Color {
   appearance?: {
@@ -13,10 +13,6 @@ const buttonColor = {
   transparent: {
     backgroundColor: "transparent",
     color: theme.color.black,
-  },
-  darkGray: {
-    backgroundColor: theme.color.cardEditorGray,
-    color: theme.color.white,
   },
   gray: {
     backgroundColor: theme.color.buttonBackground,
