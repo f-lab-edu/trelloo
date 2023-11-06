@@ -46,8 +46,7 @@ function BackgroundProperties() {
 
         <Properties.Group name="Tone Mapping">
           <Properties.Property name="Mode">
-            {/* TODO: 렌더링 위치 이슈 - drawer 컴포넌트 교체 후 표시 */}
-            {/* <Properties.SelectControl /> */}
+            <Properties.SelectControl />
           </Properties.Property>
 
           <Properties.Property name="Exposure">
@@ -67,20 +66,6 @@ function BackgroundProperties() {
           <Properties.Property name="Opacity">
             <Properties.SliderControl />
           </Properties.Property>
-        </Properties.Group>
-
-        <Properties.Group name="Transform">
-          <Properties.PropertyVertical name="Position">
-            <Properties.CoordControl />
-          </Properties.PropertyVertical>
-
-          <Properties.PropertyVertical name="Rotation">
-            <Properties.CoordControl />
-          </Properties.PropertyVertical>
-
-          <Properties.PropertyVertical name="Scale">
-            <Properties.CoordControl />
-          </Properties.PropertyVertical>
         </Properties.Group>
       </div>
     </S.Container>
