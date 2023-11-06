@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import loadable from "@loadable/component";
 import { SEARCH_PARAMS_KEY } from "@/constants";
 import Sider from "@components/Sider";
-import Drawer from "@components/Drawer";
+import DrawerProvider from "@components/providers/DrawerProvider";
 import Header from "@components/Header";
 import Menu from "@components/Menu";
 import BoardSkeleton from "@components/skeletons/BoardSkeleton";
@@ -11,14 +12,15 @@ import NoDataFallback from "@components/fallbacks/NoDataFallback";
 import SuspenseBoundary from "@components/SuspenseBoundary";
 import * as S from "./style";
 
-const Board = loadable(async () => await import("@components/Board"));
+const Board = loadable(() => import("@components/Board"));
+const Drawer = loadable(() => import("@components/Drawer"));
 
 interface BoardProps {
   searchKeyword: string;
 }
 
 const BoardPage: React.FC = () => {
-  const [isOpen, setOpen] = useState(false);
+  const background = useSelector((state: { background: { image: string; color: string } }) => state.background);
   const [searchParams, setSearchParams] = useSearchParams(window.location.search);
   const searchKeyword = searchParams.get(SEARCH_PARAMS_KEY.SEARCH) ?? "";
 
@@ -27,23 +29,17 @@ const BoardPage: React.FC = () => {
     setSearchParams(searchParams);
   };
 
-  const showDrawer = () => {
-    setOpen(true);
-  };
-
-  const onClose = () => {
-    setOpen(false);
-  };
-
   return (
-    <S.Container>
+    <S.Container backgroundImage={background.image} backgroundColor={background.color}>
       <Header />
       <S.ContentLayout>
         <Sider />
         <S.Main>
-          <Menu showDrawer={showDrawer} boardName={"boardName"} searchCards={searchCards} />
-          <BoardWrapper searchKeyword={searchKeyword} />
-          <Drawer isOpen={isOpen} onClose={onClose} />
+          <DrawerProvider>
+            <Menu boardName={"boardName"} searchCards={searchCards} />
+            <BoardWrapper searchKeyword={searchKeyword} />
+            <Drawer />
+          </DrawerProvider>
         </S.Main>
       </S.ContentLayout>
     </S.Container>

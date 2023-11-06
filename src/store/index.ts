@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import modalReducer from "./slices/modal";
+import backgroundReducer from "./slices/background";
 
 export const store = configureStore({
   reducer: {
-    modal: modalReducer,
+    background: backgroundReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

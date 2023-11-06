@@ -27,4 +27,11 @@ export const DETAIL_CODE = {
 
 export const SEARCH_PARAMS_KEY = {
   SEARCH: "search",
+  MENU: "menu",
+  FUNNEL_STEPS: "funnel-steps",
+};
+
+export const DRAWER_MENU = {
+  ALL: "all",
+  CHANGE_BACKGROUND: "change-background",
 };
