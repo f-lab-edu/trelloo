@@ -16,7 +16,6 @@ interface Props {
 
 const CardComposer = ({ isWritingCard, onCardInputToggle, onClick, listId }: Props) => {
   const [cardInputValue, setCardInputValue] = useState("");
-
   return (
     <>
       {isWritingCard ? (
