@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BoardPage />} />
       </Routes>
+      <Modals />
     </BrowserRouter>
   );
 }
