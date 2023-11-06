@@ -12,7 +12,7 @@ interface Props {
   handleClickAddCard: () => void;
 }
 
-const CardComposer = ({ isWritingCard, handleClickAddCard }: Props) => {
+const AddCard = ({ isWritingCard, handleClickAddCard }: Props) => {
   const { refetch } = useGetCardLists();
   const { mutateAsync } = useAddCardMutation();
 
@@ -54,4 +54,4 @@ const CardComposer = ({ isWritingCard, handleClickAddCard }: Props) => {
   );
 };
 
-export default CardComposer;
+export default AddCard;
