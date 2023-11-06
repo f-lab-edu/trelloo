@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { request } from "@/utils/httpRequest";
+import { mockedRequest, mockedAuthorizedRequest } from "@/utils/httpRequest";
 import type * as I from "./interface";
 
 const cardListsKeys = {
@@ -10,9 +10,8 @@ export const useCardsQuery = () => {
   return useQuery(
     cardListsKeys.all,
     async () => {
-      return await request.get<I.GetCardListsResponse[]>({
+      return await mockedRequest.get<I.GetCardListsResponse[]>({
         path: "/cards",
-        isMock: true,
       });
     },
     {
@@ -24,12 +23,10 @@ export const useCardsQuery = () => {
 export const useAddCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (params: I.AddCardRequest) => {
-      return await request.post<I.ResponseMessage>({
+    async (data: I.AddCardRequest) => {
+      return await mockedAuthorizedRequest.post<I.ResponseMessage>({
         path: "/cards",
-        params,
-        isMock: true,
-        shouldAuthorize: true,
+        data,
       });
     },
     {
@@ -43,8 +40,8 @@ export const useAddCardMutation = () => {
 export const useEditCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (params: I.EditCardRequest) => {
-      return await request.put<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
+    async (data: I.EditCardRequest) => {
+      return await mockedAuthorizedRequest.put<I.ResponseMessage>({ path: "/cards", data });
     },
     {
       onSuccess: async () => {
@@ -57,8 +54,8 @@ export const useEditCardMutation = () => {
 export const useDeleteCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (params: I.DeleteCardRequest) => {
-      return await request.delete<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
+    async (data: I.DeleteCardRequest) => {
+      return await mockedAuthorizedRequest.delete<I.ResponseMessage>({ path: "/cards", data });
     },
     {
       onSuccess: async () => {
@@ -71,12 +68,10 @@ export const useDeleteCardMutation = () => {
 export const useAddListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (params: I.AddListRequest) => {
-      return await request.post<I.ResponseMessage>({
+    async (data: I.AddListRequest) => {
+      return await mockedAuthorizedRequest.post<I.ResponseMessage>({
         path: "/lists",
-        params,
-        isMock: true,
-        shouldAuthorize: true,
+        data,
       });
     },
     {
@@ -90,8 +85,8 @@ export const useAddListMutation = () => {
 export const useEditListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (params: I.EditListRequest) => {
-      return await request.put<I.ResponseMessage>({ path: "/lists", params, isMock: true, shouldAuthorize: true });
+    async (data: I.EditListRequest) => {
+      return await mockedAuthorizedRequest.put<I.ResponseMessage>({ path: "/lists", data });
     },
     {
       onSuccess: async () => {
@@ -100,15 +95,14 @@ export const useEditListMutation = () => {
     },
   );
 };
+
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({ cardId, destination, source }: I.EditCardPositionParam & I.EditCardPositionRequest) => {
-      return await request.put<I.ResponseMessage>({
+      return await mockedAuthorizedRequest.put<I.ResponseMessage>({
         path: `/cards/${cardId}/move`,
-        params: { destination, source },
-        isMock: true,
-        shouldAuthorize: true,
+        data: { destination, source },
       });
     },
     {
@@ -122,8 +116,8 @@ export const useEditCardPositionMutation = () => {
 export const useDeleteListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (params: I.DeleteListRequest) => {
-      return await request.delete<I.ResponseMessage>({ path: "/lists", params, isMock: true, shouldAuthorize: true });
+    async (data: I.DeleteListRequest) => {
+      return await mockedAuthorizedRequest.delete<I.ResponseMessage>({ path: "/lists", data });
     },
     {
       onSuccess: async () => {

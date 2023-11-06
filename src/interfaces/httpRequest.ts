@@ -1,11 +1,16 @@
-export interface RequestParams<TQueryParams = Params, TParams = {}> {
+type RequestMethod = "get" | "post" | "put" | "delete";
+
+export type data = Record<string, string>;
+
+export type HandleRequestParams = Pick<RequestParams, "isMock" | "config">;
+
+export interface RequestParams<TParams = data, TData = {}> {
   path: string;
   method?: RequestMethod;
+  data?: TData;
   params?: TParams;
-  queryParams?: TQueryParams;
   isMock?: boolean;
-  shouldAuthorize?: boolean;
+  config?: {
+    includeAuthorization?: boolean;
+  };
 }
-
-export type Params = Record<string, string>;
-type RequestMethod = "get" | "post" | "put" | "delete";

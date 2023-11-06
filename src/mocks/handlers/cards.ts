@@ -1,4 +1,4 @@
-import {  type EditCardPositionRequest } from "../../queries/cards/interface";
+import { type EditCardPositionParam, type EditCardPositionRequest } from "../../queries/cards/interface";
 import {
   type AddCardRequest,
   type AddListRequest,
@@ -6,8 +6,9 @@ import {
   type DeleteListRequest,
   type EditCardRequest,
   type EditListRequest,
+  type ResponseMessage,
 } from "@/queries/cards/interface";
-import { type DefaultBodyType, type PathParams, type ResponseComposition, rest, type RestContext, type RestRequest } from "msw";
+import { type DefaultBodyType, type ResponseComposition, rest, type RestContext, type RestRequest } from "msw";
 import { v4 as uuidv4 } from "uuid";
 import {
   addCard,
@@ -21,7 +22,7 @@ import {
 } from "../dbfunctions";
 
 const handleAuthError = async (
-  req: RestRequest<any, PathParams<string>>,
+  req: RestRequest<string, Record<string, any>>,
   res: ResponseComposition<DefaultBodyType>,
   ctx: RestContext,
 ) => {
@@ -43,8 +44,8 @@ export const cardsHandlers = [
       return await res(ctx.delay(), ctx.status(201), ctx.json(data));
   }),
 
-  rest.post<AddCardRequest>("/cards", async(req, res, ctx) => {
-    const { listId, description } = req.body;
+  rest.post<string, ResponseMessage>("/cards", async (req, res, ctx) => {
+    const { description, listId } = JSON.parse(req.body) as AddCardRequest;
     const id = uuidv4();
 
     const error = handleAuthError(req, res, ctx);
@@ -62,8 +63,8 @@ export const cardsHandlers = [
       );
   }),
 
-  rest.put<EditCardRequest>("/cards", async(req, res, ctx) => {
-    const { description, id } = req.body;
+  rest.put<string, ResponseMessage>("/cards", async (req, res, ctx) => {
+    const { id, description } = JSON.parse(req.body) as EditCardRequest;
 
     const error = handleAuthError(req, res, ctx);
     if (error != null) return await error;
@@ -77,8 +78,8 @@ export const cardsHandlers = [
       );
   }),
 
-  rest.delete<DeleteCardRequest>("/cards", async(req, res, ctx) => {
-    const { id } = req.body;
+  rest.delete<string, ResponseMessage>("/cards", async (req, res, ctx) => {
+    const { id } = JSON.parse(req.body) as DeleteCardRequest;
 
     const error = handleAuthError(req, res, ctx);
     if (error != null) return await error;
@@ -92,8 +93,8 @@ export const cardsHandlers = [
       );
   }),
 
-  rest.post<AddListRequest>("/lists", async(req, res, ctx) => {
-    const { title } = req.body;
+  rest.post<string, ResponseMessage>("/lists", async (req, res, ctx) => {
+    const { title } = JSON.parse(req.body) as AddListRequest;
     const id = uuidv4();
 
     const error = handleAuthError(req, res, ctx);
@@ -110,8 +111,9 @@ export const cardsHandlers = [
       );
   }),
 
-  rest.put<EditListRequest>("/lists", async(req, res, ctx) => {
-    const { id, title } = req.body;
+  rest.put<string, ResponseMessage>("/lists", async (req, res, ctx) => {
+    const { id, title } = JSON.parse(req.body) as EditListRequest;
+
     const error = handleAuthError(req, res, ctx);
     if (error != null) return await error;
 
@@ -124,9 +126,10 @@ export const cardsHandlers = [
       );
   }),
 
-  rest.put<EditCardPositionRequest>("/cards/:cardId/move", async(req, res, ctx) => {
-    const { cardId } = req.params as { cardId: string };
-    const { destination, source } = req.body ;
+  rest.put<string, EditCardPositionParam>("/cards/:cardId/move", async (req, res, ctx) => {
+    const { cardId } = req.params;
+    const { destination, source } = JSON.parse(req.body) as EditCardPositionRequest;
+
     const error = handleAuthError(req, res, ctx);
     if (error != null) return await error;
 
@@ -139,8 +142,8 @@ export const cardsHandlers = [
       );
   }),
 
-  rest.delete<DeleteListRequest>("/lists", async(req, res, ctx) => {
-    const { id } = req.body;
+  rest.delete<string, ResponseMessage>("/lists", async (req, res, ctx) => {
+    const { id } = JSON.parse(req.body) as DeleteListRequest;
 
     const error = handleAuthError(req, res, ctx);
     if (error != null) return await error;
