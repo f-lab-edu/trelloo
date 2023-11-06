@@ -6,5 +6,5 @@ export const Container = styled.div`
   min-width: 272px;
   background-color: ${({ theme }) => theme.color.cardListGray};
   border-radius: ${({ theme }) => theme.borderRadius.card};
-  height: 90px;
+  height: 100%;
 `;

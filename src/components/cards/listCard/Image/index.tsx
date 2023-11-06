@@ -1,16 +1,16 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import * as S from "./style";
 
 interface Props {
+  url: string;
   name: string;
   onClick?: () => void;
-  children: ReactNode;
 }
 
-function ImageCard({ name, onClick, children }: Props) {
+function Image({ url, name, onClick }: Props) {
   return (
     <S.Button onClick={onClick}>
-      {children}
+      <S.Image src={url}></S.Image>
       <S.NameBackground>
         <p>{name ?? "-"}</p>
       </S.NameBackground>
@@ -18,4 +18,4 @@ function ImageCard({ name, onClick, children }: Props) {
   );
 }
 
-export default ImageCard;
+export default Image;

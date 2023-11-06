@@ -1,12 +1,14 @@
 import { Layout } from "antd";
+const { Header: AntdHeader } = Layout;
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
-const { Header: AntdHeader } = Layout;
 
 export const Header = styled(AntdHeader).attrs(() => ({
   style: {
+    position: "sticky",
     top: 0,
     padding: "6px 4px",
+    zIndex: 1,
     width: "100%",
     height: 44,
     backgroundColor: theme.color.headerBackground,

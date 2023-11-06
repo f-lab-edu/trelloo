@@ -1,9 +1,8 @@
 import React from "react";
-import { SEARCH_PARAMS_KEY } from "@/constants";
+import { useNavigate } from "react-router-dom";
 import useDrawer from "@/hooks/useDrawer";
 import CloseButton from "@components/buttons/CloseButton";
 import GoBackButton from "@components/buttons/GoBackButton";
-import useFunnel from "@/hooks/useFunnel";
 import * as S from "./style";
 
 interface Props {
@@ -13,23 +12,17 @@ interface Props {
 
 function MenuTitle({ hasGoBackButton = false, children }: Props) {
   const { closeDrawer } = useDrawer();
-  const { goBack, initializeStep } = useFunnel();
+  const navigate = useNavigate();
 
   const handleGoBack = () => {
-    goBack();
-  };
-
-  const handleClose = () => {
-    initializeStep(SEARCH_PARAMS_KEY.MENU);
-
-    closeDrawer();
+    navigate(-1);
   };
 
   return (
     <S.Container>
       <GoBackButton isHidden={!hasGoBackButton} onClick={handleGoBack} />
       {children}
-      <CloseButton onClick={handleClose} />
+      <CloseButton onClick={closeDrawer} />
     </S.Container>
   );
 }

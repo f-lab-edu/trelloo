@@ -1,29 +1,22 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useEffect } from "react";
 import { SEARCH_PARAMS_KEY } from "@/constants";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-function useFunnel<T>(initialStep?: T) {
-  const [searchParams, setSearchParams] = useSearchParams(`${SEARCH_PARAMS_KEY.FUNNEL_STEPS}=${initialStep}`);
+function useFunnel<T>(initialStep: T) {
+  const [searchParams, setSearchParams] = useSearchParams();
   const step = searchParams.get(SEARCH_PARAMS_KEY.FUNNEL_STEPS);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    handleStep(initialStep);
+  }, []);
 
   const handleStep = (step: T) => {
     searchParams.set(SEARCH_PARAMS_KEY.FUNNEL_STEPS, step as string);
     setSearchParams(searchParams);
   };
 
-  const goBack = () => {
-    navigate(-1);
-  };
-
-  const initializeStep = (searchParamsKey: string) => {
-    searchParams.delete(searchParamsKey);
-    searchParams.delete(SEARCH_PARAMS_KEY.FUNNEL_STEPS);
-    setSearchParams(searchParams);
-  };
-
   const Funnel = ({ children }: { children: ReactElement[] }) => {
-    const targetStep = children.find((childStep: ReactElement) => childStep?.props?.name === step) ?? children[0];
+    const targetStep = children.find((childStep: ReactElement) => childStep?.props?.name === step);
     return <>{targetStep}</>;
   };
 
@@ -33,7 +26,7 @@ function useFunnel<T>(initialStep?: T) {
 
   Funnel.Step = Step;
 
-  return { Funnel, handleStep, goBack, initializeStep };
+  return { Funnel, handleStep };
 }
 
 export default useFunnel;
