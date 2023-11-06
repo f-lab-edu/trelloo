@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card as AntdCard } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 import loadable from "@loadable/component";
 import { ICard } from "@/interfaces/cards";
 import useModal from "@/hooks/useModal";
@@ -21,7 +22,7 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
   const handleClick = () => {
     openModal({
       component: CardDetail,
-      props: { title: data.description },
+      props: { title: data.text },
     });
   };
 
@@ -32,10 +33,10 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
 
   return (
     <S.Container>
-      <S.Card onClick={handleClick}>
-        <p>{data.description}</p>
-        <S.EditButton onClick={handleOpenCardEditor} />
-      </S.Card>
+      <AntdCard style={S.Card} onClick={handleClick} bodyStyle={S.Body}>
+        <p>{data.text}</p>
+        <EditOutlined className="edit_button" onClick={handleOpenCardEditor} />
+      </AntdCard>
       {cardEditorOpened && (
         <CardEditor
           data={data}
