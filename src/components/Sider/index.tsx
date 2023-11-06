@@ -12,7 +12,7 @@ import {
   UngroupOutlined,
 } from "@ant-design/icons";
 import * as S from "./style";
-const { Sider: AntdSider } = Layout;
+const { Sider: Si } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -54,7 +54,8 @@ function Sider() {
   };
 
   return (
-    <AntdSider
+    <Si
+      collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
       style={S.Sider}
@@ -84,7 +85,7 @@ function Sider() {
           <Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} style={S.Menu} items={items2} />
         </>
       )}
-    </AntdSider>
+    </Si>
   );
 }
 

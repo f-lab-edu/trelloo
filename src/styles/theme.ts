@@ -12,7 +12,6 @@ export const theme = {
     siderBackground: "#E2E8ED",
     buttonBackground: "rgba(0, 0, 0, 0.1)",
     white: "white",
-    black: "black",
     headerBackground: "#F3F6F8",
     border: "#D0D6DD",
     buttonBlue: "#0369A7",
