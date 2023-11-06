@@ -10,7 +10,7 @@ export const theme = {
     textDefaultGray: "#3C3E3F",
     modalBackgroundGray: "#F4F5F7",
     siderBackground: "#E2E8ED",
-    buttonBackground: "rgba(0, 0, 0, 0.1)",
+    buttonBackground: "rgba(0, 0, 0, 0.1);",
     white: "white",
     headerBackground: "#F3F6F8",
     border: "#D0D6DD",
