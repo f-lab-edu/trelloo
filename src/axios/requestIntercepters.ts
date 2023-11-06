@@ -1,7 +1,13 @@
 import { InternalAxiosRequestConfig } from "axios";
 import { STORAGE_KEY } from "@/constants";
+import axiosInstance from "./instance";
 
-export const handleInterceptConfig = (config: InternalAxiosRequestConfig) => {
+axiosInstance.interceptors.request.use(
+  (config) => handleRequestIntercept(config),
+  (error) => Promise.reject(error),
+);
+
+const handleRequestIntercept = (config: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem(STORAGE_KEY.TOKEN);
 
   if (config?.headers.includeAuthorization && !!token) {
@@ -10,8 +16,4 @@ export const handleInterceptConfig = (config: InternalAxiosRequestConfig) => {
 
   delete config.headers.includeAuthorization;
   return config;
-};
-
-export const handleRquestInterceptError = (error: any) => {
-  return Promise.reject(error);
 };
