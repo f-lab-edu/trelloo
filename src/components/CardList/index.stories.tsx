@@ -24,6 +24,11 @@ const Template = (args: { text: string }) => {
             },
           ],
         }}
+        onAddCardClick={() => console.log("handle add card")}
+        onEditCard={() => console.log("edit card")}
+        onDeleteCard={() => console.log("delete card")}
+        onDeleteList={() => console.log("delete list")}
+        onEditList={() => console.log("edit list")}
       />
     </Provider>
   );
