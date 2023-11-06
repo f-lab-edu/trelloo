@@ -6,12 +6,10 @@ import ImageCard from "@components/cards/listCard";
 import Menu from "@components/menuList";
 import BackgroundPhotos from "../BackgroundPhotos";
 import BackgroundColors from "@components/BackgroundColors";
-import BackgroundProperties from "../BackgroundProperties";
 
 function ChangeBackground() {
   const dispatch = useDispatch();
-  const { Funnel, handleStep } =
-    useFunnel<"change-background" | "photos" | "colors" | "properties">("change-background");
+  const { Funnel, handleStep } = useFunnel<"change-background" | "photos" | "colors">("change-background");
 
   const handleBackgroundChangeImage = (image: string) => {
     dispatch(changeBackgroundImage(image));
@@ -41,18 +39,7 @@ function ChangeBackground() {
               </ImageCard.ImageCard>
               <ImageCard.Title>Colors</ImageCard.Title>
             </div>
-
-            <div>
-              <ImageCard.ImageCard onClick={() => handleStep("properties")} name="background image">
-                <ImageCard.ImageThumbnail url="/public/images/backgrounds/background_1.png" />
-              </ImageCard.ImageCard>
-              <ImageCard.Title>Change Properties</ImageCard.Title>
-            </div>
           </ImageCard.ImageList>
-        </Funnel.Step>
-
-        <Funnel.Step name="properties">
-          <BackgroundProperties />
         </Funnel.Step>
 
         <Funnel.Step name="photos">
