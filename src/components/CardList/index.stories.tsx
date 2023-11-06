@@ -24,8 +24,6 @@ const Template = (args: { text: string }) => {
             },
           ],
         }}
-        onDeleteList={() => {}}
-        onEditList={() => {}}
       />
     </Provider>
   );

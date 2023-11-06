@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card as AntdCard, Input } from "antd";
-import { AddCardRequest } from "@/queries/cardList/interface";
 import Button from "@components/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import * as S from "./style";
+import { CardContext } from "@components/Board/Provider";
 
 const { TextArea } = Input;
 
@@ -11,11 +11,11 @@ interface Props {
   isWritingCard: boolean;
   onCardInputToggle: () => void;
   listId: string;
-  onAddCard: (params: AddCardRequest) => void;
 }
 
-const CardComposer = ({ isWritingCard, onCardInputToggle, listId, onAddCard }: Props) => {
+const CardComposer = ({ isWritingCard, onCardInputToggle, listId }: Props) => {
   const [cardInputValue, setCardInputValue] = useState("");
+  const { onAddCard } = useContext(CardContext);
 
   const handleAddCard = (params: { text: string; listId: string }) => {
     onAddCard(params);
