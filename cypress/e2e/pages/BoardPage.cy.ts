@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 
-import { URL } from "../../../src/constants";
+import { BASE_URL } from "../../../src/constants";
 
 describe("run application", () => {
   beforeEach(() => {
-    cy.visit(URL.BASE);
+    cy.visit(BASE_URL.LOCAL);
   });
 
   it("displays Board", () => {

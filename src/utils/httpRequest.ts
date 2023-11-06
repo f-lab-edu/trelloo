@@ -1,13 +1,11 @@
-import axios from "axios";
-import { URL } from "@/constants";
 import { RequestParams } from "@/interfaces/httpRequest";
+import axios from "axios";
 
 const fetchRequest = <TParams>({
-  path,
+  url,
   method,
   params,
   data,
-  isMock,
 }: RequestParams<TParams>) => {
   const convertedParams = params
     ? Object.entries(params).reduce(
@@ -20,11 +18,9 @@ const fetchRequest = <TParams>({
     : "";
 
   const searchParams = new URLSearchParams(convertedParams).toString();
-  return axios(`${isMock ? "" : URL.API}${path}?${searchParams}`, {
+  return axios(`${url}?${searchParams}`, {
     method,
     data: JSON.stringify(data),
-  }).then((data) => {
-    return data.data;
   });
 };
 
