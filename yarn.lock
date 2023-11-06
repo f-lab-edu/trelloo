@@ -14969,17 +14969,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-error-boundary@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "react-error-boundary@npm:4.0.3"
-  dependencies:
-    "@babel/runtime": ^7.12.5
-  peerDependencies:
-    react: ">=16.13.1"
-  checksum: 50813803d3f03eb2ca07c1250a4a001ffe054f5b3f49b15ea5f0a4e1108f549bc7d8def15db51d518516997d34cebc663f4276246301b4a40a72e83a784f5c38
-  languageName: node
-  linkType: hard
-
 "react-inspector@npm:^5.1.0":
   version: 5.1.1
   resolution: "react-inspector@npm:5.1.1"
@@ -17196,7 +17185,6 @@ __metadata:
     idb: ^7.1.1
     msw: ^1.1.0
     react-beautiful-dnd: ^13.1.1
-    react-error-boundary: ^4.0.3
     react-modal: ^3.16.1
     react-redux: ^8.0.5
     react-router-dom: ^6.8.2
