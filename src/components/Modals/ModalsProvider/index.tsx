@@ -11,7 +11,7 @@ interface ModalDispatch<T = any> {
 }
 
 interface Props {
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 
 export const ModalsStateContext = createContext<ModalState[]>([]);
