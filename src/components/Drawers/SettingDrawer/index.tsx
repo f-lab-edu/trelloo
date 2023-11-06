@@ -1,17 +1,8 @@
 import React from "react";
 import * as S from "./style";
 
-interface Props {
-  onClose: () => void;
-}
-
-function SettingDrawer({ onClose }: Props) {
-  return (
-    <S.Container>
-      SettingDrawer
-      <button onClick={onClose}>x</button>
-    </S.Container>
-  );
+function SettingDrawer() {
+  return <S.Container>SettingDrawer</S.Container>;
 }
 
 export default SettingDrawer;
