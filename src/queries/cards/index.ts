@@ -12,8 +12,8 @@ const cardListsKeys = {
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {
   return useQuery(
     cardListsKeys.search(search),
-    () => {
-      return request.get<I.GetCardListsResponse[]>({
+    async () => {
+      return await request.get<I.GetCardListsResponse[]>({
         path: "/cards",
         queryParams: { search },
         isMock: true,
@@ -28,8 +28,8 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
 export const useAddCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (params: I.AddCardRequest) => {
-      return request.post<I.ResponseMessage>({
+    async (params: I.AddCardRequest) => {
+      return await request.post<I.ResponseMessage>({
         path: "/cards",
         params,
         isMock: true,
@@ -37,7 +37,9 @@ export const useAddCardMutation = () => {
       });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(cardListsKeys.all);
+      },
     },
   );
 };
@@ -45,11 +47,13 @@ export const useAddCardMutation = () => {
 export const useEditCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (params: I.EditCardRequest) => {
-      return request.put<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
+    async (params: I.EditCardRequest) => {
+      return await request.put<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(cardListsKeys.all);
+      },
     },
   );
 };
@@ -57,11 +61,13 @@ export const useEditCardMutation = () => {
 export const useDeleteCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (params: I.DeleteCardRequest) => {
-      return request.delete<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
+    async (params: I.DeleteCardRequest) => {
+      return await request.delete<I.ResponseMessage>({ path: "/cards", params, isMock: true, shouldAuthorize: true });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(cardListsKeys.all);
+      },
     },
   );
 };
@@ -69,8 +75,8 @@ export const useDeleteCardMutation = () => {
 export const useAddListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (params: I.AddListRequest) => {
-      return request.post<I.ResponseMessage>({
+    async (params: I.AddListRequest) => {
+      return await request.post<I.ResponseMessage>({
         path: "/lists",
         params,
         isMock: true,
@@ -78,7 +84,9 @@ export const useAddListMutation = () => {
       });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(cardListsKeys.all);
+      },
     },
   );
 };
@@ -86,11 +94,13 @@ export const useAddListMutation = () => {
 export const useEditListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (params: I.EditListRequest) => {
-      return request.put<I.ResponseMessage>({ path: "/lists", params, isMock: true, shouldAuthorize: true });
+    async (params: I.EditListRequest) => {
+      return await request.put<I.ResponseMessage>({ path: "/lists", params, isMock: true, shouldAuthorize: true });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(cardListsKeys.all);
+      },
     },
   );
 };
@@ -173,11 +183,13 @@ const removeCardFromList = (cardList: ICardList, cardId: string) => {
 export const useDeleteListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    (params: I.DeleteListRequest) => {
-      return request.delete<I.ResponseMessage>({ path: "/lists", params, isMock: true, shouldAuthorize: true });
+    async (params: I.DeleteListRequest) => {
+      return await request.delete<I.ResponseMessage>({ path: "/lists", params, isMock: true, shouldAuthorize: true });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(cardListsKeys.all);
+      },
     },
   );
 };
