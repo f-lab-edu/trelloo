@@ -9,7 +9,7 @@ import {
   CalendarOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-import Button from "@components/Button";
+import Button from "@components/buttons/Button";
 import * as S from "./style";
 
 const { TextArea } = Input;
