@@ -61,10 +61,12 @@ export const addCardList = async (cardList: CardListData) => {
 };
 
 export const editCardList = async ({ id, title }: EditCardListData) => {
+  console.log(id, title);
   const db = await initDb();
   const tx = db.transaction(listStoreName, "readwrite");
   const store = tx.objectStore(listStoreName);
   const list = await store.get(id);
+  console.log(list);
   list.title = title;
   await store.put(list);
   await tx.done;

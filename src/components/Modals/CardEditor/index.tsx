@@ -67,7 +67,7 @@ const CardEditor = ({ data, onClick, setIsCardEditorOpened }: Props) => {
   ];
 
   const handleClickSave = (params: { id: string; text: string }) => {
-    setIsCardEditorOpened(false);
+    onClick();
     onEditCard(params);
   };
 
