@@ -48,8 +48,7 @@
     "react-modal": "^3.16.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
-    "styled-components": "^5.3.8",
-    "uuidv4": "^6.2.13"
+    "styled-components": "^5.3.8"
   },
   "msw": {
     "workerDirectory": "public"
