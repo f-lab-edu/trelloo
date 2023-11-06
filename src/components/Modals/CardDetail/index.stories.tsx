@@ -1,13 +1,13 @@
 import React from "react";
 import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
-import { Props as CardDetailProps } from "@components/modals/CardDetailModal";
+import { Props as CardDetailProps } from "@components/modals/CardDetail";
 import { ModalsProvider } from "@components/modals/ModalsProvider/index.stories";
-const CardDetailModal = loadable(() => import("@components/modals/CardDetailModal"));
+const CardDetail = loadable(() => import("@components/modals/CardDetail"));
 
 export default {
   title: "Components/Modals",
-  component: CardDetailModal,
+  component: CardDetail,
 };
 
 const ModalButton = () => {
@@ -15,7 +15,7 @@ const ModalButton = () => {
 
   const onClickButton = () => {
     openModal({
-      component: CardDetailModal,
+      component: CardDetail,
       props: { title: "card detail modal" },
     });
   };
@@ -31,4 +31,4 @@ const Template = () => {
   );
 };
 
-export const CardDetail = Template.bind({});
+export const CardDetailModal = Template.bind({});
