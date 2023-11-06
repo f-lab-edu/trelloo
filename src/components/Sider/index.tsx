@@ -57,7 +57,7 @@ function Sider() {
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
-      style={S.Sider}
+      style={{ backgroundColor: "white" }}
       collapsedWidth={17}
       width={280}
     >
@@ -81,7 +81,13 @@ function Sider() {
               <LeftOutlined onClick={onClickCollapse} />
             </S.ProfileContainer>
           </S.SiderButton>
-          <Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} style={S.Menu} items={items2} />
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            defaultOpenKeys={["sub1"]}
+            style={{ height: "100%" }}
+            items={items2}
+          />
         </>
       )}
     </Si>

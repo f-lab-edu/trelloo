@@ -6,6 +6,5 @@ export const theme = {
     hoverPointGray: "#E1E4E9",
     textPointGray: "#5E6C83",
     textDefaultGray: "#3C3E3F",
-    siderBackground: "#E2E8ED",
   },
 };

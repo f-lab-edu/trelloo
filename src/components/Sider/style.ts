@@ -1,9 +1,4 @@
-import { theme } from "@/styles/theme";
 import styled from "styled-components";
-
-export const Sider = {
-  backgroundColor: theme.color.siderBackground,
-};
 
 export const SiderButton = styled.div`
   padding: 14px 12px;
@@ -35,8 +30,3 @@ export const ProfileImg = styled.div`
 export const ProfileText = styled.span`
   margin-left: 10px;
 `;
-
-export const Menu = {
-  height: "100%",
-  backgroundColor: theme.color.siderBackground,
-};
