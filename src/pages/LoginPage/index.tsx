@@ -39,7 +39,7 @@ const LoginPage: React.FC = () => {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
-        onFinish={handleSubmit(handleSubmitClick)}
+        onFinish={() => handleSubmit(handleSubmitClick)}
         autoComplete="off"
       >
         <Form.Item label="Id" name="id">
