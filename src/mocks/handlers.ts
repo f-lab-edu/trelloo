@@ -1,4 +1,3 @@
-import { EditCardPositionParam, EditCardPositionRequest } from "./../queries/cards/interface";
 import {
   AddCardRequest,
   AddListRequest,
@@ -17,7 +16,6 @@ import {
   deleteCardList,
   editCard,
   editCardList,
-  editCardPosition,
   getAllCardListsWithCards,
 } from "./dbfunctions";
 
@@ -91,20 +89,6 @@ export const handlers = [
         ctx.status(200),
         ctx.json({
           message: "List updated",
-        }),
-      );
-    });
-  }),
-
-  rest.put<string, EditCardPositionParam>("/cards/:cardId/move", (req, res, ctx) => {
-    const { cardId } = req.params;
-    const { destination, source } = JSON.parse(req.body) as EditCardPositionRequest;
-
-    return editCardPosition({ cardId, destination, source }).then(() => {
-      return res(
-        ctx.status(200),
-        ctx.json({
-          message: "Card position updated",
         }),
       );
     });
