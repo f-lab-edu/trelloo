@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card as AntdCard, Input } from "antd";
-import { AddCardRequest } from "@/queries/cards/interface";
+import { AddCardRequest } from "@/queries/cardList/interface";
 import Button from "@components/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import * as S from "./style";
@@ -8,13 +8,13 @@ import * as S from "./style";
 const { TextArea } = Input;
 
 interface Props {
-  isCardInputOpened: boolean;
+  isWritingCard: boolean;
   onCardInputToggle: () => void;
   listId: string;
   onAddCard: (params: AddCardRequest) => void;
 }
 
-const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard }: Props) => {
+const CardComposer = ({ isWritingCard, onCardInputToggle, listId, onAddCard }: Props) => {
   const [cardInputValue, setCardInputValue] = useState("");
 
   const handleAddCard = (params: AddCardRequest) => {
@@ -24,7 +24,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard 
 
   return (
     <>
-      {isCardInputOpened ? (
+      {isWritingCard ? (
         <S.CardInputContainer>
           <AntdCard bodyStyle={S.CardInput}>
             <TextArea
