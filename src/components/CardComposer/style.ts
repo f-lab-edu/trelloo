@@ -18,7 +18,7 @@ export const ButtonWrapper = styled.div`
   align-items: center;
 `;
 
-export const CardInputContainer = styled.form`
+export const CardInputContainer = styled.div`
   margin-top: 10px;
 `;
 
