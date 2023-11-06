@@ -2,7 +2,7 @@ import React from "react";
 import loadable from "@loadable/component";
 import styled from "styled-components";
 import useModal from "@/hooks/useModal";
-import { ModalsProvider } from "@components/Modals/ModalsProvider/index.stories";
+import { ModalProvider } from "@components/Modals/ModalsProvider/index.stories";
 import { Props as CardEditProps } from "./index";
 const CardEdit = loadable(() => import("@components/Modals/CardEdit"));
 
@@ -26,9 +26,9 @@ const ModalButton = () => {
 
 const Template = () => {
   return (
-    <ModalsProvider>
+    <ModalProvider>
       <ModalButton />
-    </ModalsProvider>
+    </ModalProvider>
   );
 };
 

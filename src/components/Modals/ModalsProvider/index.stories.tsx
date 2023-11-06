@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import ModalsProviderComponent from "@components/Modals/ModalsProvider";
+import ModalsProvider from "@components/Modals/ModalsProvider";
 import Modals from "@components/Modals/Modals";
 
 interface Props {
@@ -11,12 +11,12 @@ interface Props {
 const Template = ({ children }: Props) => {
   return (
     <Provider store={store}>
-      <ModalsProviderComponent>
+      <ModalsProvider>
         {children}
         <Modals />
-      </ModalsProviderComponent>
+      </ModalsProvider>
     </Provider>
   );
 };
 
-export const ModalsProvider = Template.bind({});
+export const ModalProvider = Template.bind({});
