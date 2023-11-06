@@ -1,13 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BoardPage from "./pages/BoardPage";
+import "./styles/global.module.css";
+import "./styles/reset.module.css";
+import Board from "./components/Board";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<BoardPage />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <Board />
+    </div>
   );
 }
 
