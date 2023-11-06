@@ -116,19 +116,15 @@ export const getCardIdsByListId = async (listId: string): Promise<CardData[]> =>
   return cards
 }
 
-export const addCard = async (card: Omit<CardData, "index">) => {
-  const db = await initDb();
-  const tx = db.transaction([cardStoreName, listStoreName], "readwrite");
-
-  const store = tx.objectStore(cardStoreName);
-  const listStore = tx.objectStore(listStoreName);
-  const list = await (await store.getAll()).filter((listCard) => listCard.listId === card.listId);
-  console.log(list, "list");
-  const index = list.length;
-  await store.add({ ...card, index });
-  await tx.done;
-  return card;
-};
+export const addCard = async (card: Omit<CardData, 'index'>) => {
+  const db = await initDb()
+  const tx = db.transaction(cardStoreName, 'readwrite')
+  const store = tx.objectStore(cardStoreName)
+  const index = await store.count()
+  await store.add({ ...card, index })
+  await tx.done
+  return card
+}
 
 export const editCard = async ({ id, description }: EditCardData) => {
   const db = await initDb();
@@ -146,30 +142,20 @@ export const editCardPosition = async ({ cardId, listId, index }: EditCardPositi
 
   const tx = db.transaction([cardStoreName, listStoreName], "readwrite");
   const cardStore = tx.objectStore(cardStoreName);
+  const listStore = tx.objectStore(listStoreName);
+  const card = await cardStore.get(cardId);
+  const list = await listStore.get(listId);
 
-  const movedCard = await cardStore.get(cardId);
+  card.listId = listId;
 
-  const oldCardList = await (await cardStore.getAll()).filter((card) => card.listId === movedCard.listId);
+  // Update the card in the cardStore
+  await cardStore.put(card);
 
-  oldCardList.forEach(async (card) => {
-    if (card.index > movedCard.index) {
-      card.index--;
-      await cardStore.put(card);
-    }
-  });
-
-  const newCardList = await (await cardStore.getAll()).filter((card) => card.listId === listId);
-  newCardList.forEach(async (card) => {
-    if (card.index >= index) {
-      card.index++;
-      await cardStore.put(card);
-    }
-  });
-
-  movedCard.listId = listId;
-  movedCard.index = index;
-
-  await cardStore.put(movedCard);
+  const oldIndex = card.index;
+  const newIndex = index;
+  const cards = await (await cardStore.getAll()).filter((card) => card.listId === listId);
+  // Fix: change index
+  console.log(cards);
 };
 
 export const deleteCard = async ({ id }: DeleteCardData) => {
