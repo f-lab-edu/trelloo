@@ -1,4 +1,3 @@
-import { Card as C } from "antd";
 import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
 const CardDetail = loadable(() => import("@components/Modals/CardDetail"));
@@ -19,13 +18,7 @@ const Card = ({ text }: Props) => {
     });
   };
 
-  return (
-    <S.Container>
-      <C style={S.Card} onClick={handleClick} bodyStyle={S.Body}>
-        <p>{text}</p>
-      </C>
-    </S.Container>
-  );
+  return <S.Container onClick={handleClick}>{text && text}</S.Container>;
 };
 
 export default Card;
