@@ -13,7 +13,7 @@ const Template = () => {
 
   return (
     <Container>
-      <CardListComposer isInputOpen toggleInputOpen={() => {}} onAddList={handleAddList} />
+      <CardListComposer onAddList={handleAddList} />
     </Container>
   );
 };

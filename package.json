@@ -35,7 +35,7 @@
     "@vitest/coverage-c8": "^0.31.1",
     "babel-loader": "^8.3.0",
     "chromatic": "^6.17.2",
-    "cypress": "^13.3.0",
+    "cypress": "^12.7.0",
     "cypress-react-selector": "^3.0.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.8.0",
