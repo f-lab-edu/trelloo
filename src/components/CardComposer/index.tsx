@@ -26,7 +26,7 @@ const CardComposer = ({ isWritingCard, onCardInputToggle, onClick }: Props) => {
               <Button type="blue" onClick={() => onClick({ text: "example text", listId: "list1" })}>
                 Add card
               </Button>
-              <CloseOutlined style={S.CancelAddCardButton} onClick={onCardInputToggle} />
+              <CloseOutlined style={S.CancleAddCardButton} onClick={onCardInputToggle} />
             </S.AddCardButtonWrapper>
             <Button type="transparent" icon={<EllipsisOutlined />} />
           </S.AddCardButtonContainer>
