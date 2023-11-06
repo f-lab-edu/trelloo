@@ -1,6 +1,6 @@
 import React from "react";
 import { AppstoreOutlined, BellOutlined, QuestionCircleOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
-import Button from "@components/buttons/Button";
+import Button from "@components/Button";
 import * as S from "./style";
 
 function Header() {
