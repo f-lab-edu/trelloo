@@ -1,7 +1,7 @@
-import { URL } from "./src/constants";
+import { BASE_URL } from "./src/constants";
 module.exports = {
   projectId: "5ouo1q",
   e2e: {
-    baseUrl: URL.BASE,
+    baseUrl: BASE_URL.LOCAL,
   },
 };
