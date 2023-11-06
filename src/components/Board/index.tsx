@@ -2,17 +2,10 @@ import {
   useAddCardMutation,
   useAddListMutation,
   useDeleteCardMutation,
-  useDeleteListMutation,
   useEditCardMutation,
   useGetCardLists,
 } from "@/queries/cardList";
-import {
-  AddCardRequest,
-  AddListRequest,
-  DeleteCardRequest,
-  DeleteListRequest,
-  EditCardRequest,
-} from "@/queries/cardList/interface";
+import { AddCardRequest, AddListRequest, DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
 import * as S from "./style";
@@ -25,7 +18,6 @@ const Board = () => {
   const { mutate: addListMutate } = useAddListMutation();
   const { mutate: editCardMutate } = useEditCardMutation();
   const { mutate: deleteCardMutate } = useDeleteCardMutation();
-  const { mutate: deleteListMutate } = useDeleteListMutation();
 
   const handleAddCard = ({ text, listId }: AddCardRequest) => {
     addCardMutate({
@@ -57,13 +49,6 @@ const Board = () => {
     refetch();
   };
 
-  const handleDeleteList = ({ id }: DeleteListRequest) => {
-    deleteListMutate({
-      id,
-    });
-    refetch();
-  };
-
   return (
     <S.Container>
       {cardLists?.map((cardList) => (
@@ -73,7 +58,6 @@ const Board = () => {
           onAddCardClick={handleAddCard}
           onEditCard={handleEditCard}
           onDeleteCard={handleDeleteCard}
-          onDeleteList={handleDeleteList}
         />
       ))}
       <CardListComposer onClick={handleAddList} />
