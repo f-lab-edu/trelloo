@@ -14,6 +14,16 @@ export const Body = {
   padding: "6px 8px 6px",
 };
 
+export const ButtonWrapper = styled.div`
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+`;
+
 export const AddCardButton = {
   //
+};
+
+export const TemplateButton = {
+  width: 24,
 };
