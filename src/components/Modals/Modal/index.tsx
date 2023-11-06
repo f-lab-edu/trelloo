@@ -7,13 +7,13 @@ interface Props<P> extends ModalState<P> {
   onClose: (state: ModalState<P>) => void;
 }
 
-const Modal = <P extends {}>({ component: Component, onClose, props, options }: Props<P>) => {
+const Modal = <P extends {}>({ component: Component, onClose, props, isMultiple }: Props<P>) => {
   const handleClose = () => {
-    onClose({ component: Component, props });
+    if (!isMultiple) onClose({ component: Component, props });
   };
   return (
-    <ReactModal isOpen={true} style={S.ModalStyle(options)} onRequestClose={handleClose}>
-      <button onClick={() => onClose({ component: Component, props, options })}>x</button>
+    <ReactModal isOpen={true} style={S.ModalStyle} onRequestClose={handleClose}>
+      <button onClick={() => onClose({ component: Component, props })}>x</button>
       <Suspense fallback={<div>is loading...</div>}>
         <Component {...props} />
       </Suspense>
