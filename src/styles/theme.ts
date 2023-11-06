@@ -1,4 +1,6 @@
-export const theme = {
+import { DefaultTheme } from "styled-components"; // ✨ 1
+
+export const theme: DefaultTheme = {
   color: {
     dimmedBackground: "#000000a3",
     backgroundGray: "#F3F5F7", // modal background
