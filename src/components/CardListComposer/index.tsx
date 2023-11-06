@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input as AntdInput } from "antd";
+import { Input } from "antd";
 import { MutationOptions } from "@/interfaces/httpRequest";
 import { AddListRequest } from "@/queries/cards/interface";
 import Composer from "@components/forms/Composer";
@@ -52,7 +52,7 @@ function CardListComposer({ onAddList }: Props) {
         submitBtnText="Add list"
         onSubmit={wrappedOnSubmit}
       >
-        <AntdInput onChange={onChange} value={value} placeholder="Enter list title..." />
+        <Input onChange={onChange} value={value} placeholder="Enter list title..." />
       </Composer>
     </S.Container>
   );

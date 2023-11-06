@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { Input as AntdInput } from "antd";
+import { Input } from "antd";
 import { useController, useForm } from "react-hook-form";
 import * as I from "@/queries/cards/interface";
 import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from "@/queries/cards";
@@ -89,7 +89,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
           {!isTitleInputOpened ? (
             <S.Title onClick={toggleTitleInputOpen}>{data.title}</S.Title>
           ) : (
-            <AntdInput onChange={onChange} value={value} onBlur={handleTitleUpdate} onPressEnter={handleTitleUpdate} />
+            <Input onChange={onChange} value={value} onBlur={handleTitleUpdate} onPressEnter={handleTitleUpdate} />
           )}
         </S.ListTitle>
 
