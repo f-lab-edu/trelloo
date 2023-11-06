@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Provider } from "react-redux";
 import styled from "styled-components";
 import { store } from "@/store";
-import Modal from "@components/Modals/Modal";
+import Modal from "@components/Modals/ModalContainer";
 import useModal from "@/hooks/useModal";
 import { MODAL_TYPE } from "@/constants";
 export default {
@@ -30,7 +30,7 @@ const Template = (args: { isBlue?: boolean }) => {
   return (
     <Provider store={store}>
       <ModalButton />
-      {/* <Modal /> */}
+      <Modal />
     </Provider>
   );
 };
