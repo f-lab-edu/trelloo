@@ -30,14 +30,7 @@ export const useAddCardMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (params: AddCardRequest) => {
-      return request.post<ResponseMessage>({
-        path: "/cards",
-        isMock: true,
-        params,
-        config: {
-          includeAuthorization: true,
-        },
-      });
+      return request.post<ResponseMessage>({ path: "/cards", isMock: true, params });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
@@ -73,14 +66,7 @@ export const useAddListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
     (params: AddListRequest) => {
-      return request.post<ResponseMessage>({
-        path: "/lists",
-        isMock: true,
-        params,
-        config: {
-          includeAuthorization: true,
-        },
-      });
+      return request.post<ResponseMessage>({ path: "/lists", isMock: true, params });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
