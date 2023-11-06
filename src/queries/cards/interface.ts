@@ -1,4 +1,4 @@
-import { type ICardList } from "@/interfaces/cards";
+import { ICardList } from "@/interfaces/cards";
 
 export interface GetCardRequest {
   search: string;

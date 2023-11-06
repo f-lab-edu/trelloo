@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { Layout } from "antd";
+import type { MenuProps } from "antd";
+import { LeftOutlined, RightCircleOutlined } from "@ant-design/icons";
 import SiderMenu from "@components/menus/SiderMenu";
 import * as S from "./style";
+
+const { Sider: AntdSider } = Layout;
 
 function Sider() {
   const [collapsed, setCollapsed] = useState(true);
@@ -10,16 +15,22 @@ function Sider() {
   };
 
   return (
-    <S.Container
+    <AntdSider
       collapsed={collapsed}
-      onCollapse={(value) => {
-        setCollapsed(value);
-      }}
+      onCollapse={(value) => setCollapsed(value)}
+      style={S.Sider}
+      collapsedWidth={17}
+      width={280}
     >
-      {collapsed && <S.SpreadButton onClick={onClickCollapse} />}
+      {collapsed && (
+        <RightCircleOutlined
+          onClick={onClickCollapse}
+          style={{ fontSize: "24px", position: "absolute", top: "13px", left: "5px" }}
+        />
+      )}
       {!collapsed && (
         <>
-          <S.Header>
+          <S.SiderButton>
             <S.ProfileContainer>
               <S.Profile>
                 <S.ProfileImg></S.ProfileImg>
@@ -28,13 +39,13 @@ function Sider() {
                   <p>Free</p>
                 </S.ProfileText>
               </S.Profile>
-              <S.CollapseButton onClick={onClickCollapse} />
+              <LeftOutlined onClick={onClickCollapse} />
             </S.ProfileContainer>
-          </S.Header>
+          </S.SiderButton>
           <SiderMenu />
         </>
       )}
-    </S.Container>
+    </AntdSider>
   );
 }
 
