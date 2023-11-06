@@ -4,7 +4,6 @@ import type { MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
 import { AddCardRequest, DeleteListRequest, EditListRequest } from "@/queries/cardList/interface";
 import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from "@/queries/cardList";
-import { CardList } from "@/interfaces/cards";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
 import * as S from "./style";
@@ -12,7 +11,14 @@ import * as S from "./style";
 const { TextArea } = Input;
 
 export interface Props {
-  data: CardList;
+  data: {
+    id: string;
+    title: string;
+    cards: {
+      id: string;
+      text: string;
+    }[];
+  };
   onEditList: (params: EditListRequest) => void;
   onDeleteList: (params: DeleteListRequest) => void;
 }
