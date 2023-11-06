@@ -6,11 +6,6 @@ const queryKeys = {
   all: ["cardLists"],
 };
 
-interface AddCardRequest {
-  text: string;
-  listTitle: string;
-}
-
 export const useGetCardLists = () => {
   return useQuery(queryKeys.all, () => {
     return request.get<GetCardListsResponse[]>({
@@ -21,7 +16,7 @@ export const useGetCardLists = () => {
 };
 
 export const useAddCardMutation = () => {
-  return useMutation(queryKeys.all, (params: AddCardRequest) => {
-    return request.post<ResponseMessage>({ path: "/cards", isMock: true, params });
+  return useMutation(queryKeys.all, () => {
+    return request.post<ResponseMessage>({ path: "/cards", isMock: true });
   });
 };

@@ -23,15 +23,15 @@ function Menu({ showDrawer }: Props) {
     <S.Container>
       <S.ButtonsWrapper>
         <Button>Board name</Button>
-        {buttonList.map((button, idx) => (
-          <Button key={idx} icon={button.icon} buttonColor="gray">
+        {buttonList.map((button) => (
+          <Button icon={button.icon} buttonColor="gray">
             {button.text}
           </Button>
         ))}
       </S.ButtonsWrapper>
       <S.OtherButtonsWrapper>
-        {buttonList2.map((button, idx) => (
-          <Button key={idx} icon={button.icon} buttonColor={button.buttonColor || "gray"}>
+        {buttonList2.map((button) => (
+          <Button icon={button.icon} buttonColor={button.buttonColor || "gray"}>
             {button.text}
           </Button>
         ))}

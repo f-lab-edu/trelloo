@@ -12,7 +12,7 @@ const Board = ({ boardName }: Props) => {
   return (
     <S.Container>
       {cardLists?.map((cardList) => (
-        <CardList key={cardList.id} data={cardList} />
+        <CardList data={cardList} />
       ))}
     </S.Container>
   );

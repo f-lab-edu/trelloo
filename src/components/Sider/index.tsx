@@ -34,16 +34,16 @@ function getItem(
 
 const items2: MenuProps["items"] = [
   getItem("Boards", "12", <AppstoreOutlined />),
-  getItem("Members", "13", <UserOutlined />),
-  getItem("Workspace settings", "14", <SettingOutlined />),
+  getItem("Members", "12", <UserOutlined />),
+  getItem("Workspace settings", "12", <SettingOutlined />),
   getItem(
     "Workspace views",
     "grp",
     null,
-    [getItem("Table", "15", <TableOutlined />), getItem("Calendar", "16", <CalendarOutlined />)],
+    [getItem("Table", "13", <TableOutlined />), getItem("Calendar", "14", <CalendarOutlined />)],
     "group",
   ),
-  getItem("Your boards", "grp2", null, [getItem("my board", "17", <UngroupOutlined />)], "group"),
+  getItem("Your boards", "grp", null, [getItem("my board", "15", <UngroupOutlined />)], "group"),
 ];
 
 function Sider() {
