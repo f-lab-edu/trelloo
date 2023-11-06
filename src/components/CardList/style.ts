@@ -2,7 +2,7 @@ import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-left: 10px;
+  //
 `;
 
 export const Header = {
@@ -18,7 +18,6 @@ export const Body = {
 };
 
 export const ButtonWrapper = styled.div`
-  margin-top: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
