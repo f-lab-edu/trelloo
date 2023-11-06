@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import ReactModal from "react-modal";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "./store";
@@ -16,7 +15,6 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const queryClient = new QueryClient();
-ReactModal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -29,5 +27,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         </ThemeProvider>
       </Provider>
     </QueryClientProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
