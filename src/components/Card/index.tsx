@@ -3,8 +3,8 @@ import { Card as AntdCard } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
-import CardEditor from "@components/modals/CardEditor";
 const CardDetail = loadable(() => import("@components/modals/CardDetail"));
+const CardEditor = loadable(() => import("@components/modals/CardEditor"));
 import * as S from "./style";
 
 interface Props {

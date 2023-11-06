@@ -44,10 +44,25 @@ export const CardContext = createContext<CardFuncState>({
   onDeleteCard: () => {},
 });
 
-export function CardListHandlerProvider({ children }: Props) {
+function Provider({ children }: Props) {
+  const { mutate: addCardMutate } = useAddCardMutation();
   const { mutate: addListMutate } = useAddListMutation();
+  const { mutate: editCardMutate } = useEditCardMutation();
+  const { mutate: deleteCardMutate } = useDeleteCardMutation();
   const { mutate: deleteListMutate } = useDeleteListMutation();
   const { mutate: editListMutate } = useEditListMutation();
+
+  const onAddCard = ({ text, listId }: AddCardRequest) => {
+    addCardMutate({ text, listId });
+  };
+
+  const onEditCard = ({ text, id }: EditCardRequest) => {
+    editCardMutate({ text, id });
+  };
+
+  const onDeleteCard = ({ id }: DeleteCardRequest) => {
+    deleteCardMutate({ id });
+  };
 
   const onAddList = ({ title }: AddListRequest) => {
     addListMutate({ title });
@@ -62,32 +77,13 @@ export function CardListHandlerProvider({ children }: Props) {
   };
 
   const cardListFunc = { onAddList, onEditList, onDeleteList };
-
-  return <CardListContext.Provider value={cardListFunc}>{children}</CardListContext.Provider>;
-}
-
-export function CardHandlerProvider({ children }: Props) {
-  const { mutate: addCardMutate } = useAddCardMutation();
-  const { mutate: editCardMutate } = useEditCardMutation();
-  const { mutate: deleteCardMutate } = useDeleteCardMutation();
-
-  const onAddCard = ({ text, listId }: AddCardRequest) => {
-    addCardMutate({ text, listId });
-  };
-
-  const onEditCard = ({ text, id }: EditCardRequest) => {
-    editCardMutate({ text, id });
-  };
-
-  const onDeleteCard = ({ id }: DeleteCardRequest) => {
-    deleteCardMutate({ id });
-  };
-
   const cardFunc = { onAddCard, onEditCard, onDeleteCard };
 
   return (
-    <div>
+    <CardListContext.Provider value={cardListFunc}>
       <CardContext.Provider value={cardFunc}>{children}</CardContext.Provider>
-    </div>
+    </CardListContext.Provider>
   );
 }
+
+export default Provider;
