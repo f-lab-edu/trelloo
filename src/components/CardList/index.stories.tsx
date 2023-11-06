@@ -20,7 +20,7 @@ const Template = (args: { text: string }) => {
           cards: [
             {
               id: "string",
-              description: "string",
+              text: "string",
             },
           ],
         }}
