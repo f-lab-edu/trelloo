@@ -1,11 +1,8 @@
-import { LoadableComponent } from "@loadable/component";
-
-type ModalContentsKey = "cardDetailModal" | "inviteToWorkspaceModal";
-export type ModalContents<TProps> = Record<ModalContentsKey, LoadableComponent<TProps>>;
+import {type ComponentType} from "react";
 
 export interface ModalState<TProps = any> {
-  component: ModalContentsKey;
-  props?: TProps;
+  component: string;
+  props: TProps;
   index: number;
   options?: {
     hasOverlay?: boolean;
