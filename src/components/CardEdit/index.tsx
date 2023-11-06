@@ -1,4 +1,4 @@
-const CardEdit = ({ text }: { text: string }) => {
+const CardEdit = () => {
   return <div>CardEdit</div>;
 };
 
