@@ -36,9 +36,7 @@ const Card = ({ data }: Props) => {
         <p>{data.text}</p>
         <EditOutlined className="edit_button" onClick={handleOpenCardEditor} />
       </AntdCard>
-      {isCardEditorOpened && (
-        <CardEditor data={data} onClick={handleOpenCardEditor} setIsCardEditorOpened={setIsCardEditorOpened} />
-      )}
+      {isCardEditorOpened && <CardEditor data={data} onClick={handleOpenCardEditor} />}
     </S.Container>
   );
 };
