@@ -15,7 +15,7 @@ export default {
 const Template = (args: { text: string }) => {
   return (
     <Provider store={store}>
-      <Card data={{ text: "default" }} />
+      <Card text="default" />
     </Provider>
   );
 };
