@@ -1,13 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { request } from "@utils/httpRequest";
-import {
-  AddCardRequest,
-  AddListRequest,
-  DeleteCardRequest,
-  EditCardRequest,
-  GetCardListsResponse,
-  ResponseMessage,
-} from "./interface";
+import { AddCardRequest, AddListRequest, EditCardRequest, GetCardListsResponse, ResponseMessage } from "./interface";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
@@ -31,12 +24,6 @@ export const useAddCardMutation = () => {
 export const useEditCardMutation = () => {
   return useMutation(cardListsKeys.all, (params: EditCardRequest) => {
     return request.put<ResponseMessage>({ path: "/cards", isMock: true, params });
-  });
-};
-
-export const useDeleteCardMutation = () => {
-  return useMutation(cardListsKeys.all, (params: DeleteCardRequest) => {
-    return request.delete<ResponseMessage>({ path: "/card", isMock: true, params });
   });
 };
 
