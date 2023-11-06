@@ -1,4 +1,3 @@
-import { Menu as AntdMenu } from "antd";
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
@@ -37,9 +36,7 @@ export const ProfileText = styled.span`
   margin-left: 10px;
 `;
 
-export const Menu = styled(AntdMenu).attrs(() => ({
-  style: {
-    height: "100%",
-    backgroundColor: theme.color.siderBackground,
-  },
-}))``;
+export const Menu = {
+  height: "100%",
+  backgroundColor: theme.color.siderBackground,
+};

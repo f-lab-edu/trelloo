@@ -1,4 +1,3 @@
-import { Card as AntdCard } from "antd";
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
@@ -6,20 +5,19 @@ export const Container = styled.div`
   margin-left: 10px;
 `;
 
-export const Card = styled(AntdCard).attrs(() => ({
-  headStyle: {
-    minHeight: "40px",
-    backgroundColor: theme.color.cardListGray,
-    borderRadius: theme.borderRadius.card,
-    fontSize: "14px",
-  },
-  bodyStyle: {
-    padding: "5px 10px 5px 10px",
-    width: "100%",
-    borderRadius: theme.borderRadius.card,
-    backgroundColor: theme.color.cardListGray,
-  },
-}))``;
+export const Header = {
+  minHeight: "40px",
+  backgroundColor: theme.color.cardListGray,
+  borderRadius: theme.borderRadius.card,
+  fontSize: "14px",
+};
+
+export const Body = {
+  padding: "5px 10px 5px 10px",
+  width: "100%",
+  borderRadius: theme.borderRadius.card,
+  backgroundColor: theme.color.cardListGray,
+};
 
 export const ListTitle = styled.div`
   position: absolute;

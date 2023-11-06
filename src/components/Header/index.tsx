@@ -1,11 +1,14 @@
 import React from "react";
+import { Layout } from "antd";
 import { AppstoreOutlined, BellOutlined, QuestionCircleOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
 import Button from "@components/Button";
 import * as S from "./style";
 
+const { Header: AntdHeader } = Layout;
+
 function Header() {
   return (
-    <S.Header>
+    <AntdHeader style={S.Header}>
       <S.Container>
         <S.Nav>
           <Button type="transparent" icon={<AppstoreOutlined />} />
@@ -32,7 +35,7 @@ function Header() {
           <Button type="transparent" icon={<UserOutlined />} />
         </S.ButtonsWrapper>
       </S.Container>
-    </S.Header>
+    </AntdHeader>
   );
 }
 
