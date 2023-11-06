@@ -9,8 +9,7 @@ describe("Board page 렌더링", () => {
 
   it("test", () => {
     cy.contains("Trelloo").should("be.visible");
-  });
-
+    
   //   it("Header 표시", () => {
   //     cy.get(".sc-hAtEyd").should("be.visible");
   //   });
