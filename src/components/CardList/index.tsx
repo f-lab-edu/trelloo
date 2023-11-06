@@ -59,12 +59,16 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     deleteCardMutate(params);
   };
 
+  const handleDeleteListById = () => {
+    onDeleteList({ id: data.id });
+  };
+
   return (
     <S.Container>
       <AntdCard
         bordered={false}
         style={{ width: 300 }}
-        extra={<ListOptions onDeleteList={() => onDeleteList({ id: data.id })} />}
+        extra={<ListOptions onDeleteListById={handleDeleteListById} />}
         headStyle={S.Header}
         bodyStyle={S.Body}
       >
