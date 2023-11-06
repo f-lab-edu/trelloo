@@ -1,8 +1,10 @@
 import React from "react";
 import loadable from "@loadable/component";
+import styled from "styled-components";
 import useModal from "@/hooks/useModal";
 import { ModalsProvider } from "@components/modals/ModalsProvider/index.stories";
-const CardEdit = loadable(() => import("@components/modals/CardEditor"));
+import { Props as CardEditProps } from "./index";
+const CardEdit = loadable(() => import("@components/modals/CardEdit"));
 
 export default {
   title: "Components/Modals",
@@ -13,7 +15,7 @@ const ModalButton = () => {
   const { openModal } = useModal();
 
   const onClickButton = () => {
-    openModal({
+    openModal<CardEditProps>({
       component: CardEdit,
       props: { text: "card edit modal" },
     });
