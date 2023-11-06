@@ -1,14 +1,6 @@
 import { rest } from "msw";
 import { v4 as uuidv4 } from "uuid";
-import {
-  addCard,
-  addCardList,
-  deleteCard,
-  deleteCardList,
-  editCard,
-  editCardList,
-  getAllCardListsWithCards,
-} from "./dbfunctions";
+import { addCard, addCardList, deleteCard, deleteCardList, editCard, getAllCardListsWithCards } from "./dbfunctions";
 
 interface AddCardRequestBody {
   text: string;
@@ -25,11 +17,6 @@ interface DeleteCardRequestBody {
 }
 
 interface AddListRequestBody {
-  title: string;
-}
-
-interface EditListRequestBody {
-  id: string;
   title: string;
 }
 
@@ -67,18 +54,6 @@ export const handlers = [
         ctx.status(200),
         ctx.json({
           message: "list created",
-        }),
-      );
-    });
-  }),
-
-  rest.put<string, DefaultResponseBody>("/list", (req, res, ctx) => {
-    const { id, title } = JSON.parse(req.body) as EditListRequestBody;
-    return editCardList({ id, title }).then(() => {
-      return res(
-        ctx.status(200),
-        ctx.json({
-          message: "list updated",
         }),
       );
     });

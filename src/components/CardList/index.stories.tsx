@@ -28,7 +28,6 @@ const Template = (args: { text: string }) => {
         onEditCard={() => console.log("edit card")}
         onDeleteCard={() => console.log("delete card")}
         onDeleteList={() => console.log("delete list")}
-        onEditList={() => console.log("edit list")}
       />
     </Provider>
   );
