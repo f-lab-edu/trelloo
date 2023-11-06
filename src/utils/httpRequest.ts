@@ -31,17 +31,13 @@ const fetchRequest = <TParams>({
     headers,
     method,
     body: JSON.stringify(params),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        return Promise.reject(res.status);
-      }
-
+  }).then((res) => {
+    if (res.status >= 200 && res.status < 300) {
       return res.json();
-    })
-    .catch((err) => {
-      handleError(err);
-    });
+    }
+
+    throw new Error(res.status.toString());
+  });
 };
 
 const handleRequest = (option?: { isMock: true }) => {
@@ -62,18 +58,6 @@ const handleRequest = (option?: { isMock: true }) => {
       return fetchRequest({ ...params, method: "delete", ...option });
     },
   };
-};
-
-const handleError = (status: number) => {
-  switch (status) {
-    case 401:
-      redirectToLogin();
-      break;
-  }
-};
-
-const redirectToLogin = () => {
-  window.location.href = "/login";
 };
 
 export const request = handleRequest();
