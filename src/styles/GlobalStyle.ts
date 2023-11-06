@@ -55,7 +55,4 @@ table {
 a{
   text-decoration: none
 }
-button{
-  border: none;
-}
 `;

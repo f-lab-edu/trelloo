@@ -8,26 +8,28 @@ function Header() {
     <S.Header>
       <S.Container>
         <S.Nav>
-          <Button Icon={<AppstoreOutlined />} />
-          <Button Icon={<AppstoreOutlined />}>Trello</Button>
-          <Button Icon={<DownOutlined />} isIconBehindText={true}>
+          <Button type="transparent" icon={<AppstoreOutlined />} />
+          <Button type="transparent" icon={<AppstoreOutlined />}>
+            Trello
+          </Button>
+          <Button type="transparent" icon={<DownOutlined />} isIconBehindText={true}>
             Workspaces
           </Button>
-          <Button Icon={<DownOutlined />} isIconBehindText={true}>
+          <Button type="transparent" icon={<DownOutlined />} isIconBehindText={true}>
             Recent
           </Button>
-          <Button Icon={<DownOutlined />} isIconBehindText={true}>
+          <Button type="transparent" icon={<DownOutlined />} isIconBehindText={true}>
             Starred
           </Button>
-          <Button Icon={<DownOutlined />} isIconBehindText={true}>
+          <Button type="transparent" icon={<DownOutlined />} isIconBehindText={true}>
             Templates
           </Button>
-          <Button>Ireate</Button>
+          <Button type="transparent">Create</Button>
         </S.Nav>
         <S.ButtonsWrapper>
-          <Button Icon={<BellOutlined />} />
-          <Button Icon={<QuestionCircleOutlined />} />
-          <Button Icon={<UserOutlined />} />
+          <Button type="transparent" icon={<BellOutlined />} />
+          <Button type="transparent" icon={<QuestionCircleOutlined />} />
+          <Button type="transparent" icon={<UserOutlined />} />
         </S.ButtonsWrapper>
       </S.Container>
     </S.Header>
