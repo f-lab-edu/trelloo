@@ -21,7 +21,6 @@ const buttonColor = {
   gray: {
     backgroundColor: theme.color.buttonBackground,
     color: theme.color.black,
-    hoverBackgroundColor: theme.color.hoverPointGray,
   },
   blue: {
     backgroundColor: theme.color.buttonBlue,
