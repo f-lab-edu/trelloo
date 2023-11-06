@@ -49,7 +49,7 @@ export const AddCardButtonWrapper = styled.span`
   align-items: center;
 `;
 
-export const CancelAddCardButton = {
+export const CancleAddCardButton = {
   marginLeft: 5,
   padding: 0,
   fontSize: 20,
