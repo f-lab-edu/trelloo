@@ -1,5 +1,5 @@
-import { MODAL_TYPE } from "@/constants";
 import { createSlice } from "@reduxjs/toolkit";
+import { MODAL_TYPE } from "./../../utils/constants";
 
 export interface ModalState<TOptions = object, TProps = object> {
   type: string;

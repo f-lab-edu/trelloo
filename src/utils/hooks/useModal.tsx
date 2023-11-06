@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { handleModal, ModalState } from "@/store/slices/modal";
-import { MODAL_TYPE } from "@/constants";
+import { MODAL_TYPE } from "@utils/constants";
 
 const useModal = () => {
   const dispatch = useDispatch();
