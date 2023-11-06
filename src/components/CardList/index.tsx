@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Draggable } from "react-beautiful-dnd";
 import { Card as AntdCard, Input } from "antd";
 import {
   AddCardRequest,
@@ -84,17 +83,9 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
             />
           )}
         </S.ListTitle>
-
-        {data.cards.map((card, index) => (
-          <Draggable key={card.id} draggableId={card.id} index={index}>
-            {(provided) => (
-              <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                <Card key={card.id} data={card} onEditCard={handleEditCard} onDeleteCard={handleDeleteCard} />
-              </div>
-            )}
-          </Draggable>
+        {data.cards.map((card) => (
+          <Card key={card.id} data={card} onEditCard={handleEditCard} onDeleteCard={handleDeleteCard} />
         ))}
-
         <CardComposer
           isCardInputOpened={isCardInputOpened}
           onCardInputToggle={handleCardInputToggle}

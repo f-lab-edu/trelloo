@@ -3,7 +3,6 @@ import { useAddListMutation, useDeleteListMutation, useEditListMutation } from "
 import { AddListRequest, DeleteListRequest, EditListRequest } from "@/queries/cards/interface";
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import * as S from "./style";
 
 const Board = () => {
@@ -26,25 +25,10 @@ const Board = () => {
 
   return (
     <S.Container>
-      <DragDropContext onDragEnd={() => {}} onDragStart={() => {}} onDragUpdate={() => {}}>
-        {cardLists?.map((cardList) => (
-          <Droppable key={cardList.id} droppableId={cardList.id}>
-            {(provided) => (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
-                <CardList
-                  key={cardList.id}
-                  data={cardList}
-                  onEditList={handleEditList}
-                  onDeleteList={handleDeleteList}
-                />
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        ))}
-
-        <CardListComposer onAddList={handleAddList} />
-      </DragDropContext>
+      {cardLists?.map((cardList) => (
+        <CardList key={cardList.id} data={cardList} onEditList={handleEditList} onDeleteList={handleDeleteList} />
+      ))}
+      <CardListComposer onAddList={handleAddList} />
     </S.Container>
   );
 };
