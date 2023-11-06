@@ -1,10 +1,8 @@
 /// <reference types="cypress" />
 
-import { BASE_URL } from "../../../src/utils/constants";
-
 describe("example to-do app", () => {
   beforeEach(() => {
-    cy.visit(BASE_URL.LOCAL);
+    cy.visit("http://127.0.0.1:5173/");
   });
 
   it("displays Board", () => {
