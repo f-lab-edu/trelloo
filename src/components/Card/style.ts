@@ -1,4 +1,4 @@
-import { type theme } from "@/styles/theme";
+import { theme } from "@/styles/theme";
 import { Card as AntdCard } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import styled from "styled-components";
