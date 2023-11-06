@@ -27,7 +27,7 @@ function DropdownMenu2({ searchCards }: Props) {
       text: "Automation",
       icon: <ThunderboltOutlined />,
     },
-    { text: "Filter", icon: <FilterOutlined />, Dropdown: <FilterMenu onClick={searchCards} />, onClick: searchCards },
+    { text: "Filter", icon: <FilterOutlined />, Dropdown: FilterMenu, onClick: searchCards },
     {
       text: "Share",
       icon: <UserAddOutlined />,
@@ -37,8 +37,8 @@ function DropdownMenu2({ searchCards }: Props) {
 
   return (
     <>
-      {buttonList2.map(({ text, icon, Dropdown }, idx) => (
-        <DropdownButton key={idx} text={text} icon={icon} Dropdown={Dropdown} />
+      {buttonList2.map(({ text, icon, Dropdown, onClick }, idx) => (
+        <DropdownButton key={idx} text={text} icon={icon} Dropdown={Dropdown} onClick={onClick} />
       ))}
     </>
   );
