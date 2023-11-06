@@ -1,9 +1,10 @@
-export interface RequestParams<TQueryParams = Params, TParams = {}> {
+export interface RequestParams<TQueryParams = Params, TParams = {}, TConfig = {}> {
   path: string;
   method?: RequestMethod;
   params?: TParams;
   queryParams?: TQueryParams;
   isMock?: boolean;
+  config?: TConfig;
 }
 
 export type Params = Record<string, string>;
