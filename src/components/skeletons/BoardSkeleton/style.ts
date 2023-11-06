@@ -4,7 +4,7 @@ import Skeleton from "@mui/material/Skeleton";
 export const Container = styled.div`
   padding: 5px 24px;
   display: flex;
-  min-width: 1400px;
+  width: 100%;
 `;
 
 export const CardListSkeleton = styled(Skeleton).attrs(() => ({
