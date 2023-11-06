@@ -1,21 +1,94 @@
-import { useGetCardLists } from "@/queries/cardList";
-
+import {
+  useAddCardMutation,
+  useAddListMutation,
+  useDeleteCardMutation,
+  useDeleteListMutation,
+  useEditCardMutation,
+  useEditListMutation,
+  useGetCardLists,
+} from "@/queries/cardList";
+import {
+  AddCardRequest,
+  AddListRequest,
+  DeleteCardRequest,
+  DeleteListRequest,
+  EditCardRequest,
+  EditListRequest,
+} from "@/queries/cardList/interface";
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
 import * as S from "./style";
-import Provider from "./Provider";
 
 const Board = () => {
   const { data: cardLists } = useGetCardLists();
 
+  const { refetch } = useGetCardLists();
+  const { mutate: addCardMutate } = useAddCardMutation();
+  const { mutate: addListMutate } = useAddListMutation();
+  const { mutate: editCardMutate } = useEditCardMutation();
+  const { mutate: deleteCardMutate } = useDeleteCardMutation();
+  const { mutate: deleteListMutate } = useDeleteListMutation();
+  const { mutate: editListMutate } = useEditListMutation();
+
+  const handleAddCard = ({ text, listId }: AddCardRequest) => {
+    addCardMutate({
+      text,
+      listId,
+    });
+    refetch();
+  };
+
+  const handleEditCard = ({ text, id }: EditCardRequest) => {
+    editCardMutate({
+      text,
+      id,
+    });
+    refetch();
+  };
+
+  const handleDeleteCard = ({ id }: DeleteCardRequest) => {
+    deleteCardMutate({
+      id,
+    });
+    refetch();
+  };
+
+  const handleAddList = ({ title }: AddListRequest) => {
+    addListMutate({
+      title,
+    });
+    refetch();
+  };
+
+  const handleEditList = ({ id, title }: EditListRequest) => {
+    editListMutate({
+      id,
+      title,
+    });
+    refetch();
+  };
+
+  const handleDeleteList = ({ id }: DeleteListRequest) => {
+    deleteListMutate({
+      id,
+    });
+    refetch();
+  };
+
   return (
     <S.Container>
-      <Provider>
-        {cardLists?.map((cardList) => (
-          <CardList key={cardList.id} data={cardList} />
-        ))}
-        <CardListComposer />
-      </Provider>
+      {cardLists?.map((cardList) => (
+        <CardList
+          key={cardList.id}
+          data={cardList}
+          onAddCardClick={handleAddCard}
+          onEditCard={handleEditCard}
+          onDeleteCard={handleDeleteCard}
+          onEditList={handleEditList}
+          onDeleteList={handleDeleteList}
+        />
+      ))}
+      <CardListComposer onClick={handleAddList} />
     </S.Container>
   );
 };

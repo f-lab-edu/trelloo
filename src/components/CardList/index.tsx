@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Card as AntdCard, Dropdown, Input } from "antd";
 import type { MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
@@ -12,7 +12,6 @@ import {
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
 import * as S from "./style";
-import { CardContext, CardListContext } from "@components/Board/Provider";
 
 const { TextArea } = Input;
 
@@ -25,15 +24,19 @@ export interface Props {
       text: string;
     }[];
   };
+  onAddCardClick: HandleAddCard;
+  onEditCard: (data: EditCardRequest) => void;
+  onDeleteCard: (data: DeleteCardRequest) => void;
+  onEditList: (data: EditListRequest) => void;
+  onDeleteList: (data: DeleteListRequest) => void;
 }
 
 export type HandleAddCard = ({ text, listId }: AddCardRequest) => void;
 
-const CardList = ({ data }: Props) => {
+const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard, onDeleteList, onEditList }: Props) => {
   const [isWritingCard, setIsWritingCard] = useState(false);
   const [isTitleInputOpened, setIsTitleInputOpened] = useState(false);
   const [titleInput, setTitleInput] = useState(data.title);
-  const { onDeleteList, onEditList } = useContext(CardListContext);
 
   const onCardInputToggle = () => {
     setIsWritingCard(!isWritingCard);
@@ -105,9 +108,14 @@ const CardList = ({ data }: Props) => {
           )}
         </S.ListTitle>
         {data.cards.map((card) => (
-          <Card key={card.id} data={card} />
+          <Card key={card.id} data={card} onEditCard={onEditCard} onDeleteCard={onDeleteCard} />
         ))}
-        <CardComposer isWritingCard={isWritingCard} onCardInputToggle={onCardInputToggle} listId={data.id} />
+        <CardComposer
+          isWritingCard={isWritingCard}
+          onCardInputToggle={onCardInputToggle}
+          onClick={onAddCardClick}
+          listId={data.id}
+        />
       </AntdCard>
     </S.Container>
   );
