@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "@components/Header";
-import { StoryProvider } from "@/index.stories";
 
 export default {
   title: "Components/Header",
@@ -12,11 +11,7 @@ export default {
 };
 
 const Template = (args: { isBlue?: boolean }) => {
-  return (
-    <StoryProvider>
-      <Header />
-    </StoryProvider>
-  );
+  return <Header />;
 };
 
 export const Primary = Template.bind({});
