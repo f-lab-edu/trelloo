@@ -1,4 +1,4 @@
-import { EditCardPositionParam, EditCardPositionRequest } from "../../queries/cards/interface";
+import { EditCardPositionParam, EditCardPositionRequest } from "./../queries/cards/interface";
 import {
   AddCardRequest,
   AddListRequest,
@@ -19,9 +19,9 @@ import {
   editCardList,
   editCardPosition,
   getAllCardListsWithCards,
-} from "../dbfunctions";
+} from "./dbfunctions";
 
-const cardsHandlers = [
+export const handlers = [
   rest.get("/cards", (req, res, ctx) => {
     return getAllCardListsWithCards().then((data) => {
       return res(ctx.status(200), ctx.json(data));
@@ -122,5 +122,3 @@ const cardsHandlers = [
     });
   }),
 ];
-
-export default cardsHandlers;
