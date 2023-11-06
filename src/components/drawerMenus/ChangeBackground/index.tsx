@@ -6,12 +6,12 @@ import BackgroundColors from "@components/BackgroundColors";
 import useFunnel from "@/hooks/useFunnel";
 
 function ChangeBackground() {
-  const { Funnel, handleStep } = useFunnel<"changeBackground" | "photos" | "colors">("changeBackground");
+  const { Funnel, Step, handleStep } = useFunnel<"changeBackground" | "photos" | "colors">("changeBackground");
 
   return (
     <div>
       <Funnel>
-        <Funnel.Step name="changeBackground">
+        <Step name="changeBackground">
           <Menu.Title hasGoBackButton>Change Background</Menu.Title>
 
           <ImageCard.ImageList>
@@ -33,15 +33,15 @@ function ChangeBackground() {
               <ImageCard.Title>Colors</ImageCard.Title>
             </div>
           </ImageCard.ImageList>
-        </Funnel.Step>
+        </Step>
 
-        <Funnel.Step name="photos">
+        <Step name="photos">
           <BackgroundPhotos />
-        </Funnel.Step>
+        </Step>
 
-        <Funnel.Step name="colors">
+        <Step name="colors">
           <BackgroundColors />
-        </Funnel.Step>
+        </Step>
       </Funnel>
     </div>
   );
