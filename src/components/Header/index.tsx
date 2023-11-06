@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 import { AppstoreOutlined, BellOutlined, QuestionCircleOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
-import Button from "@components/buttons/Button";
+import Button from "@components/Button";
 import * as S from "./style";
 
 const { Header: AntdHeader } = Layout;
@@ -11,28 +11,26 @@ function Header() {
     <AntdHeader style={S.Header}>
       <S.Container>
         <S.Nav>
-          <Button type="transparent" icon={<AppstoreOutlined />} />
-          <Button type="transparent" icon={<AppstoreOutlined />}>
-            Trello
-          </Button>
-          <Button type="transparent" icon={<DownOutlined />} isIconBehindText={true}>
+          <Button icon={<AppstoreOutlined />} />
+          <Button icon={<AppstoreOutlined />}>Trello</Button>
+          <Button icon={<DownOutlined />} isIconBehindText={true}>
             Workspaces
           </Button>
-          <Button type="transparent" icon={<DownOutlined />} isIconBehindText={true}>
+          <Button icon={<DownOutlined />} isIconBehindText={true}>
             Recent
           </Button>
-          <Button type="transparent" icon={<DownOutlined />} isIconBehindText={true}>
+          <Button icon={<DownOutlined />} isIconBehindText={true}>
             Starred
           </Button>
-          <Button type="transparent" icon={<DownOutlined />} isIconBehindText={true}>
+          <Button icon={<DownOutlined />} isIconBehindText={true}>
             Templates
           </Button>
-          <Button type="transparent">Create</Button>
+          <Button>Create</Button>
         </S.Nav>
         <S.ButtonsWrapper>
-          <Button type="transparent" icon={<BellOutlined />} />
-          <Button type="transparent" icon={<QuestionCircleOutlined />} />
-          <Button type="transparent" icon={<UserOutlined />} />
+          <Button icon={<BellOutlined />} />
+          <Button icon={<QuestionCircleOutlined />} />
+          <Button icon={<UserOutlined />} />
         </S.ButtonsWrapper>
       </S.Container>
     </AntdHeader>

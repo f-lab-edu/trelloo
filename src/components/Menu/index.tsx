@@ -11,7 +11,7 @@ import {
   UserAddOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
-import Button from "@components/buttons/Button";
+import Button from "@components/Button";
 import * as S from "./style";
 
 interface Props {
@@ -23,10 +23,10 @@ function Menu({ showDrawer, boardName }: Props) {
   return (
     <S.Container>
       <S.ButtonsWrapper>
-        <Button type="transparent">{boardName}</Button>
+        <Button>{boardName}</Button>
         {buttonList.map((button, idx) => (
           <S.ButtonWrapper>
-            <Button key={idx} icon={button.icon} type="gray">
+            <Button key={idx} icon={button.icon} options={{ buttonColor: "rgba(0, 0, 0, 0.1)" }}>
               {button.text}
             </Button>
           </S.ButtonWrapper>
@@ -35,12 +35,12 @@ function Menu({ showDrawer, boardName }: Props) {
       <S.OtherButtonsWrapper>
         {buttonList2.map((button, idx) => (
           <S.ButtonWrapper>
-            <Button key={idx} icon={button.icon} type="gray">
+            <Button key={idx} icon={button.icon} options={{ buttonColor: "rgba(0, 0, 0, 0.1)" }}>
               {button.text}
             </Button>
           </S.ButtonWrapper>
         ))}
-        <Button icon={<EllipsisOutlined />} onClick={showDrawer} type="transparent" />
+        <Button icon={<EllipsisOutlined />} onClick={showDrawer} />
       </S.OtherButtonsWrapper>
     </S.Container>
   );
