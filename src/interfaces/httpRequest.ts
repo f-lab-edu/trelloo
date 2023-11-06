@@ -1,32 +1,32 @@
-export interface RequestParams<TParams = data, TData = {}> {
+export interface RequestParams<TQueryParams = Params, TParams = {}> {
   path: string;
   method?: RequestMethod;
-  data?: TData;
   params?: TParams;
+  queryParams?: TQueryParams;
   isMock?: boolean;
 }
 
-export type data = Record<string, string>;
+export type Params = Record<string, string>;
 type RequestMethod = "get" | "post" | "put" | "delete";
 
-export interface RequestOptions<TData> {
-  onSuccess?: (data: TData) => void;
+export interface RequestOptions<TParams> {
+  onSuccess?: (data: TParams) => void;
   onError?: (error: Error) => void;
 }
 
-export interface HandleUseQueryParams<TParams = data, TData = object> {
+export interface HandleUseQueryParams<TQueryParams = Params, TParams = object> {
   key: string;
   path: string;
-  params?: TParams;
-  options?: RequestOptions<TData>;
+  queryParams?: TQueryParams;
+  options?: RequestOptions<TParams>;
 }
 
-export interface HandleUseMutationParams<TParams = data, TData = object, TRes = object> {
+export interface HandleUseMutationParams<TQueryParams = Params, TParams = object, TRes = object> {
   key?: string;
   path: string;
   method: RequestMethod;
+  queryParams?: TQueryParams;
   params?: TParams;
-  data?: TData;
   options?: RequestOptions<TRes>;
   res?: TRes;
 }
