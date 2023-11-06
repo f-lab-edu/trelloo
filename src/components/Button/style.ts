@@ -1,44 +1,23 @@
-import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
-export type ButtonStyleType = "transparent" | "gray" | "blue" | "black";
-
 interface Color {
-  appearance?: {
-    type: ButtonStyleType;
+  options?: {
+    buttonColor?: string;
+    textColor?: string;
     width?: string;
   };
 }
 
-const buttonColor = {
-  transparent: {
-    backgroundColor: "transparent",
-    color: theme.color.black,
-  },
-  gray: {
-    backgroundColor: theme.color.buttonBackground,
-    color: theme.color.black,
-  },
-  blue: {
-    backgroundColor: theme.color.buttonBlue,
-    color: theme.color.white,
-  },
-  black: {
-    backgroundColor: theme.color.black,
-    color: theme.color.white,
-  },
-};
-
-export const Container = styled.button<Color>`
+export const Container = styled.div<Color>`
   padding: 0 10px;
-  width: ${({ appearance }) => appearance?.width || "max-content"};
+  width: ${({ options }) => options?.width || "max-content"};
   height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ appearance }) => (appearance ? buttonColor[appearance.type].backgroundColor : "transparent")};
+  background-color: ${({ options }) => options?.buttonColor};
   border-radius: ${({ theme }) => theme.borderRadius.card};
-  color: ${({ appearance }) => (appearance ? buttonColor[appearance.type].color : "black")};
+  color: ${({ options }) => options?.textColor};
   cursor: pointer;
 `;
 
