@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { DRAWER_CONTENT, DRAWER_MENU_SEARCH_PARAMS, SEARCH_PARAMS_KEY } from "@/constants";
 import ChangeBackground from "@components/drawerMenus/ChangeBackground";
 import AllLists from "@components/drawerMenus/AllLists";
 import BackgroundPhotos from "@components/drawerMenus/BackgroundPhotos";
-import useDrawer from "@/hooks/useDrawer";
-import { DrawerStateContext } from "@components/providers/DrawerProvider";
 import * as S from "./style";
 
-function Drawer() {
-  const isDrawerOpen = useContext(DrawerStateContext);
+interface Props {
+  isOpen: boolean;
+  onClose: (e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>) => void;
+}
 
-  const { closeDrawer } = useDrawer();
+function Drawer({ isOpen, onClose }: Props) {
   const [searchParams] = useSearchParams();
   const content = searchParams.get(SEARCH_PARAMS_KEY.MENU) ?? DRAWER_MENU_SEARCH_PARAMS.ALL;
 
@@ -21,7 +21,7 @@ function Drawer() {
   };
 
   return (
-    <S.Drawer placement="right" closable={false} onClose={closeDrawer} open={isDrawerOpen} getContainer={false}>
+    <S.Drawer placement="right" closable={false} onClose={onClose} open={isOpen} getContainer={false}>
       {contents[content] || <AllLists />}
     </S.Drawer>
   );

@@ -13,7 +13,7 @@ function ChangeBackground() {
 
   return (
     <div>
-      <Menu.Title hasGoBackButton>Change Background</Menu.Title>
+      <Menu.Title>Change Background</Menu.Title>
 
       <ImageCard.ImageList>
         <div>
