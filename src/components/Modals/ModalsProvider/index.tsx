@@ -1,4 +1,4 @@
-import { type CloseModalState, type ModalState, type OpenModalState } from "@/interfaces/modal";
+import { CloseModalState, ModalState, OpenModalState } from "@/interfaces/modal";
 import React, { createContext, useState, useMemo, useCallback } from "react";
 import Modals from "@components/modals/Modals";
 
