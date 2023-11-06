@@ -9,14 +9,14 @@ export const Container = styled.div`
 export const Card = styled(AntdCard).attrs(() => ({
   headStyle: {
     minHeight: "40px",
-    fontSize: "14px",
     backgroundColor: theme.color.cardListGray,
-    borderRadius: `${theme.borderRadius.card} ${theme.borderRadius.card} 0 0`,
+    borderRadius: theme.borderRadius.card,
+    fontSize: "14px",
   },
   bodyStyle: {
-    padding: "5px 10px 10px 10px",
+    padding: "5px 10px 5px 10px",
     width: "100%",
-    borderRadius: `0 0  ${theme.borderRadius.card} ${theme.borderRadius.card}`,
+    borderRadius: theme.borderRadius.card,
     backgroundColor: theme.color.cardListGray,
   },
 }))``;

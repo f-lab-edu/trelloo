@@ -41,7 +41,7 @@ export const Container = styled.button<Color>`
   justify-content: center;
   align-items: center;
   background-color: ${({ appearance }) => (appearance ? buttonColor[appearance.type].backgroundColor : "transparent")};
-  border-radius: ${({ theme }) => theme.borderRadius.button};
+  border-radius: ${({ theme }) => theme.borderRadius.card};
   color: ${({ appearance }) => (appearance ? buttonColor[appearance.type].color : "black")};
   cursor: pointer;
 
