@@ -4,16 +4,14 @@ import type * as I from "./interface";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
-  search: (keyword: string) => [...cardListsKeys.all, ...keyword],
 };
 
-export const useCardsQuery = ({ search }: I.GetCardRequest) => {
+export const useCardsQuery = () => {
   return useQuery(
-    cardListsKeys.search(search),
+    cardListsKeys.all,
     async () => {
       return await request.get<I.GetCardListsResponse[]>({
         path: "/cards",
-        queryParams: { search },
         isMock: true,
       });
     },
