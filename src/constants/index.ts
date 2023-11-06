@@ -13,18 +13,6 @@ export const STORAGE_KEY = {
   TOKEN: "token",
 };
 
-export const STATUS_CODE = {
-  400: "400",
-  401: "401",
-  404: "404",
-  500: "500",
-  504: "504",
-};
-
-export const DETAIL_CODE = {
-  700: "700",
-};
-
 export const SEARCH_PARAMS_KEY = {
   SEARCH: "search",
   MENU: "menu",

@@ -1,4 +1,4 @@
-export const mockedCardLists = [
+export const cardLists = [
   {
     id: "list1",
     title: "list1",
