@@ -1,5 +1,5 @@
 import useModal from "@/hooks/useModal";
-import CardDetail from "@components/Modals/CardDetail";
+import CardDetail from "@components/Modals/CardDetailModal";
 import * as S from "./style";
 
 interface Props {
@@ -7,10 +7,10 @@ interface Props {
 }
 
 const Card = ({ text }: Props) => {
-  const { openModal } = useModal();
+  const { openModal } = useModal<{ title: string }>();
 
   const onClickCard = () => {
-    openModal<{ title: string }>({ component: CardDetail, props: { title: "cardDetail" } });
+    openModal({ component: CardDetail, props: { title: "cardDetail" } });
   };
 
   return <S.Container onClick={onClickCard}>{text && text}</S.Container>;

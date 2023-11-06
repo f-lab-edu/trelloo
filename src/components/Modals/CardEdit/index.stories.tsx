@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import useModal from "@/hooks/useModal";
-import { ModalProvider } from "@components/Modals/ModalsProvider/index.stories";
 import CardEdit, { Props as CardEditProps } from "./index";
+import { ModalTemplate } from "@/templateStories/ModalTemplate/index.stories";
 
 export default {
   title: "Components/Modals",
@@ -10,10 +10,10 @@ export default {
 };
 
 const ModalButton = () => {
-  const { openModal } = useModal();
+  const { openModal } = useModal<CardEditProps>();
 
   const onClickButton = () => {
-    openModal<CardEditProps>({
+    openModal({
       component: CardEdit,
       props: { text: "card edit modal" },
     });
@@ -24,9 +24,9 @@ const ModalButton = () => {
 
 const Template = () => {
   return (
-    <ModalProvider>
+    <ModalTemplate>
       <ModalButton />
-    </ModalProvider>
+    </ModalTemplate>
   );
 };
 

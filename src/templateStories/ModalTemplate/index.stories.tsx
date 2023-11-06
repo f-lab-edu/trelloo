@@ -19,4 +19,4 @@ const Template = ({ children }: Props) => {
   );
 };
 
-export const ModalProvider = Template.bind({});
+export const ModalTemplate = Template.bind({});

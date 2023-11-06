@@ -2,15 +2,15 @@ import { useContext } from "react";
 import { ModalsDipatchContext } from "@components/Modals/ModalsProvider";
 import { ModalState } from "@/interfaces/modal";
 
-const useModal = () => {
+const useModal = <P extends {}>() => {
   const modalDispatch = useContext(ModalsDipatchContext);
 
-  const openModal = <TProps,>({ component, props, isMultiple }: ModalState<TProps>) => {
+  const openModal = ({ component, props, isMultiple }: ModalState) => {
     if (!modalDispatch) return;
     modalDispatch.open({ component, props, isMultiple });
   };
 
-  const closeModal = <TProps,>({ component, props }: ModalState<TProps>) => {
+  const closeModal = ({ component, props }: ModalState) => {
     if (!modalDispatch) return;
 
     modalDispatch.close({ component, props });
