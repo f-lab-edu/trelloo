@@ -5,12 +5,10 @@ const CardDetail = loadable(() => import("@components/Modals/CardDetail"));
 import * as S from "./style";
 
 interface Props {
-  data: {
-    text: string;
-  };
+  text: string;
 }
 
-const Card = ({ data }: Props) => {
+const Card = ({ text }: Props) => {
   const { openModal } = useModal();
 
   const handleClick = () => {
@@ -24,7 +22,7 @@ const Card = ({ data }: Props) => {
   return (
     <S.Container>
       <C style={S.Card} onClick={handleClick} bodyStyle={S.Body}>
-        <p>{data.text}</p>
+        <p>{text}</p>
       </C>
     </S.Container>
   );

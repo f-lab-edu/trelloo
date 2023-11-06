@@ -8,12 +8,10 @@ interface Props {
 
 const Board = ({ boardName }: Props) => {
   const { data: cardLists } = useGetCardLists();
-
+  // TODO: render card lists
   return (
     <S.Container>
-      {cardLists?.map((cardList) => (
-        <CardList data={cardList} />
-      ))}
+      <CardList />
     </S.Container>
   );
 };
