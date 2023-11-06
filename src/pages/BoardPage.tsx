@@ -1,7 +1,7 @@
-import Board from "@components/Board";
+import Board from "../components/Board";
 import * as S from "./style";
 
-const BoardPage = () => {
+const BoardPage = (): JSX.Element => {
   return (
     <S.Container>
       <Board boardName="test board name" />
