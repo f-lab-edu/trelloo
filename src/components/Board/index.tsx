@@ -25,15 +25,15 @@ const Board = ({ searchKeyword }: Props) => {
   const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
 
   const handleEditList = ({ id, title }: EditListRequest, options?: MutationOptions) => {
-    editListMutate({ id, title }, { onSuccess: options?.onSuccess });
+    editListMutate({ id, title }, { onSuccess: options?.onSuccess, onError: options?.onError });
   };
 
-  const handleDeleteList = ({ id }: DeleteListRequest) => {
-    deleteListMutate({ id });
+  const handleDeleteList = ({ id }: DeleteListRequest, options?: MutationOptions) => {
+    deleteListMutate({ id }, { onSuccess: options?.onSuccess, onError: options?.onError });
   };
 
   const handleAddList = ({ title }: AddListRequest, options?: MutationOptions) => {
-    addListMutate({ title }, { onSuccess: options?.onSuccess });
+    addListMutate({ title }, { onSuccess: options?.onSuccess, onError: options?.onError });
   };
 
   const handleDragEnd = (result: DropResult) => {
