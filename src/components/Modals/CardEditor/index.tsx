@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { Input } from "antd";
+import {
+  CreditCardOutlined,
+  TagOutlined,
+  UserSwitchOutlined,
+  IdcardOutlined,
+  ArrowRightOutlined,
+  CalendarOutlined,
+  SaveOutlined,
+} from "@ant-design/icons";
 import { ICard } from "@/interfaces/cards";
 import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
 import Button from "@components/Button";
-import CardEditorButtons from "@components/CardEditorButtons";
 import * as S from "./style";
 
 const { TextArea } = Input;
@@ -18,6 +26,44 @@ export interface Props {
 
 const CardEditor = ({ data, onCardEditorClose, setIsCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
   const [inputValue, setInputValue] = useState(data.text);
+
+  const buttonList = [
+    {
+      text: "Open card",
+      icon: <CreditCardOutlined />,
+    },
+    {
+      text: "Edit labels",
+      icon: <TagOutlined />,
+    },
+    {
+      text: "Change members",
+      icon: <UserSwitchOutlined />,
+    },
+    {
+      text: "Change cover",
+      icon: <IdcardOutlined />,
+    },
+    {
+      text: "Move",
+      icon: <ArrowRightOutlined />,
+    },
+    {
+      text: "Copy",
+      icon: <CreditCardOutlined />,
+    },
+    {
+      text: "Edit dates",
+      icon: <CalendarOutlined />,
+    },
+    {
+      text: "Archive",
+      icon: <SaveOutlined />,
+      onClick(id: string) {
+        onDeleteCard({ id });
+      },
+    },
+  ];
 
   const handleClickSave = (params: { id: string; text: string }) => {
     setIsCardEditorOpened(false);
@@ -41,7 +87,13 @@ const CardEditor = ({ data, onCardEditorClose, setIsCardEditorOpened, onEditCard
           </S.SaveButtonWrapper>
         </S.InputWrapper>
         <S.MenuButtonsWrapper>
-          <CardEditorButtons onDeleteCard={() => onDeleteCard({ id: data.id })} />
+          {buttonList.map((button) => (
+            <S.ButtonWrapper>
+              <Button type="darkGray" icon={button.icon} onClick={() => button.onClick?.(data.id)}>
+                {button.text}
+              </Button>
+            </S.ButtonWrapper>
+          ))}
         </S.MenuButtonsWrapper>
       </S.Container>
     </>
