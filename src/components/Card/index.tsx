@@ -1,7 +1,7 @@
 import { Card as AntdCard } from "antd";
 import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
-const CardDetail = loadable(() => import("@components/modals/CardDetail"));
+const CardDetail = loadable(() => import("@components/Modals/CardDetail"));
 import * as S from "./style";
 
 interface Props {

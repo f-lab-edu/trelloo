@@ -11,19 +11,18 @@ import {
   UserAddOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
-import Button from "@components/Button";
 import * as S from "./style";
+import Button from "@components/Buttons/Button";
 
 interface Props {
   showDrawer: React.MouseEventHandler<HTMLDivElement>;
-  boardName: string;
 }
 
-function Menu({ showDrawer, boardName }: Props) {
+function Menu({ showDrawer }: Props) {
   return (
     <S.Container>
       <S.ButtonsWrapper>
-        <Button>{boardName}</Button>
+        <Button>Board name</Button>
         {buttonList.map((button, idx) => (
           <Button key={idx} icon={button.icon} buttonColor="gray">
             {button.text}

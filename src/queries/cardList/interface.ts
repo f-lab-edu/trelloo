@@ -7,11 +7,6 @@ export interface GetCardListsResponse {
   }[];
 }
 
-export interface AddCardRequest {
-  text: string;
-  listId: string;
-}
-
 export interface ResponseMessage {
   message: string;
 }
