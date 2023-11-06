@@ -1,4 +1,4 @@
-import Card from "@components/Card";
+import Card from "../Card";
 import * as S from "./style";
 
 const CardList = () => {
