@@ -1,4 +1,4 @@
-import axios, { InternalAxiosRequestConfig } from "axios";
+import axios from "axios";
 import { STORAGE_KEY, URL } from "@/constants";
 import { RequestParams } from "@/interfaces/httpRequest";
 
@@ -12,40 +12,45 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (config) => handleRequestIntercept(config),
+  (config) => {
+    const token = localStorage.getItem(STORAGE_KEY.TOKEN);
+    config.headers.Authorization = !!token ? `Bearer ${token}` : "";
+    return config;
+  },
   (error) => Promise.reject(error),
 );
 
-const handleRequestIntercept = (config: InternalAxiosRequestConfig) => {
-  const token = localStorage.getItem(STORAGE_KEY.TOKEN);
-  config.headers.Authorization = !!token ? `Bearer ${token}` : "";
-  return config;
-};
+const fetchRequest = <TQueryParams>({ path, method, queryParams, params, isMock }: RequestParams<TQueryParams>) => {
+  const convertedParams = queryParams
+    ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {
+        newObj[key] = value.toString();
+        return newObj;
+      }, {})
+    : "";
 
-const fetchRequest = <TQueryParams>({ path, method, params, data, isMock }: RequestParams<TQueryParams>) => {
-  return instance(`${isMock ? "" : URL.API}${path}`, {
+  const searchParams = new URLSearchParams(convertedParams).toString();
+  return instance(`${isMock ? "" : URL.API}${path}?${searchParams}`, {
     method,
-    data: JSON.stringify(data),
-    params,
-  }).then((res) => {
-    return res.data;
+    data: JSON.stringify(params),
+  }).then((data) => {
+    return data.data;
   });
 };
 
 export const request = {
-  get<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({ ...data, method: "get" });
+  get<TResponse>(params: RequestParams): Promise<TResponse> {
+    return fetchRequest({ ...params, method: "get" });
   },
 
-  post<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({ ...data, method: "post" });
+  post<TResponse>(params: RequestParams): Promise<TResponse> {
+    return fetchRequest({ ...params, method: "post" });
   },
 
-  put<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({ ...data, method: "put" });
+  put<TResponse>(params: RequestParams): Promise<TResponse> {
+    return fetchRequest({ ...params, method: "put" });
   },
 
-  delete<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({ ...data, method: "delete" });
+  delete<TResponse>(params: RequestParams): Promise<TResponse> {
+    return fetchRequest({ ...params, method: "delete" });
   },
 };
