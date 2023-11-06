@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card as AntdCard, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
-import { AddCardRequest, DeleteCardRequest, DeleteListRequest, EditCardRequest } from "@/queries/cardList/interface";
+import { AddCardRequest, DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
 import * as S from "./style";
@@ -19,48 +19,16 @@ export interface Props {
   onAddCardClick: HandleAddCard;
   onEditCard: (data: EditCardRequest) => void;
   onDeleteCard: (data: DeleteCardRequest) => void;
-  onDeleteList: (data: DeleteListRequest) => void;
 }
 
 export type HandleAddCard = ({ text, listId }: AddCardRequest) => void;
 
-const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard, onDeleteList }: Props) => {
+const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard }: Props) => {
   const [isWritingCard, setIsWritingCard] = useState(false);
 
   const onCardInputToggle = () => {
     setIsWritingCard(!isWritingCard);
   };
-
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: <S.ListOptionTitle>List actions</S.ListOptionTitle>,
-    },
-    {
-      key: "2",
-      label: <>Add card...</>,
-    },
-    {
-      key: "3",
-      label: <>Copy list...</>,
-    },
-    {
-      key: "4",
-      label: <>Move list...</>,
-    },
-    {
-      key: "5",
-      label: <>Watch</>,
-    },
-    {
-      key: "6",
-      label: <>Sort by...</>,
-    },
-    {
-      key: "7",
-      label: <div onClick={() => onDeleteList({ id: data.id })}>Arcive this list...</div>,
-    },
-  ];
 
   return (
     <S.Container>
@@ -91,3 +59,34 @@ const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard, onDeleteList
 };
 
 export default CardList;
+
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: <S.ListOptionTitle>List actions</S.ListOptionTitle>,
+  },
+  {
+    key: "2",
+    label: <>Add card...</>,
+  },
+  {
+    key: "3",
+    label: <>Copy list...</>,
+  },
+  {
+    key: "4",
+    label: <>Move list...</>,
+  },
+  {
+    key: "5",
+    label: <>Watch</>,
+  },
+  {
+    key: "6",
+    label: <>Sort by...</>,
+  },
+  {
+    key: "7",
+    label: <>Arcive this list...</>,
+  },
+];
