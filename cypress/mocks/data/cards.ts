@@ -5,11 +5,11 @@ export const mockedCardLists = [
     cards: [
       {
         id: "card1",
-        text: "card1",
+        description: "card1",
       },
       {
         id: "card2",
-        text: "card2",
+        description: "card2",
       },
     ],
   },
@@ -19,7 +19,7 @@ export const mockedCardLists = [
     cards: [
       {
         id: "card2-1",
-        text: "card2-1",
+        description: "card2-1",
       },
     ],
   },
