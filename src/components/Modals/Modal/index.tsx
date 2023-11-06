@@ -2,19 +2,16 @@ import React, { Suspense } from "react";
 import ReactModal from "react-modal";
 import * as S from "./style";
 
-interface Props<P> {
-  Component: React.ComponentType<P>;
-  onClose: (component: React.ComponentType<P>) => void;
-  props: P;
+interface Props {
+  component: React.ReactNode;
+  onClose: (component: any) => void;
 }
 
-const Modal = <P extends {}>({ Component, onClose, props }: Props<P>) => {
+const Modal = ({ component: Component, onClose }: Props) => {
   return (
     <ReactModal isOpen={true} style={S.ModalStyle}>
       <button onClick={() => onClose(Component)}>x</button>
-      <Suspense fallback={<div>is loading...</div>}>
-        <Component {...props} />
-      </Suspense>
+      <Suspense fallback={<div>is loading...</div>}>{Component}</Suspense>
     </ReactModal>
   );
 };
