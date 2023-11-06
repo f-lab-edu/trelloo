@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import styled from "styled-components";
 import { store } from "@/store";
 import CardList from "@components/CardList";
+
 export default {
   title: "Components/CardList",
   component: CardList,
@@ -10,6 +11,7 @@ export default {
     text: "default",
   },
 };
+
 const Template = (args: { text: string }) => {
   return (
     <Provider store={store}>
@@ -25,10 +27,9 @@ const Template = (args: { text: string }) => {
           ],
         }}
         onAddCardClick={() => console.log("handle add card")}
-        onEditCard={() => console.log("edit card")}
-        onDeleteCard={() => console.log("delete card")}
       />
     </Provider>
   );
 };
-export const Primary = Template.bind({});
+
+// export const Primary = Template.bind({});
