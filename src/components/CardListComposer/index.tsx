@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "antd";
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
-import Button from "@components/buttons/Button";
+import Button from "@components/Button";
 import * as S from "./style";
 
 const { TextArea } = Input;
@@ -22,9 +22,7 @@ function CardListComposer({ onClick }: Props) {
     <S.Container>
       {!isInputOpened ? (
         <S.ButtonWrapper onClick={handleInputOpen}>
-          <Button type="transparent" icon={<PlusOutlined />}>
-            Add another list
-          </Button>
+          <Button icon={<PlusOutlined />}>Add another list</Button>
         </S.ButtonWrapper>
       ) : (
         <S.InputWrapper>
@@ -34,9 +32,7 @@ function CardListComposer({ onClick }: Props) {
             autoSize
           />
           <S.SubmitButtonWrapper>
-            <Button type="transparent" onClick={() => onClick({ title: listTitleInputValue })}>
-              Add a list
-            </Button>
+            <Button onClick={() => onClick({ title: listTitleInputValue })}>Add a list</Button>
             <CloseOutlined style={S.CancleAddListButton} onClick={handleInputOpen} />
           </S.SubmitButtonWrapper>
         </S.InputWrapper>

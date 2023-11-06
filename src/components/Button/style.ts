@@ -16,7 +16,7 @@ export const Container = styled.div<Color>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ options }) => options?.buttonColor};
+  background-color: ${({ options }) => options?.buttonColor || "transparent"};
   border-radius: ${({ theme }) => theme.borderRadius.card};
   color: ${({ options }) => options?.textColor};
   cursor: pointer;
