@@ -1,5 +1,5 @@
-import { CloseModalState, ModalState } from "@/interfaces/modal";
-import React, { Suspense, useCallback } from "react";
+import React, { Suspense, useCallback } from "react"
+import { type CloseModalState, type ModalState } from "@/interfaces/modal";
 import { modalContents } from "../modalContents";
 import * as S from "./style";
 

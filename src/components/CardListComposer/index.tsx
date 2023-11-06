@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { AddListRequest } from "@/queries/cards/interface";
+import { type AddListRequest } from "@/queries/cards/interface";
 import Button from "@components/buttons/Button";
 import * as S from "./style";
 
@@ -36,19 +36,12 @@ function CardListComposer({ onAddList }: Props) {
         <S.InputWrapper>
           <TextArea
             value={listTitleInputValue}
-            onChange={(e) => {
-              setListTitleInputValue(e.target.value);
-            }}
+            onChange={(e) => { setListTitleInputValue(e.target.value); }}
             placeholder="Enter list title..."
             autoSize
           />
           <S.SubmitButtonWrapper>
-            <Button
-              appearance={{ type: "blue" }}
-              onClick={() => {
-                handleAddList({ title: listTitleInputValue });
-              }}
-            >
+            <Button appearance={{ type: "blue" }} onClick={() => { handleAddList({ title: listTitleInputValue }); }}>
               Add a list
             </Button>
             <S.CloseButton onClick={handleInputOpen} />

@@ -1,5 +1,5 @@
 import { STORAGE_KEY, URL } from "@/constants";
-import { RequestParams } from "@/interfaces/httpRequest";
+import { type RequestParams } from "@/interfaces/httpRequest";
 
 const headers: HeadersInit = {
   "Content-Type": "application/json; charset=utf-8",
@@ -22,7 +22,7 @@ const fetchRequest = async <TQueryParams>({
 
   const searchParams = new URLSearchParams(convertedParams).toString();
 
-  if (shouldAuthorize) {
+  if ((shouldAuthorize)) {
     const token = localStorage.getItem(STORAGE_KEY.TOKEN);
     headers.Authorization = token ? `Bearer ${token}` : "";
   }
