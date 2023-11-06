@@ -24,12 +24,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <ModalsProvider>
+        <ModalsProvider>
+          <ThemeProvider theme={theme}>
             <GlobalStyle />
             <App />
-          </ModalsProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </ModalsProvider>
       </Provider>
     </QueryClientProvider>
   </React.StrictMode>,

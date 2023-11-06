@@ -1,20 +1,17 @@
 import { theme } from "@/styles/theme";
+import styled from "styled-components";
 
-interface Props {
-  hasOverlay?: boolean;
-  top?: number;
-  left?: number;
-}
-
-export const ModalStyle = (options?: Props) => {
+export const ModalStyle = (options: any) => {
   return {
     overlay: {
-      top: options?.top || 0,
-      left: options?.left || 0,
+      top: 0,
+      left: 0,
+      width: options?.isMultiple ? 0 : "100vw",
+      height: options?.isMultiple ? 0 : "100vh",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: options?.hasOverlay ? theme.color.dimmedBackground : "transparent",
+      backgroundColor: `${theme.color.dimmedBackground}`,
     },
     content: {
       inset: "unset",
