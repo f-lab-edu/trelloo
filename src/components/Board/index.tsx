@@ -1,7 +1,6 @@
 import { useAddCardMutation, useGetCardLists } from "@/queries/cardList";
 import { AddCardRequest } from "@/queries/cardList/interface";
 import CardList from "@components/CardList";
-import CardListComposer from "@components/CardListComposer";
 import * as S from "./style";
 
 const Board = () => {
@@ -18,16 +17,11 @@ const Board = () => {
     refetch();
   };
 
-  const handleAddList = () => {
-    // TODO: add func
-  };
-
   return (
     <S.Container>
       {cardLists?.map((cardList) => (
-        <CardList key={cardList.id} data={cardList} onAddCardClick={handleAddCard} />
+        <CardList key={cardList.id} data={cardList} handleAddCard={handleAddCard} />
       ))}
-      <CardListComposer onClick={handleAddList} />
     </S.Container>
   );
 };
