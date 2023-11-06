@@ -19,18 +19,12 @@ const cardListsKeys = {
 };
 
 export const useCardsQuery = () => {
-  return useQuery(
-    cardListsKeys.all,
-    () => {
-      return request.get<GetCardListsResponse[]>({
-        path: "/cards",
-        isMock: true,
-      });
-    },
-    {
-      suspense: true,
-    },
-  );
+  return useQuery(cardListsKeys.all, () => {
+    return request.get<GetCardListsResponse[]>({
+      path: "/cards",
+      isMock: true,
+    });
+  });
 };
 
 export const useAddCardMutation = () => {

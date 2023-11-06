@@ -3,9 +3,8 @@ export const theme = {
     dimmedBackground: "#000000a3",
     cardEditorGray: "#0009",
     cardEditorText: "#c7d1db",
-    backgroundGray: "#F3F5F7",
+    backgroundGray: "#F3F5F7", // modal background
     cardListGray: "#EAECF0",
-    skeletonGray: "rgba(0, 0, 0, 0.11)",
     hoverPointGray: "#E1E4E9",
     textPointGray: "#5E6C83",
     textDefaultGray: "#3C3E3F",
