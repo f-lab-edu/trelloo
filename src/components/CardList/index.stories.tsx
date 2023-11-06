@@ -20,7 +20,6 @@ const Template = (args: { text: string }) => {
             {
               id: "string",
               description: "string",
-              index: 0,
             },
           ],
         }}
