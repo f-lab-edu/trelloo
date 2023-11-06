@@ -1,4 +1,3 @@
-import { CloseOutlined } from "@ant-design/icons";
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
@@ -25,13 +24,11 @@ export const SubmitButtonWrapper = styled.div`
   display: flex;
 `;
 
-export const CloseButton = styled(CloseOutlined).attrs(() => ({
-  style: {
-    marginLeft: 5,
-    padding: 0,
-    display: "flex",
-    alignItems: "center",
-    fontSize: 20,
-    color: theme.color.textPointGray,
-  },
-}))``;
+export const CancleAddListButton = {
+  marginLeft: 5,
+  padding: 0,
+  display: "flex",
+  alignItems: "center",
+  fontSize: 20,
+  color: theme.color.textPointGray,
+};

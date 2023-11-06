@@ -61,10 +61,12 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
 
   return (
     <S.Container>
-      <S.Card
+      <AntdCard
         bordered={false}
         style={{ width: 300 }}
         extra={<ListOptions onDeleteList={() => onDeleteList({ id: data.id })} />}
+        headStyle={S.Header}
+        bodyStyle={S.Body}
       >
         <S.ListTitle>
           {!isTitleInputOpened ? (
@@ -95,7 +97,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
           listId={data.id}
           onAddCard={handleAddCard}
         />
-      </S.Card>
+      </AntdCard>
     </S.Container>
   );
 };

@@ -20,3 +20,7 @@ export const ButtonWrapper = styled.div`
 export const OtherButtonsWrapper = styled.span`
   display: flex;
 `;
+
+export const Button = {
+  backgroundColor: "transparent",
+};

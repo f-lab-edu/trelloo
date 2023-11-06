@@ -1,4 +1,5 @@
 import React, { Suspense, useCallback } from "react";
+import ReactModal from "react-modal";
 import { CloseModalState, ModalState } from "@/interfaces/modal";
 import * as S from "./style";
 
@@ -12,12 +13,12 @@ const Modal = <P extends {}>({ component: Component, index, onClose, props, opti
   }, [Component, index, props]);
 
   return (
-    <S.ModalContainer isOpen={true} onRequestClose={handleClose}>
+    <ReactModal isOpen={true} style={S.ModalStyle(options)} onRequestClose={handleClose}>
       <button onClick={handleClose}>x</button>
       <Suspense fallback={<div>is loading...</div>}>
         <Component {...props} />
       </Suspense>
-    </S.ModalContainer>
+    </ReactModal>
   );
 };
 

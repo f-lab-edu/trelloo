@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu } from "antd";
 import type { MenuProps } from "antd";
+import { Drawer as AntdDrawer } from "antd";
 import {
   TableOutlined,
   SettingOutlined,
@@ -52,9 +53,17 @@ const items2: MenuProps["items"] = [
 
 function Drawer({ open, onClose }: Props) {
   return (
-    <S.Drawer title="Menu" placement="right" closable={false} onClose={onClose} open={open} getContainer={false}>
-      <S.Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} items={items2} />
-    </S.Drawer>
+    <AntdDrawer
+      title="Menu"
+      placement="right"
+      closable={false}
+      onClose={onClose}
+      open={open}
+      getContainer={false}
+      bodyStyle={S.BodyStyle}
+    >
+      <Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} items={items2} style={S.Menu} />
+    </AntdDrawer>
   );
 }
 

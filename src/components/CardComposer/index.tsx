@@ -26,7 +26,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard 
     <>
       {isCardInputOpened ? (
         <S.CardInputContainer>
-          <S.Card>
+          <AntdCard bodyStyle={S.CardInput}>
             <TextArea
               value={cardInputValue}
               onChange={(e) => setCardInputValue(e.target.value)}
@@ -34,13 +34,13 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard 
               autoSize
               bordered={false}
             />
-          </S.Card>
+          </AntdCard>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
               <Button type="blue" onClick={() => handleAddCard({ description: cardInputValue, listId })}>
                 Add card
               </Button>
-              <S.CloseButton onClick={onCardInputToggle} />
+              <CloseOutlined style={S.CancelAddCardButton} onClick={onCardInputToggle} />
             </S.AddCardButtonWrapper>
             <Button type="transparent" icon={<EllipsisOutlined />} />
           </S.AddCardButtonContainer>
