@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Layout } from "antd";
+import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import {
   LeftOutlined,
@@ -47,7 +47,7 @@ const items2: MenuProps["items"] = [
 ];
 
 function Sider() {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
   const onClickCollapse = () => {
     setCollapsed(!collapsed);
