@@ -23,7 +23,7 @@ function Composer({ isOpen,toggleInputOpen, btnText, submitBtnText, children, on
         </Button>
       </S.ButtonWrapper>
     ) : (
-      <div>
+      <S.InputWrapper>
         {children}
         <S.SubmitButtonWrapper>
           <Button type="submit" appearance={{ type: "blue" }} >
@@ -31,7 +31,7 @@ function Composer({ isOpen,toggleInputOpen, btnText, submitBtnText, children, on
           </Button>
           <S.CloseButton onClick={toggleInputOpen} />
         </S.SubmitButtonWrapper>
-      </div>
+      </S.InputWrapper>
     )}
   </S.Container>)
 }

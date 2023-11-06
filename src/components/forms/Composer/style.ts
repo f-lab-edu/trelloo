@@ -15,6 +15,10 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
+export const InputWrapper = styled.div`
+  background-color: ${({ theme }) => theme.color.cardListGray};
+`;
+
 export const SubmitButtonWrapper = styled.div`
   margin-top: 8px;
   display: flex;
