@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Drawer from "@components/Drawer";
 
 export default {
@@ -7,7 +7,12 @@ export default {
 };
 
 const Template = () => {
-  return <Drawer />;
+  const [, setOpen] = useState(false);
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  return <Drawer isOpen onClose={onClose} />;
 };
 
 export const Default = Template.bind({});

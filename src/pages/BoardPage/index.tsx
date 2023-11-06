@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import loadable from "@loadable/component";
 import { SEARCH_PARAMS_KEY } from "@/constants";
@@ -20,7 +19,6 @@ interface BoardProps {
 }
 
 const BoardPage: React.FC = () => {
-  const background = useSelector((state: { background: { image: string; color: string } }) => state.background);
   const [searchParams, setSearchParams] = useSearchParams(window.location.search);
   const searchKeyword = searchParams.get(SEARCH_PARAMS_KEY.SEARCH) ?? "";
 
@@ -30,7 +28,7 @@ const BoardPage: React.FC = () => {
   };
 
   return (
-    <S.Container backgroundImage={background.image} backgroundColor={background.color}>
+    <S.Container>
       <Header />
       <S.ContentLayout>
         <Sider />
