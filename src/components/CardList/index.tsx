@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card as AntdCard, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
-import { AddCardRequest, DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
+import { AddCardRequest, EditCardRequest } from "@/queries/cardList/interface";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
 import * as S from "./style";
@@ -18,12 +18,11 @@ export interface Props {
   };
   onAddCardClick: HandleAddCard;
   onEditCard: (data: EditCardRequest) => void;
-  onDeleteCard: (data: DeleteCardRequest) => void;
 }
 
 export type HandleAddCard = ({ text, listId }: AddCardRequest) => void;
 
-const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard }: Props) => {
+const CardList = ({ data, onAddCardClick, onEditCard }: Props) => {
   const [isWritingCard, setIsWritingCard] = useState(false);
 
   const onCardInputToggle = () => {
@@ -45,7 +44,7 @@ const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard }: Props) => 
         bodyStyle={S.Body}
       >
         {data.cards.map((card) => (
-          <Card key={card.id} data={card} onEditCard={onEditCard} onDeleteCard={onDeleteCard} />
+          <Card key={card.id} data={card} onEditCard={onEditCard} />
         ))}
         <CardComposer
           isWritingCard={isWritingCard}

@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import { v4 as uuidv4 } from "uuid";
-import { addCard, addCardList, deleteCard, editCard, getAllCardListsWithCards } from "./dbfunctions";
+import { addCard, addCardList, editCard, getAllCardListsWithCards } from "./dbfunctions";
 
 interface AddCardRequestBody {
   text: string;
@@ -10,10 +10,6 @@ interface AddCardRequestBody {
 interface EditCardRequestBody {
   id: string;
   text: string;
-}
-
-interface DeleteCardRequestBody {
-  id: string;
 }
 
 interface AddListRequestBody {
@@ -67,15 +63,12 @@ export const handlers = [
     });
   }),
 
-  rest.delete<string, DefaultResponseBody>("/card", (req, res, ctx) => {
-    const { id } = JSON.parse(req.body) as DeleteCardRequestBody;
-    return deleteCard({ id }).then(() => {
-      return res(
-        ctx.status(200),
-        ctx.json({
-          message: "card is deleted",
-        }),
-      );
-    });
+  rest.delete("/cards", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: "card created",
+      }),
+    );
   }),
 ];

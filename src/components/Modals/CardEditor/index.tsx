@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import Button from "@components/Button";
 import * as S from "./style";
-import { DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
+import { EditCardRequest } from "@/queries/cardList/interface";
 
 const { TextArea } = Input;
 
@@ -22,49 +22,10 @@ export interface Props {
   };
   onClick: (e: any) => void;
   onEditCard: (data: EditCardRequest) => void;
-  onDeleteCard: (data: DeleteCardRequest) => void;
 }
 
-const CardEditor = ({ data, onClick, onEditCard, onDeleteCard }: Props) => {
+const CardEditor = ({ data, onClick, onEditCard }: Props) => {
   const [inputValue, setInputValue] = useState(data.text);
-
-  const buttonList = [
-    {
-      text: "Open card",
-      icon: <CreditCardOutlined />,
-    },
-    {
-      text: "Edit labels",
-      icon: <TagOutlined />,
-    },
-    {
-      text: "Change members",
-      icon: <UserSwitchOutlined />,
-    },
-    {
-      text: "Change cover",
-      icon: <IdcardOutlined />,
-    },
-    {
-      text: "Move",
-      icon: <ArrowRightOutlined />,
-    },
-    {
-      text: "Copy",
-      icon: <CreditCardOutlined />,
-    },
-    {
-      text: "Edit dates",
-      icon: <CalendarOutlined />,
-    },
-    {
-      text: "Archive",
-      icon: <SaveOutlined />,
-      onClick(id: string) {
-        onDeleteCard({ id });
-      },
-    },
-  ];
 
   return (
     <>
@@ -85,7 +46,7 @@ const CardEditor = ({ data, onClick, onEditCard, onDeleteCard }: Props) => {
         <S.MenuButtonsWrapper>
           {buttonList.map((button) => (
             <S.ButtonWrapper>
-              <Button type="darkGray" icon={button.icon} onClick={() => button.onClick?.(data.id)}>
+              <Button type="darkGray" icon={button.icon}>
                 {button.text}
               </Button>
             </S.ButtonWrapper>
@@ -95,5 +56,40 @@ const CardEditor = ({ data, onClick, onEditCard, onDeleteCard }: Props) => {
     </>
   );
 };
+
+const buttonList = [
+  {
+    text: "Open card",
+    icon: <CreditCardOutlined />,
+  },
+  {
+    text: "Edit labels",
+    icon: <TagOutlined />,
+  },
+  {
+    text: "Change members",
+    icon: <UserSwitchOutlined />,
+  },
+  {
+    text: "Change cover",
+    icon: <IdcardOutlined />,
+  },
+  {
+    text: "Move",
+    icon: <ArrowRightOutlined />,
+  },
+  {
+    text: "Copy",
+    icon: <CreditCardOutlined />,
+  },
+  {
+    text: "Edit dates",
+    icon: <CalendarOutlined />,
+  },
+  {
+    text: "Archive",
+    icon: <SaveOutlined />,
+  },
+];
 
 export default CardEditor;

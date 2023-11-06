@@ -18,10 +18,6 @@ export interface EditCardData {
   text: string;
 }
 
-export interface DeleteCardData {
-  id: string;
-}
-
 const dbName = "card-db";
 const listStoreName = "card-list-store";
 const cardStoreName = "card-store";
@@ -31,15 +27,13 @@ const cardKeyPath = "id";
 const initDb = async () => {
   const db = await openDB(dbName, 1, {
     upgrade(db) {
-      db.createObjectStore(listStoreName, {
+      const listStore = db.createObjectStore(listStoreName, {
         keyPath: listKeyPath,
       });
       const cardStore = db.createObjectStore(cardStoreName, {
         keyPath: cardKeyPath,
       });
       cardStore.createIndex("listId", "listId", { unique: false });
-      cardStore.createIndex("id", "id", { unique: true });
-      cardStore.createIndex("createdAt", "createdAt", { unique: true });
     },
   });
   return db;
@@ -72,18 +66,6 @@ export const editCard = async ({ id, text }: EditCardData) => {
   await store.put(card);
   await tx.done;
   return card;
-};
-
-export const deleteCard = async ({ id }: DeleteCardData) => {
-  const db = await initDb();
-  const tx = db.transaction(cardStoreName, "readwrite");
-  const store = tx.objectStore(cardStoreName);
-  const index = store.index("id");
-  const keyRange = IDBKeyRange.only(id);
-  const cursor = await index.openCursor(keyRange);
-  const deleteRequest = cursor?.delete();
-  await tx.done;
-  return deleteRequest;
 };
 
 export const getAllCardLists = async (): Promise<CardListData[]> => {
