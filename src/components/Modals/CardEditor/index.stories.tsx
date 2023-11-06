@@ -8,6 +8,7 @@ export default {
   title: "Components/Modals",
   component: CardEdit,
 };
+
 const ModalButton = () => {
   const { openModal } = useModal();
 
@@ -17,8 +18,10 @@ const ModalButton = () => {
       props: { text: "card edit modal" },
     });
   };
+
   return <button onClick={onClickButton}>open modal</button>;
 };
+
 const Template = () => {
   return (
     <ModalsProvider>
@@ -26,4 +29,5 @@ const Template = () => {
     </ModalsProvider>
   );
 };
+
 export const CardEditModal = Template.bind({});
