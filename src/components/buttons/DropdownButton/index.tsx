@@ -4,11 +4,11 @@ import * as S from "./style";
 
 interface Props {
   text: string;
-  Icon: ReactNode;
+  icon: ReactNode;
   Dropdown?: ReactNode;
 }
 
-function DropdownButton({ text, Icon, Dropdown }: Props) {
+function DropdownButton({ text, icon, Dropdown }: Props) {
   const [isOpened, setIsOpened] = useState(false);
 
   const handleDropdownOpen = () => {
@@ -17,7 +17,7 @@ function DropdownButton({ text, Icon, Dropdown }: Props) {
 
   return (
     <S.Container>
-      <Button onClick={handleDropdownOpen} Icon={Icon} appearance={{ type: "gray", style: { margin: "5px 5px 0 0" } }}>
+      <Button onClick={handleDropdownOpen} Icon={icon} appearance={{ type: "gray", style: { margin: "5px 5px 0 0" } }}>
         {text}
       </Button>
       {isOpened && (
