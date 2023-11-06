@@ -68,4 +68,9 @@ input{
   outline:none;
   border:none;
 }
+
+.Toastify__toast {
+  white-space: pre-wrap;
+}
+
 `;
