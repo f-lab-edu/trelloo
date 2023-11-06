@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "@/utils/httpRequest";
 import type * as I from "./interface";
-import { ICard, ICardList } from "@/interfaces/cards";
+import { ICardList } from "@/interfaces/cards";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
@@ -116,48 +116,36 @@ export const useEditCardPositionMutation = () => {
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
       onMutate: ({ cardId, listId, index }) => {
-        const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.all);
-        if (!currentCards) return;
+        const previousData = queryClient.getQueryData<ICardList[]>(cardListsKeys.all);
+        if (!previousData) return;
 
-        const currentCardsList = currentCards.filter((list) => list.cards.some((card) => card.id === cardId));
-        const currentListId = currentCardsList[0].id;
-        const card = currentCardsList[0].cards.filter((card) => card.id === cardId)[0];
+        const previousList = previousData.filter((list) => list.cards.some((card) => card.id === cardId));
+        const previousListId = previousList[0].id;
+        const card = previousList[0].cards.filter((card) => card.id === cardId)[0];
 
-        const updatedData = currentCards.map((list) => {
-          const hasMatchedListId = list.id === listId;
-          const hasCardInList = list.id === currentListId;
-
-          if (hasMatchedListId) {
-            return addMovedCardToList(list, card, index);
+        const updatedData = previousData.map((list) => {
+          if (list.id === listId) {
+            const newCards = Array.from(list.cards);
+            newCards.splice(index, 0, card);
+            return { ...list, cards: newCards };
+          } else if (list.id === previousListId) {
+            const newCards = Array.from(list.cards);
+            newCards.splice(card.index, 1);
+            return { ...list, cards: newCards };
+          } else {
+            return list;
           }
-
-          if (hasCardInList) {
-            return removeMovedCardFromList(list, cardId);
-          }
-
-          return list;
         });
 
         queryClient.setQueryData(cardListsKeys.all, updatedData);
 
-        return () => queryClient.setQueryData(cardListsKeys.all, currentCards);
+        return () => queryClient.setQueryData(cardListsKeys.all, previousData);
       },
       onError: (error, variables, rollback) => {
         rollback?.();
       },
     },
   );
-};
-
-const addMovedCardToList = (list: ICardList, card: ICard, index: number) => {
-  const newCards = Array.from(list.cards);
-  newCards.splice(index, 0, card);
-  return { ...list, cards: newCards };
-};
-
-const removeMovedCardFromList = (list: ICardList, cardId: string) => {
-  const filteredCards = list.cards.filter((card) => card.id !== cardId);
-  return { ...list, cards: filteredCards };
 };
 
 export const useDeleteListMutation = () => {
