@@ -24,7 +24,7 @@ import {
 const cardsHandlers = [
   rest.get("/cards", (req, res, ctx) => {
     return getAllCardListsWithCards().then((data) => {
-      return res(ctx.delay(5000), ctx.status(200), ctx.json(data));
+      return res(ctx.status(200), ctx.json(data));
     });
   }),
 
@@ -34,7 +34,6 @@ const cardsHandlers = [
 
     return addCard({ listId, description, id, createdAt: Date.now() }).then(() => {
       return res(
-        ctx.delay(3000),
         ctx.status(201),
         ctx.json({
           message: "Card created",
