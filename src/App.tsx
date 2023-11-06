@@ -1,13 +1,7 @@
-import "./styles/global.module.css";
-import "./styles/reset.module.css";
-import Board from "./components/Board";
+import styles from "./index.module.css";
 
 function App() {
-  return (
-    <div>
-      <Board />
-    </div>
-  );
+  return <div className={styles.app}></div>;
 }
 
 export default App;
