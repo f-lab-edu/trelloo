@@ -1,4 +1,4 @@
-import { MODAL_TYPE } from "@/constants";
+import { MODAL_TYPE } from "@utils/constants";
 import useModal from "@utils/hooks/useModal";
 import * as S from "./style";
 

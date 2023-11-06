@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { BASE_URL } from "../../../src/constants";
+import { BASE_URL } from "../../../src/utils/constants";
 
 describe("run application", () => {
   beforeEach(() => {

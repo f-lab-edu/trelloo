@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { createPortal } from "react-dom";
-import { MODAL_TYPE } from "@/constants";
-import useOutsideClick from "@utils/hooks/useClickOutside";
+import { MODAL_TYPE } from "@utils/constants";
+import useOutsideClick from "@utils/useClickOutside";
 import useModal from "@utils/hooks/useModal";
 import { ModalState } from "@/store/slices/modal";
 import CardDetail from "@components/CardDetail";
