@@ -22,7 +22,6 @@ function Menu({ showDrawer }: Props) {
   return (
     <S.Container>
       <S.ButtonsWrapper>
-        <Button>Board name</Button>
         {buttonList.map((button) => (
           <Button icon={button.icon} buttonColor="gray">
             {button.text}
@@ -31,7 +30,7 @@ function Menu({ showDrawer }: Props) {
       </S.ButtonsWrapper>
       <S.OtherButtonsWrapper>
         {buttonList2.map((button) => (
-          <Button icon={button.icon} buttonColor={button.buttonColor || "gray"}>
+          <Button icon={button.icon} buttonColor="gray">
             {button.text}
           </Button>
         ))}
@@ -82,6 +81,5 @@ const buttonList2 = [
   {
     text: "Share",
     icon: <UserAddOutlined />,
-    buttonColor: "blue",
   },
 ];

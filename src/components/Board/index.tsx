@@ -11,6 +11,7 @@ const Board = ({ boardName }: Props) => {
   // TODO: render card lists
   return (
     <S.Container>
+      Board: {boardName}
       <CardList />
     </S.Container>
   );
