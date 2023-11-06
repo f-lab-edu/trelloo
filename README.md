@@ -103,13 +103,17 @@ Published Links
 
 - 다중 모달 구현
 - 공통 에러 처리
-  - status code별 공통/개별 에러처리
-- error-boundary와 suspense 사용해 사용자 경험 고려해 개발
+  - status code별 공통 에러처리 (default options)
+  - detail code 염두에 두고 에러처리하기
+- error-boundary와 suspense 사용
   - Skeleton UI 사용
-- 공통 api fetching 로직 구현
+- 공통 api fetching
+  - fetch vs axios
+  - fetch 어떻게 랩핑해 사용할까 (axios 흉내내기)
 - 상태관리 전략
-  - React Query, Context API 사용
-- 테스트 코드 작성
+  - React Query
+  - Context API
+  - Redux?
 
 <br>
 <br>
