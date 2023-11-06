@@ -4,10 +4,10 @@ import { EllipsisOutlined } from "@ant-design/icons";
 import * as S from "./style";
 
 interface Props {
-  onDeleteList: () => void;
+  onDeleteListById: () => void;
 }
 
-function ListOptions({ onDeleteList }: Props) {
+function ListOptions({ onDeleteListById }: Props) {
   const items: MenuProps["items"] = [
     {
       key: "1",
@@ -35,7 +35,7 @@ function ListOptions({ onDeleteList }: Props) {
     },
     {
       key: "7",
-      label: <div onClick={onDeleteList}>Arcive this list...</div>,
+      label: <div onClick={onDeleteListById}>Arcive this list...</div>,
     },
   ];
   return (
