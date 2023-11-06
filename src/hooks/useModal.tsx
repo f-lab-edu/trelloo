@@ -1,18 +1,16 @@
-import { useContext } from "react";
-import { ModalsDipatchContext } from "@components/Modals/ModalsProvider";
+import { useDispatch } from "react-redux";
+import { handleModal, ModalState } from "@/store/slices/modal";
+import { MODAL_TYPE } from "@/constants";
 
 const useModal = () => {
-  const modalDispatch = useContext(ModalsDipatchContext);
+  const dispatch = useDispatch();
 
-  const openModal = ({ component, props }: { component: any; props?: any }) => {
-    if (!modalDispatch) return;
-    modalDispatch.open({ component, props });
+  const openModal = <TOptions, TProps>(props: ModalState<TOptions, TProps>) => {
+    dispatch(handleModal(props));
   };
 
-  const closeModal = (component: React.ComponentType) => {
-    if (!modalDispatch) return;
-
-    modalDispatch.close(component);
+  const closeModal = () => {
+    dispatch(handleModal({ type: MODAL_TYPE.NONE }));
   };
   return { openModal, closeModal };
 };
