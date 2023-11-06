@@ -11,16 +11,16 @@ const { TextArea } = Input;
 export interface Props {
   data: ICard;
   onCardEditorClose: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-  setCardEditorOpened: (state: boolean) => void;
+  setIsCardEditorOpened: (state: boolean) => void;
   onEditCard: (params: EditCardRequest) => void;
   onDeleteCard: (params: DeleteCardRequest) => void;
 }
 
-const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
+const CardEditor = ({ data, onCardEditorClose, setIsCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
   const [inputValue, setInputValue] = useState(data.text);
 
   const handleClickSave = (params: { id: string; text: string }) => {
-    setCardEditorOpened(false);
+    setIsCardEditorOpened(false);
     onEditCard(params);
   };
 
