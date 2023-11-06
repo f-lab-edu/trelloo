@@ -12,7 +12,7 @@ exports[`Board 테스트 > 스냅샷 테스트 1`] = `
     />
     <div>
       <div
-        class="sc-lnAgIa cOtAoW"
+        class="sc-lnAgIa eatuPu"
       >
         <div
           data-rbd-droppable-context-id="1"
@@ -362,7 +362,7 @@ exports[`Board 테스트 > 스냅샷 테스트 1`] = `
           </div>
         </div>
         <div
-          class="sc-cyRfQX dOTKfH"
+          class="sc-cyRfQX hRkjZK"
         >
           <form>
             <div
@@ -430,7 +430,7 @@ exports[`Board 테스트 > 스냅샷 테스트 1`] = `
   </body>,
   "container": <div>
     <div
-      class="sc-lnAgIa cOtAoW"
+      class="sc-lnAgIa eatuPu"
     >
       <div
         data-rbd-droppable-context-id="1"
@@ -780,7 +780,7 @@ exports[`Board 테스트 > 스냅샷 테스트 1`] = `
         </div>
       </div>
       <div
-        class="sc-cyRfQX dOTKfH"
+        class="sc-cyRfQX hRkjZK"
       >
         <form>
           <div
