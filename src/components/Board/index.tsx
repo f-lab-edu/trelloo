@@ -1,4 +1,4 @@
-import { useCardsQuery, useEditCardPositionMutation } from "@/queries/cards";
+import { useCardsQuery } from "@/queries/cards";
 import { useAddListMutation, useDeleteListMutation, useEditListMutation } from "@/queries/cards";
 import { AddListRequest, DeleteListRequest, EditListRequest } from "@/queries/cards/interface";
 import CardList from "@components/CardList";
@@ -11,7 +11,6 @@ const Board = () => {
   const { mutate: addListMutate } = useAddListMutation();
   const { mutate: deleteListMutate } = useDeleteListMutation();
   const { mutate: editListMutate } = useEditListMutation();
-  const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
 
   const handleEditList = (params: EditListRequest) => {
     editListMutate(params);
@@ -25,31 +24,9 @@ const Board = () => {
     addListMutate(params);
   };
 
-  const handleDragEnd = (result: any) => {
-    const { destination, source, draggableId } = result;
-    if (!destination) {
-      return;
-    }
-
-    if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return;
-    }
-    editCardPositionMutate({
-      cardId: draggableId,
-      destination: {
-        listId: destination.droppableId,
-        index: destination.index,
-      },
-      source: {
-        listId: source.droppableId,
-        index: source.index,
-      },
-    });
-  };
-
   return (
     <S.Container>
-      <DragDropContext onDragEnd={handleDragEnd} onDragStart={() => {}} onDragUpdate={() => {}}>
+      <DragDropContext onDragEnd={() => {}} onDragStart={() => {}} onDragUpdate={() => {}}>
         {cardLists?.map((cardList) => (
           <Droppable key={cardList.id} droppableId={cardList.id}>
             {(provided) => (
