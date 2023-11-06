@@ -5,14 +5,14 @@ const headers: HeadersInit = {
   "Content-Type": "application/json; charset=utf-8",
 };
 
-const fetchRequest = <TParams>({
+const fetchRequest = async <TQueryParams>({
   path,
   method,
   queryParams,
   params,
   isMock,
   shouldAuthorize,
-}: RequestParams<TParams>) => {
+}: RequestParams<TQueryParams>) => {
   const convertedParams = queryParams
     ? Object.entries(queryParams).reduce((newObj: Record<string, string>, [key, value]) => {
         newObj[key] = value.toString();
@@ -27,17 +27,17 @@ const fetchRequest = <TParams>({
     headers.Authorization = token ? `Bearer ${token}` : "";
   }
 
-  return fetch(`${isMock ? "" : URL.API}${path}${searchParams ? `?${searchParams}` : ""}`, {
+  return await fetch(`${isMock ? "" : URL.API}${path}${searchParams ? `?${searchParams}` : ""}`, {
     headers,
     method,
     body: JSON.stringify(params),
   })
-    .then((res) => {
+    .then(async (res) => {
       if (!res.ok) {
-        return Promise.reject(res.status);
+        return await Promise.reject(res.status);
       }
 
-      return res.json();
+      return await res.json();
     })
     .catch((err) => {
       handleError(err);
@@ -46,20 +46,20 @@ const fetchRequest = <TParams>({
 
 const handleRequest = (option?: { isMock: true }) => {
   return {
-    get<TParams, TResponse>(params: RequestParams<TParams>): Promise<TResponse> {
-      return fetchRequest<TParams>({ ...params, method: "get", ...option });
+    async get<TResponse>(params: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...params, method: "get", ...option });
     },
 
-    post<TParams, TResponse>(params: RequestParams<TParams>): Promise<TResponse> {
-      return fetchRequest({ ...params, method: "post", ...option });
+    async post<TResponse>(params: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...params, method: "post", ...option });
     },
 
-    put<TParams, TResponse>(params: RequestParams<TParams>): Promise<TResponse> {
-      return fetchRequest({ ...params, method: "put", ...option });
+    async put<TResponse>(params: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...params, method: "put", ...option });
     },
 
-    delete<TParams, TResponse>(params: RequestParams<TParams>): Promise<TResponse> {
-      return fetchRequest({ ...params, method: "delete", ...option });
+    async delete<TResponse>(params: RequestParams): Promise<TResponse> {
+      return await fetchRequest({ ...params, method: "delete", ...option });
     },
   };
 };
