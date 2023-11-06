@@ -7,7 +7,7 @@ export default {
 };
 
 const Template = () => {
-  const data = { id: "id", description: "description", index: 0 };
+  const data = { id: "id", description: "description" };
   const onCardEditorClose = () => {};
   const setCardEditorOpened = () => {};
   const onEditCard = () => {};
