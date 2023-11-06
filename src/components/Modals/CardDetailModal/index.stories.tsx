@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
+import styled from "styled-components";
 import { store } from "@/store";
+import ModalContainer from "@components/Modals/Modal";
 import Modal from "@components/Modals/CardDetailModal";
 import useModal from "@/hooks/useModal";
-import CardDetail from "@components/Modals/CardDetailModal";
-import ModalsProvider from "@components/Modals/ModalsProvider";
-import Modals from "@components/Modals/Modals";
+import { MODAL_TYPE } from "@/constants";
 
 export default {
   title: "Components/Modals",
@@ -20,7 +20,7 @@ const ModalButton = () => {
 
   const onClickButton = () => {
     openModal({
-      component: CardDetail,
+      type: MODAL_TYPE.CARD_DETAIL,
       props: { title: "card detail modal" },
     });
   };
@@ -32,10 +32,8 @@ const Template = () => {
   return (
     <>
       <Provider store={store}>
-        <ModalsProvider>
-          <ModalButton />
-          <Modals />
-        </ModalsProvider>
+        <ModalButton />
+        {/* <ModalContainer /> */}
       </Provider>
     </>
   );
