@@ -7,6 +7,7 @@ import { handleError, handleThrowError } from "@utils/handleError";
 import { ICardList } from "@/interfaces/cards";
 import { rearrangeCards } from "@components/Board/utils/rearrangeCards";
 import { RequestParams } from "@/interfaces/httpRequest";
+
 import * as I from "./interface";
 
 const cardListsKeys = {
@@ -26,6 +27,7 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
     cardListsKeys.search(search),
     () => {
       return request.get<I.GetCardRequest, I.ResponseData<I.GetCardListsResponse[]>>({
+
         path: "/cards",
         queryParams: { search },
         isMock: true,
