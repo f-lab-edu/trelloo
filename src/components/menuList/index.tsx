@@ -2,7 +2,7 @@ import MenuList from "./MenuList";
 import MenuListTitle from "./MenuListTitle";
 import MenuButton from "./MenuButton";
 import MenuContainer from "./MenuContainer";
-import MenuHeader from "./MenuHeader";
+import MenuTitle from "./MenuTitle";
 
 function Menu() {}
 
@@ -10,6 +10,6 @@ Menu.Container = MenuContainer;
 Menu.List = MenuList;
 Menu.ListTitle = MenuListTitle;
 Menu.Button = MenuButton;
-Menu.Title = MenuHeader;
+Menu.Title = MenuTitle;
 
 export default Menu;
