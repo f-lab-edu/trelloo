@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { request } from "@utils/httpRequest";
-import { GetCardListsResponse, ResponseMessage } from "./interface";
 
 const queryKeys = {
   all: ["cardLists"],
@@ -8,15 +7,12 @@ const queryKeys = {
 
 export const useGetCardLists = () => {
   return useQuery(queryKeys.all, () => {
-    return request.get<GetCardListsResponse[]>({
-      path: "/cards/lists",
-      isMock: true,
-    });
+    return request.get({ path: "/card/list", isMock: true });
   });
 };
 
 export const useAddCardMutation = () => {
   return useMutation(queryKeys.all, () => {
-    return request.post<ResponseMessage>({ path: "/cards", isMock: true });
+    return request.post({ path: "/card/list", isMock: true });
   });
 };
