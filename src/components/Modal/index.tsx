@@ -27,15 +27,17 @@ const Modal = () => {
   const CurrentComponent = modalComponent[type];
 
   return (
-    <ReactModal
-      isOpen={isModalOpened}
-      onRequestClose={closeModal}
-      style={S.ModalStyle}
-    >
-      <Suspense fallback={<div>is loading...</div>}>
-        {modalComponent[type] && <CurrentComponent {...props} />}
-      </Suspense>
-    </ReactModal>
+    <>
+      {isModalOpened && (
+        <S.DimmedBackground>
+          <ReactModal isOpen={isModalOpened} onRequestClose={closeModal}>
+            <Suspense fallback={<div>is loading...</div>}>
+              {modalComponent[type] && <CurrentComponent {...props} />}
+            </Suspense>
+          </ReactModal>
+        </S.DimmedBackground>
+      )}
+    </>
   );
 };
 
