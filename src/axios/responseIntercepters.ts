@@ -1,14 +1,16 @@
-import { type AxiosResponse } from "axios";
-type HandleError = Record<number, () => void>;
+import { AxiosResponse } from "axios";
+interface HandleError {
+  [status: number]: () => void;
+}
 
 export const handleInterceptResponse = (response: AxiosResponse) => {
   return response;
 };
 
-export const handleResponseInterceptError = async (error: any) => {
+export const handleResponseInterceptError = (error: any) => {
   const { status } = error.response;
   handleError[status]();
-  return await Promise.reject(error);
+  return Promise.reject(error);
 };
 
 const handleError: HandleError = {
