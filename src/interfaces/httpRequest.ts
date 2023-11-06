@@ -1,10 +1,9 @@
-export interface RequestParams<TQueryParams = Params, TParams = {}, TConfig = {}> {
+export interface RequestParams<TQueryParams = Params, TParams = {}> {
   path: string;
   method?: RequestMethod;
   params?: TParams;
   queryParams?: TQueryParams;
   isMock?: boolean;
-  config?: TConfig;
 }
 
 export type Params = Record<string, string>;
@@ -22,7 +21,11 @@ export interface HandleUseQueryParams<TQueryParams = Params, TParams = object> {
   options?: RequestOptions<TParams>;
 }
 
-export interface HandleUseMutationParams<TQueryParams = Params, TParams = object, TRes = object> {
+export interface HandleUseMutationParams<
+  TQueryParams = Params,
+  TParams = object,
+  TRes = object
+> {
   key?: string;
   path: string;
   method: RequestMethod;
