@@ -7,7 +7,7 @@ interface Props {
   onQueryErrorReset: () => void;
 }
 
-function BoardErrorFallback({ onQueryErrorReset }: Props) {
+function EmptyBoard({ onQueryErrorReset }: Props) {
   return (
     <S.Container>
       <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
@@ -29,4 +29,4 @@ function BoardErrorFallback({ onQueryErrorReset }: Props) {
   );
 }
 
-export default BoardErrorFallback;
+export default EmptyBoard;

@@ -1,92 +1,95 @@
-import React, { useState } from 'react'
-import { Draggable } from 'react-beautiful-dnd'
-import { Input } from 'antd'
-import { useForm } from 'react-hook-form'
+import { useState, useEffect } from "react";
+import { Draggable } from "react-beautiful-dnd";
+import { Card as AntdCard, Input } from "antd";
+import { useForm } from "react-hook-form";
 import {
-  type AddCardRequest,
-  type DeleteCardRequest,
-  type DeleteListRequest,
-  type EditCardRequest,
-  type EditListRequest
-} from '@/queries/cards/interface'
-import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from '@/queries/cards'
-import { type ICardList } from '@/interfaces/cards'
-import Card from '@components/Card'
-import CardComposer from '@components/CardComposer'
-import ListOptions from '@components/ListOptions'
-import * as S from './style'
+  AddCardRequest,
+  DeleteCardRequest,
+  DeleteListRequest,
+  EditCardRequest,
+  EditListRequest,
+} from "@/queries/cards/interface";
+import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from "@/queries/cards";
+import { ICardList } from "@/interfaces/cards";
+import Card from "@components/Card";
+import CardComposer from "@components/CardComposer";
+import ListOptions from "@components/ListOptions";
+import * as S from "./style";
 
-const { TextArea } = Input
+const { TextArea } = Input;
 
 export interface Props {
-  data: ICardList
-  onEditList: (params: EditListRequest) => void
-  onDeleteList: (params: DeleteListRequest) => void
+  data: ICardList;
+  onEditList: (params: EditListRequest) => void;
+  onDeleteList: (params: DeleteListRequest) => void;
 }
 
-export type HandleAddCard = ({ description, listId }: AddCardRequest) => void
+export type HandleAddCard = ({ description, listId }: AddCardRequest) => void;
 
 const CardList = ({ data, onEditList, onDeleteList }: Props) => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, watch } = useForm();
 
-  const [isCardInputOpened, setIsCardInputOpened] = useState(false)
-  const [isTitleInputOpened, setIsTitleInputOpened] = useState(false)
-  const [titleInput, setTitleInput] = useState(data.title)
+  const [isCardInputOpened, setIsCardInputOpened] = useState(false);
+  const [isTitleInputOpened, setIsTitleInputOpened] = useState(false);
+  const [titleInput, setTitleInput] = useState(data.title);
 
-  const { mutate: addCardMutate, isLoading: addCardLoading } = useAddCardMutation()
-  const { mutate: editCardMutate } = useEditCardMutation()
-  const { mutate: deleteCardMutate } = useDeleteCardMutation()
+  const { mutateAsync: addCardMutateAsync, isSuccess, isLoading: addCardLoading } = useAddCardMutation();
+  const { mutate: editCardMutate } = useEditCardMutation();
+  const { mutate: deleteCardMutate } = useDeleteCardMutation();
 
   const handleCardInputToggle = () => {
-    setIsCardInputOpened(!isCardInputOpened)
-  }
+    setIsCardInputOpened(!isCardInputOpened);
+  };
 
   const handleTitleInput = () => {
-    setIsTitleInputOpened(!isTitleInputOpened)
-  }
+    setIsTitleInputOpened(!isTitleInputOpened);
+  };
 
   const handleTitleChange = (e: any) => {
-    setTitleInput(e.target.value)
-  }
+    setTitleInput(e.target.value);
+  };
 
   const handleTitleUpdate = () => {
-    onEditList({ id: data.id, title: titleInput })
-    handleTitleInput()
-  }
+    onEditList({ id: data.id, title: titleInput });
+    handleTitleInput();
+  };
 
-  const handleAddCard = ({ description, listId }: any) => {
-    addCardMutate({ description, listId })
-  }
+  const handleAddCard = ({ description, listId, onSuccess }: any) => {
+    addCardMutateAsync(
+      { description, listId },
+      {
+        onSuccess: () => onSuccess(),
+      },
+    );
+  };
 
   const handleEditCard = ({ id, description }: EditCardRequest) => {
-    editCardMutate({ id, description })
-  }
+    editCardMutate({ id, description });
+  };
 
   const handleDeleteCard = ({ id }: DeleteCardRequest) => {
-    deleteCardMutate({ id })
-  }
+    deleteCardMutate({ id });
+  };
 
   return (
     <S.Container>
       <S.Card
         bordered={false}
         style={{ width: 300 }}
-        extra={<ListOptions onDeleteList={() => { onDeleteList({ id: data.id }) }} />}
+        extra={<ListOptions onDeleteList={() => onDeleteList({ id: data.id })} />}
       >
-        <S.ListTitle onSubmit={() => handleSubmit(handleTitleUpdate)}>
-          {!isTitleInputOpened
-            ? (
+        <S.ListTitle onSubmit={handleSubmit(handleTitleUpdate)}>
+          {!isTitleInputOpened ? (
             <S.Title onClick={handleTitleInput}>{data.title}</S.Title>
-              )
-            : (
+          ) : (
             <TextArea
               autoSize
-              {...register('title')}
+              {...register("title")}
               defaultValue={titleInput}
               onChange={handleTitleChange}
               onBlur={handleTitleUpdate}
             />
-              )}
+          )}
         </S.ListTitle>
 
         {data.cards.map((card, index) => (
@@ -108,7 +111,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
         />
       </S.Card>
     </S.Container>
-  )
-}
+  );
+};
 
-export default CardList
+export default CardList;

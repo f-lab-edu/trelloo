@@ -56,8 +56,8 @@ function CardEditorButtons({ onDeleteCard }: Props) {
 
   return (
     <div>
-      {buttonList.map((button, idx) => (
-        <S.ButtonWrapper key={idx}>
+      {buttonList.map((button) => (
+        <S.ButtonWrapper>
           <Button appearance={{ type: "gray" }} Icon={button.icon} onClick={button.onClick}>
             {button.text}
           </Button>

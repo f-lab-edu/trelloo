@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
+import styled from "styled-components";
 import { store } from "@/store";
 import CardList from "@components/CardList";
 export default {

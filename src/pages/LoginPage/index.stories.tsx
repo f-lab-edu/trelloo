@@ -1,4 +1,3 @@
-import React from "react";
 import LoginPage from ".";
 
 export default {
@@ -8,7 +7,8 @@ export default {
 };
 
 const Template = () => {
-  return <LoginPage />;
+  // TODO: add story
+  return <></>;
 };
 
 export const Primary = Template.bind({});

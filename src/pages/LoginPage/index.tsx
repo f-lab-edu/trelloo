@@ -18,8 +18,8 @@ const LoginPage: React.FC = () => {
     handleLoginComplete(res.accessToken);
   };
 
-  const handleLogin = async () => {
-    return await loginMutate({
+  const handleLogin = () => {
+    return loginMutate({
       id: watch("id"),
       password: watch("password"),
     });
@@ -39,7 +39,7 @@ const LoginPage: React.FC = () => {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
-        onFinish={() => handleSubmit(handleSubmitClick)}
+        onFinish={handleSubmit(handleSubmitClick)}
         autoComplete="off"
       >
         <Form.Item label="Id" name="id">

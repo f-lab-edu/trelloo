@@ -1,10 +1,10 @@
 export interface GetCardListsResponse {
   id: string;
   title: string;
-  cards: Array<{
+  cards: {
     id: string;
     description: string;
-  }>;
+  }[];
 }
 
 export interface AddCardRequest {
