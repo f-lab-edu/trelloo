@@ -18,18 +18,12 @@ instance.interceptors.request.use(
 
 const handleRequestIntercept = (config: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem(STORAGE_KEY.TOKEN);
-
-  if (config?.headers.includeAuthorization && !!token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-
-  delete config.headers.includeAuthorization;
+  config.headers.Authorization = !!token ? `Bearer ${token}` : "";
   return config;
 };
 
-const fetchRequest = <TQueryParams>({ path, method, params, data, isMock, config }: RequestParams<TQueryParams>) => {
+const fetchRequest = <TQueryParams>({ path, method, params, data, isMock }: RequestParams<TQueryParams>) => {
   return instance(`${isMock ? "" : URL.API}${path}`, {
-    headers: config,
     method,
     data: JSON.stringify(data),
     params,
@@ -53,47 +47,5 @@ export const request = {
 
   delete<TResponse>(data: RequestParams): Promise<TResponse> {
     return fetchRequest({ ...data, method: "delete" });
-  },
-};
-
-export const authorizedRequest = {
-  get<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({
-      ...data,
-      method: "get",
-      config: {
-        includeAuthorization: true,
-      },
-    });
-  },
-
-  post<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({
-      ...data,
-      method: "post",
-      config: {
-        includeAuthorization: true,
-      },
-    });
-  },
-
-  put<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({
-      ...data,
-      method: "put",
-      config: {
-        includeAuthorization: true,
-      },
-    });
-  },
-
-  delete<TResponse>(data: RequestParams): Promise<TResponse> {
-    return fetchRequest({
-      ...data,
-      method: "delete",
-      config: {
-        includeAuthorization: true,
-      },
-    });
   },
 };

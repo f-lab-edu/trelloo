@@ -4,9 +4,6 @@ export interface RequestParams<TParams = data, TData = {}> {
   data?: TData;
   params?: TParams;
   isMock?: boolean;
-  config?: {
-    includeAuthorization?: boolean;
-  };
 }
 
 export type data = Record<string, string>;
