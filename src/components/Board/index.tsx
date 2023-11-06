@@ -1,12 +1,13 @@
+import React from "react";
 import CardList from "../CardList";
-import * as S from "./style";
+import styles from "./index.module.css";
 
 const Board = () => {
   return (
-    <S.Container>
+    <div>
       Board
       <CardList />
-    </S.Container>
+    </div>
   );
 };
 

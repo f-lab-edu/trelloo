@@ -1,7 +1,6 @@
-import * as S from "./style";
-
+import React from "react";
 const Card = () => {
-  return <S.Container>Card</S.Container>;
+  return <div>Card</div>;
 };
 
 export default Card;
