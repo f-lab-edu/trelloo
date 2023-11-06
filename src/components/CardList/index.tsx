@@ -45,12 +45,8 @@ const CardList = ({ data, onAddCardClick }: Props) => {
         {data.cards.map((card) => (
           <Card key={card.id} data={card} />
         ))}
-        <CardComposer
-          isWritingCard={isWritingCard}
-          onCardInputToggle={onCardInputToggle}
-          onClick={onAddCardClick}
-          listId={data.id}
-        />
+        <S.ListOption></S.ListOption>
+        <CardComposer isWritingCard={isWritingCard} onCardInputToggle={onCardInputToggle} onClick={onAddCardClick} />
       </AntdCard>
     </S.Container>
   );
