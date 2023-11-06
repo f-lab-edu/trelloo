@@ -23,7 +23,6 @@ const Board = () => {
     addListMutate({
       title,
     });
-    refetch();
   };
 
   return (
