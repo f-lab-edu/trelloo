@@ -5,10 +5,10 @@ import Button from "@components/buttons/Button";
 import * as S from "./style";
 
 interface Props {
-  resetErrorBoundary: () => void;
+  onQueryErrorReset: () => void;
 }
 
-function BoardErrorFallback({ resetErrorBoundary }: Props) {
+function BoardErrorFallback({ onQueryErrorReset }: Props) {
   return (
     <S.Container>
       <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
@@ -22,7 +22,7 @@ function BoardErrorFallback({ resetErrorBoundary }: Props) {
           },
         }}
         type="button"
-        onClick={resetErrorBoundary}
+        onClick={onQueryErrorReset}
       >
         try again
       </Button>

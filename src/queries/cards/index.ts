@@ -11,7 +11,7 @@ const cardListsKeys = {
 
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {
   return useQuery(
-    cardListsKeys.search(search),
+    cardListsKeys.all,
     async () => {
       return await request.get<I.GetCardListsResponse[]>({
         path: "/cards",
@@ -117,8 +117,8 @@ export const useEditCardPositionMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
-      onMutate: ({ cardId, listId, index }) => {
-        queryClient.cancelQueries(cardListsKeys.all);
+      onMutate: async ({ cardId, listId, index }) => {
+        await queryClient.cancelQueries(cardListsKeys.all);
 
         const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.all);
         if (!currentCards) return;
