@@ -13,8 +13,8 @@ import {
 import * as S from "./style";
 
 interface Props {
-  open: boolean;
-  onClose: (e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>) => void;
+  open: any;
+  onClose: any;
 }
 
 type MenuItem = Required<MenuProps>["items"][number];
