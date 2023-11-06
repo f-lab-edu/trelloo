@@ -45,9 +45,7 @@ function BackgroundProperties() {
         </Properties.Group>
 
         <Properties.Group name="Tone Mapping">
-          <Properties.Property name="Mode">
-            <Properties.SelectControl />
-          </Properties.Property>
+          <Properties.Property name="Mode">{/* <Properties.DropdownControl /> */}</Properties.Property>
 
           <Properties.Property name="Exposure">
             <Properties.SliderControl />
