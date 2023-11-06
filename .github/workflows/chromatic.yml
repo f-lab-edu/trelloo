@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     # The list of steps that the action will go through
     steps:
-      - name: specify node version
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
       - uses: actions/checkout@v1
       - run: yarn
         #👇 Adds Chromatic as a step in the workflow
