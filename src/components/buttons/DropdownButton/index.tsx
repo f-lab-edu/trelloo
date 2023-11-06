@@ -6,10 +6,9 @@ interface Props {
   text: string;
   icon: any;
   Dropdown?: any;
-  onClick: any;
 }
 
-function DropdownButton({ text, icon, Dropdown, onClick }: Props) {
+function DropdownButton({ text, icon, Dropdown }: Props) {
   const [isOpened, setIsOpened] = useState(false);
 
   const handleDropdownOpen = () => {
@@ -23,7 +22,7 @@ function DropdownButton({ text, icon, Dropdown, onClick }: Props) {
       </Button>
       {isOpened && (
         <S.Dropdown>
-          <Dropdown onClick={onClick} />
+          <Dropdown />
         </S.Dropdown>
       )}
     </S.Container>

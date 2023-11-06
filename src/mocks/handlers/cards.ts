@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { type EditCardPositionRequest } from "../../queries/cards/interface";
 import {
   type AddCardRequest,
@@ -20,7 +21,7 @@ import {
   getAllCardListsWithCards,
 } from "../dbfunctions";
 
-const handleAuthError =  async (
+const handleAuthError =  (
   req: RestRequest<any, PathParams<string>>,
   res: ResponseComposition<DefaultBodyType>,
   ctx: RestContext,
@@ -28,7 +29,7 @@ const handleAuthError =  async (
   const authToken = req.headers.get("Authorization");
 
   if (authToken === undefined) {
-    return await res(
+    return res(
       ctx.status(401),
       ctx.json({
         message: "access token is required",
@@ -39,21 +40,20 @@ const handleAuthError =  async (
 
 export const cardsHandlers = [
   rest.get("/cards", async (req, res, ctx) => {
-    const search = req.url.searchParams.get('search');
-    const data = await getAllCardListsWithCards(search??"")
+   const data = await getAllCardListsWithCards()
       return await res(ctx.delay(), ctx.status(201), ctx.json(data));
   }),
 
-  rest.post<AddCardRequest>("/cards",  async (req, res, ctx) => {
+  rest.post<AddCardRequest>("/cards",  (req, res, ctx) => {
     const { listId, description } = req.body;
     const id = uuidv4();
 
     const error = handleAuthError(req, res, ctx);
-    if (error != null) return await error;
+    if (error != null) return error;
 
-    await addCard({ listId, description, id, createdAt: Date.now() })
+    addCard({ listId, description, id, createdAt: Date.now() })
 
-    return await res(
+    return res(
       ctx.delay(),
       ctx.status(201),
       ctx.json({

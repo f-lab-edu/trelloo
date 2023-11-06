@@ -206,17 +206,13 @@ export const getAllCards = async (): Promise<CardData[]> => {
   return sortedCards
 }
 
-export const getAllCardListsWithCards = async (keyword:string): Promise<CardListData[]> => {
+export const getAllCardListsWithCards = async (): Promise<CardListData[]> => {
   const lists = await getAllCardLists()
   const cards = await getAllCards()
-
-  const searchedCards = cards.filter((card)=> card.description.includes(keyword))
-  const searchingCards = keyword ? searchedCards : cards;
-
   return lists.map((list) => {
     return {
       ...list,
-      cards: searchingCards.filter((card) => card.listId === list.id).sort((a, b) => a.index - b.index)
+      cards: cards.filter((card) => card.listId === list.id).sort((a, b) => a.index - b.index)
     }
   })
 }

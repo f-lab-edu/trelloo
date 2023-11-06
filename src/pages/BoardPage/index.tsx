@@ -13,17 +13,8 @@ import * as S from "./style";
 
 const { Content } = Layout;
 
-interface BoardProps {
-  searchKeyword: string;
-}
-
 const BoardPage: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [searchKeyword, setSearchKeywords] = useState<string>("");
-
-  const searchCards = (keyword: string) => {
-    setSearchKeywords(keyword);
-  };
 
   const showDrawer = () => {
     setOpen(true);
@@ -39,8 +30,8 @@ const BoardPage: React.FC = () => {
       <Layout style={S.ContentLayout}>
         <Sider />
         <Content style={S.Content}>
-          <Menu showDrawer={showDrawer} boardName={"boardName"} searchCards={searchCards} />
-          <BoardWrapper searchKeyword={searchKeyword} />
+          <Menu showDrawer={showDrawer} boardName={"boardName"} />
+          <BoardWrapper />
           <Drawer open={open} onClose={onClose} />
         </Content>
       </Layout>
@@ -50,7 +41,7 @@ const BoardPage: React.FC = () => {
 
 export default BoardPage;
 
-function BoardWrapper({ searchKeyword }: BoardProps) {
+function BoardWrapper() {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
@@ -59,7 +50,7 @@ function BoardWrapper({ searchKeyword }: BoardProps) {
           fallbackRender={({ resetErrorBoundary }) => <BoardErrorFallback onQueryErrorReset={resetErrorBoundary} />}
         >
           <Suspense fallback={<BoardSkeleton />}>
-            <Board searchKeyword={searchKeyword} />
+            <Board />
           </Suspense>
         </ErrorBoundary>
       )}
