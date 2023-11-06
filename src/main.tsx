@@ -28,9 +28,8 @@ const queryClient = new QueryClient({
         }
       },
       onSuccess(data) {
-        const response = data as { code: number };
-        if (response?.code) {
-          handleThrowError(response?.code);
+        if (isDataValid(data)) {
+          handleThrowError(data.code);
         }
       },
     },
@@ -41,15 +40,18 @@ const queryClient = new QueryClient({
         }
       },
       onSuccess(data) {
-        const response = data as { code: number };
-        if (response?.code) {
-          handleThrowError(response?.code);
+        if (isDataValid(data)) {
+          handleThrowError(data.code);
         }
       },
     },
   },
 });
 ReactModal.setAppElement("#root");
+
+const isDataValid = (data: unknown): data is { code: number } => {
+  return typeof data === "object" && data !== null && "code" in data;
+};
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <QueryClientProvider client={queryClient}>
