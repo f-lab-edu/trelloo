@@ -1,6 +1,6 @@
-import React, { Suspense, useCallback } from "react";
-import ReactModal from "react-modal";
 import { ModalState } from "@/interfaces/modal";
+import React, { Suspense } from "react";
+import ReactModal from "react-modal";
 import * as S from "./style";
 
 interface Props<P> extends ModalState<P> {
@@ -8,13 +8,13 @@ interface Props<P> extends ModalState<P> {
 }
 
 const Modal = <P extends {}>({ component: Component, onClose, props, options }: Props<P>) => {
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     onClose({ component: Component, props });
-  }, [Component, props]);
+  };
 
   return (
     <ReactModal isOpen={true} style={S.ModalStyle(options)} onRequestClose={handleClose}>
-      <button onClick={handleClose}>x</button>
+      <button onClick={() => onClose({ component: Component, props, options })}>x</button>
       <Suspense fallback={<div>is loading...</div>}>
         <Component {...props} />
       </Suspense>

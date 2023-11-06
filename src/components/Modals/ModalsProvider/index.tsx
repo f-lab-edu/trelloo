@@ -18,11 +18,17 @@ function ModalsProvider({ children }: Props) {
   const [modals, setModals] = useState<ModalState[]>([]);
 
   const open = useCallback((state: ModalState) => {
-    setModals((modals) => [...modals, state]);
+    setModals((modals) => {
+      return [...modals, state];
+    });
   }, []);
 
   const close = useCallback((state: ModalState) => {
-    setModals((modals) => modals.filter((modal) => modal.component !== state.component || modal.props !== state.props));
+    setModals((modals) => {
+      return modals.filter((modal) => {
+        return modal.component !== state.component || modal.props !== state.props;
+      });
+    });
   }, []);
 
   const dispatch = useMemo(() => ({ open, close }), []);
