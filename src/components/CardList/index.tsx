@@ -1,19 +1,11 @@
 import { useState } from "react";
-import { Card as AntdCard, Dropdown, Input } from "antd";
+import { Card as AntdCard, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
-import {
-  AddCardRequest,
-  DeleteCardRequest,
-  DeleteListRequest,
-  EditCardRequest,
-  EditListRequest,
-} from "@/queries/cardList/interface";
+import { AddCardRequest, DeleteCardRequest, DeleteListRequest, EditCardRequest } from "@/queries/cardList/interface";
 import Card from "@components/Card";
 import CardComposer from "@components/CardComposer";
 import * as S from "./style";
-
-const { TextArea } = Input;
 
 export interface Props {
   data: {
@@ -27,28 +19,16 @@ export interface Props {
   onAddCardClick: HandleAddCard;
   onEditCard: (data: EditCardRequest) => void;
   onDeleteCard: (data: DeleteCardRequest) => void;
-  onEditList: (data: EditListRequest) => void;
   onDeleteList: (data: DeleteListRequest) => void;
 }
 
 export type HandleAddCard = ({ text, listId }: AddCardRequest) => void;
 
-const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard, onDeleteList, onEditList }: Props) => {
+const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard, onDeleteList }: Props) => {
   const [isWritingCard, setIsWritingCard] = useState(false);
-  const [isTitleInputOpened, setIsTitleInputOpened] = useState(false);
-  const [titleInput, setTitleInput] = useState(data.title);
 
   const onCardInputToggle = () => {
     setIsWritingCard(!isWritingCard);
-  };
-
-  const handleTitleInput = () => {
-    setIsTitleInputOpened(!isTitleInputOpened);
-  };
-
-  const handleTitleUpdate = () => {
-    onEditList({ id: data.id, title: titleInput });
-    handleTitleInput();
   };
 
   const items: MenuProps["items"] = [
@@ -85,6 +65,7 @@ const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard, onDeleteList
   return (
     <S.Container>
       <AntdCard
+        title={data.title}
         bordered={false}
         style={{ width: 300 }}
         extra={
@@ -95,18 +76,6 @@ const CardList = ({ data, onAddCardClick, onEditCard, onDeleteCard, onDeleteList
         headStyle={S.Header}
         bodyStyle={S.Body}
       >
-        <S.ListTitle>
-          {!isTitleInputOpened ? (
-            <S.Title onClick={handleTitleInput}>{titleInput}</S.Title>
-          ) : (
-            <TextArea
-              value={titleInput}
-              autoSize
-              onChange={(e) => setTitleInput(e.target.value)}
-              onBlur={handleTitleUpdate}
-            />
-          )}
-        </S.ListTitle>
         {data.cards.map((card) => (
           <Card key={card.id} data={card} onEditCard={onEditCard} onDeleteCard={onDeleteCard} />
         ))}

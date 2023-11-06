@@ -6,11 +6,6 @@ export interface CardListData {
   createdAt: number;
 }
 
-export interface EditCardListData {
-  id: string;
-  title: string;
-}
-
 export interface CardData {
   listId: string;
   id: string;
@@ -60,14 +55,12 @@ export const addCardList = async (cardList: CardListData) => {
   return name;
 };
 
-export const editCardList = async ({ id, title }: EditCardListData) => {
-  console.log(id, title);
+export const editCardList = async ({ id, text }: EditCardData) => {
   const db = await initDb();
-  const tx = db.transaction(listStoreName, "readwrite");
-  const store = tx.objectStore(listStoreName);
+  const tx = db.transaction(cardStoreName, "readwrite");
+  const store = tx.objectStore(cardStoreName);
   const list = await store.get(id);
-  console.log(list);
-  list.title = title;
+  list.text = text;
   await store.put(list);
   await tx.done;
   return list;

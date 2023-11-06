@@ -25,11 +25,6 @@ export interface AddListRequest {
   title: string;
 }
 
-export interface EditListRequest {
-  id: string;
-  title: string;
-}
-
 export interface DeleteListRequest {
   id: string;
 }
