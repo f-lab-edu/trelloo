@@ -1,13 +1,7 @@
 import { defineConfig } from "vite";
-import type { InlineConfig } from "vitest";
-import type { UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { resolve } from "path";
-
-interface VitestConfigExport extends UserConfig {
-  test: InlineConfig;
-}
 
 export default defineConfig({
   resolve: {
@@ -23,10 +17,6 @@ export default defineConfig({
       },
     ],
   },
+
   plugins: [react(), tsconfigPaths()],
-  test: {
-    globals: true,
-    environment: "jsdom",
-    setupFiles: ["./src/setupTest.ts"],
-  },
-} as VitestConfigExport);
+});

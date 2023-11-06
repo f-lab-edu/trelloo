@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { SEARCH_PARAMS_KEY } from "@/constants";
 import { request } from "@/utils/httpRequest";
 import { rearrangeCards } from "@components/Board/utils/rearrangeCards";
-import { RequestParams, Response } from "@/interfaces/httpRequest";
+import { RequestParams } from "@/interfaces/httpRequest";
 import { ICardList } from "@/interfaces/cards";
 import * as I from "./interface";
 
@@ -24,7 +24,7 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
   return useQuery(
     cardListsKeys.search(search),
     () => {
-      return request.get<I.GetCardRequest, Response<I.GetCardListsResponse[]>>({
+      return request.get<I.GetCardRequest, I.GetCardListsResponse[]>({
         path: "/cards",
         queryParams: { search },
         isMock: true,

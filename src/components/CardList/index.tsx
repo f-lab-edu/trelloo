@@ -23,9 +23,9 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   const [isCardInputOpened, setIsCardInputOpened] = useState(false);
   const [isTitleInputOpened, setIsTitleInputOpened] = useState(false);
 
-  const addCardMutation = useAddCardMutation();
-  const editCardMutation = useEditCardMutation();
-  const deleteCardMutation = useDeleteCardMutation();
+  const { mutate: addCardMutate, isLoading: addCardLoading } = useAddCardMutation();
+  const { mutate: editCardMutate } = useEditCardMutation();
+  const { mutate: deleteCardMutate } = useDeleteCardMutation();
 
   const { control, reset, handleSubmit } = useForm({
     defaultValues: {
@@ -62,15 +62,15 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   };
 
   const handleAddCard = ({ description, listId }: I.AddCardRequest, options?: MutationOptions) => {
-    addCardMutation.mutate({ description, listId }, { onSuccess: options?.onSuccess });
+    addCardMutate({ description, listId }, { onSuccess: options?.onSuccess });
   };
 
   const handleEditCard = ({ id, description }: I.EditCardRequest, options?: MutationOptions) => {
-    editCardMutation.mutate({ id, description }, { onSuccess: options?.onSuccess });
+    editCardMutate({ id, description }, { onSuccess: options?.onSuccess });
   };
 
   const handleDeleteCard = ({ id }: I.DeleteCardRequest) => {
-    deleteCardMutation.mutate({ id });
+    deleteCardMutate({ id });
   };
 
   return (
@@ -104,7 +104,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
         ))}
 
         <CardComposer
-          isLoading={addCardMutation?.isLoading}
+          isLoading={addCardLoading}
           isCardInputOpened={isCardInputOpened}
           onCardInputToggle={handleCardInputToggle}
           listId={data.id}
