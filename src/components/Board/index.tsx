@@ -49,7 +49,7 @@ const Board = () => {
 
   return (
     <S.Container>
-      <DragDropContext onDragEnd={handleDragEnd}>
+      <DragDropContext onDragEnd={handleDragEnd} onDragStart={() => {}} onDragUpdate={() => {}}>
         {cardLists?.map((cardList) => (
           <Droppable key={cardList.id} droppableId={cardList.id}>
             {(provided) => (
