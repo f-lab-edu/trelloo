@@ -1,16 +1,7 @@
 import React from "react";
-import { Input } from "antd";
-import {
-  CreditCardOutlined,
-  TagOutlined,
-  UserSwitchOutlined,
-  IdcardOutlined,
-  ArrowRightOutlined,
-  CalendarOutlined,
-  SaveOutlined,
-} from "@ant-design/icons";
-import Button from "@components/Button";
 import * as S from "./style";
+import { Input } from "antd";
+import Button from "@components/Button";
 
 const { TextArea } = Input;
 
@@ -33,9 +24,7 @@ const CardEditor = ({ text, onClick }: Props) => {
         <S.MenuButtonsWrapper>
           {buttonList.map((button) => (
             <S.ButtonWrapper>
-              <Button icon={button.icon} options={{ buttonColor: "#0009", textColor: "#c7d1db" }}>
-                {button.text}
-              </Button>
+              <Button options={{ buttonColor: "#0009", textColor: "#c7d1db" }}>{button}</Button>
             </S.ButtonWrapper>
           ))}
         </S.MenuButtonsWrapper>
@@ -45,38 +34,14 @@ const CardEditor = ({ text, onClick }: Props) => {
 };
 
 const buttonList = [
-  {
-    text: "Open card",
-    icon: <CreditCardOutlined />,
-  },
-  {
-    text: "Edit labels",
-    icon: <TagOutlined />,
-  },
-  {
-    text: "Change members",
-    icon: <UserSwitchOutlined />,
-  },
-  {
-    text: "Change cover",
-    icon: <IdcardOutlined />,
-  },
-  {
-    text: "Move",
-    icon: <ArrowRightOutlined />,
-  },
-  {
-    text: "Copy",
-    icon: <CreditCardOutlined />,
-  },
-  {
-    text: "Edit dates",
-    icon: <CalendarOutlined />,
-  },
-  {
-    text: "Archive",
-    icon: <SaveOutlined />,
-  },
+  "Open card",
+  "Edit labels",
+  "Change members",
+  "Change cover",
+  "Move",
+  "Copy",
+  "Edit dates",
+  "Archive",
 ];
 
 export default CardEditor;
