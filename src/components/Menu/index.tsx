@@ -35,7 +35,7 @@ function Menu({ showDrawer, boardName }: Props) {
       <S.OtherButtonsWrapper>
         {buttonList2.map((button, idx) => (
           <S.ButtonWrapper>
-            <Button key={idx} icon={button.icon} type={button.text === "Share" ? "blue" : "gray"}>
+            <Button key={idx} icon={button.icon} type="gray">
               {button.text}
             </Button>
           </S.ButtonWrapper>
