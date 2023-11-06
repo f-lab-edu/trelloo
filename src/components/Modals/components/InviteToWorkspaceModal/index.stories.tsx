@@ -1,6 +1,6 @@
 import React from "react";
 import loadable from "@loadable/component";
-const InviteToWorkspaceModal = loadable(() => import("@components/modals/components/InviteToWorkspaceModal"));
+const InviteToWorkspaceModal = loadable(async () => await import("@components/modals/InviteToWorkspaceModal"));
 
 export default {
   title: "components/modals/InviteToWorkspaceModal",

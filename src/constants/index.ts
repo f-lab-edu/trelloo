@@ -12,7 +12,3 @@ export const MODAL_TYPE = {
 export const STORAGE_KEY = {
   TOKEN: "token",
 };
-
-export const SEARCH_PARAMS_KEY = {
-  SEARCH: "search",
-};

@@ -12,7 +12,6 @@ import {
   editCardPosition,
   getAllCardListsWithCards,
 } from "../dbfunctions";
-import { SEARCH_PARAMS_KEY } from "@/constants";
 
 const checkAuthorization = async (
   req: RestRequest<any, PathParams<string>>,
@@ -26,7 +25,7 @@ const checkAuthorization = async (
 
 export const cardsHandlers = [
   rest.get("/cards", async (req, res, ctx) => {
-    const search = req.url.searchParams.get(SEARCH_PARAMS_KEY.SEARCH);
+    const search = req.url.searchParams.get("search");
     const data = await getAllCardListsWithCards(search ?? "");
     return await res(ctx.delay(), ctx.status(201), ctx.json(data));
   }),

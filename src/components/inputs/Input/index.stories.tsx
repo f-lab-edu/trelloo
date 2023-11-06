@@ -9,7 +9,7 @@ export default {
 const Template = () => {
   const handleSubmit = () => {};
 
-  return <Component onSubmit={handleSubmit} placeHolder="Enter new keyword..." name="input" defaultValue="" />;
+  return <Component onSubmit={handleSubmit} placeHolder="Enter new keyword..." name="input" />;
 };
 
 export const Input = Template.bind({});

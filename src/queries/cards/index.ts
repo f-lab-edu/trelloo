@@ -1,30 +1,23 @@
-import { useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { SEARCH_PARAMS_KEY } from "@/constants";
 import { request } from "@/utils/httpRequest";
-import { rearrangeCards } from "@components/Board/utils/rearrangeCards";
-import { RequestParams } from "@/interfaces/httpRequest";
-import { ICardList } from "@/interfaces/cards";
 import * as I from "./interface";
+import { ICard, ICardList } from "@/interfaces/cards";
 
 const cardListsKeys = {
   all: ["cardLists"] as const,
-  search: (keyword: string) => [...cardListsKeys.all, keyword] as const,
+  search: (keyword: string) => [...cardListsKeys.all, keyword],
 };
 
 export const useCardsQuery = ({ search }: I.GetCardRequest) => {
-  const parameter: RequestParams = {
-    path: "/cards",
-    isMock: true,
-  };
-
-  if (search) parameter.queryParams = { search };
-
   return useQuery(
     cardListsKeys.search(search),
     () => {
-      return request.get<I.GetCardListsResponse[]>(parameter);
+      return request.get<I.GetCardListsResponse[]>({
+        path: "/cards",
+        queryParams: { search },
+        isMock: true,
+      });
     },
     {
       suspense: true,
@@ -103,7 +96,6 @@ export const useEditListMutation = () => {
 };
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
-  const [searchParams] = useSearchParams(window.location.search);
   return useMutation<I.ResponseMessage, AxiosError, I.EditCardPositionRequest, I.EditCardMutationData>(
     ({ cardId, listId, index }: I.EditCardPositionRequest) => {
       return request.put<I.ResponseMessage>({
@@ -116,14 +108,13 @@ export const useEditCardPositionMutation = () => {
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
       onMutate: ({ cardId, listId, index }) => {
-        const searchKeyword = searchParams.get(SEARCH_PARAMS_KEY.SEARCH) ?? "";
-        queryClient.cancelQueries(cardListsKeys.search(searchKeyword));
+        queryClient.cancelQueries(cardListsKeys.all);
 
-        const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.search(searchKeyword));
+        const currentCards = queryClient.getQueryData<ICardList[]>(cardListsKeys.all);
         if (!currentCards) return;
 
-        const updatedData = rearrangeCards(currentCards, cardId, listId, index);
-        queryClient.setQueryData(cardListsKeys.search(searchKeyword), updatedData);
+        const updatedData = createNewCardList(currentCards, cardId, listId, index);
+        queryClient.setQueryData(cardListsKeys.all, updatedData);
 
         return { currentCards };
       },
@@ -132,6 +123,51 @@ export const useEditCardPositionMutation = () => {
       },
     },
   );
+};
+
+const createNewCardList = (currentCardList: ICardList[], cardId: string, listId: string, index: number) => {
+  const currentCardsList = currentCardList.find((cardList) => cardList.cards.some((card) => card.id === cardId));
+  const currentListId = currentCardsList?.id;
+  const card = currentCardsList?.cards.find((card) => card.id === cardId);
+  if (!card) return;
+
+  const updatedCardLists = currentCardList.map((cardList) => {
+    const isDroppedList = cardList.id === listId;
+    const isDraggedList = cardList.id === currentListId;
+    const isMovedToSameList = isDroppedList && isDraggedList;
+
+    if (isMovedToSameList) {
+      return reorderCardInList(cardList, card, cardId, index);
+    }
+
+    if (isDroppedList) {
+      return addCardToList(cardList, card, index);
+    }
+
+    if (isDraggedList) {
+      return removeCardFromList(cardList, cardId);
+    }
+
+    return cardList;
+  });
+
+  return updatedCardLists;
+};
+
+const reorderCardInList = (cardList: ICardList, card: ICard, cardId: string, index: number) => {
+  const filteredCardList = removeCardFromList(cardList, cardId);
+  return addCardToList(filteredCardList, card, index);
+};
+
+const addCardToList = (cardList: ICardList, card: ICard, index: number) => {
+  const newCards = Array.from(cardList.cards);
+  newCards.splice(index, 0, card);
+  return { ...cardList, cards: newCards };
+};
+
+const removeCardFromList = (cardList: ICardList, cardId: string) => {
+  const filteredCards = cardList.cards.filter((card) => card.id !== cardId);
+  return { ...cardList, cards: filteredCards };
 };
 
 export const useDeleteListMutation = () => {
