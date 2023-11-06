@@ -3,14 +3,12 @@ import { openDB } from "idb";
 export interface CardListData {
   id: string;
   title: string;
-  createdAt: number;
 }
 
 export interface CardData {
   listId: string;
   id: string;
   text: string;
-  createdAt: number;
 }
 
 const dbName = "card-db";
@@ -57,9 +55,8 @@ export const getAllCardLists = async (): Promise<CardListData[]> => {
   const tx = db.transaction(listStoreName, "readonly");
   const store = tx.objectStore(listStoreName);
   const lists = await store.getAll();
-  const sortedLists = lists.sort((a, b) => a.createdAt - b.createdAt);
   await tx.done;
-  return sortedLists;
+  return lists;
 };
 
 export const getAllCards = async (): Promise<CardData[]> => {
@@ -67,9 +64,8 @@ export const getAllCards = async (): Promise<CardData[]> => {
   const tx = db.transaction(cardStoreName, "readonly");
   const store = tx.objectStore(cardStoreName);
   const cards = await store.getAll();
-  const sortedCards = cards.sort((a, b) => a.createdAt - b.createdAt);
   await tx.done;
-  return sortedCards;
+  return cards;
 };
 
 export const getAllCardListsWithCards = async (): Promise<CardListData[]> => {

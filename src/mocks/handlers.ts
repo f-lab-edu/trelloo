@@ -24,7 +24,7 @@ export const handlers = [
 
   rest.post<string, DefaultResponseBody>("/cards", (req, res, ctx) => {
     const { text, listId } = JSON.parse(req.body) as AddCardRequestBody;
-    return addCard({ listId, text, id: uuidv4(), createdAt: Date.now() }).then(() => {
+    return addCard({ listId, text, id: uuidv4() }).then(() => {
       return res(
         ctx.status(200),
         ctx.json({
@@ -36,7 +36,7 @@ export const handlers = [
 
   rest.post<string, DefaultResponseBody>("/list", (req, res, ctx) => {
     const { title } = JSON.parse(req.body) as AddListRequestBody;
-    return addCardList({ title, id: uuidv4(), createdAt: Date.now() }).then(() => {
+    return addCardList({ title, id: uuidv4() }).then(() => {
       return res(
         ctx.status(200),
         ctx.json({
