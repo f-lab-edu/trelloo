@@ -15,10 +15,10 @@ const cardListsKeys = {
   all: ["cardLists"] as const,
 };
 
-export const useCardsQuery = () => {
+export const useGetCardLists = () => {
   return useQuery(cardListsKeys.all, () => {
     return request.get<GetCardListsResponse[]>({
-      path: "/cards",
+      path: "/cards/lists",
       isMock: true,
     });
   });
@@ -55,7 +55,7 @@ export const useDeleteCardMutation = () => {
   return useMutation(
     cardListsKeys.all,
     (params: DeleteCardRequest) => {
-      return request.delete<ResponseMessage>({ path: "/cards", isMock: true, params });
+      return request.delete<ResponseMessage>({ path: "/card", isMock: true, params });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
@@ -68,7 +68,7 @@ export const useAddListMutation = () => {
   return useMutation(
     cardListsKeys.all,
     (params: AddListRequest) => {
-      return request.post<ResponseMessage>({ path: "/lists", isMock: true, params });
+      return request.post<ResponseMessage>({ path: "/list", isMock: true, params });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
@@ -81,7 +81,7 @@ export const useEditListMutation = () => {
   return useMutation(
     cardListsKeys.all,
     (params: EditListRequest) => {
-      return request.put<ResponseMessage>({ path: "/lists", isMock: true, params });
+      return request.put<ResponseMessage>({ path: "/list", isMock: true, params });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
@@ -94,7 +94,7 @@ export const useDeleteListMutation = () => {
   return useMutation(
     cardListsKeys.all,
     (params: DeleteListRequest) => {
-      return request.delete<ResponseMessage>({ path: "/lists", isMock: true, params });
+      return request.delete<ResponseMessage>({ path: "/list", isMock: true, params });
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
