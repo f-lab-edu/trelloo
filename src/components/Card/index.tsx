@@ -10,10 +10,7 @@ const Card = ({ text }: Props) => {
   const { openModal } = useModal();
 
   const onClickCard = () => {
-    openModal<{ title: string }>({
-      component: CardDetail,
-      props: { title: "cardDetail" },
-    });
+    openModal<{ title: string }>({ component: CardDetail, props: { title: "cardDetail" } });
   };
 
   return <S.Container onClick={onClickCard}>{text && text}</S.Container>;

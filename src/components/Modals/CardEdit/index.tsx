@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./style";
 
-export interface Props {
+interface Props {
   text: string;
 }
 
