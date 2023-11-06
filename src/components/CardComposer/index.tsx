@@ -17,7 +17,6 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     defaultValues: {
       description: "",
     },
-    mode: "onSubmit"
   });
 
   const {
@@ -35,7 +34,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
   const wrappedOnSubmit = handleSubmit(handleAddCard)
 
   return (
-    <Composer isOpen={isCardInputOpened} toggleInputOpen={onCardInputToggle} btnText="Add a card" submitBtnText="Add card" onSubmit={wrappedOnSubmit}>
+    <Composer isOpen={isCardInputOpened} toggleInputOpen={onCardInputToggle} btnText="Add a card" submitBtnText="Add card"  onSubmit={wrappedOnSubmit}>
       <Spin spinning={isLoading}>
         <S.Card>
           <input onChange={onChange} value={value} placeholder="Enter a title for this card..." />
