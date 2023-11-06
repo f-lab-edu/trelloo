@@ -11,7 +11,7 @@ const Card = ({ text }: Props) => {
   const { openModal } = useModal();
 
   const handleClick = () => {
-    openModal({
+    openModal<{ title: string }>({
       component: CardDetail,
       props: { title: "cardDetail" },
       options: { hasOverlay: true },
