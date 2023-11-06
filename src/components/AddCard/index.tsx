@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card as AntdCard, Input } from "antd";
+import { Card as C, Input } from "antd";
 import { useAddCardMutation, useGetCardLists } from "@/queries/cardList";
 import Button from "@components/Buttons/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
@@ -29,9 +29,9 @@ const AddCard = ({ isWritingCard, handleClickAddCard }: Props) => {
     <>
       {isWritingCard ? (
         <S.CardInputContainer>
-          <AntdCard bodyStyle={S.CardInput}>
+          <C bodyStyle={S.CardInput}>
             <TextArea placeholder="Enter a title for this card..." autoSize bordered={false} />
-          </AntdCard>
+          </C>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
               <Button buttonColor="blue" onClick={handleAddCard}>
