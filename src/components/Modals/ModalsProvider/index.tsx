@@ -20,18 +20,14 @@ export const ModalsDipatchContext = createContext<ModalDispatch | null>(null);
 function ModalsProvider({ children }: Props) {
   const [modals, setModals] = useState<ModalState[]>([]);
 
-  const open = (state: ModalState) => {
-    setModals((modals) => {
-      return [...modals, state];
-    });
-  };
+  const open = useCallback((state: ModalState) => {
+    const updatedModals = [state, ...modals];
+    setModals(updatedModals);
+  }, []);
 
   const close = useCallback((component: React.ComponentType) => {
-    setModals((modals) => {
-      return modals.filter((modal) => {
-        return modal.component !== component;
-      });
-    });
+    const updatedModals = modals.filter((modal) => modal.component !== component);
+    setModals(updatedModals);
   }, []);
 
   const dispatch = useMemo(() => ({ open, close }), []);
