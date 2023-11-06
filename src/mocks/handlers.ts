@@ -1,12 +1,11 @@
 import { rest } from "msw";
-import { cardLists } from "./data/cards";
 
 export const handlers = [
   rest.get("/card/list", (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
-        data: cardLists,
+        data: cardList,
       })
     );
   }),
@@ -19,4 +18,9 @@ export const handlers = [
       })
     );
   }),
+];
+
+const cardList = [
+  { id: 0, title: "cardTitle1" },
+  { id: 1, title: "cardTitle2" },
 ];
