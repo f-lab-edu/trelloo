@@ -14,8 +14,10 @@ import { theme } from "./styles/theme";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import "react-toastify/dist/ReactToastify.css";
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-worker.start();
+if (process.env.NODE_ENV === "development") {
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
+  worker.start();
+}
 
 const queryClient = new QueryClient();
 ReactModal.setAppElement("#root");

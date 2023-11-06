@@ -13403,13 +13403,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loadable@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "loadable@npm:1.0.0"
-  checksum: 9db4a97dcec293c3f91be20ba1b47b895990b7213d46fb6ca789d791e917345f444c3fd3cf7973f929319ede7d9015831338b4605997ec5324c45aa7122c044a
-  languageName: node
-  linkType: hard
-
 "loader-runner@npm:^2.4.0":
   version: 2.4.0
   resolution: "loader-runner@npm:2.4.0"
@@ -19470,7 +19463,6 @@ __metadata:
     husky: ^8.0.0
     idb: ^7.1.1
     jsdom: ^22.0.0
-    loadable: ^1.0.0
     msw: ^1.2.1
     pinst: ^3.0.0
     react: ^18.2.0

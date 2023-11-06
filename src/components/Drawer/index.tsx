@@ -17,14 +17,7 @@ function Drawer() {
   };
 
   return (
-    <S.Drawer
-      aria-label="drawer"
-      placement="right"
-      closable={false}
-      onClose={closeDrawer}
-      open={isDrawerOpen}
-      getContainer={false}
-    >
+    <S.Drawer placement="right" closable={false} onClose={closeDrawer} open={isDrawerOpen} getContainer={false}>
       {contents[content] || <AllLists />}
     </S.Drawer>
   );

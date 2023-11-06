@@ -5,6 +5,7 @@ import loadable from "@loadable/component";
 import { SEARCH_PARAMS_KEY } from "@/constants";
 import Sider from "@components/Sider";
 import DrawerProvider from "@components/providers/DrawerProvider";
+import Drawer from "@components/Drawer";
 import Header from "@components/Header";
 import Menu from "@components/Menu";
 import BoardSkeleton from "@components/skeletons/BoardSkeleton";
@@ -12,8 +13,7 @@ import NoDataFallback from "@components/fallbacks/NoDataFallback";
 import SuspenseBoundary from "@components/SuspenseBoundary";
 import * as S from "./style";
 
-const Board = loadable(() => import("@components/Board"));
-const Drawer = loadable(() => import("@components/Drawer"));
+const Board = loadable(async () => await import("@components/Board"));
 
 interface BoardProps {
   searchKeyword: string;

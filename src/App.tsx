@@ -1,10 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import loadable from "@loadable/component";
-
-const MainPage = loadable(() => import("./pages/MainPage"));
-const BoardPage = loadable(() => import("./pages/BoardPage"));
-const LoginPage = loadable(() => import("./pages/LoginPage"));
+import MainPage from "./pages/MainPage";
+import BoardPage from "./pages/BoardPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
