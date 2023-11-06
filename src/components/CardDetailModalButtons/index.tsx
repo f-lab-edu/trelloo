@@ -8,7 +8,7 @@ import {
   CalendarOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-import Button from "@components/buttons/Button";
+import Button from "@components/Button";
 import * as S from "./style";
 
 function CardDetailModalButtons() {
