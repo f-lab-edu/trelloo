@@ -39,7 +39,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     setIsTitleInputOpened(!isTitleInputOpened);
   };
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTitleChange = (e: any) => {
     setTitleInput(e.target.value);
   };
 
@@ -48,7 +48,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     handleTitleInput();
   };
 
-  const handleAddCard = ({ description, listId }: I.AddCardRequest) => {
+  const handleAddCard = ({ description, listId }: any) => {
     addCardMutate({ description, listId });
   };
 
