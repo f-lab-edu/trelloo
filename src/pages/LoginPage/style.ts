@@ -1,4 +1,3 @@
-import { Form as AntdForm } from "antd";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -7,11 +6,11 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-`;
 
-export const Form = styled(AntdForm)`
-  margin-top: 70px;
-  width: 500px;
+  .login_form {
+    margin-top: 70px;
+    width: 500px;
+  }
 `;
 
 export const Title = styled.h1`
