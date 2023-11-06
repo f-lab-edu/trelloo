@@ -21,7 +21,7 @@ export const Card = styled(AntdCard).attrs(() => ({
   },
 }))``;
 
-export const ListTitle = styled.form`
+export const ListTitle = styled.div`
   position: absolute;
   top: 0;
   margin-top: 8px;

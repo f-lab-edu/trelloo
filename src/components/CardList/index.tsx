@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Card as AntdCard, Input } from "antd";
-import { useForm } from "react-hook-form";
 import {
   AddCardRequest,
   DeleteCardRequest,
@@ -27,8 +26,6 @@ export interface Props {
 export type HandleAddCard = ({ description, listId }: AddCardRequest) => void;
 
 const CardList = ({ data, onEditList, onDeleteList }: Props) => {
-  const { register, handleSubmit, watch } = useForm();
-
   const [isCardInputOpened, setIsCardInputOpened] = useState(false);
   const [isTitleInputOpened, setIsTitleInputOpened] = useState(false);
   const [titleInput, setTitleInput] = useState(data.title);
@@ -43,10 +40,6 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
 
   const handleTitleInput = () => {
     setIsTitleInputOpened(!isTitleInputOpened);
-  };
-
-  const handleTitleChange = (e: any) => {
-    setTitleInput(e.target.value);
   };
 
   const handleTitleUpdate = () => {
@@ -73,15 +66,14 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
         style={{ width: 300 }}
         extra={<ListOptions onDeleteList={() => onDeleteList({ id: data.id })} />}
       >
-        <S.ListTitle onSubmit={handleSubmit(handleTitleUpdate)}>
+        <S.ListTitle>
           {!isTitleInputOpened ? (
-            <S.Title onClick={handleTitleInput}>{data.title}</S.Title>
+            <S.Title onClick={handleTitleInput}>{titleInput}</S.Title>
           ) : (
             <TextArea
+              value={titleInput}
               autoSize
-              {...register("title")}
-              defaultValue={titleInput}
-              onChange={handleTitleChange}
+              onChange={(e) => setTitleInput(e.target.value)}
               onBlur={handleTitleUpdate}
             />
           )}
