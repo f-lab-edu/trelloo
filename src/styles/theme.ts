@@ -15,7 +15,7 @@ export const theme = {
     black: "black",
     headerBackground: "#F3F6F8",
     border: "#D0D6DD",
-    buttonBlue: "#0079BF",
+    buttonBlue: "#0369A7",
   },
   borderRadius: {
     button: "6px",

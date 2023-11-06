@@ -34,7 +34,7 @@ function CardListComposer({ onClick }: Props) {
             autoSize
           />
           <S.SubmitButtonWrapper>
-            <Button type="blue" onClick={() => onClick({ title: listTitleInputValue })}>
+            <Button type="transparent" onClick={() => onClick({ title: listTitleInputValue })}>
               Add a list
             </Button>
             <CloseOutlined style={S.CancleAddListButton} onClick={handleInputOpen} />
