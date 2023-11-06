@@ -1,4 +1,4 @@
-import { type EditCardPositionRequest } from "../../queries/cards/interface";
+import { EditCardPositionParam, type EditCardPositionRequest } from "../../queries/cards/interface";
 import {
   type AddCardRequest,
   type AddListRequest,
@@ -20,14 +20,21 @@ import {
   getAllCardListsWithCards,
 } from "../dbfunctions";
 
-const checkAuthorization =  async (
+const handleAuthError =  async (
   req: RestRequest<any, PathParams<string>>,
   res: ResponseComposition<DefaultBodyType>,
   ctx: RestContext,
 ) => {
   const authToken = req.headers.get("Authorization");
 
-  return !!authToken
+  if (authToken === undefined) {
+    return await res(
+      ctx.status(401),
+      ctx.json({
+        message: "access token is required",
+      }),
+    );
+  }
 };
 
 export const cardsHandlers = [
@@ -41,16 +48,8 @@ export const cardsHandlers = [
     const { listId, description } = req.body;
     const id = uuidv4();
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
-
-    if(!isAuthorized) {
-      return await res(
-        ctx.status(401),
-        ctx.json({
-          message: "access token is required",
-        }),
-      );
-    }
+    const error = handleAuthError(req, res, ctx);
+    if (error != null) return await error;
 
     await addCard({ listId, description, id, createdAt: Date.now() })
 
@@ -68,16 +67,8 @@ export const cardsHandlers = [
   rest.put<EditCardRequest>("/cards", async(req, res, ctx) => {
     const { description, id } = req.body;
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
-
-    if(!isAuthorized) {
-      return await res(
-        ctx.status(401),
-        ctx.json({
-          message: "access token is required",
-        }),
-      );
-    }
+    const error = handleAuthError(req, res, ctx);
+    if (error != null) return await error;
 
     await editCard({ id, description })
       return await res(
@@ -91,16 +82,9 @@ export const cardsHandlers = [
   rest.delete<DeleteCardRequest>("/cards", async(req, res, ctx) => {
     const { id } = req.body;
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+    const error = handleAuthError(req, res, ctx);
+    if (error != null) return await error;
 
-    if(!isAuthorized) {
-      return await res(
-        ctx.status(401),
-        ctx.json({
-          message: "access token is required",
-        }),
-      );
-    }
      await deleteCard({ id })
       return await res(
         ctx.status(200),
@@ -111,19 +95,11 @@ export const cardsHandlers = [
   }),
 
   rest.post<AddListRequest>("/lists", async(req, res, ctx) => {
-    const { title } = req.body as {title:string}
+    const { title } = req.body;
     const id = uuidv4();
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
-
-    if(!isAuthorized) {
-      return await res(
-        ctx.status(401),
-        ctx.json({
-          message: "access token is required",
-        }),
-      );
-    }
+    const error = handleAuthError(req, res, ctx);
+    if (error != null) return await error;
 
     await addCardList({ title, id, createdAt: Date.now() })
       return await res(
@@ -138,71 +114,45 @@ export const cardsHandlers = [
 
   rest.put<EditListRequest>("/lists", async(req, res, ctx) => {
     const { id, title } = req.body;
+    const error = handleAuthError(req, res, ctx);
+    if (error != null) return await error;
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
-
-    if(!isAuthorized) {
+     await editCardList({ id, title })
       return await res(
-        ctx.status(401),
+        ctx.status(200),
         ctx.json({
-          message: "access token is required",
+          message: "List updated",
         }),
       );
-    }
-
-    await editCardList({ id, title })
-    return await res(
-      ctx.status(200),
-      ctx.json({
-        message: "List updated",
-      }),
-    );
   }),
 
-  rest.put<EditCardPositionRequest>("/cards/:cardId/move", async (req, res, ctx) => {
-    const { cardId } = req.params as { cardId : string }
-    const { listId, index } = req.body as any
+  rest.put<string, EditCardPositionParam>("/cards/:cardId/move", (req, res, ctx) => {
+    const { cardId } = req.params;
+    const { listId, index } = JSON.parse(req.body) as EditCardPositionRequest;
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
-    if(!isAuthorized) {
-      return await res(
-        ctx.status(401),
+    return editCardPosition({ cardId, listId, index }).then(() => {
+      return res(
+        ctx.status(200),
         ctx.json({
-          message: "access token is required",
+          message: "Card position updated",
         }),
       );
-    }
-
-    await editCardPosition({ cardId, listId,index })
-    return await res(
-      ctx.status(200),
-      ctx.json({
-        message: "Card position updated",
-      }),
-    );
+    })
   }),
 
   rest.delete<DeleteListRequest>("/lists", async(req, res, ctx) => {
     const { id } = req.body;
 
-    const isAuthorized = await checkAuthorization(req, res, ctx);
+    const error = handleAuthError(req, res, ctx);
+    if (error != null) return await error;
 
-    if(!isAuthorized) {
-      return await res(
-        ctx.status(401),
-        ctx.json({
-          message: "access token is required",
-        }),
-      );
-    }
-
-    await deleteCardList({ id })
-    return await res(
-    ctx.status(200),
-    ctx.json({
-      message: "List deleted",
-    }),
-  );
+     await deleteCardList({ id })
+     return await res(
+      ctx.status(200),
+      ctx.json({
+        message: "List deleted",
+      }),
+    );
   }),
 ];
 

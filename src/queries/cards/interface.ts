@@ -34,6 +34,10 @@ export interface EditCardMutationData {
   currentCards: ICardList[];
 }
 
+export interface EditCardPositionParam {
+  cardId: string;
+}
+
 export interface DeleteCardRequest {
   id: string;
 }

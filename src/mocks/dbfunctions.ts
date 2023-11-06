@@ -1,4 +1,4 @@
-import { type EditCardPositionRequest } from './../queries/cards/interface'
+import { type EditCardPositionParam, type EditCardPositionRequest } from './../queries/cards/interface'
 import { openDB } from 'idb'
 
 export interface CardListData {
@@ -141,7 +141,7 @@ export const editCard = async ({ id, description }: EditCardData) => {
   return card;
 };
 
-export const editCardPosition = async ({ cardId, listId, index }: EditCardPositionRequest) => {
+export const editCardPosition = async ({ cardId, listId, index }: EditCardPositionParam & EditCardPositionRequest) => {
   const db = await initDb();
 
   const tx = db.transaction([cardStoreName, listStoreName], "readwrite");
