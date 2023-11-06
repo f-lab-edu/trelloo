@@ -16,11 +16,6 @@ function CardListComposer() {
     setIsInputOpened(!isInputOpened);
   };
 
-  const handleAddList = (params: { title: string }) => {
-    onAddList(params);
-    setListTitleInputValue("");
-  };
-
   return (
     <S.Container>
       {!isInputOpened ? (
@@ -32,13 +27,12 @@ function CardListComposer() {
       ) : (
         <S.InputWrapper>
           <TextArea
-            value={listTitleInputValue}
             onChange={(e) => setListTitleInputValue(e.target.value)}
             placeholder="Enter list title..."
             autoSize
           />
           <S.SubmitButtonWrapper>
-            <Button type="blue" onClick={() => handleAddList({ title: listTitleInputValue })}>
+            <Button type="blue" onClick={() => onAddList({ title: listTitleInputValue })}>
               Add a list
             </Button>
             <CloseOutlined style={S.CancleAddListButton} onClick={handleInputOpen} />

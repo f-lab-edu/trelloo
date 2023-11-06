@@ -1,12 +1,12 @@
-import { useCardsQuery } from "@/queries/cardList";
+import { useGetCardLists } from "@/queries/cardList";
 
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
-import { CardListHandlerProvider } from "./Provider";
+import { CardHandlerProvider, CardListHandlerProvider } from "./Provider";
 import * as S from "./style";
 
 const Board = () => {
-  const { data: cardLists } = useCardsQuery();
+  const { data: cardLists } = useGetCardLists();
 
   return (
     <S.Container>
