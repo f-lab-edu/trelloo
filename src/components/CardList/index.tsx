@@ -1,12 +1,13 @@
+import React from "react";
 import Card from "../Card";
-import * as S from "./style";
+import styles from "./index.module.css";
 
 const CardList = () => {
   return (
-    <S.Container>
+    <div>
       CardList
       <Card />
-    </S.Container>
+    </div>
   );
 };
 
