@@ -44,7 +44,6 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
               <Button
                 appearance={{ type: "blue" }}
                 onClick={() => handleAddCard({ description: cardInputValue, listId })}
-                isLoading={isLoading}
               >
                 Add card
               </Button>
