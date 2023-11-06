@@ -10,9 +10,6 @@ export const theme = {
     cardBoxShadow: "#091e4240",
     buttonBackground: "rgba(0, 0, 0, 0.1);",
     white: "white",
-    headerBackground: "#F3F6F8",
-    border: "#D0D6DD",
-    buttonBlue: "#0369A7",
   },
   borderRadius: {
     button: "6px",

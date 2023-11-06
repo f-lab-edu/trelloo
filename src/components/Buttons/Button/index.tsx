@@ -12,7 +12,7 @@ interface Props {
 function Button({ icon, isIconBehindText = false, buttonColor, onClick, children }: Props) {
   return (
     <S.Container onClick={onClick} buttonColor={buttonColor}>
-      <B icon={!isIconBehindText && icon} type={buttonColor === "blue" ? "primary" : "text"}>
+      <B icon={!isIconBehindText && icon} type="text">
         {children}
         {isIconBehindText && icon}
       </B>
