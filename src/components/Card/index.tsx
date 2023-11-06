@@ -1,5 +1,4 @@
 import { Card as AntdCard } from "antd";
-import { EditOutlined } from "@ant-design/icons";
 import loadable from "@loadable/component";
 import useModal from "@/hooks/useModal";
 const CardDetail = loadable(() => import("@components/modals/CardDetail"));
@@ -25,7 +24,6 @@ const Card = ({ data }: Props) => {
     <S.Container>
       <AntdCard style={S.Card} onClick={handleClick} bodyStyle={S.Body}>
         <p>{data.text}</p>
-        <EditOutlined className="edit_button" />
       </AntdCard>
     </S.Container>
   );
