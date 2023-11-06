@@ -25,22 +25,18 @@ function Menu({ showDrawer, boardName }: Props) {
       <S.ButtonsWrapper>
         <Button>{boardName}</Button>
         {buttonList.map((button, idx) => (
-          <S.ButtonWrapper>
-            <Button key={idx} icon={button.icon} options={{ buttonColor: "rgba(0, 0, 0, 0.1)" }}>
-              {button.text}
-            </Button>
-          </S.ButtonWrapper>
+          <Button key={idx} icon={button.icon} buttonColor="gray">
+            {button.text}
+          </Button>
         ))}
       </S.ButtonsWrapper>
       <S.OtherButtonsWrapper>
         {buttonList2.map((button, idx) => (
-          <S.ButtonWrapper>
-            <Button key={idx} icon={button.icon} options={{ buttonColor: "rgba(0, 0, 0, 0.1)" }}>
-              {button.text}
-            </Button>
-          </S.ButtonWrapper>
+          <Button key={idx} icon={button.icon} buttonColor={button.buttonColor || "gray"}>
+            {button.text}
+          </Button>
         ))}
-        <Button icon={<EllipsisOutlined />} onClick={showDrawer} />
+        <Button icon={<EllipsisOutlined />} onClick={showDrawer} buttonColor="gray" />
       </S.OtherButtonsWrapper>
     </S.Container>
   );
