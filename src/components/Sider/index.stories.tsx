@@ -9,5 +9,5 @@ export default {
 const Template = () => {
   return <Sider />;
 };
-//
+
 export const Default = Template.bind({});
