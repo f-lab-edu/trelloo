@@ -58,8 +58,4 @@ a{
 button{
   border: none;
 }
-input{
-  outline:none;
-  border:none;
-}
 `;
