@@ -13,16 +13,16 @@ const Board = () => {
   const { mutate: editListMutate } = useEditListMutation();
   const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
 
-  const handleEditList = ({ id, title }: EditListRequest) => {
-    editListMutate({ id, title });
+  const handleEditList = (params: EditListRequest) => {
+    editListMutate(params);
   };
 
-  const handleDeleteList = ({ id }: DeleteListRequest) => {
-    deleteListMutate({ id });
+  const handleDeleteList = (params: DeleteListRequest) => {
+    deleteListMutate(params);
   };
 
-  const handleAddList = ({ title }: AddListRequest) => {
-    addListMutate({ title });
+  const handleAddList = (params: AddListRequest) => {
+    addListMutate(params);
   };
 
   const handleDragEnd = (result: any) => {

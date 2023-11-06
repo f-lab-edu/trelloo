@@ -47,16 +47,16 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     handleTitleInput();
   };
 
-  const handleAddCard = ({ text, listId }: AddCardRequest) => {
-    addCardMutate({ text, listId });
+  const handleAddCard = (params: AddCardRequest) => {
+    addCardMutate(params);
   };
 
-  const handleEditCard = ({ id, text }: EditCardRequest) => {
-    editCardMutate({ id, text });
+  const handleEditCard = (params: EditCardRequest) => {
+    editCardMutate(params);
   };
 
-  const handleDeleteCard = ({ id }: DeleteCardRequest) => {
-    deleteCardMutate({ id });
+  const handleDeleteCard = (params: DeleteCardRequest) => {
+    deleteCardMutate(params);
   };
 
   return (
