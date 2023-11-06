@@ -13,7 +13,7 @@ const ModalButton = () => {
 
   const onClickButton = () => {
     openModal({
-      component: "cardEdit",
+      component: CardEdit,
       props: { text: "card edit modal" },
     });
   };

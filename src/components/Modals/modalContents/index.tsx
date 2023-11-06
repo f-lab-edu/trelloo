@@ -1,11 +1,11 @@
-import loadable, { LoadableComponent } from "@loadable/component";
-
-interface ModalContents<TProps> {
-  [component: string]: LoadableComponent<TProps>;
-}
+import loadable from "@loadable/component";
 
 const CardDetail = loadable(() => import("@components/modals/CardDetailModal"));
 
-export const modalContents: ModalContents<any> = {
+interface ModalContents {
+  [component: string]: any;
+}
+
+export const modalContents: ModalContents = {
   cardDetailModal: CardDetail,
 };
