@@ -32,9 +32,6 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ["js-big-decimal"],
   },
-  build: {
-    sourcemap: true,
-  },
   server: {
     host: "0.0.0.0",
     port: 5173,

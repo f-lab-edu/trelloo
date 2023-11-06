@@ -7,7 +7,7 @@ interface Props {
 
 function CloseButton({ onClick }: Props) {
   return (
-    <button onClick={onClick} aria-label="close">
+    <button onClick={onClick}>
       <AiOutlineClose />
     </button>
   );
