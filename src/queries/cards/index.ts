@@ -105,11 +105,12 @@ export const useEditListMutation = () => {
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    ({ cardId, listId, index }: I.EditCardPositionParam & EditCardPositionRequest) => {
-      return request.put<I.ResponseMessage>({
+    async ({ cardId, destination, source }: I.EditCardPositionParam & I.EditCardPositionRequest) => {
+      return await request.put<I.ResponseMessage>({
         path: `/cards/${cardId}/move`,
+        params: { destination, source },
         isMock: true,
-        params: { listId, index },
+        shouldAuthorize: true,
       });
     },
     {
