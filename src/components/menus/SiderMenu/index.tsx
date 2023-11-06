@@ -19,7 +19,7 @@ function SiderMenu() {
 
   const handleMemberClick = () => {
     openModal({
-      component: "inviteToWorkspaceModal",
+      component: InviteToWorkspaceModal,
       props: {},
     });
   };
