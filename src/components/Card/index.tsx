@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Card as AntdCard } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import loadable from "@loadable/component";
-import { Card } from "@/interfaces/cards";
 import useModal from "@/hooks/useModal";
 import CardEditor from "@components/modals/CardEditor";
 const CardDetail = loadable(() => import("@components/modals/CardDetail"));
@@ -10,7 +9,10 @@ import * as S from "./style";
 import { DeleteCardRequest, EditCardRequest } from "@/queries/cardList/interface";
 
 export interface Props {
-  data: Card;
+  data: {
+    id: string;
+    text: string;
+  };
   onEditCard: (params: EditCardRequest) => void;
   onDeleteCard: (params: DeleteCardRequest) => void;
 }
@@ -26,7 +28,7 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
     });
   };
 
-  const handleOpenCardEditor = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  const handleOpenCardEditor = (e: any) => {
     e.stopPropagation();
     setIsCardEditorOpened(!isCardEditorOpened);
   };
@@ -40,7 +42,7 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
       {isCardEditorOpened && (
         <CardEditor
           data={data}
-          onCardEditorClose={handleOpenCardEditor}
+          onClick={handleOpenCardEditor}
           setIsCardEditorOpened={setIsCardEditorOpened}
           onEditCard={onEditCard}
           onDeleteCard={onDeleteCard}
