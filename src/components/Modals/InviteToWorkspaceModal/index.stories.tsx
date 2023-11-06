@@ -1,4 +1,7 @@
+import React from "react";
 import loadable from "@loadable/component";
+import useModal from "@/hooks/useModal";
+import { ModalsProvider } from "@components/modals/ModalsProvider/index.stories";
 const InviteToWorkspaceModal = loadable(() => import("@components/modals/InviteToWorkspaceModal"));
 
 export default {
@@ -6,9 +9,24 @@ export default {
   component: InviteToWorkspaceModal,
 };
 
+const ModalButton = () => {
+  const { openModal } = useModal();
+
+  const onClickButton = () => {
+    openModal({
+      component: "inviteToWorkspaceModal",
+    });
+  };
+
+  return <button onClick={onClickButton}>open modal</button>;
+};
+
 const Template = () => {
-  const onClose = () => {};
-  return <InviteToWorkspaceModal onClose={onClose} />;
+  return (
+    <ModalsProvider>
+      <ModalButton />
+    </ModalsProvider>
+  );
 };
 
 export const CardDetail = Template.bind({});
