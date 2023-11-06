@@ -6,8 +6,8 @@ export const theme = {
     hoverPointGray: "#E1E4E9",
     textPointGray: "#5E6C83",
     textDefaultGray: "#3C3E3F",
-    modalBackgroundGray: "#F4F5F7",
     siderBackground: "#E2E8ED",
+    cardBoxShadow: "#091e4240",
     buttonBackground: "rgba(0, 0, 0, 0.1);",
     white: "white",
     headerBackground: "#F3F6F8",
@@ -17,8 +17,5 @@ export const theme = {
   borderRadius: {
     button: "6px",
     card: "3px",
-  },
-  boxShadow: {
-    card: "0 1px 0 #091e4240",
   },
 };
