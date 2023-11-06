@@ -5,14 +5,10 @@ import { EllipsisOutlined } from "@ant-design/icons";
 import * as S from "./style";
 import AddCard from "@components/AddCard";
 
-export interface Props {
+interface Props {
   data: {
-    id: string;
     title: string;
-    cards: {
-      id: string;
-      text: string;
-    }[];
+    cards: { text: string }[];
   };
 }
 
