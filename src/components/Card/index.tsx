@@ -7,7 +7,7 @@ import CardEditor from "@components/modals/CardEditor";
 const CardDetail = loadable(() => import("@components/modals/CardDetail"));
 import * as S from "./style";
 
-export interface Props {
+interface Props {
   data: {
     id: string;
     text: string;
