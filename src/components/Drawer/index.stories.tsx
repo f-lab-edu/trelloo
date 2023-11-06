@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import Drawer from "@components/Drawer";
+import DrawerProvider from "@components/providers/DrawerProvider";
+import { withRouter } from "storybook-addon-react-router-v6";
 
 export default {
   title: "components/Drawer",
   component: Drawer,
+  decorators: [withRouter],
+  parameters: {
+    reactRouter: {
+      routePath: "/board",
+    },
+  },
 };
 
 const Template = () => {
-  const [, setOpen] = useState(false);
-  const onClose = () => {
-    setOpen(false);
-  };
-
-  return <Drawer isOpen onClose={onClose} />;
+  return (
+    <DrawerProvider>
+      <Drawer />
+    </DrawerProvider>
+  );
 };
 
 export const Default = Template.bind({});

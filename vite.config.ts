@@ -13,6 +13,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: "@src", replacement: resolve(__dirname, "src") },
+      { find: "@", replacement: resolve(__dirname, "src") },
       {
         find: "@components",
         replacement: resolve(__dirname, "src/components"),
@@ -28,5 +29,15 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./src/setupTest.ts"],
+  },
+  optimizeDeps: {
+    exclude: ["js-big-decimal"],
+  },
+  build: {
+    sourcemap: true,
+  },
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
   },
 } as VitestConfigExport);

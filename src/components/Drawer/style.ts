@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 export const Drawer = styled(AntdDrawer).attrs(() => ({
   bodyStyle: {
+    display: "flex",
+    flexDirection: "column",
+    rowGap: "20px",
     padding: "12px 6px 8px 12px",
   },
 }))``;
