@@ -2,23 +2,29 @@ import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { Input } from 'antd'
 import { useForm } from 'react-hook-form'
-import type * as I from '@/queries/cards/interface'
+import {
+  type AddCardRequest,
+  type DeleteCardRequest,
+  type DeleteListRequest,
+  type EditCardRequest,
+  type EditListRequest
+} from '@/queries/cards/interface'
 import { useAddCardMutation, useDeleteCardMutation, useEditCardMutation } from '@/queries/cards'
 import { type ICardList } from '@/interfaces/cards'
 import Card from '@components/Card'
 import CardComposer from '@components/CardComposer'
-import ListMenu from '@components/menus/ListMenu'
+import ListOptions from '@components/ListOptions'
 import * as S from './style'
 
 const { TextArea } = Input
 
 export interface Props {
   data: ICardList
-  onEditList: (params: I.EditListRequest) => void
-  onDeleteList: (params: I.DeleteListRequest) => void
+  onEditList: (params: EditListRequest) => void
+  onDeleteList: (params: DeleteListRequest) => void
 }
 
-export type HandleAddCard = ({ description, listId }: I.AddCardRequest) => void
+export type HandleAddCard = ({ description, listId }: AddCardRequest) => void
 
 const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   const { register, handleSubmit } = useForm()
@@ -52,11 +58,11 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     addCardMutate({ description, listId })
   }
 
-  const handleEditCard = ({ id, description }: I.EditCardRequest) => {
+  const handleEditCard = ({ id, description }: EditCardRequest) => {
     editCardMutate({ id, description })
   }
 
-  const handleDeleteCard = ({ id }: I.DeleteCardRequest) => {
+  const handleDeleteCard = ({ id }: DeleteCardRequest) => {
     deleteCardMutate({ id })
   }
 
@@ -65,7 +71,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
       <S.Card
         bordered={false}
         style={{ width: 300 }}
-        extra={<ListMenu onDeleteList={() => { onDeleteList({ id: data.id }) }} />}
+        extra={<ListOptions onDeleteList={() => { onDeleteList({ id: data.id }) }} />}
       >
         <S.ListTitle onSubmit={() => handleSubmit(handleTitleUpdate)}>
           {!isTitleInputOpened
