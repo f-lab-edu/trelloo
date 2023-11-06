@@ -8,7 +8,7 @@ export const Container = styled.div`
   z-index: 4;
 `;
 
-export const EditorForm = styled.form`
+export const InputWrapper = styled.div`
   width: 280px;
 `;
 

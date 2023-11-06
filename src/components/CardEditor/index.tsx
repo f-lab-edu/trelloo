@@ -1,5 +1,4 @@
-import React from "react";
-import { useController, useForm } from "react-hook-form";
+import React, { useState } from "react";
 import { Input } from "antd";
 import { ICard } from "@/interfaces/cards";
 import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
@@ -18,38 +17,36 @@ export interface Props {
 }
 
 const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
-  const { handleSubmit, control } = useForm({
-    defaultValues: {
-      description: data.description,
-    },
-    mode: "onSubmit",
-  });
+  const [inputValue, setInputValue] = useState(data.description);
 
-  const { field } = useController({
-    control,
-    name: "description",
-  });
-
-  const handleClickSave = () => {
-    onEditCard({
-      id: data.id,
-      description: field.value,
-    });
+  const handleClickSave = (params: { id: string; description: string }) => {
     setCardEditorOpened(false);
+    onEditCard(params);
   };
 
   return (
     <>
       <S.Overlay onClick={onCardEditorClose} />
       <S.Container>
-        <S.EditorForm onSubmit={handleSubmit(handleClickSave)}>
-          <TextArea {...field} autoSize={{ minRows: 3, maxRows: 5 }} onPressEnter={handleClickSave} />
+        <S.InputWrapper>
+          <TextArea
+            defaultValue={data.description}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+            }}
+            autoSize={{ minRows: 3, maxRows: 5 }}
+          />
           <S.SaveButtonWrapper>
-            <Button type="submit" appearance={{ type: "blue" }}>
+            <Button
+              appearance={{ type: "blue" }}
+              onClick={() => {
+                handleClickSave({ id: data.id, description: inputValue });
+              }}
+            >
               Save
             </Button>
           </S.SaveButtonWrapper>
-        </S.EditorForm>
+        </S.InputWrapper>
         <S.MenuButtonsWrapper>
           <CardEditorButtons
             onDeleteCard={() => {

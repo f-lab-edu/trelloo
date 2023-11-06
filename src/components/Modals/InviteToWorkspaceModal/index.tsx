@@ -1,4 +1,3 @@
-import React from "react";
 import { LinkOutlined } from "@ant-design/icons";
 import * as S from "./style";
 
