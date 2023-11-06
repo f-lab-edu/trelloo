@@ -1,10 +1,3 @@
-export interface HandleRequestParams {
-  isMock?: boolean;
-  config?: {
-    includeAuthorization?: boolean;
-  };
-}
-
 export interface RequestParams<TParams = data, TData = {}> {
   path: string;
   method?: RequestMethod;
