@@ -34,6 +34,7 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "cypress/no-assigning-return-values": "error",
+    "@typescript-eslint/return-await": "off",
     "cypress/no-unnecessary-waiting": "error",
     "cypress/assertion-before-screenshot": "warn",
     "cypress/no-force": "warn",

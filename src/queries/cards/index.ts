@@ -1,11 +1,13 @@
+import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
-import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { SEARCH_PARAMS_KEY } from "@/constants";
+import { SEARCH_PARAMS_KEY, DETAIL_CODE, STATUS_CODE } from "@/constants";
 import { request } from "@/utils/httpRequest";
-import { rearrangeCards } from "@components/Board/utils/rearrangeCards";
-import { RequestParams, Response } from "@/interfaces/httpRequest";
+import { handleError, handleThrowError } from "@utils/handleError";
 import { ICardList } from "@/interfaces/cards";
+import { rearrangeCards } from "@components/Board/utils/rearrangeCards";
+import { RequestParams } from "@/interfaces/httpRequest";
+
 import * as I from "./interface";
 
 const cardListsKeys = {
@@ -24,7 +26,8 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
   return useQuery(
     cardListsKeys.search(search),
     () => {
-      return request.get<I.GetCardRequest, Response<I.GetCardListsResponse[]>>({
+      return request.get<I.GetCardRequest, I.ResponseData<I.GetCardListsResponse[]>>({
+
         path: "/cards",
         queryParams: { search },
         isMock: true,
@@ -38,6 +41,13 @@ export const useCardsQuery = ({ search }: I.GetCardRequest) => {
 
 export const useAddCardMutation = () => {
   const queryClient = useQueryClient();
+
+  const errorHandlers: Record<string, () => void> = {
+    [DETAIL_CODE[700]]() {
+      toast.error("카드 생성에 실패했습니다.\n잠시 후 다시 시도해주세요.");
+    },
+  };
+
   return useMutation(
     (params: I.AddCardRequest) => {
       return request.post<I.AddCardRequest, I.ResponseMessage>({
@@ -48,13 +58,27 @@ export const useAddCardMutation = () => {
       });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onSuccess: ({ code }: { code: number }) => {
+        handleThrowError(code);
+        queryClient.invalidateQueries(cardListsKeys.all);
+      },
+      onError: (err) => {
+        const error = err as Error;
+        handleError(error.message, errorHandlers);
+      },
     },
   );
 };
 
 export const useEditCardMutation = () => {
   const queryClient = useQueryClient();
+
+  const errorHandlers: Record<string, () => void> = {
+    [STATUS_CODE[500]]() {
+      toast.error("카드 텍스트 수정에 실패했습니다.\n잠시 후 다시 시도해주세요.");
+    },
+  };
+
   return useMutation(
     (params: I.EditCardRequest) => {
       return request.put<I.EditCardRequest, I.ResponseMessage>({
@@ -66,6 +90,10 @@ export const useEditCardMutation = () => {
     },
     {
       onSuccess: () => queryClient.invalidateQueries(cardListsKeys.all),
+      onError: (err) => {
+        const error = err as Error;
+        handleError(error.message, errorHandlers);
+      },
     },
   );
 };
@@ -122,8 +150,9 @@ export const useEditListMutation = () => {
 };
 export const useEditCardPositionMutation = () => {
   const queryClient = useQueryClient();
-  const [searchParams] = useSearchParams(window.location.search);
-  return useMutation<I.ResponseMessage, AxiosError, I.EditCardPositionRequest, I.EditCardMutationData>(
+  const [searchParams] = useSearchParams();
+
+  return useMutation(
     ({ cardId, listId, index }: I.EditCardPositionRequest) => {
       return request.put<Omit<I.EditCardPositionRequest, "cardId">, I.ResponseMessage>({
         path: `/cards/${cardId}/move`,

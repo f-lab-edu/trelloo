@@ -8695,9 +8695,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^13.3.0":
-  version: 13.3.0
-  resolution: "cypress@npm:13.3.0"
+"cypress-real-events@npm:^1.8.1":
+  version: 1.8.1
+  resolution: "cypress-real-events@npm:1.8.1"
+  peerDependencies:
+    cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x
+  checksum: 48f229335f26f8c225428563e94ca091ab7a00e943a4c953e062135b1d37672edec9cb7667452d894b43528b52924cd1b6061df044ccb0665b9c0965a0fe214f
+  languageName: node
+  linkType: hard
+
+"cypress@npm:^12.7.0":
+  version: 12.10.0
+  resolution: "cypress@npm:12.10.0"
   dependencies:
     "@cypress/request": ^3.0.0
     "@cypress/xvfb": ^1.2.4
@@ -19457,6 +19466,7 @@ __metadata:
     chromatic: ^6.17.2
     cypress: ^13.3.0
     cypress-react-selector: ^3.0.0
+    cypress-real-events: ^1.8.1
     eslint: ^8.0.1
     eslint-config-prettier: ^8.8.0
     eslint-config-standard-with-typescript: latest
