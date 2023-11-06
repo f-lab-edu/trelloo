@@ -9,8 +9,8 @@ function Modals() {
 
   return (
     <>
-      {modalStates.map(({ component, index, props, options }, idx) => (
-        <Modal key={idx} index={index} component={component} onClose={closeModal} props={props} options={options} />
+      {modalStates.map(({ component, props, options }, idx) => (
+        <Modal key={idx} component={component} onClose={closeModal} props={props} options={options} />
       ))}
     </>
   );
