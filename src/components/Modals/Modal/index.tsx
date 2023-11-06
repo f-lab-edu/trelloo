@@ -1,18 +1,17 @@
-import { ModalState } from "@/interfaces/modal";
 import React, { Suspense } from "react";
 import ReactModal from "react-modal";
+import { ModalState } from "../ModalsProvider";
 import * as S from "./style";
 
-interface Props<P> extends ModalState<P> {
+interface Props<P> {
+  Component: React.ComponentType<P>;
   onClose: (state: ModalState<P>) => void;
+  props: P;
 }
 
-const Modal = <P extends {}>({ component: Component, onClose, props, isMultiple }: Props<P>) => {
-  const handleClose = () => {
-    if (!isMultiple) onClose({ component: Component, props });
-  };
+const Modal = <P extends {}>({ Component, onClose, props }: Props<P>) => {
   return (
-    <ReactModal isOpen={true} style={S.ModalStyle} onRequestClose={handleClose}>
+    <ReactModal isOpen={true} style={S.ModalStyle}>
       <button onClick={() => onClose({ component: Component, props })}>x</button>
       <Suspense fallback={<div>is loading...</div>}>
         <Component {...props} />
