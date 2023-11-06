@@ -1,26 +1,18 @@
-import { useAddCardMutation, useGetCardLists } from "@/queries/cardList";
-import { AddCardRequest } from "@/queries/cardList/interface";
+import { useGetCardLists } from "@/queries/cardList";
 import CardList from "@components/CardList";
 import * as S from "./style";
 
-const Board = () => {
+interface Props {
+  boardName: string;
+}
+
+const Board = ({ boardName }: Props) => {
   const { data: cardLists } = useGetCardLists();
-
-  const { refetch } = useGetCardLists();
-  const { mutate } = useAddCardMutation();
-
-  const handleAddCard = ({ text, listId }: AddCardRequest) => {
-    mutate({
-      text,
-      listId,
-    });
-    refetch();
-  };
 
   return (
     <S.Container>
       {cardLists?.map((cardList) => (
-        <CardList key={cardList.id} data={cardList} handleAddCard={handleAddCard} />
+        <CardList key={cardList.id} data={cardList} />
       ))}
     </S.Container>
   );

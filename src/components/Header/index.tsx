@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 import { AppstoreOutlined, BellOutlined, QuestionCircleOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
-import Button from "@components/Button";
+import Button from "@components/Buttons/Button";
 import * as S from "./style";
 
 const { Header: AntdHeader } = Layout;

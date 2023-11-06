@@ -1,8 +1,8 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import ModalsProviderComponent from "@components/modals/ModalsProvider";
-import Modals from "@components/modals/Modals";
+import ModalsProviderComponent from "@components/Modals/ModalsProvider";
+import Modals from "@components/Modals/Modals";
 
 interface Props {
   children: React.ReactNode;

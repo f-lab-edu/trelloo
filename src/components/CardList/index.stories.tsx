@@ -26,7 +26,6 @@ const Template = (args: { text: string }) => {
             },
           ],
         }}
-        handleAddCard={() => console.log("handle add card")}
       />
     </Provider>
   );

@@ -27,8 +27,8 @@ const BoardPage: React.FC = () => {
         <Layout style={S.ContentLayout}>
           <Sider />
           <Content style={S.Content}>
-            <Menu showDrawer={showDrawer} boardName={"boardName"} />
-            <Board />
+            <Menu showDrawer={showDrawer} />
+            <Board boardName={"sdf"} />
             <Drawer open={open} onClose={onClose} />
           </Content>
         </Layout>
