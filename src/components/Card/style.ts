@@ -8,15 +8,9 @@ export const Container = styled.div`
   .ant-card-body:hover {
     background-color: ${({ theme }) => theme.color.backgroundGray};
     border-radius: 8px;
-
-    .edit_button {
-      visibility: visible;
-    }
   }
 
   .edit_button {
-    visibility: hidden;
-    display: none;
     position: absolute;
     top: 3px;
     right: 3px;
