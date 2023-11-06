@@ -24,7 +24,7 @@ const fetchRequest = async <TQueryParams>({
 
   if ((shouldAuthorize)) {
     const token = localStorage.getItem(STORAGE_KEY.TOKEN);
-    headers.Authorization = token ? `Bearer ${token}` : "";
+    headers.Authorization = `Bearer ${token ?? ""}`;
   }
 
   return await fetch(`${isMock ? "" : URL.API}${path}${searchParams ? `?${searchParams}` : ""}`, {
@@ -32,15 +32,9 @@ const fetchRequest = async <TQueryParams>({
     method,
     body: JSON.stringify(params),
   })
-    .then(async (res) => {
-      if (!res.ok) {
-        return await Promise.reject(res.status);
-      }
-
-      return await res.json();
-    })
-    .catch((err) => {
-      handleError(err);
+    .then(async (res) => await res.json())
+    .then((data) => {
+      return data;
     });
 };
 
@@ -62,18 +56,6 @@ const handleRequest = (option?: { isMock: true }) => {
       return await fetchRequest({ ...params, method: "delete", ...option });
     },
   };
-};
-
-const handleError = (status: number) => {
-  switch (status) {
-    case 401:
-      redirectToLogin();
-      break;
-  }
-};
-
-const redirectToLogin = () => {
-  window.location.href = "/login";
 };
 
 export const request = handleRequest();
