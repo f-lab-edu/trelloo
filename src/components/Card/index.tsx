@@ -3,7 +3,6 @@ import { ICard } from "@/interfaces/cards";
 import useModal from "@/hooks/useModal";
 import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
 import CardEditor from "@components/CardEditor";
-import { modals } from "@components/modals/components";
 import * as S from "./style";
 
 export interface Props {
@@ -18,7 +17,7 @@ const Card = ({ data, onEditCard, onDeleteCard }: Props) => {
 
   const handleClick = () => {
     openModal({
-      component: modals.cardDetailModal,
+      component: "cardDetailModal",
       props: { title: data.description },
     });
   };

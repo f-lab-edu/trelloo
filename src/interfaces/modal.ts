@@ -1,8 +1,11 @@
-import { ComponentType } from "react";
+import { LoadableComponent } from "@loadable/component";
+
+type ModalContentsKey = "cardDetailModal" | "inviteToWorkspaceModal";
+export type ModalContents<TProps> = Record<ModalContentsKey, LoadableComponent<TProps>>;
 
 export interface ModalState<TProps = any> {
-  component: ComponentType<TProps>;
-  props?: Omit<TProps, "onClose">;
+  component: ModalContentsKey;
+  props?: TProps;
   index: number;
   options?: {
     hasOverlay?: boolean;
@@ -11,7 +14,5 @@ export interface ModalState<TProps = any> {
   };
 }
 
-export type OpenModal<TProps> = Omit<ModalState<TProps>, "index">;
-
 export type OpenModalState = Omit<ModalState, "index">;
-export type CloseModalState = Pick<ModalState, "index">;
+export type CloseModalState = Pick<ModalState, "component" | "index">;
