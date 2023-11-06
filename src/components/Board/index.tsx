@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import {
   useCardsQuery,
@@ -19,27 +19,21 @@ interface Props {
 
 const Board = ({ searchKeyword }: Props) => {
   const { data: cardLists } = useCardsQuery({ search: searchKeyword });
-  const addListMutation = useAddListMutation();
-  const deleteListMutation = useDeleteListMutation();
-  const editListMutation = useEditListMutation();
-  const editCardPositionMutation = useEditCardPositionMutation();
-
-  const [isListInputOpen, setIsListInputOpen] = useState(false);
-
-  const toggleListInputOpen = () => {
-    setIsListInputOpen(!isListInputOpen);
-  };
+  const { mutate: addListMutate } = useAddListMutation();
+  const { mutate: deleteListMutate } = useDeleteListMutation();
+  const { mutate: editListMutate } = useEditListMutation();
+  const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
 
   const handleEditList = ({ id, title }: EditListRequest, options?: MutationOptions) => {
-    editListMutation.mutate({ id, title }, { onSuccess: options?.onSuccess });
+    editListMutate({ id, title }, { onSuccess: options?.onSuccess });
   };
 
   const handleDeleteList = ({ id }: DeleteListRequest) => {
-    deleteListMutation.mutate({ id });
+    deleteListMutate({ id });
   };
 
   const handleAddList = ({ title }: AddListRequest, options?: MutationOptions) => {
-    addListMutation.mutate({ title }, { onSuccess: options?.onSuccess });
+    addListMutate({ title }, { onSuccess: options?.onSuccess });
   };
 
   const handleDragEnd = (result: DropResult) => {
@@ -52,7 +46,7 @@ const Board = ({ searchKeyword }: Props) => {
       return;
     }
 
-    editCardPositionMutation.mutate({
+    editCardPositionMutate({
       cardId: draggableId,
       listId: destination.droppableId,
       index: destination.index,
@@ -62,7 +56,7 @@ const Board = ({ searchKeyword }: Props) => {
   return (
     <S.Container>
       <DragDropContext onDragEnd={handleDragEnd}>
-        {cardLists?.data?.map((cardList) => (
+        {cardLists?.map((cardList) => (
           <Droppable key={cardList.id} droppableId={cardList.id}>
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -78,11 +72,7 @@ const Board = ({ searchKeyword }: Props) => {
           </Droppable>
         ))}
 
-        <CardListComposer
-          isInputOpen={isListInputOpen}
-          toggleInputOpen={toggleListInputOpen}
-          onAddList={handleAddList}
-        />
+        <CardListComposer onAddList={handleAddList} />
       </DragDropContext>
     </S.Container>
   );

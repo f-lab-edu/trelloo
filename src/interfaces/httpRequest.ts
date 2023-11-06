@@ -14,8 +14,3 @@ export interface MutationOptions {
 
 export type Params = Record<string, string>;
 type RequestMethod = "get" | "post" | "put" | "delete";
-
-export interface Response<TData> {
-  code: number;
-  data: TData;
-}

@@ -8,7 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 .yarn
-coverage
 
 node_modules
 dist

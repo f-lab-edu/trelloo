@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input as AntdInput } from "antd";
 import { MutationOptions } from "@/interfaces/httpRequest";
 import { AddListRequest } from "@/queries/cards/interface";
@@ -7,12 +7,16 @@ import { useController, useForm } from "react-hook-form";
 import * as S from "./style";
 
 interface Props {
-  isInputOpen: boolean;
-  toggleInputOpen: () => void;
   onAddList: (params: AddListRequest, options?: MutationOptions) => void;
 }
 
-function CardListComposer({ isInputOpen, toggleInputOpen, onAddList }: Props) {
+function CardListComposer({ onAddList }: Props) {
+  const [isInputOpened, setIsInputOpened] = useState(false);
+
+  const handleInputOpen = () => {
+    setIsInputOpened(!isInputOpened);
+  };
+
   const { control, reset, handleSubmit } = useForm({
     defaultValues: {
       title: "",
@@ -42,8 +46,8 @@ function CardListComposer({ isInputOpen, toggleInputOpen, onAddList }: Props) {
   return (
     <S.Container>
       <Composer
-        isOpen={isInputOpen}
-        toggleInputOpen={toggleInputOpen}
+        isOpen={isInputOpened}
+        toggleInputOpen={handleInputOpen}
         btnText="Add a list"
         submitBtnText="Add list"
         onSubmit={wrappedOnSubmit}
