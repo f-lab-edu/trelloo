@@ -30,7 +30,7 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   const [isTitleInputOpened, setIsTitleInputOpened] = useState(false);
   const [titleInput, setTitleInput] = useState(data.title);
 
-  const { mutate: addCardMutate, isLoading: addCardLoading } = useAddCardMutation();
+  const { mutate: addCardMutate } = useAddCardMutation();
   const { mutate: editCardMutate } = useEditCardMutation();
   const { mutate: deleteCardMutate } = useDeleteCardMutation();
 
@@ -90,7 +90,6 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
         ))}
 
         <CardComposer
-          isLoading={addCardLoading}
           isCardInputOpened={isCardInputOpened}
           onCardInputToggle={handleCardInputToggle}
           listId={data.id}

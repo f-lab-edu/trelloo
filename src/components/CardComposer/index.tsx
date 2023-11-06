@@ -1,21 +1,20 @@
-import { useState } from "react";
-import { Input, Spin } from "antd";
+import React, { useState } from "react";
+import { Card as AntdCard, Input } from "antd";
 import { AddCardRequest } from "@/queries/cards/interface";
 import Button from "@components/Button";
-import { EllipsisOutlined, PlusOutlined, PicLeftOutlined } from "@ant-design/icons";
+import { EllipsisOutlined, PlusOutlined, PicLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import * as S from "./style";
 
 const { TextArea } = Input;
 
 interface Props {
-  isLoading: boolean;
   isCardInputOpened: boolean;
   onCardInputToggle: () => void;
   listId: string;
   onAddCard: (params: AddCardRequest) => void;
 }
 
-const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard, isLoading }: Props) => {
+const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard }: Props) => {
   const [cardInputValue, setCardInputValue] = useState("");
 
   const handleAddCard = ({ description, listId }: AddCardRequest) => {
@@ -27,18 +26,15 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     <>
       {isCardInputOpened ? (
         <S.CardInputContainer>
-          <Spin spinning={isLoading}>
-            <S.Card>
-              <TextArea
-                value={cardInputValue}
-                onChange={(e) => setCardInputValue(e.target.value)}
-                placeholder="Enter a title for this card..."
-                autoSize
-                bordered={false}
-              />
-            </S.Card>
-          </Spin>
-
+          <S.Card>
+            <TextArea
+              value={cardInputValue}
+              onChange={(e) => setCardInputValue(e.target.value)}
+              placeholder="Enter a title for this card..."
+              autoSize
+              bordered={false}
+            />
+          </S.Card>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
               <Button
