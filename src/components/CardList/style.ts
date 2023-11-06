@@ -4,18 +4,18 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   margin-left: 10px;
-  width: 300px;
 `;
 
 export const Card = styled(AntdCard).attrs(() => ({
   headStyle: {
     minHeight: "40px",
+    fontSize: "14px",
     backgroundColor: theme.color.cardListGray,
     borderRadius: `${theme.borderRadius.card} ${theme.borderRadius.card} 0 0`,
-    fontSize: "14px",
   },
   bodyStyle: {
     padding: "5px 10px 10px 10px",
+    width: "100%",
     borderRadius: `0 0  ${theme.borderRadius.card} ${theme.borderRadius.card}`,
     backgroundColor: theme.color.cardListGray,
   },

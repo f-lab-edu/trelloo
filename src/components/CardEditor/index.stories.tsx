@@ -2,25 +2,25 @@ import React from "react";
 import CardEditor from "@components/CardEditor";
 
 export default {
-  title: "components/CardEditor",
+  title: "Components/Cards",
   component: CardEditor,
 };
 
 const Template = () => {
   const data = { id: "id", description: "description", index: 0 };
-  const handleCardEditorClose = () => {};
+  const onCardEditorClose = () => {};
   const setCardEditorOpened = () => {};
-  const handleEditCard = async () => {};
-  const handleDeleteCard = () => {};
+  const onEditCard = () => {};
+  const onDeleteCard = () => {};
 
   return (
     <CardEditor
       data={data}
-      onCardEditorClose={handleCardEditorClose}
+      onCardEditorClose={onCardEditorClose}
       setCardEditorOpened={setCardEditorOpened}
-      onEditCard={handleEditCard}
-      onDeleteCard={handleDeleteCard}
+      onEditCard={onEditCard}
+      onDeleteCard={onDeleteCard}
     />
   );
 };
-export const Default = Template.bind({});
+export const InviteToWorkspaceModal = Template.bind({});

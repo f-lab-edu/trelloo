@@ -1,9 +1,8 @@
-import React from "react";
 import loadable from "@loadable/component";
-const InviteToWorkspaceModal = loadable(async () => await import("@components/modals/InviteToWorkspaceModal"));
+const InviteToWorkspaceModal = loadable(() => import("@components/modals/InviteToWorkspaceModal"));
 
 export default {
-  title: "components/modals/InviteToWorkspaceModal",
+  title: "Components/Modals",
   component: InviteToWorkspaceModal,
 };
 
@@ -12,4 +11,4 @@ const Template = () => {
   return <InviteToWorkspaceModal onClose={onClose} />;
 };
 
-export const Default = Template.bind({});
+export const CardDetail = Template.bind({});

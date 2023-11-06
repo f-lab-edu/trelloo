@@ -1,4 +1,3 @@
-import React from "react";
 import { Space, Input } from "antd";
 import CardDetailModalButtons from "@components/CardDetailModalButtons";
 import Button from "@components/buttons/Button";

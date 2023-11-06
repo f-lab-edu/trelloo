@@ -11,7 +11,7 @@ import {
 import * as S from "./style";
 
 interface Props {
-  isOpen: boolean;
+  open: boolean;
   onClose: (e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>) => void;
 }
 
@@ -49,9 +49,9 @@ const items2: MenuProps["items"] = [
   getItem("Your boards", "grp", null, [getItem("my board", "15", <UngroupOutlined />)], "group"),
 ];
 
-function Drawer({ isOpen, onClose }: Props) {
+function Drawer({ open, onClose }: Props) {
   return (
-    <S.Drawer title="Menu" placement="right" closable={false} onClose={onClose} open={isOpen} getContainer={false}>
+    <S.Drawer title="Menu" placement="right" closable={false} onClose={onClose} open={open} getContainer={false}>
       <S.Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} items={items2} />
     </S.Drawer>
   );

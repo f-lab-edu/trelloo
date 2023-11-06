@@ -2,7 +2,7 @@ import React from "react";
 import { useController, useForm } from "react-hook-form";
 import * as S from "./style";
 
-export interface Props {
+interface Props {
   onSubmit: (params: Record<string, string>) => void;
   name: string;
   placeHolder: string;
