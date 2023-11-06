@@ -7,10 +7,5 @@ export interface RequestParams<TQueryParams = Params, TParams = any> {
   shouldAuthorize?: boolean;
 }
 
-export interface MutationOptions {
-  onSuccess?: () => void;
-  onError?: () => void;
-}
-
 export type Params = Record<string, string>;
 type RequestMethod = "get" | "post" | "put" | "delete";

@@ -7,7 +7,6 @@ import {
   useDeleteListMutation,
   useEditListMutation,
 } from "@/queries/cards";
-import { MutationOptions } from "@/interfaces/httpRequest";
 import { AddListRequest, DeleteListRequest, EditListRequest } from "@/queries/cards/interface";
 import CardList from "@components/CardList";
 import CardListComposer from "@components/CardListComposer";
@@ -24,16 +23,16 @@ const Board = ({ searchKeyword }: Props) => {
   const { mutate: editListMutate } = useEditListMutation();
   const { mutate: editCardPositionMutate } = useEditCardPositionMutation();
 
-  const handleEditList = ({ id, title }: EditListRequest, options?: MutationOptions) => {
-    editListMutate({ id, title }, { onSuccess: options?.onSuccess, onError: options?.onError });
+  const handleEditList = ({ id, title }: EditListRequest) => {
+    editListMutate({ id, title });
   };
 
-  const handleDeleteList = ({ id }: DeleteListRequest, options?: MutationOptions) => {
-    deleteListMutate({ id }, { onSuccess: options?.onSuccess, onError: options?.onError });
+  const handleDeleteList = ({ id }: DeleteListRequest) => {
+    deleteListMutate({ id });
   };
 
-  const handleAddList = ({ title }: AddListRequest, options?: MutationOptions) => {
-    addListMutate({ title }, { onSuccess: options?.onSuccess, onError: options?.onError });
+  const handleAddList = ({ title }: AddListRequest) => {
+    addListMutate({ title });
   };
 
   const handleDragEnd = (result: DropResult) => {
