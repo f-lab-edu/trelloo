@@ -10,14 +10,14 @@ interface Props {
 const Card = ({ text }: Props) => {
   const { openModal } = useModal();
 
-  const handleClick = () => {
+  const onClickCard = () => {
     openModal<{ title: string }>({
       component: CardDetail,
       props: { title: "cardDetail" },
     });
   };
 
-  return <S.Container onClick={handleClick}>{text && text}</S.Container>;
+  return <S.Container onClick={onClickCard}>{text && text}</S.Container>;
 };
 
 export default Card;
