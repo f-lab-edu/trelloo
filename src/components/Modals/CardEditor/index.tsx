@@ -21,10 +21,9 @@ export interface Props {
     text: string;
   };
   onClick: (e: any) => void;
-  setIsCardEditorOpened: (state: boolean) => void;
 }
 
-const CardEditor = ({ data, onClick, setIsCardEditorOpened }: Props) => {
+const CardEditor = ({ data, onClick }: Props) => {
   const [inputValue, setInputValue] = useState(data.text);
   const { onEditCard, onDeleteCard } = useContext(CardContext);
 
@@ -66,11 +65,6 @@ const CardEditor = ({ data, onClick, setIsCardEditorOpened }: Props) => {
     },
   ];
 
-  const handleClickSave = (params: { id: string; text: string }) => {
-    onClick();
-    onEditCard(params);
-  };
-
   return (
     <>
       <S.Overlay onClick={onClick} />
@@ -82,7 +76,7 @@ const CardEditor = ({ data, onClick, setIsCardEditorOpened }: Props) => {
             autoSize={{ minRows: 3, maxRows: 5 }}
           />
           <S.SaveButtonWrapper>
-            <Button type="blue" onClick={() => handleClickSave({ id: data.id, text: inputValue })}>
+            <Button type="blue" onClick={() => onEditCard({ id: data.id, text: inputValue })}>
               Save
             </Button>
           </S.SaveButtonWrapper>
