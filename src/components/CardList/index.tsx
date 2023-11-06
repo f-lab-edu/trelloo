@@ -23,7 +23,7 @@ export interface Props {
   onDeleteList: (params: DeleteListRequest) => void;
 }
 
-export type HandleAddCard = ({ description, listId }: AddCardRequest) => void;
+export type HandleAddCard = ({ text, listId }: AddCardRequest) => void;
 
 const CardList = ({ data, onEditList, onDeleteList }: Props) => {
   const [isCardInputOpened, setIsCardInputOpened] = useState(false);
@@ -47,12 +47,12 @@ const CardList = ({ data, onEditList, onDeleteList }: Props) => {
     handleTitleInput();
   };
 
-  const handleAddCard = ({ description, listId }: AddCardRequest) => {
-    addCardMutate({ description, listId });
+  const handleAddCard = ({ text, listId }: AddCardRequest) => {
+    addCardMutate({ text, listId });
   };
 
-  const handleEditCard = ({ id, description }: EditCardRequest) => {
-    editCardMutate({ id, description });
+  const handleEditCard = ({ id, text }: EditCardRequest) => {
+    editCardMutate({ id, text });
   };
 
   const handleDeleteCard = ({ id }: DeleteCardRequest) => {

@@ -17,9 +17,9 @@ export interface Props {
 }
 
 const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, onDeleteCard }: Props) => {
-  const [inputValue, setInputValue] = useState(data.description);
+  const [inputValue, setInputValue] = useState(data.text);
 
-  const handleClickSave = (params: { id: string; description: string }) => {
+  const handleClickSave = (params: { id: string; text: string }) => {
     setCardEditorOpened(false);
     onEditCard(params);
   };
@@ -30,12 +30,12 @@ const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, 
       <S.Container>
         <S.InputWrapper>
           <TextArea
-            defaultValue={data.description}
+            defaultValue={data.text}
             onChange={(e) => setInputValue(e.target.value)}
             autoSize={{ minRows: 3, maxRows: 5 }}
           />
           <S.SaveButtonWrapper>
-            <Button type="blue" onClick={() => handleClickSave({ id: data.id, description: inputValue })}>
+            <Button type="blue" onClick={() => handleClickSave({ id: data.id, text: inputValue })}>
               Save
             </Button>
           </S.SaveButtonWrapper>
