@@ -1,16 +1,15 @@
 import React, { Spin } from "antd";
 import { useController, useForm } from "react-hook-form";
-import { MutationOptions } from "@/interfaces/httpRequest";
-import { AddCardRequest } from "@/queries/cards/interface";
-import Composer from "@components/forms/Composer";
+import { type AddCardRequest } from "@/queries/cards/interface";
 import * as S from "./style";
+import Composer from "@components/forms/Composer";
 
 interface Props {
   isLoading: boolean;
   isCardInputOpened: boolean;
   onCardInputToggle: () => void;
   listId: string;
-  onAddCard: (params: AddCardRequest, options?: MutationOptions) => void;
+  onAddCard: (params: AddCardRequest) => void
 }
 
 const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard, isLoading }: Props) => {
@@ -18,37 +17,25 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     defaultValues: {
       description: "",
     },
-    mode: "onSubmit",
+    mode: "onSubmit"
   });
 
   const {
     field: { onChange, value },
-  } = useController({ name: "description", control, rules: { required: true } });
+  } = useController({ name: "description", control, rules:{required:true} });
 
   const handleAddCard = () => {
-    onAddCard(
-      {
-        description: value,
-        listId,
-      },
-      {
-        onSuccess() {
-          reset();
-        },
-      },
-    );
+     onAddCard({
+      description: value,
+      listId,
+    });
+    reset();
   };
 
-  const wrappedOnSubmit = handleSubmit(handleAddCard);
+  const wrappedOnSubmit = handleSubmit(handleAddCard)
 
   return (
-    <Composer
-      isOpen={isCardInputOpened}
-      toggleInputOpen={onCardInputToggle}
-      btnText="Add a card"
-      submitBtnText="Add card"
-      onSubmit={wrappedOnSubmit}
-    >
+    <Composer isOpen={isCardInputOpened} toggleInputOpen={onCardInputToggle} btnText="Add a card" submitBtnText="Add card" onSubmit={wrappedOnSubmit}>
       <Spin spinning={isLoading}>
         <S.Card>
           <input onChange={onChange} value={value} placeholder="Enter a title for this card..." />
