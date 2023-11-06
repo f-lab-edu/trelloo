@@ -17,8 +17,8 @@ interface Props {
 const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard }: Props) => {
   const [cardInputValue, setCardInputValue] = useState("");
 
-  const handleAddCard = ({ description, listId }: AddCardRequest) => {
-    onAddCard({ description, listId });
+  const handleAddCard = ({ text, listId }: AddCardRequest) => {
+    onAddCard({ text, listId });
     setCardInputValue("");
   };
 
@@ -37,7 +37,7 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard 
           </AntdCard>
           <S.AddCardButtonContainer>
             <S.AddCardButtonWrapper>
-              <Button type="blue" onClick={() => handleAddCard({ description: cardInputValue, listId })}>
+              <Button type="blue" onClick={() => handleAddCard({ text: cardInputValue, listId })}>
                 Add card
               </Button>
               <CloseOutlined style={S.CancelAddCardButton} onClick={onCardInputToggle} />
