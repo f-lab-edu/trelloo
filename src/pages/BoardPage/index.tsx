@@ -5,7 +5,6 @@ import Drawer from "@components/Drawer";
 import Header from "@components/Header";
 import Menu from "@components/Menu";
 import Board from "@components/Board";
-import * as S from "./style";
 
 const { Content } = Layout;
 
@@ -20,20 +19,22 @@ const BoardPage: React.FC = () => {
     setOpen(false);
   };
 
+  const containerStyle: React.CSSProperties = {
+    position: "relative",
+  };
+
   return (
-    <S.Container>
-      <Layout style={S.Layout}>
-        <Header />
-        <Layout style={S.ContentLayout}>
-          <Sider />
-          <Content style={S.Content}>
-            <Menu showDrawer={showDrawer} />
-            <Board boardName={"sdf"} />
-            <Drawer open={open} onClose={onClose} />
-          </Content>
-        </Layout>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Header />
+      <Layout className="site-layout">
+        <Sider />
+        <Content style={containerStyle}>
+          <Menu showDrawer={showDrawer} />
+          <Board boardName={"sdf"} />
+          <Drawer open={open} onClose={onClose} />
+        </Content>
       </Layout>
-    </S.Container>
+    </Layout>
   );
 };
 
