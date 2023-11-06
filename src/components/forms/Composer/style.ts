@@ -2,6 +2,8 @@ import { CloseOutlined } from "@ant-design/icons";
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
 
+export const Container = styled.form``;
+
 export const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
