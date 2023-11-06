@@ -34,7 +34,7 @@ const CardList = ({ data }: Props) => {
         bodyStyle={S.Body}
       >
         {data.cards.map((card) => (
-          <Card key={card.id} data={card} />
+          <Card data={card} />
         ))}
         <AddCard isWritingCard={isWritingCard} handleClickAddCard={handleClickAddCard} />
       </C>
