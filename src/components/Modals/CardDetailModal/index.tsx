@@ -1,11 +1,11 @@
 import useModal from "@/hooks/useModal";
 import * as S from "./style";
 
-export interface CardDetailProps {
+interface Props {
   title: string;
 }
 
-const CardDetail = ({ title }: CardDetailProps) => {
+const CardDetail = ({ title }: Props) => {
   return <S.Container>{title}</S.Container>;
 };
 
