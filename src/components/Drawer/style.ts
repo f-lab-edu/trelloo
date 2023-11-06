@@ -1,4 +1,5 @@
-import { Drawer as AntdDrawer, Menu as AntdMenu } from "antd";
+import { Drawer as AntdDrawer } from "antd";
+import { Menu as AntdMenu } from "antd";
 import styled from "styled-components";
 
 export const Drawer = styled(AntdDrawer).attrs(() => ({

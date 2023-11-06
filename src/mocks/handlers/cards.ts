@@ -1,4 +1,4 @@
-import {  EditCardPositionRequest } from "../../queries/cards/interface";
+import { type EditCardPositionRequest } from "../../queries/cards/interface";
 import {
   type AddCardRequest,
   type AddListRequest,
@@ -7,7 +7,7 @@ import {
   type EditCardRequest,
   type EditListRequest,
 } from "@/queries/cards/interface";
-import {  DefaultBodyType,  PathParams,  ResponseComposition, rest,  RestContext,  RestRequest } from "msw";
+import { type DefaultBodyType, type PathParams, type ResponseComposition, rest, type RestContext, type RestRequest } from "msw";
 import { v4 as uuidv4 } from "uuid";
 import {
   addCard,

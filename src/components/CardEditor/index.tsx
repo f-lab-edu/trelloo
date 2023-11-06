@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "antd";
-import { ICard } from "@/interfaces/cards";
-import { DeleteCardRequest, EditCardRequest } from "@/queries/cards/interface";
+import { type ICard } from "@/interfaces/cards";
+import { type DeleteCardRequest, type EditCardRequest } from "@/queries/cards/interface";
 import Button from "@components/buttons/Button";
 import CardEditorButtons from "@components/CardEditorButtons";
 import * as S from "./style";
@@ -31,28 +31,20 @@ const CardEditor = ({ data, onCardEditorClose, setCardEditorOpened, onEditCard, 
         <S.InputWrapper>
           <TextArea
             defaultValue={data.description}
-            onChange={(e) => {
-              setInputValue(e.target.value);
-            }}
+            onChange={(e) => { setInputValue(e.target.value); }}
             autoSize={{ minRows: 3, maxRows: 5 }}
           />
           <S.SaveButtonWrapper>
             <Button
               appearance={{ type: "blue" }}
-              onClick={() => {
-                handleClickSave({ id: data.id, description: inputValue });
-              }}
+              onClick={() => { handleClickSave({ id: data.id, description: inputValue }); }}
             >
               Save
             </Button>
           </S.SaveButtonWrapper>
         </S.InputWrapper>
         <S.MenuButtonsWrapper>
-          <CardEditorButtons
-            onDeleteCard={() => {
-              onDeleteCard({ id: data.id });
-            }}
-          />
+          <CardEditorButtons onDeleteCard={() => { onDeleteCard({ id: data.id }); }} />
         </S.MenuButtonsWrapper>
       </S.Container>
     </>
