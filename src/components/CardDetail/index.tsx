@@ -1,12 +1,7 @@
 import useModal from "@/hooks/useModal";
 import * as S from "./style";
 
-interface Props {
-  title: string;
-}
-
-const CardDetail = ({ title }: Props) => {
-  console.log(title);
+const CardDetail = ({ title }: { title: string }) => {
   const { closeModal } = useModal();
 
   return (
