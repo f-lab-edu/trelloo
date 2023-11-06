@@ -1,8 +1,8 @@
 import { rest } from "msw";
 
 const authHandlers = [
-  rest.post("/login", async (req, res, ctx) => {
-    return await res(
+  rest.post("/login", (req, res, ctx) => {
+    return res(
       ctx.status(200),
       ctx.json({
         message: "login succeed",

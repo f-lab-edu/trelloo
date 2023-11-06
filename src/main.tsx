@@ -15,7 +15,6 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 import "react-toastify/dist/ReactToastify.css";
 
 if (process.env.NODE_ENV === "development") {
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   worker.start();
 }
 

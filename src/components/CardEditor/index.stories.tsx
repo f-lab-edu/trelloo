@@ -1,4 +1,3 @@
-import React from "react";
 import CardEditor from "@components/CardEditor";
 
 export default {

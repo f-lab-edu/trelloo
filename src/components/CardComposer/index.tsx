@@ -1,8 +1,10 @@
-import React, { Spin } from "antd";
+import { Input, Spin } from "antd";
 import { useController, useForm } from "react-hook-form";
 import Button from "@components/Button";
 import { EllipsisOutlined, PlusOutlined, PicLeftOutlined } from "@ant-design/icons";
 import * as S from "./style";
+
+const { TextArea } = Input;
 
 interface Props {
   isLoading: boolean;
@@ -23,20 +25,14 @@ const CardComposer = ({ isCardInputOpened, onCardInputToggle, listId, onAddCard,
     field: { onChange, value },
   } = useController({ name: "description", control });
 
-  const handleAddCard = () => {
-    onAddCard({
-      description: value,
-      listId,
-      onSuccess: () => {
-        reset();
-      },
-    });
+  const handleAddCard = async () => {
+    await onAddCard({ description: value, listId, onSuccess: () => reset() });
   };
 
   return (
     <>
       {isCardInputOpened ? (
-        <S.CardInputContainer onSubmit={() => handleSubmit(handleAddCard)}>
+        <S.CardInputContainer onSubmit={handleSubmit(handleAddCard)}>
           <Spin spinning={isLoading}>
             <S.Card>
               <input onChange={onChange} value={value} placeholder="Enter a title for this card..." />
