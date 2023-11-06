@@ -1,14 +1,11 @@
-import { useGetCardLists } from "@/queries/cardList";
 import CardList from "@components/CardList";
 import * as S from "./style";
 
-interface Props {
+interface Board {
   boardName: string;
 }
 
-const Board = ({ boardName }: Props) => {
-  const { data: cardLists } = useGetCardLists();
-  // TODO: render card lists
+const Board = ({ boardName }: Board) => {
   return (
     <S.Container>
       Board: {boardName}
