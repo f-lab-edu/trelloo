@@ -6,7 +6,7 @@
       "@utils/*": ["src/utils/*"],
       "@/*": ["src/*"]
     },
-    "types": ["node", "cypress", "cypress-real-events"],
+    "types": ["node", "cypress"],
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],

@@ -28,25 +28,17 @@ export const cardsHandlers = [
   rest.get("/cards", async (req, res, ctx) => {
     const search = req.url.searchParams.get(SEARCH_PARAMS_KEY.SEARCH);
     const data = await getAllCardListsWithCards(search ?? "");
-    return res(
-      ctx.delay(),
-      ctx.status(200),
-      ctx.json({
-        code: 1,
-        data,
-      }),
-    );
-
+    return await res(ctx.delay(), ctx.status(201), ctx.json({ code: 1, data }));
   }),
 
   rest.post<I.AddCardRequest>("/cards", async (req, res, ctx) => {
     const { listId, description } = req.body;
     const id = uuidv4();
 
-    const isAuthorized = checkAuthorization(req, res, ctx);
+    const isAuthorized = await checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return res(
+      return await res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -56,11 +48,10 @@ export const cardsHandlers = [
 
     await addCard({ listId, description, id, createdAt: Date.now() });
 
-    return res(
+    return await res(
       ctx.delay(),
       ctx.status(201),
       ctx.json({
-        code: 1,
         message: "Card created",
         id,
         description,
@@ -71,10 +62,10 @@ export const cardsHandlers = [
   rest.put<I.EditCardRequest>("/cards", async (req, res, ctx) => {
     const { description, id } = req.body;
 
-    const isAuthorized = checkAuthorization(req, res, ctx);
+    const isAuthorized = await checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return res(
+      return await res(
         ctx.delay(),
         ctx.status(401),
         ctx.json({
@@ -84,10 +75,9 @@ export const cardsHandlers = [
     }
 
     await editCard({ id, description });
-    return res(
+    return await res(
       ctx.status(200),
       ctx.json({
-        code: 1,
         message: "Card updated",
       }),
     );
@@ -96,10 +86,10 @@ export const cardsHandlers = [
   rest.delete<I.DeleteCardRequest>("/cards", async (req, res, ctx) => {
     const { id } = req.body;
 
-    const isAuthorized = checkAuthorization(req, res, ctx);
+    const isAuthorized = await checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return res(
+      return await res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -107,10 +97,9 @@ export const cardsHandlers = [
       );
     }
     await deleteCard({ id });
-    return res(
+    return await res(
       ctx.status(200),
       ctx.json({
-        code: 1,
         message: "Card deleted",
       }),
     );
@@ -120,10 +109,10 @@ export const cardsHandlers = [
     const { title } = req.body as { title: string };
     const id = uuidv4();
 
-    const isAuthorized = checkAuthorization(req, res, ctx);
+    const isAuthorized = await checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return res(
+      return await res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -132,10 +121,9 @@ export const cardsHandlers = [
     }
 
     await addCardList({ title, id, createdAt: Date.now() });
-    return res(
+    return await res(
       ctx.status(201),
       ctx.json({
-        code: 1,
         message: "List created",
         title,
         id,
@@ -146,10 +134,10 @@ export const cardsHandlers = [
   rest.put<I.EditListRequest>("/lists", async (req, res, ctx) => {
     const { id, title } = req.body;
 
-    const isAuthorized = checkAuthorization(req, res, ctx);
+    const isAuthorized = await checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return res(
+      return await res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -158,10 +146,9 @@ export const cardsHandlers = [
     }
 
     await editCardList({ id, title });
-    return res(
+    return await res(
       ctx.status(200),
       ctx.json({
-        code: 1,
         message: "List updated",
       }),
     );
@@ -171,9 +158,9 @@ export const cardsHandlers = [
     const { cardId } = req.params as { cardId: string };
     const { listId, index } = req.body as any;
 
-    const isAuthorized = checkAuthorization(req, res, ctx);
+    const isAuthorized = await checkAuthorization(req, res, ctx);
     if (!isAuthorized) {
-      return res(
+      return await res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -182,10 +169,9 @@ export const cardsHandlers = [
     }
 
     await editCardPosition({ cardId, listId, index });
-    return res(
+    return await res(
       ctx.status(200),
       ctx.json({
-        code: 1,
         message: "Card position updated",
       }),
     );
@@ -194,10 +180,10 @@ export const cardsHandlers = [
   rest.delete<I.DeleteListRequest>("/lists", async (req, res, ctx) => {
     const { id } = req.body;
 
-    const isAuthorized = checkAuthorization(req, res, ctx);
+    const isAuthorized = await checkAuthorization(req, res, ctx);
 
     if (!isAuthorized) {
-      return res(
+      return await res(
         ctx.status(401),
         ctx.json({
           message: "access token is required",
@@ -206,10 +192,9 @@ export const cardsHandlers = [
     }
 
     await deleteCardList({ id });
-    return res(
+    return await res(
       ctx.status(200),
       ctx.json({
-        code: 1,
         message: "List deleted",
       }),
     );
